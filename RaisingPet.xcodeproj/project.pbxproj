@@ -24,6 +24,7 @@
 		EC606EFB2C57B97A0015F103 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC606EFA2C57B97A0015F103 /* FirebaseFirestoreSwift */; };
 		EC606EFD2C57B97A0015F103 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EC606EFC2C57B97A0015F103 /* FirebaseStorage */; };
 		EC606EFF2C57B97A0015F103 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EC606EFE2C57B97A0015F103 /* FirebaseStorageCombine-Community */; };
+		EC606F022C57D1320015F103 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F012C57D1320015F103 /* button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		EC606EDA2C57B7060015F103 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC606EDD2C57B7060015F103 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EC606EE42C57B8930015F103 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EC606F012C57D1320015F103 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
 				EC606EE62C57B8A00015F103 /* Firebase */,
 				EC606ED82C57B7040015F103 /* SplashView.swift */,
+				EC606F002C57D10D0015F103 /* Components */,
 				EC606EDA2C57B7060015F103 /* Assets.xcassets */,
 				EC606EDC2C57B7060015F103 /* Preview Content */,
 			);
@@ -100,6 +103,14 @@
 				EC606EE42C57B8930015F103 /* GoogleService-Info.plist */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		EC606F002C57D10D0015F103 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EC606F012C57D1320015F103 /* button.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +203,7 @@
 			files = (
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
+				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
