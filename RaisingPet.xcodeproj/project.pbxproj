@@ -30,6 +30,8 @@
 		EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0C2C57D46D0015F103 /* CustomTextField.swift */; };
 		EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0E2C57E1040015F103 /* SignInView.swift */; };
 		EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F102C58BDD90015F103 /* AuthenticationManager.swift */; };
+		EC606F132C58D2100015F103 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F122C58D2100015F103 /* SettingsView.swift */; };
+		EC606F152C58F61F0015F103 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F142C58F61F0015F103 /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		EC606F0C2C57D46D0015F103 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		EC606F0E2C57E1040015F103 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EC606F102C58BDD90015F103 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		EC606F122C58D2100015F103 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EC606F142C58F61F0015F103 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +94,12 @@
 			isa = PBXGroup;
 			children = (
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
+				EC606F142C58F61F0015F103 /* RootView.swift */,
 				EC606EE62C57B8A00015F103 /* Firebase */,
 				EC606F082C57D2A80015F103 /* SignInUp */,
 				EC606F002C57D10D0015F103 /* Components */,
 				EC606EDA2C57B7060015F103 /* Assets.xcassets */,
+				EC606F122C58D2100015F103 /* SettingsView.swift */,
 				EC606EDC2C57B7060015F103 /* Preview Content */,
 			);
 			path = RaisingPet;
@@ -227,6 +233,8 @@
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
 				EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */,
+				EC606F132C58D2100015F103 /* SettingsView.swift in Sources */,
+				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */,

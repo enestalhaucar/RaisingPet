@@ -27,6 +27,7 @@ final class AuthenticationManager {
     
     
     // MARK: Firebase Create User w/ Email/Password
+    @discardableResult
     func createUser(email : String, password : String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthDataResultModel(user: authDataResult.user)
@@ -39,6 +40,17 @@ final class AuthenticationManager {
             throw URLError(.badURL)
         }
         return AuthDataResultModel(user: user)
-   
+    }
+    
+    // MARK: Sign In
+    @discardableResult
+    func signIn(email : String, password : String) async throws -> AuthDataResultModel {
+        let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+        return AuthDataResultModel(user: authDataResult.user)
+    }
+    
+    // MARK: Sign Out from App
+    func signOut() throws {
+        try Auth.auth().signOut()
     }
 }

@@ -14,21 +14,15 @@ final class SignUpViewModel : ObservableObject {
     @Published var password = ""
     @Published var fullName = ""
     
-    func signUp() {
+    
+    func signUp() async throws{
         guard !email.isEmpty, !password.isEmpty else {
             print("No mail or password")
             return
         }
         
-        Task {
-            do {
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                print("Success")
-                print(returnedUserData)
-            } catch {
-                print("Failure")
-            }
-        }
+        try await AuthenticationManager.shared.createUser(email: email, password: password)
+        print("success")
     }
 }
 
@@ -38,6 +32,7 @@ struct SignUpView: View {
     @State var password : String = ""
     @State var repassword : String = ""
     @StateObject private var viewModel = SignUpViewModel()
+    @Binding var isSuccess : Bool
     var body: some View {
         NavigationStack {
             ZStack {
@@ -63,13 +58,22 @@ struct SignUpView: View {
                     
                     Spacer()
                     Button(action: {
-                        viewModel.signUp()
+                        Task {
+                            do {
+                                try await viewModel.signUp()
+                                isSuccess = false
+                            } catch {
+                                print("error while signUp from signupview")
+                            }
+                        }
                     }, label: {
                         Text("Sign Up")
                             .foregroundStyle(.white)
                             .frame(width: 250, height: 50)
                             .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
                     })
+                    
+                  
                     
                     HStack(spacing: 15) {
                         Image("Google")
@@ -80,26 +84,19 @@ struct SignUpView: View {
                     HStack {
                         Text("Already have an account ?")
                         NavigationLink {
-                            SignInView()
+                            SignInView(isSuccess: $isSuccess)
                         } label: {
                             Text("Sign In")
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
 
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                }.padding()
-                    
+                }.padding()   
             }
         }
     }
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(isSuccess: .constant(false))
 }

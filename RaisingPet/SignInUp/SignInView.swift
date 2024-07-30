@@ -9,12 +9,24 @@ import SwiftUI
 
 @MainActor
 final class SignInViewModel : ObservableObject {
-    @Published var email : String = ""
+    @Published var email = ""
+    @Published var password = ""
+    func signIn() async throws{
+        guard !email.isEmpty, !password.isEmpty else {
+            print("No mail or password")
+            return
+        }
+        
+        try await AuthenticationManager.shared.signIn(email: email, password: password)
+        print("success signIn")
+    }
 }
 
 struct SignInView: View {
     @State var email : String = ""
     @State var password : String = ""
+    @StateObject private var viewModel = SignInViewModel()
+    @Binding var isSuccess : Bool
     var body: some View {
         NavigationStack {
             ZStack {
@@ -38,19 +50,36 @@ struct SignInView: View {
                             .foregroundStyle(Color("buttonBackgroundColor"))
                             .font(.headline)
                     }
-
+                    
                     
                     Spacer()
-                    button(title: "Sign In")
+                    
+                    Button {
+                        Task {
+                            do {
+                                try await viewModel.signIn()
+                                isSuccess = false
+                            } catch {
+                                print("error while signUp from signupview")
+                            }
+                        }
+                    } label: {
+                        Text("Sign In")
+                            .foregroundStyle(.white)
+                            .frame(width: 250, height: 50)
+                            .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
+                        
+                    }
+                    
                     HStack {
                         Text("Don't you have an account ?")
                         NavigationLink {
-                            SignUpView()
+                            SignUpView(isSuccess: $isSuccess)
                         } label: {
                             Text("Sign Up")
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
-
+                        
                     }
                     
                     
@@ -59,12 +88,16 @@ struct SignInView: View {
                     
                     
                 }.padding()
-                    
+                
+            }.onAppear {
+                let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+                self.isSuccess = authUser == nil ? true : false
             }
+            
         }
     }
 }
 
 #Preview {
-    SignInView()
+    SignInView(isSuccess: .constant(false))
 }
