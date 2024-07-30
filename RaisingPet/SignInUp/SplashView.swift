@@ -11,10 +11,8 @@ struct SplashView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("backgroundColor").ignoresSafeArea()
                 
-                Image("shapeEclipse")
-                    .offset(x: -UIScreen.main.bounds.width / 2 + 70, y: -UIScreen.main.bounds.height / 2 + 50)
+                SignInUpBackground()
                 
                 VStack(spacing: 45) {
                     Spacer()
@@ -27,8 +25,9 @@ struct SplashView: View {
                         .multilineTextAlignment(.center)
                     
                     NavigationLink {
-                        
+                        SignUpView()
                     } label: {
+                        // Components/Button
                         button(title: "Get Started")
                     }
 

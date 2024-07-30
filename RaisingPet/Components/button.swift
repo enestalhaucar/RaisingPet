@@ -10,9 +10,9 @@ import SwiftUI
 struct button: View {
     var title : String
     var body: some View {
-        Text("Get Started")
+        Text(title)
             .foregroundStyle(.white)
-            .frame(width: 350, height: 50)
+            .frame(width: 250, height: 50)
             .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
     }
 }

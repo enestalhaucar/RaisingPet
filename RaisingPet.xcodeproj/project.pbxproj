@@ -25,6 +25,11 @@
 		EC606EFD2C57B97A0015F103 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EC606EFC2C57B97A0015F103 /* FirebaseStorage */; };
 		EC606EFF2C57B97A0015F103 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EC606EFE2C57B97A0015F103 /* FirebaseStorageCombine-Community */; };
 		EC606F022C57D1320015F103 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F012C57D1320015F103 /* button.swift */; };
+		EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F062C57D1F20015F103 /* SignInUpBackground.swift */; };
+		EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0A2C57D2DE0015F103 /* SignUpView.swift */; };
+		EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0C2C57D46D0015F103 /* CustomTextField.swift */; };
+		EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0E2C57E1040015F103 /* SignInView.swift */; };
+		EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F102C58BDD90015F103 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +40,11 @@
 		EC606EDD2C57B7060015F103 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EC606EE42C57B8930015F103 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC606F012C57D1320015F103 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
+		EC606F062C57D1F20015F103 /* SignInUpBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpBackground.swift; sourceTree = "<group>"; };
+		EC606F0A2C57D2DE0015F103 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EC606F0C2C57D46D0015F103 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EC606F0E2C57E1040015F103 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		EC606F102C58BDD90015F103 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +91,7 @@
 			children = (
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
 				EC606EE62C57B8A00015F103 /* Firebase */,
-				EC606ED82C57B7040015F103 /* SplashView.swift */,
+				EC606F082C57D2A80015F103 /* SignInUp */,
 				EC606F002C57D10D0015F103 /* Components */,
 				EC606EDA2C57B7060015F103 /* Assets.xcassets */,
 				EC606EDC2C57B7060015F103 /* Preview Content */,
@@ -101,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				EC606EE42C57B8930015F103 /* GoogleService-Info.plist */,
+				EC606F102C58BDD90015F103 /* AuthenticationManager.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -109,8 +120,20 @@
 			isa = PBXGroup;
 			children = (
 				EC606F012C57D1320015F103 /* button.swift */,
+				EC606F062C57D1F20015F103 /* SignInUpBackground.swift */,
+				EC606F0C2C57D46D0015F103 /* CustomTextField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		EC606F082C57D2A80015F103 /* SignInUp */ = {
+			isa = PBXGroup;
+			children = (
+				EC606ED82C57B7040015F103 /* SplashView.swift */,
+				EC606F0A2C57D2DE0015F103 /* SignUpView.swift */,
+				EC606F0E2C57E1040015F103 /* SignInView.swift */,
+			);
+			path = SignInUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
+				EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */,
+				EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */,
+				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
+				EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
