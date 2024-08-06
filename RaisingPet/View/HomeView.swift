@@ -20,13 +20,26 @@ struct HomeView: View {
                     
                     HStack(spacing: 25) {
                         VStack {
-                            Image("shopIcon")
-                            Text("Shop")
-                                .bold()
+                            NavigationLink {
+                                ShopScreenView()
+                            } label: {
+                                VStack{
+                                    Image("shopIcon")
+                                    Text("Shop")
+                                        .bold()
+                                }
+                            }
+
                         }
                         VStack {
-                            Image("friendsIcon")
-                            Text("Friends").bold()
+                            NavigationLink {
+                                FriendsView()
+                            } label: {
+                                VStack{
+                                    Image("friendsIcon")
+                                    Text("Friends").bold()
+                                }
+                            }
                         }
                         VStack {
                             Image("petIcon")

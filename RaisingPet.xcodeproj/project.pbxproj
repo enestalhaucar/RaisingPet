@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
+		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
 		EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606ED62C57B7040015F103 /* RaisingPetApp.swift */; };
 		EC606ED92C57B7040015F103 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606ED82C57B7040015F103 /* SplashView.swift */; };
 		EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC606EDA2C57B7060015F103 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
+		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		EC606ED32C57B7040015F103 /* RaisingPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaisingPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC606ED62C57B7040015F103 /* RaisingPetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisingPetApp.swift; sourceTree = "<group>"; };
 		EC606ED82C57B7040015F103 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				EC8AA8FD2C610142000C2478 /* HomeView.swift */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
+				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC606F122C58D2100015F103 /* ProfileView.swift */,
 				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
 				EC8AA8FF2C6101FA000C2478 /* NoteView.swift */,
@@ -294,6 +297,7 @@
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
+				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC8AA8FA2C60F4BC000C2478 /* AccountView.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
