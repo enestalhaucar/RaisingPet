@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 
 @MainActor
@@ -23,6 +25,12 @@ final class SignUpViewModel : ObservableObject {
         
         try await AuthenticationManager.shared.createUser(email: email, password: password)
         print("success")
+    }
+    
+    func signInGoogle() async throws {
+        let helper = GoogleSignInHelper()
+        let tokens = try await helper.signIn()
+        try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
     }
 }
 
@@ -76,7 +84,16 @@ struct SignUpView: View {
                   
                     
                     HStack(spacing: 15) {
-                        Image("Google")
+                        GoogleSignInButton(scheme: .light, style: .icon, state: .normal) {
+                            Task {
+                                do {
+                                    try await viewModel.signInGoogle()
+                                    isSuccess = false
+                                } catch {
+                                    print("error while google  + \(error)")
+                                }
+                            }
+                        }
                         Image("Apple")
                         Image("Facebook")
                             

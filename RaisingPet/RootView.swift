@@ -8,16 +8,45 @@
 import SwiftUI
 
 struct RootView: View {
-    @State private var isSuccess : Bool = true
+    @State private var isSuccess : Bool = false
     var body: some View {
         ZStack {
             SignInUpBackground()
             
             VStack {
+                
+                
                 TabView {
-                    SettingsView(isSuccess: $isSuccess)
+                    HomeView()
                         .tabItem {
-                            Image(systemName: "gear")
+                            VStack {
+                                Image(systemName: "house")
+                                Text("Home")
+                            }
+                        }
+                    
+                    NoteView()
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "note.text")
+                                Text("Home")
+                            }
+                        }
+                    CoupleQuestionView()
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "person.fill.questionmark")
+                                Text("Couple Questions")
+                            }
+                        }
+                    
+                    
+                    ProfileView(isSuccess: $isSuccess)
+                        .tabItem {
+                            VStack {
+                                Image(systemName: "person")
+                                Text("Profile")
+                            }
                         }
                 }
             }.fullScreenCover(isPresented: $isSuccess, content: {
