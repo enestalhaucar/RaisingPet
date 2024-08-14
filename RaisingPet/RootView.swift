@@ -12,47 +12,56 @@ struct RootView: View {
     var body: some View {
         ZStack {
             SignInUpBackground()
-            
-            VStack {
-                
-                
-                TabView {
-                    HomeView()
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "house")
-                                Text("Home")
-                            }
-                        }
-                    
-                    NoteView()
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "note.text")
-                                Text("Home")
-                            }
-                        }
-                    CoupleQuestionView()
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "person.fill.questionmark")
-                                Text("Couple Questions")
-                            }
-                        }
+            if !isSuccess {
+                VStack {
                     
                     
-                    ProfileView(isSuccess: $isSuccess)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "person")
-                                Text("Profile")
+                    TabView {
+                        HomeView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "house")
+                                    Text("Home")
+                                }
                             }
-                        }
+                        
+                        NoteView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "note.text")
+                                    Text("Notes")
+                                }
+                            }
+                        CoupleQuestionView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "person.fill.questionmark")
+                                    Text("Couple Questions")
+                                }
+                            }
+                        
+                        
+                        ProfileView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "person")
+                                    Text("Profile")
+                                }
+                            }
+                    }
                 }
-            }.fullScreenCover(isPresented: $isSuccess, content: {
-                SplashView(isSuccess: $isSuccess)
-            })
+            }
+            
+            
+        }.onAppear {
+            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+            print(authUser ?? "auth boş")
+            self.isSuccess = authUser == nil ? true : false
         }
+        .fullScreenCover(isPresented: $isSuccess, content: {
+            SplashView(isSuccess: $isSuccess)
+        })
+        
     }
 }
 

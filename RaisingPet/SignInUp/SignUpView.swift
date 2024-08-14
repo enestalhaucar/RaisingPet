@@ -14,31 +14,32 @@ import GoogleSignInSwift
 final class SignUpViewModel : ObservableObject {
     @Published var email = ""
     @Published var password = ""
-    @Published var fullName = ""
     
     
     func signUp() async throws{
         guard !email.isEmpty, !password.isEmpty else {
-            print("No mail or password")
+            print("No mail or password or name")
             return
         }
         
-        try await AuthenticationManager.shared.createUser(email: email, password: password)
+        let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
+        print(authDataResult)
+        try await UserManager.shared.createNewUser(auth: authDataResult)
         print("success")
     }
     
     func signInGoogle() async throws {
         let helper = GoogleSignInHelper()
         let tokens = try await helper.signIn()
-        try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+        let authDataResult = try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+        print(authDataResult)
+        try await UserManager.shared.createNewUser(auth: authDataResult)
     }
 }
 
 
 struct SignUpView: View {
-    @State var email : String = ""
-    @State var password : String = ""
-    @State var repassword : String = ""
+    
     @StateObject private var viewModel = SignUpViewModel()
     @Binding var isSuccess : Bool
     var body: some View {
@@ -57,7 +58,7 @@ struct SignUpView: View {
                     
                     Spacer()
                     
-                    CustomTextField(placeholder: "Enter your name", text: $viewModel.fullName)
+                    
                     CustomTextField(placeholder: "Enter your email", text: $viewModel.email)
                     CustomTextField(placeholder: "Enter your password", text: $viewModel.password)
                     
