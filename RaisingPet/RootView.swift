@@ -51,16 +51,23 @@ struct RootView: View {
                     }
                 }
             }
+           
             
             
-        }.onAppear {
-            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-            print(authUser ?? "auth boş")
-            self.isSuccess = authUser == nil ? true : false
-        }
-        .fullScreenCover(isPresented: $isSuccess, content: {
+        }.fullScreenCover(isPresented: $isSuccess, content: {
             SplashView(isSuccess: $isSuccess)
         })
+        .onAppear {
+            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+            print(authUser ?? "auth boş")
+           
+            if authUser == nil {
+                self.isSuccess = true
+            }
+            print("RootView on appear |\(isSuccess)")
+            
+        }
+        
         
     }
 }

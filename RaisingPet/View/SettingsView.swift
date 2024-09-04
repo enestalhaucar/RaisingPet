@@ -12,6 +12,7 @@ final class SettingsViewModel : ObservableObject {
     func logOut() throws {
         try AuthenticationManager.shared.signOut()
         
+        
     }
 }
 
@@ -79,7 +80,11 @@ struct SettingsView: View {
                                 do {
                                     try viewModel.logOut()
                                     print("loggedout")
-                                    isSuccess = false
+                                    isSuccess = true
+                                    print(_isSuccess)
+                                    print(isSuccess)
+                                    
+                                    
                                     
                                 }
                                 catch {

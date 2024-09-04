@@ -71,6 +71,7 @@ struct SignUpView: View {
                             do {
                                 try await viewModel.signUp()
                                 isSuccess = false
+                                print(isSuccess)
                             } catch {
                                 print("error while signUp from signupview")
                             }
@@ -90,6 +91,7 @@ struct SignUpView: View {
                                 do {
                                     try await viewModel.signInGoogle()
                                     isSuccess = false
+                                    print(isSuccess)
                                 } catch {
                                     print("error while google  + \(error)")
                                 }

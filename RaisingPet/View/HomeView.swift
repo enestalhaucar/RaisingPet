@@ -9,67 +9,69 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        ZStack {
-            Color("mainbgColor").ignoresSafeArea()
-            
-            VStack() {
+        NavigationStack {
+            ZStack {
+                Color("mainbgColor").ignoresSafeArea()
                 
-                Image("homeViewCat")
-                    .padding(.vertical, 25)
-                
-                HStack(spacing: 25) {
-                    VStack {
-                        NavigationLink {
-                            ShopScreenView()
-                        } label: {
-                            VStack{
-                                Image("shopIcon")
-                                Text("Shop")
-                                    .bold()
+                VStack() {
+                    
+                    Image("homeViewCat")
+                        .padding(.vertical, 25)
+                    
+                    HStack(spacing: 25) {
+                        VStack {
+                            NavigationLink {
+                                ShopScreenView()
+                            } label: {
+                                VStack{
+                                    Image("shopIcon")
+                                    Text("Shop")
+                                        .bold()
+                                }
                             }
+                            
+                        }
+                        VStack {
+                            NavigationLink {
+                                FriendsView()
+                            } label: {
+                                VStack{
+                                    Image("friendsIcon")
+                                    Text("Friends").bold()
+                                }
+                            }
+                        }
+                        VStack {
+                            Image("petIcon")
+                            Text("Pet").bold()
+                        }
+                        VStack {
+                            Image("emotionsIcon")
+                            Text("Emotions").bold()
                         }
                         
-                    }
-                    VStack {
-                        NavigationLink {
-                            FriendsView()
-                        } label: {
-                            VStack{
-                                Image("friendsIcon")
-                                Text("Friends").bold()
-                            }
-                        }
-                    }
-                    VStack {
-                        Image("petIcon")
-                        Text("Pet").bold()
-                    }
-                    VStack {
-                        Image("emotionsIcon")
-                        Text("Emotions").bold()
+                        
                     }
                     
+                    ZStack {
+                        Image("homeViewNewRect")
+                        Text("News")
+                    }
                     
-                }
-                
-                ZStack {
-                    Image("homeViewNewRect")
-                    Text("News")
-                }
-                
-                Spacer()
-                
-                
-            }.toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Image("squareBtn")
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Image("questionMarkBtn")
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Raising Pet").bold()
+                    Spacer()
+                    
+                    
+                }.toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Image("squareBtn")
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Image("questionMarkBtn")
+                    }
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text("Raising Pet").bold()
+                    }
                 }
             }
         }

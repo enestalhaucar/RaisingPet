@@ -40,7 +40,7 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: SettingsView(isSuccess: .constant(false))) {
+                    NavigationLink(destination: SettingsView(isSuccess: .constant(true))) {
                         Image(systemName: "gear")
                             .font(.headline)
                     }
