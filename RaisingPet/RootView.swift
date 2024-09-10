@@ -41,7 +41,7 @@ struct RootView: View {
                             }
                         
                         
-                        ProfileView()
+                        ProfileView(isSuccess: $isSuccess)
                             .tabItem {
                                 VStack {
                                     Image(systemName: "person")

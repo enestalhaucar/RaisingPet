@@ -32,7 +32,7 @@ struct EmotionsView: View {
                         Text("Unlock & Specialize Action")
                             .foregroundStyle(.white)
                             .padding(25)
-                            .background(Color.blue)
+                            .background(Color("friendsViewbuttonColor") )
                             .clipShape(RoundedRectangle(cornerRadius: 25))
                     }.padding(.vertical)
                     
@@ -84,7 +84,7 @@ struct EmotionsView: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
-                            .foregroundColor(Color.blue)
+                            .foregroundColor(Color("friendsViewbuttonColor"))
                             .frame(height: 100)
                             .padding(.horizontal)
                         HStack(spacing: 10) {

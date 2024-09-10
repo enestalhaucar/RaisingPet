@@ -15,7 +15,9 @@ struct HomeView: View {
                 
                 VStack() {
                     
-                    Image("homeViewCat")
+                    Image("homeViewPet")
+                        .resizable()
+                        .frame(width: 120, height: 120)
                         .padding(.vertical, 25)
                     
                     HStack(spacing: 25) {
@@ -42,12 +44,24 @@ struct HomeView: View {
                             }
                         }
                         VStack {
-                            Image("petIcon")
-                            Text("Pet").bold()
+                            NavigationLink {
+                                PetCareView()
+                            } label: {
+                                VStack{
+                                    Image("petIcon")
+                                    Text("Pet").bold()
+                                }
+                            }
                         }
                         VStack {
-                            Image("emotionsIcon")
-                            Text("Emotions").bold()
+                            NavigationLink {
+                                EmotionsView()
+                            } label: {
+                                VStack{
+                                    Image("emotionsIcon")
+                                    Text("Emotions").bold()
+                                }
+                            }
                         }
                         
                         
@@ -55,6 +69,8 @@ struct HomeView: View {
                     
                     ZStack {
                         Image("homeViewNewRect")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 75)
                         Text("News")
                     }
                     
@@ -63,14 +79,23 @@ struct HomeView: View {
                     
                 }.toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Image("squareBtn")
+                        HStack {
+                            Image("squareBtn")
+                            Text("Stacks")
+                        }
+                        
                     }
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Image("questionMarkBtn")
                     }
                     ToolbarItem(placement: .topBarLeading) {
-                        Text("Raising Pet").bold()
+                        HStack {
+                            Image("Petiverse")
+                                .resizable()
+                                .frame(width: 32, height: 32)
+                            Text("Petiverse").bold()
+                        }
                     }
                 }
             }

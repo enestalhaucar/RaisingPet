@@ -10,6 +10,9 @@
 		EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
+		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
+		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
+		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
 		EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606ED62C57B7040015F103 /* RaisingPetApp.swift */; };
 		EC606ED92C57B7040015F103 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606ED82C57B7040015F103 /* SplashView.swift */; };
 		EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC606EDA2C57B7060015F103 /* Assets.xcassets */; };
@@ -53,6 +56,9 @@
 		EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsView.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
+		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
+		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		EC606ED32C57B7040015F103 /* RaisingPet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaisingPet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC606ED62C57B7040015F103 /* RaisingPetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisingPetApp.swift; sourceTree = "<group>"; };
 		EC606ED82C57B7040015F103 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -113,11 +119,14 @@
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC606F122C58D2100015F103 /* SettingsView.swift */,
 				ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */,
+				EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */,
 				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
 				EC8AA8FF2C6101FA000C2478 /* NoteView.swift */,
 				EC8AA8F92C60F4BC000C2478 /* AccountView.swift */,
 				ECAF55B22C75F19A0010B6CF /* PetView.swift */,
+				EC561BFA2C88A31900D90B4A /* PetCareView.swift */,
 				EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */,
+				EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +311,7 @@
 				EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */,
 				EC8AA8F82C60DD9A000C2478 /* GoogleSignInHelper.swift in Sources */,
 				EC606F132C58D2100015F103 /* SettingsView.swift in Sources */,
+				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */,
@@ -310,9 +320,11 @@
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
+				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
+				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC8AA8FA2C60F4BC000C2478 /* AccountView.swift in Sources */,
