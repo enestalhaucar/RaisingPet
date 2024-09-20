@@ -17,5 +17,7 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>526182637332-p2cdc2149et3p1h2j94djg7ic6lrstoe.apps.googleusercontent.com</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>May I access your gallery ? </string>
 </dict>
 </plist>
