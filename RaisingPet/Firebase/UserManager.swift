@@ -29,7 +29,7 @@ final class UserManager {
         var userData : [String : Any] = [
             "user_id" : auth.uid,
             "date_created" : Timestamp(),
-            "email" : auth.email
+            "email" : auth.email,
         ]
         if let profilePhotoUrl = auth.profilePhotoUrl {
             userData["photo_url"] = profilePhotoUrl
@@ -48,8 +48,9 @@ final class UserManager {
         let profilePhotoUrl = data["profile_photo_url"] as? String
         let wallpaperUrl = data["wallpaper_url"] as? String
         let dateCreated = data["date_created"] as? Date
+        let name = data["name"] as? String
         
         
-        return DBUser(userId: userId, name: nil, email: email, profilePhotoUrl: profilePhotoUrl, wallpaperUrl: wallpaperUrl, dateCreated: dateCreated)
+        return DBUser(userId: userId, name: name, email: email, profilePhotoUrl: profilePhotoUrl, wallpaperUrl: wallpaperUrl, dateCreated: dateCreated)
     }
 }

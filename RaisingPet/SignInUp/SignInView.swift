@@ -23,10 +23,10 @@ final class SignInViewModel : ObservableObject {
 }
 
 struct SignInView: View {
-    @State var email : String = ""
-    @State var password : String = ""
+    
     @StateObject private var viewModel = SignInViewModel()
     @Binding var isSuccess : Bool
+   
     var body: some View {
         NavigationStack {
             ZStack {
@@ -40,8 +40,8 @@ struct SignInView: View {
                         .fontWeight(.semibold)
                     Image("signInDog")
                     Spacer()
-                    CustomTextField(placeholder: "Enter your email", text: $email)
-                    CustomTextField(placeholder: "Enter your password", text: $password)
+                    MailTextField(placeholder: "Enter Your Email", text: $viewModel.email)
+                    PasswordTextField(placeholder: "Enter Your Password", text: $viewModel.password)
                     
                     NavigationLink {
                         
@@ -89,7 +89,7 @@ struct SignInView: View {
                     
                 }.padding()
                 
-            }            
+            }
         }
     }
 }

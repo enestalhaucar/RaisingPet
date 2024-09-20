@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomTextField: View {
+struct MailTextField: View {
     var placeholder : String
     @Binding var text : String
     
@@ -17,6 +17,8 @@ struct CustomTextField: View {
             .padding(.leading,10)
             .frame(width: 300, height: 50)
             .background(Color.white, in: .rect(cornerRadius: 25))
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
             .foregroundStyle(.black)
             
             .overlay {
@@ -30,5 +32,5 @@ struct CustomTextField: View {
 }
 
 #Preview {
-    CustomTextField(placeholder: "Enter Your name", text: .constant(""))
+    MailTextField(placeholder: "Enter Your name", text: .constant(""))
 }

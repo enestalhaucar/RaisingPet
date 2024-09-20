@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */; };
+		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
@@ -32,7 +33,7 @@
 		EC606F022C57D1320015F103 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F012C57D1320015F103 /* button.swift */; };
 		EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F062C57D1F20015F103 /* SignInUpBackground.swift */; };
 		EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0A2C57D2DE0015F103 /* SignUpView.swift */; };
-		EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0C2C57D46D0015F103 /* CustomTextField.swift */; };
+		EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0C2C57D46D0015F103 /* MailTextField.swift */; };
 		EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0E2C57E1040015F103 /* SignInView.swift */; };
 		EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F102C58BDD90015F103 /* AuthenticationManager.swift */; };
 		EC606F132C58D2100015F103 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F122C58D2100015F103 /* SettingsView.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsView.swift; sourceTree = "<group>"; };
+		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 		EC606F012C57D1320015F103 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 		EC606F062C57D1F20015F103 /* SignInUpBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpBackground.swift; sourceTree = "<group>"; };
 		EC606F0A2C57D2DE0015F103 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		EC606F0C2C57D46D0015F103 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EC606F0C2C57D46D0015F103 /* MailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailTextField.swift; sourceTree = "<group>"; };
 		EC606F0E2C57E1040015F103 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EC606F102C58BDD90015F103 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		EC606F122C58D2100015F103 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -188,8 +190,9 @@
 			children = (
 				EC606F012C57D1320015F103 /* button.swift */,
 				EC606F062C57D1F20015F103 /* SignInUpBackground.swift */,
-				EC606F0C2C57D46D0015F103 /* CustomTextField.swift */,
+				EC606F0C2C57D46D0015F103 /* MailTextField.swift */,
 				EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */,
+				EC08F0D42C9C641000F6574D /* PasswordTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
+				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC8AA9002C6101FA000C2478 /* NoteView.swift in Sources */,
@@ -321,7 +325,7 @@
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
-				EC606F0D2C57D46D0015F103 /* CustomTextField.swift in Sources */,
+				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,

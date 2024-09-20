@@ -44,13 +44,14 @@ struct ProfileView: View {
                                 }
                             }
                         } else {
-                            Circle()
+                            Image("personIcon")
+                                .resizable()
                                 .frame(width: 155, height: 155)
-                                .foregroundStyle(.gray.opacity(0.2))
+                                
                         }
                          
                         if let user = viewModel.user  {
-                            Text("\(user.userId)")
+                            Text("\(user.name ?? "default")")
                             Text("\(user.email)")
                         }
                         
@@ -96,7 +97,7 @@ struct ProfileView: View {
                         // Arka plan
                         VStack(alignment: .leading, spacing: 16) {
                             // Her bir ayar öğesi
-                            Row(iconName: "person.circle", title: "Profile")
+                            ProfileRow(iconName: "person.circle", title: "Profile")
                             Divider()
                             Row(iconName: "bell", title: "Notification")
                             Divider()
@@ -214,7 +215,7 @@ struct ProfileRow : View {
     var title: String
     
     var body: some View {
-        NavigationLink(destination: ProfileEditView()) {
+        NavigationLink(destination: ProfileEditView(isSuccess: .constant(false))) {
             HStack(spacing: 10) {
                 Image(systemName: iconName) // Sistem simgesi
                     .resizable()

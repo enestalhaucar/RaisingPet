@@ -14,6 +14,7 @@ import GoogleSignInSwift
 final class SignUpViewModel : ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var repassword = ""
     
     
     func signUp() async throws{
@@ -59,8 +60,9 @@ struct SignUpView: View {
                     Spacer()
                     
                     
-                    CustomTextField(placeholder: "Enter your email", text: $viewModel.email)
-                    CustomTextField(placeholder: "Enter your password", text: $viewModel.password)
+                    MailTextField(placeholder: "Enter your email", text: $viewModel.email)
+                    PasswordTextField(placeholder: "Enter Your Password", text: $viewModel.password)
+                    PasswordTextField(placeholder: "Enter Your Password Again", text: $viewModel.repassword)
                     
                     
                     
@@ -77,10 +79,17 @@ struct SignUpView: View {
                             }
                         }
                     }, label: {
-                        Text("Sign Up")
-                            .foregroundStyle(.white)
-                            .frame(width: 250, height: 50)
-                            .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
+                        if viewModel.password == viewModel.repassword, !viewModel.password.isEmpty, !viewModel.password.isEmpty {
+                            Text("Sign Up")
+                                .foregroundStyle(.white)
+                                .frame(width: 250, height: 50)
+                                .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
+                        } else {
+                            Text("Sign Up")
+                                .foregroundStyle(.white)
+                                .frame(width: 250, height: 50)
+                                .background(Color("buttonBackgroundColor").opacity(0.3), in: .rect(cornerRadius: 25))
+                        }
                     })
                     
                   
