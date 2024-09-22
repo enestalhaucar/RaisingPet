@@ -98,7 +98,7 @@ struct HomeView: View {
                         }
                     }
                 }
-            }
+            }.navigationBarBackButtonHidden()
         }
     }
 }

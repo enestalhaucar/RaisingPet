@@ -11,7 +11,7 @@
 		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
-		EC1B965E2C9EF6E7001C5773 /* NoteView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView2.swift */; };
+		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
 		EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
@@ -47,9 +47,10 @@
 		EC8AA8FA2C60F4BC000C2478 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8F92C60F4BC000C2478 /* AccountView.swift */; };
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
-		EC8AA9002C6101FA000C2478 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FF2C6101FA000C2478 /* NoteView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
+		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
+		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
 		ECC4FCD32C6CBBEF00E78F7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FCD22C6CBBEF00E78F7F /* GoogleService-Info.plist */; };
 		ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD42C6CD01C00E78F7F /* UserManager.swift */; };
@@ -60,7 +61,7 @@
 		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
-		EC1B965D2C9EF6E7001C5773 /* NoteView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView2.swift; sourceTree = "<group>"; };
+		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionComponent.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
@@ -84,9 +85,10 @@
 		EC8AA8F92C60F4BC000C2478 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonComp.swift; sourceTree = "<group>"; };
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		EC8AA8FF2C6101FA000C2478 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
+		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ECC4FCD22C6CBBEF00E78F7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECC4FCD42C6CD01C00E78F7F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -127,8 +129,7 @@
 				ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */,
 				EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */,
 				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
-				EC8AA8FF2C6101FA000C2478 /* NoteView.swift */,
-				EC1B965D2C9EF6E7001C5773 /* NoteView2.swift */,
+				EC1B965D2C9EF6E7001C5773 /* NoteView.swift */,
 				EC8AA8F92C60F4BC000C2478 /* AccountView.swift */,
 				ECAF55B22C75F19A0010B6CF /* PetView.swift */,
 				EC561BFA2C88A31900D90B4A /* PetCareView.swift */,
@@ -199,6 +200,8 @@
 				EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */,
 				EC08F0D42C9C641000F6574D /* PasswordTextField.swift */,
 				EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */,
+				ECC2BE532CA0486C00790C92 /* CanvasView.swift */,
+				ECC2BE552CA0491200790C92 /* ShareSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
+				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
@@ -326,9 +330,9 @@
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
-				EC8AA9002C6101FA000C2478 /* NoteView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
+				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
@@ -338,7 +342,7 @@
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
-				EC1B965E2C9EF6E7001C5773 /* NoteView2.swift in Sources */,
+				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
 				EC8AA8FA2C60F4BC000C2478 /* AccountView.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
