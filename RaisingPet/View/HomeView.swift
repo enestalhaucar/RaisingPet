@@ -55,11 +55,11 @@ struct HomeView: View {
                         }
                         VStack {
                             NavigationLink {
-                                EmotionsView()
+                                NoteView()
                             } label: {
                                 VStack{
-                                    Image("emotionsIcon")
-                                    Text("Emotions").bold()
+                                    Image("noteIcon")
+                                    Text("Note").bold()
                                 }
                             }
                         }

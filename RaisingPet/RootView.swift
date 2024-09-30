@@ -25,11 +25,11 @@ struct RootView: View {
                                 }
                             }
                         
-                        NoteView()
+                        EmotionsView()
                             .tabItem {
                                 VStack {
-                                    Image(systemName: "note.text")
-                                    Text("Notes")
+                                    Image(systemName: "face.smiling")
+                                    Text("Emotions")
                                 }
                             }
                         CoupleQuestionView()

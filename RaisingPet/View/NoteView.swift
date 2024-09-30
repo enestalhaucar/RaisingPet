@@ -14,8 +14,9 @@ struct NoteView: View {
     @State private var showingShareSheet = false
     @Environment(\.undoManager) private var undoManager
     @State var backgroundColor : UIColor = .white
+    @State private var path = NavigationPath()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack {
                 VStack(spacing: 20) {
                     CanvasView(canvasView: $canvasView, backgroundColor: $backgroundColor)
