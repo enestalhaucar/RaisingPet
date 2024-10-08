@@ -21,10 +21,12 @@ struct PetView: View {
                                 .font(.system(size: 12))
                         }
                         Spacer()
-                        VStack(spacing: 10) {
-                            Image("GoMarket")
-                            Text("Markete Git")
-                                .font(.system(size: 12))
+                        NavigationLink(destination: ShopScreenView()) {
+                            VStack(spacing: 10) {
+                                Image("GoMarket")
+                                Text("Markete Git")
+                                    .font(.system(size: 12))
+                            }
                         }
                         Spacer()
                         VStack(spacing: 10) {
@@ -43,18 +45,43 @@ struct PetView: View {
                     }.padding(.vertical)
                     
                     HStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 80, height: 90)
-                            .foregroundStyle(Color("EggBackgroundColor"))
+                        
+                        NavigationLink(destination: PetCareView()) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 80, height: 90)
+                                .foregroundStyle(Color("EggBackgroundColor"))
+                                
+                                Image("pet")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
+                        }
                         Spacer()
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 80, height: 90)
-                            .foregroundStyle(Color("EggBackgroundColor"))
+                        NavigationLink(destination: PetCareView()) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 80, height: 90)
+                                .foregroundStyle(Color("EggBackgroundColor"))
+                                
+                                Image("pet")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
+                        }
                         Spacer()
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 80, height: 90)
-                            .foregroundStyle(Color("EggBackgroundColor"))
-                    
+                        NavigationLink(destination: PetCareView()) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 80, height: 90)
+                                .foregroundStyle(Color("EggBackgroundColor"))
+                                
+                                Image("pet")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
+                        }
+                        
                     }.padding(.horizontal )
                     
                     HStack {
@@ -77,14 +104,14 @@ struct PetView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .frame(width: 80, height: 90)
                             .foregroundStyle(Color("EggBackgroundColor"))
-                    
+                        
                     }.padding(.horizontal )
                     
                     
                     Spacer()
                     
                 }.padding(.horizontal)
-                .navigationTitle("Pet Screen")
+                    .navigationTitle("Pet Screen")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {

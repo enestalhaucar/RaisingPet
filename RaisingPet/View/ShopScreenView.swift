@@ -16,11 +16,19 @@ struct ShopScreenView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                Color("shopBackgroundColor").ignoresSafeArea() 
+                
+                Image("shopBackgroundImage")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .offset(y: -UIScreen.main.bounds.height / 2 + 150)
+                
                 Image("shopRoof")
                     .resizable()
-                    .scaleEffect(1.1)
-                    .frame(height: 140)
+                    .frame(height: 300)
                     .offset(y: -(UIScreen.main.bounds.height / 2) + 40)
+                
+                
                 
                 
                 
@@ -37,8 +45,12 @@ struct ShopScreenView: View {
                                 Image(systemName: "plus")
                             }
                         }
+                        .foregroundStyle(.black)
                         .padding(8)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 1))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
+                        
+                        
                         
                         Spacer()
                         
@@ -47,7 +59,9 @@ struct ShopScreenView: View {
                         }) {
                             Text("Restore")
                                 .padding(8)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 1))
+                                .foregroundStyle(.black)
+                                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
                         }
                     }
                     .padding()
@@ -61,7 +75,7 @@ struct ShopScreenView: View {
                             Text("Pet").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
                         
                         HStack {
                             Image("goldIcon")
@@ -70,7 +84,7 @@ struct ShopScreenView: View {
                             Text("Gold").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
                         
                         HStack {
                             Image("assetIcon")
@@ -79,7 +93,7 @@ struct ShopScreenView: View {
                             Text("Asset").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
                         HStack {
                             Image("sofaIcon")
                                 .resizable()
@@ -87,9 +101,9 @@ struct ShopScreenView: View {
                             Text("Home").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
                     }
-                    .padding(.horizontal)
+                    .padding()
                     
                     // Üçüncü Kısım (Ödüller - Prize Grid)
                     LazyVGrid(columns: columns, spacing: 16) {
@@ -97,6 +111,7 @@ struct ShopScreenView: View {
                             VStack {
                                 Image("giftBox")
                                     .resizable()
+                                    .scaleEffect(1.5)
                                     .frame(width: 50, height: 50)
                                     .padding()
                                     
@@ -117,7 +132,7 @@ struct ShopScreenView: View {
                     
                     Spacer()
                 }
-                .background(Color("shopBackgroundColor")) // Arka plan rengi
+                
             }
             
         }

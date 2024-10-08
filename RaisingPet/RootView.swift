@@ -28,7 +28,7 @@ struct RootView: View {
                         EmotionsView()
                             .tabItem {
                                 VStack {
-                                    Image(systemName: "face.smiling")
+                                    Image(systemName: "hands.and.sparkles")
                                     Text("Emotions")
                                 }
                             }

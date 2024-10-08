@@ -15,10 +15,21 @@ struct HomeView: View {
                 
                 VStack() {
                     
-                    Image("homeViewPet")
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                        .padding(.vertical, 25)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .frame(width: UIScreen.main.bounds.width * 8 / 10, height: 150)
+                            .foregroundStyle(.white)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(.gray.opacity(0.3), lineWidth: 2)
+                            }
+                            
+                        
+                        Image("pet")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .padding(.vertical, 25)
+                    }
                     
                     HStack(spacing: 25) {
                         VStack {
@@ -45,7 +56,7 @@ struct HomeView: View {
                         }
                         VStack {
                             NavigationLink {
-                                PetCareView()
+                                PetView()
                             } label: {
                                 VStack{
                                     Image("petIcon")
@@ -58,7 +69,7 @@ struct HomeView: View {
                                 NoteView()
                             } label: {
                                 VStack{
-                                    Image("noteIcon")
+                                    Image("notesIcon")
                                     Text("Note").bold()
                                 }
                             }
