@@ -58,6 +58,7 @@ struct NoteView: View {
             .sheet(isPresented: $showingShareSheet, content: {
                 ShareSheet(activityItems: [canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)])
             })
+            .toolbar(.visible, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {

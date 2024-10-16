@@ -8,13 +8,14 @@
 import WidgetKit
 import SwiftUI
 
+
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        SimpleEntry(countdown: CountDownWidget(targetDate: Date(), title: "Maldives"), date: Date())
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+        SimpleEntry(countdown: CountDownWidget(targetDate: Date(), title: "Maldives"), date: Date())
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -22,9 +23,9 @@ struct Provider: AppIntentTimelineProvider {
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+        for minuteOffSet in 0 ..< 60 {
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minuteOffSet, to: currentDate)!
+            let entry = SimpleEntry(countdown: CountDownWidget(targetDate: Date(), title: "Maldives"), date: Date())
             entries.append(entry)
         }
 
@@ -33,21 +34,17 @@ struct Provider: AppIntentTimelineProvider {
 }
 
 struct SimpleEntry: TimelineEntry {
+    let countdown : CountDownWidget
     let date: Date
-    let configuration: ConfigurationAppIntent
+    
+    
 }
 
 struct PetiverseWidgetExtensionEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
-        }
+        CountDownView(title: entry.countdown.title, dayText: entry.countdown.dayRemaining.days, hourText: entry.countdown.dayRemaining.hour, minuteText: entry.countdown.dayRemaining.minutes, backgroundImage: Image("notesIcon"), backgroundImageSelected: false)
     }
 }
 
@@ -58,27 +55,14 @@ struct PetiverseWidgetExtension: Widget {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             PetiverseWidgetExtensionEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
-        }
+        }.contentMarginsDisabled()
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemMedium) {
     PetiverseWidgetExtension()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SimpleEntry(countdown: CountDownWidget(targetDate: Date(), title: "Maldives"), date: .now)
+    SimpleEntry(countdown: CountDownWidget(targetDate: Date(), title: "Maldives"), date: .now)
 }

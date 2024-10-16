@@ -8,84 +8,55 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var item: CountDownWidgetOne =
+        CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date())
+        
+    
+    @State private var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // Default 23 days later
+    @State private var timeRemaining: (days: Int, hours: Int, minutes: Int) = (0, 0, 0)
+    @State private var title : String = "To Maldives"
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("mainbgColor").ignoresSafeArea()
                 
-                VStack() {
+                VStack(spacing: 30) {
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .frame(width: UIScreen.main.bounds.width * 8 / 10, height: 150)
-                            .foregroundStyle(.white)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(.gray.opacity(0.3), lineWidth: 2)
-                            }
-                            
+                    HomePetSection()
+                    
+                    HomeNavigationButtons()
+                    
+                    HomeNewsSection()
+                    
+                    
+                    
+                    VStack {
+                        HStack {
+                            Text("Hot Widgets 🔥")
+                                .font(.title3)
+                                .bold()
+                            Spacer()
+                        }
                         
-                        Image("pet")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .padding(.vertical, 25)
-                    }
-                    
-                    HStack(spacing: 25) {
-                        VStack {
-                            NavigationLink {
-                                ShopScreenView()
-                            } label: {
-                                VStack{
-                                    Image("shopIcon")
-                                    Text("Shop")
-                                        .bold()
+                        HStack {
+                            NavigationLink(destination: CountDownSettingsView()) {
+                                ZStack {
+                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                 }
                             }
-                            
-                        }
-                        VStack {
-                            NavigationLink {
-                                FriendsView()
-                            } label: {
-                                VStack{
-                                    Image("friendsIcon")
-                                    Text("Friends").bold()
-                                }
-                            }
-                        }
-                        VStack {
-                            NavigationLink {
-                                PetView()
-                            } label: {
-                                VStack{
-                                    Image("petIcon")
-                                    Text("Pet").bold()
-                                }
-                            }
-                        }
-                        VStack {
-                            NavigationLink {
-                                NoteView()
-                            } label: {
-                                VStack{
-                                    Image("notesIcon")
-                                    Text("Note").bold()
+                            NavigationLink(destination: CountDownSettingsView()) {
+                                ZStack {
+                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                 }
                             }
                         }
                         
                         
-                    }
-                    
-                    ZStack {
-                        Image("homeViewNewRect")
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 75)
-                        Text("News")
-                    }
-                    
+                        
+                    }.frame(width: UIScreen.main.bounds.width * 9 / 10)
                     Spacer()
+                    
+                    
                     
                     
                 }.toolbar {
@@ -109,6 +80,7 @@ struct HomeView: View {
                         }
                     }
                 }
+                .padding(.top,30)
             }.navigationBarBackButtonHidden()
         }
     }
@@ -116,4 +88,104 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+}
+
+struct CustomNavigationLink<Destination: View> : View {
+    let view : Destination
+    var imageName : String
+    var text : String
+    
+    var body: some View {
+        VStack {
+            NavigationLink {
+                view
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 65, height: 65)
+                        .foregroundStyle(.white)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.gray.opacity(0.3))
+                        }
+                    VStack(spacing: 1) {
+                        Image("\(imageName)")
+                            .scaleEffect(0.8)
+                        Text("\(text)")
+                            .bold()
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+struct HomePetSection: View {
+    var body: some View {
+        NavigationLink(destination: PetView()) {
+            ZStack {
+                Image("petBackgroundImage")
+                    .resizable(resizingMode: .tile)
+                    .opacity(0.3)
+                    .foregroundStyle(.white)
+                
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(.gray.opacity(0.3), lineWidth: 2)
+                    }
+                
+                Image("pet")
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .padding(.vertical, 25)
+            }.frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+        }
+            
+    }
+}
+
+struct HomeNavigationButtons: View {
+    var body: some View {
+        HStack(spacing: 25) {
+            CustomNavigationLink(view: ShopScreenView(), imageName: "shopIcon", text: "Shop")
+            CustomNavigationLink(view: FriendsView(), imageName: "friendsIcon", text: "Friends")
+            CustomNavigationLink(view: PetView(), imageName: "petIcon", text: "Pet")
+            VStack {
+                NavigationLink {
+                    NoteView()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 65, height: 65)
+                            .foregroundStyle(.white)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.gray.opacity(0.3))
+                            }
+                        VStack(spacing: 1) {
+                            Image("notesIcon")
+                                .resizable()
+                                .frame(width: 44, height: 44)
+                                .scaleEffect(0.8)
+                            Text("Notes")
+                                .bold()
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+struct HomeNewsSection: View {
+    var body: some View {
+        ZStack {
+            Image("homeViewNewRect")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 75)
+            Text("News").bold()
+        }
+    }
 }

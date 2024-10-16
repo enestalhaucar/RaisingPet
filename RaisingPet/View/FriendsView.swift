@@ -77,7 +77,8 @@ struct FriendsView: View {
                     
                     
                 }
-            }.navigationTitle("Friends & Relations")
+            }.toolbar(.hidden, for: .tabBar)
+            .navigationTitle("Friends & Relations")
                 .navigationBarTitleDisplayMode(.inline)
         }
     }

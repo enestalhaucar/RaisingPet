@@ -13,6 +13,16 @@
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
 		EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */; };
+		EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */; };
+		EC2B97C32CB69C9900CE15CD /* CountDownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */; };
+		EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C42CB6A63900CE15CD /* CountDownView.swift */; };
+		EC2B97C62CB6A6B200CE15CD /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C42CB6A63900CE15CD /* CountDownView.swift */; };
+		EC2B97C82CB6AD1400CE15CD /* CountDownSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C72CB6AD1400CE15CD /* CountDownSettingsView.swift */; };
+		EC2B97CA2CB95FD200CE15CD /* CountDownWidgetOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C92CB95FD100CE15CD /* CountDownWidgetOne.swift */; };
+		EC2B97CC2CB9626700CE15CD /* CountDownWidgetTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97CB2CB9626700CE15CD /* CountDownWidgetTwo.swift */; };
+		EC300B382CBE75D400BA4EC3 /* CountDownWidgetThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B372CBE75D400BA4EC3 /* CountDownWidgetThree.swift */; };
+		EC300B3A2CBEC08200BA4EC3 /* CountDownWidgetFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B392CBEC08200BA4EC3 /* CountDownWidgetFour.swift */; };
+		EC300B3D2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
 		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
@@ -95,6 +105,14 @@
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionComponent.swift; sourceTree = "<group>"; };
+		EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidget.swift; sourceTree = "<group>"; };
+		EC2B97C42CB6A63900CE15CD /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
+		EC2B97C72CB6AD1400CE15CD /* CountDownSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownSettingsView.swift; sourceTree = "<group>"; };
+		EC2B97C92CB95FD100CE15CD /* CountDownWidgetOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetOne.swift; sourceTree = "<group>"; };
+		EC2B97CB2CB9626700CE15CD /* CountDownWidgetTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetTwo.swift; sourceTree = "<group>"; };
+		EC300B372CBE75D400BA4EC3 /* CountDownWidgetThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetThree.swift; sourceTree = "<group>"; };
+		EC300B392CBEC08200BA4EC3 /* CountDownWidgetFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetFour.swift; sourceTree = "<group>"; };
+		EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetViewModel.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -175,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				EC8AA8FD2C610142000C2478 /* HomeView.swift */,
+				EC300B3B2CBFE1AA00BA4EC3 /* CountDownWidget */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC606F122C58D2100015F103 /* SettingsView.swift */,
@@ -189,6 +208,19 @@
 				EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EC300B3B2CBFE1AA00BA4EC3 /* CountDownWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EC2B97C72CB6AD1400CE15CD /* CountDownSettingsView.swift */,
+				EC300B372CBE75D400BA4EC3 /* CountDownWidgetThree.swift */,
+				EC2B97C92CB95FD100CE15CD /* CountDownWidgetOne.swift */,
+				EC2B97CB2CB9626700CE15CD /* CountDownWidgetTwo.swift */,
+				EC300B392CBEC08200BA4EC3 /* CountDownWidgetFour.swift */,
+				EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */,
+			);
+			path = CountDownWidget;
 			sourceTree = "<group>";
 		};
 		EC606ECA2C57B7040015F103 = {
@@ -296,6 +328,8 @@
 				ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */,
 				ECCC7B382CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift */,
 				ECCC7B3A2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift */,
+				EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */,
+				EC2B97C42CB6A63900CE15CD /* CountDownView.swift */,
 				ECCC7B3C2CAAB3FB00B16C91 /* AppIntent.swift */,
 				ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */,
 				ECCC7B402CAAB3FD00B16C91 /* Info.plist */,
@@ -425,17 +459,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC2B97CA2CB95FD200CE15CD /* CountDownWidgetOne.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
+				EC300B382CBE75D400BA4EC3 /* CountDownWidgetThree.swift in Sources */,
+				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */,
+				EC300B3D2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift in Sources */,
+				EC2B97C82CB6AD1400CE15CD /* CountDownSettingsView.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */,
 				EC8AA8F82C60DD9A000C2478 /* GoogleSignInHelper.swift in Sources */,
 				EC606F132C58D2100015F103 /* SettingsView.swift in Sources */,
+				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
+				EC2B97CC2CB9626700CE15CD /* CountDownWidgetTwo.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
+				EC300B3A2CBEC08200BA4EC3 /* CountDownWidgetFour.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */,
@@ -464,7 +506,9 @@
 			files = (
 				ECCC7B392CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift in Sources */,
 				ECCC7B3D2CAAB3FB00B16C91 /* AppIntent.swift in Sources */,
+				EC2B97C62CB6A6B200CE15CD /* CountDownView.swift in Sources */,
 				ECCC7B3B2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift in Sources */,
+				EC2B97C32CB69C9900CE15CD /* CountDownWidget.swift in Sources */,
 				ECCC7B372CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

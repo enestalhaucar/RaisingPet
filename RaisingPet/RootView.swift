@@ -14,47 +14,50 @@ struct RootView: View {
             SignInUpBackground()
             if !isSuccess {
                 VStack {
-                    
-                    
                     TabView {
-                        HomeView()
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "house")
-                                    Text("Home")
+                        Group {
+                            HomeView()
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "house")
+                                        Text("Home")
+                                    }
                                 }
-                            }
-                        
-                        EmotionsView()
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "hands.and.sparkles")
-                                    Text("Emotions")
+                            
+                            EmotionsView()
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "hands.and.sparkles")
+                                        Text("Emotions")
+                                    }
                                 }
-                            }
-                        CoupleQuestionView()
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "person.fill.questionmark")
-                                    Text("Couple Questions")
+                            CoupleQuestionView()
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "person.fill.questionmark")
+                                        Text("Couple Questions")
+                                    }
                                 }
-                            }
-                        
-                        
-                        ProfileView(isSuccess: $isSuccess)
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "person")
-                                    Text("Profile")
+                            
+                            
+                            ProfileView(isSuccess: $isSuccess)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "person")
+                                        Text("Profile")
+                                    }
                                 }
-                            }
+                        }
+                        .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
+                            .toolbarBackground(.visible, for: .tabBar)
                     }
                 }
             }
            
             
             
-        }.fullScreenCover(isPresented: $isSuccess, content: {
+        }
+                .fullScreenCover(isPresented: $isSuccess, content: {
             SplashView(isSuccess: $isSuccess)
         })
         .onAppear {

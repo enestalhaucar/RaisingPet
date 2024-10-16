@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct PetView: View {
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("mainbgColor").ignoresSafeArea()
+                Image("petScreenBackground")
+                    .resizable()
+                    .ignoresSafeArea()
                 VStack() {
                     HStack(spacing: 10) {
                         VStack(spacing: 10) {
@@ -21,7 +24,7 @@ struct PetView: View {
                                 .font(.system(size: 12))
                         }
                         Spacer()
-                        NavigationLink(destination: ShopScreenView()) {
+                        NavigationLink(destination: ShopScreenView()){
                             VStack(spacing: 10) {
                                 Image("GoMarket")
                                 Text("Markete Git")
@@ -118,7 +121,7 @@ struct PetView: View {
                             Image(systemName: "line.3.horizontal")
                         }
                     }
-            }
+            }.toolbar(.hidden, for: .tabBar)
         }
     }
 }

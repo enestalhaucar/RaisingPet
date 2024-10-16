@@ -16,55 +16,40 @@ struct ShopScreenView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("shopBackgroundColor").ignoresSafeArea() 
+                Color("shopBackgroundColor").ignoresSafeArea()
                 
                 Image("shopBackgroundImage")
                     .resizable()
                     .frame(width: 200, height: 200)
                     .offset(y: -UIScreen.main.bounds.height / 2 + 150)
                 
-                Image("shopRoof")
-                    .resizable()
-                    .frame(height: 300)
+                ZStack {
+                    Image("shopRoof")
+                        .resizable()
+                        .frame(height: 300)
+                        .offset(y: -(UIScreen.main.bounds.height / 2) + 20)
+                    HStack {
+                        Image(systemName: "dollarsign.circle")
+                        Text("5")
+                        Button(action: {
+                            // Ekleme aksiyonu
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                    }
+                    .foregroundStyle(.black)
+                    .padding(8)
+                    .frame(width: 100, height: 40)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
                     .offset(y: -(UIScreen.main.bounds.height / 2) + 40)
+                }
                 
                 
                 
                 
                 
                 VStack {
-                    // Üst Kısım (Dükkan Başlığı ve Menü)
-                    HStack {
-                        
-                        HStack {
-                            Image(systemName: "dollarsign.circle")
-                            Text("5")
-                            Button(action: {
-                                // Ekleme aksiyonu
-                            }) {
-                                Image(systemName: "plus")
-                            }
-                        }
-                        .foregroundStyle(.black)
-                        .padding(8)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
-                        
-                        
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            // Restore butonu aksiyonu
-                        }) {
-                            Text("Restore")
-                                .padding(8)
-                                .foregroundStyle(.black)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
-                        }
-                    }
-                    .padding()
                     
                     // İkinci Kısım (Pet, Gold, Asset, Home)
                     HStack(spacing: 12) {
@@ -114,8 +99,8 @@ struct ShopScreenView: View {
                                     .scaleEffect(1.5)
                                     .frame(width: 50, height: 50)
                                     .padding()
-                                    
-                                    
+                                
+                                
                                 Text("Prize")
                                     .font(.headline)
                             }
@@ -131,10 +116,23 @@ struct ShopScreenView: View {
                     .padding()
                     
                     Spacer()
-                }
+                }.padding(.top, 100)
                 
-            }
-            
+            }.toolbar(.hidden, for: .tabBar)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            // Restore butonu aksiyonu
+                        }) {
+                            Text("Restore")
+                                .padding(8)
+                                .font(.caption)
+                                .foregroundStyle(.black)
+                                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
+                        }
+                    }
+                }
         }
     }
 }
