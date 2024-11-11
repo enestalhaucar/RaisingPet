@@ -26,7 +26,7 @@ struct SplashView: View {
                         .multilineTextAlignment(.center)
                     
                     NavigationLink {
-                        SignUpView(isSuccess: $isSuccess)
+                        SignUpView()
                     } label: {
                         // Components/Button
                         button(title: "Get Started")

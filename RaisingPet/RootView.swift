@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RootView: View {
-    @State private var isSuccess : Bool = false
+    
+    @EnvironmentObject var loginViewModel : LoginViewModel
+    @EnvironmentObject var signUpViewModel : SignUpViewModel
     var body: some View {
         ZStack {
             SignInUpBackground()
-            if !isSuccess {
+            if  {
                 VStack {
                     TabView {
                         Group {
@@ -40,7 +42,7 @@ struct RootView: View {
                                 }
                             
                             
-                            ProfileView(isSuccess: $isSuccess)
+                            ProfileView()
                                 .tabItem {
                                     VStack {
                                         Image(systemName: "person")
@@ -52,24 +54,15 @@ struct RootView: View {
                             .toolbarBackground(.visible, for: .tabBar)
                     }
                 }
+            } else {
+                LoginView()
+                    .environmentObject(loginViewModel)
             }
            
             
             
         }
-                .fullScreenCover(isPresented: $isSuccess, content: {
-            SplashView(isSuccess: $isSuccess)
-        })
-        .onAppear {
-            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-            print(authUser ?? "auth boş")
-           
-            if authUser == nil {
-                self.isSuccess = true
-            }
-            print("RootView on appear |\(isSuccess)")
-            
-        }
+        
         
         
     }

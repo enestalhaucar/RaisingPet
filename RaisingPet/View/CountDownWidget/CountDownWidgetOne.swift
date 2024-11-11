@@ -19,7 +19,7 @@ struct CountDownWidgetOne: Identifiable {
     var targetDate : Date
 }
 enum widgetSizeOne {
-    case small, medium
+    case small, medium, large
 }
 
 struct CountDownWidgetPreviewDesignOne: View {

@@ -11,7 +11,38 @@ struct CountDownSettingsView: View {
     @State private var styleIndex : Int = 0
     @State private var title : String = "Title"
     
-    @StateObject private var viewModel = CountDownWidgetViewModel()
+    
+    
+    @State var timeRemaining: (days: Int, hours: Int, minutes: Int) = (0, 0, 0)
+    @State var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // Default 23 days later
+    
+    @State var itemsOne: [CountDownWidgetOne] = [
+        CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date()),
+        CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .medium, title: "Maldives", targetDate: Date())
+    ]
+    @State var itemsTwo: [CountDownWidgetTwo] = [
+        CountDownWidgetTwo(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date()),
+        CountDownWidgetTwo(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .medium, title: "Maldives", targetDate: Date())
+    ]
+    @State var itemsThree: [CountDownWidgetThree] = [
+        CountDownWidgetThree(backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date()),
+        CountDownWidgetThree(backgroundColor: .blue, textColor: .white, size: .medium, title: "Maldives", targetDate: Date())
+    ]
+    @State var itemsFour: [CountDownWidgetFour] = [
+        CountDownWidgetFour(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date()),
+        CountDownWidgetFour(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .medium, title: "Maldives", targetDate: Date())
+    ]
+    
+    func updateRemainingTime() {
+        let now = Date()
+        let diff = Calendar.current.dateComponents([.day, .hour, .minute], from: now, to: targetDate)
+        timeRemaining.days = diff.day ?? 0
+        timeRemaining.hours = diff.hour ?? 0
+        timeRemaining.minutes = diff.minute ?? 0
+    }
+    @State private var timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect() // Timer to update every minute
+    
+    
     
     
     var body: some View {
@@ -24,8 +55,8 @@ struct CountDownSettingsView: View {
                         // TabView for showing one item at a time and swiping to see the others
                         if styleIndex == 0 {
                             TabView() {
-                                ForEach(Array(viewModel.itemsOne.enumerated()), id: \.element.id) { index, item in
-                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $viewModel.targetDate, timeRemaining: viewModel.timeRemaining, title: $title)
+                                ForEach(Array(itemsOne.enumerated()), id: \.element.id) { index, item in
+                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                         .tag(index)
                                     
                                 }
@@ -35,8 +66,8 @@ struct CountDownSettingsView: View {
                             .background(Color.gray.gradient.opacity(0.1))
                         } else if styleIndex == 1 {
                             TabView() {
-                                ForEach(Array(viewModel.itemsTwo.enumerated()), id: \.element.id) { index, item in
-                                    CountDownWidgetPreviewDesignTwo(item: item, targetDate: $viewModel.targetDate, timeRemaining: viewModel.timeRemaining, title: $title)
+                                ForEach(Array(itemsTwo.enumerated()), id: \.element.id) { index, item in
+                                    CountDownWidgetPreviewDesignTwo(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                         .tag(index)
                                     
                                 }
@@ -46,8 +77,8 @@ struct CountDownSettingsView: View {
                             .background(Color.gray.gradient.opacity(0.1))
                         } else if styleIndex == 2 {
                             TabView() {
-                                ForEach(Array(viewModel.itemsThree.enumerated()), id: \.element.id) { index, item in
-                                    CountDownWidgetPreviewDesignThree(item: item, targetDate: $viewModel.targetDate, timeRemaining: viewModel.timeRemaining, title: $title)
+                                ForEach(Array(itemsThree.enumerated()), id: \.element.id) { index, item in
+                                    CountDownWidgetPreviewDesignThree(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                         .tag(index)
                                     
                                 }
@@ -57,8 +88,8 @@ struct CountDownSettingsView: View {
                             .background(Color.gray.gradient.opacity(0.1))
                         } else if styleIndex == 3 {
                             TabView() {
-                                ForEach(Array(viewModel.itemsFour.enumerated()), id: \.element.id) { index, item in
-                                    CountDownWidgetPreviewDesignFour(item: item, targetDate: $viewModel.targetDate, timeRemaining: viewModel.timeRemaining, title: $title)
+                                ForEach(Array(itemsFour.enumerated()), id: \.element.id) { index, item in
+                                    CountDownWidgetPreviewDesignFour(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
                                         .tag(index)
                                     
                                 }
@@ -89,7 +120,7 @@ struct CountDownSettingsView: View {
                             }
                         }.padding(.horizontal)
                             .scrollIndicators(.hidden)
-                       
+                        
                         
                         // MARK: BACKGROUND PHOTO & BACKGROUND COLOR & TEXT COLOR SELECTION
                         VStack {
@@ -107,13 +138,13 @@ struct CountDownSettingsView: View {
                                         if let loaded = try? await selectedBackgroundPhoto?.loadTransferable(type: Image.self) {
                                             backgroundImage = loaded
                                             // Set the selected background image for all items
-                                            for index in viewModel.itemsOne.indices {
-                                                viewModel.itemsOne[index].backgroundImage = loaded
-                                                viewModel.itemsOne[index].bgSelected = true
-                                                viewModel.itemsTwo[index].backgroundImage = loaded
-                                                viewModel.itemsTwo[index].bgSelected = true
-                                                viewModel.itemsFour[index].backgroundImage = loaded
-                                                viewModel.itemsFour[index].bgSelected = true
+                                            for index in itemsOne.indices {
+                                                itemsOne[index].backgroundImage = loaded
+                                                itemsOne[index].bgSelected = true
+                                                itemsTwo[index].backgroundImage = loaded
+                                                itemsTwo[index].bgSelected = true
+                                                itemsFour[index].backgroundImage = loaded
+                                                itemsFour[index].bgSelected = true
                                             }
                                         } else {
                                             print("failed")
@@ -127,25 +158,25 @@ struct CountDownSettingsView: View {
                             ColorPicker("Select background color", selection: $backgroundColor)
                                 .padding(.horizontal)
                                 .onChange(of: backgroundColor) {
-                                    for index in viewModel.itemsOne.indices {
-                                        viewModel.itemsOne[index].backgroundColor = backgroundColor
-                                        viewModel.itemsOne[index].bgSelected = false // Deselect photo when color is picked
-                                        viewModel.itemsTwo[index].backgroundColor = backgroundColor
-                                        viewModel.itemsTwo[index].bgSelected = false // Deselect photo when color is picked
-                                        viewModel.itemsThree[index].backgroundColor = backgroundColor
-                                        viewModel.itemsFour[index].backgroundColor = backgroundColor
-                                        viewModel.itemsFour[index].bgSelected = false // Deselect photo when color is picked
+                                    for index in itemsOne.indices {
+                                        itemsOne[index].backgroundColor = backgroundColor
+                                        itemsOne[index].bgSelected = false // Deselect photo when color is picked
+                                        itemsTwo[index].backgroundColor = backgroundColor
+                                        itemsTwo[index].bgSelected = false // Deselect photo when color is picked
+                                        itemsThree[index].backgroundColor = backgroundColor
+                                        itemsFour[index].backgroundColor = backgroundColor
+                                        itemsFour[index].bgSelected = false // Deselect photo when color is picked
                                         
                                     }
                                 }
                             ColorPicker("Select text color", selection: $textColor)
                                 .padding(.horizontal)
                                 .onChange(of: textColor) {
-                                    for index in viewModel.itemsOne.indices {
-                                        viewModel.itemsOne[index].textColor = textColor
-                                        viewModel.itemsTwo[index].textColor = textColor
-                                        viewModel.itemsThree[index].textColor = textColor
-                                        viewModel.itemsFour[index].textColor = textColor
+                                    for index in itemsOne.indices {
+                                        itemsOne[index].textColor = textColor
+                                        itemsTwo[index].textColor = textColor
+                                        itemsThree[index].textColor = textColor
+                                        itemsFour[index].textColor = textColor
                                     }
                                 }
                         }
@@ -153,11 +184,11 @@ struct CountDownSettingsView: View {
                         // MARK: TITLE TEXTFIELD
                         TextField("Enter Title", text: $title).padding(.horizontal)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            
+                        
                         // MARK: DATE PICKER
-                        DatePicker("Target Date", selection: viewModel.$targetDate, displayedComponents: [.date, .hourAndMinute])
-                            .onChange(of: viewModel.targetDate) {
-                                viewModel.updateRemainingTime()
+                        DatePicker("Target Date", selection: $targetDate, displayedComponents: [.date, .hourAndMinute])
+                            .onChange(of: targetDate) {
+                                updateRemainingTime()
                             }.padding(.horizontal)
                         
                         

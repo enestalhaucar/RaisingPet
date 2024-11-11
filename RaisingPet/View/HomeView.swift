@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var item: CountDownWidgetOne =
-        CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date())
-        
+    @State private var CountDownItem: CountDownWidgetOne =
+    CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date())
+    
+    @State private var DistanceItem : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .small, title: "")
+    @State private var DistanceItem2 : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .medium, title: "")
+    
     
     @State private var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // Default 23 days later
     @State private var timeRemaining: (days: Int, hours: Int, minutes: Int) = (0, 0, 0)
@@ -20,67 +23,77 @@ struct HomeView: View {
             ZStack {
                 Color("mainbgColor").ignoresSafeArea()
                 
-                VStack(spacing: 30) {
-                    
-                    HomePetSection()
-                    
-                    HomeNavigationButtons()
-                    
-                    HomeNewsSection()
-                    
-                    
-                    
-                    VStack {
-                        HStack {
-                            Text("Hot Widgets 🔥")
-                                .font(.title3)
-                                .bold()
-                            Spacer()
-                        }
+                ScrollView {
+                    VStack(spacing: 30) {
                         
-                        HStack {
-                            NavigationLink(destination: CountDownSettingsView()) {
-                                ZStack {
-                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
+                        HomePetSection()
+                        
+                        HomeNavigationButtons()
+                        
+                        HomeNewsSection()
+                        
+                        
+                        
+                        VStack {
+                            HStack {
+                                Text("Hot Widgets 🔥")
+                                    .font(.title3)
+                                    .bold()
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                NavigationLink(destination: CountDownSettingsView()) {
+                                    ZStack {
+                                        CountDownWidgetPreviewDesignOne(item: CountDownItem, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
+                                    }
+                                }
+                                NavigationLink(destination: DistanceSettingsView()) {
+                                    ZStack {
+                                        DistanceWidgetPreviewDesignOne(item: DistanceItem, title: $title)
+                                    }
                                 }
                             }
-                            NavigationLink(destination: CountDownSettingsView()) {
+                            
+                            NavigationLink(destination: DistanceSettingsView()) {
                                 ZStack {
-                                    CountDownWidgetPreviewDesignOne(item: item, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
+                                    DistanceWidgetPreviewDesignOne(item: DistanceItem2, title: $title)
                                 }
                             }
+                            
+                            
+                            
+                            
+                        }.frame(width: UIScreen.main.bounds.width * 9 / 10)
+                        Spacer()
+                        
+                        
+                        
+                        
+                    }.toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            HStack {
+                                Image("squareBtn")
+                                Text("Stacks")
+                            }
+                            
                         }
                         
-                        
-                        
-                    }.frame(width: UIScreen.main.bounds.width * 9 / 10)
-                    Spacer()
-                    
-                    
-                    
-                    
-                }.toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack {
-                            Image("squareBtn")
-                            Text("Stacks")
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Image("questionMarkBtn")
                         }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Image("questionMarkBtn")
-                    }
-                    ToolbarItem(placement: .topBarLeading) {
-                        HStack {
-                            Image("Petiverse")
-                                .resizable()
-                                .frame(width: 32, height: 32)
-                            Text("Petiverse").bold()
+                        ToolbarItem(placement: .topBarLeading) {
+                            HStack {
+                                Image("Petiverse")
+                                    .resizable()
+                                    .frame(width: 32, height: 32)
+                                Text("Petiverse").bold()
+                            }
                         }
                     }
-                }
-                .padding(.top,30)
+                    .padding(.top,30)
+                    
+                }.scrollIndicators(.hidden)
             }.navigationBarBackButtonHidden()
         }
     }
@@ -141,7 +154,7 @@ struct HomePetSection: View {
                     .padding(.vertical, 25)
             }.frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
         }
-            
+        
     }
 }
 

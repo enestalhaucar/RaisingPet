@@ -23,6 +23,10 @@
 		EC300B382CBE75D400BA4EC3 /* CountDownWidgetThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B372CBE75D400BA4EC3 /* CountDownWidgetThree.swift */; };
 		EC300B3A2CBEC08200BA4EC3 /* CountDownWidgetFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B392CBEC08200BA4EC3 /* CountDownWidgetFour.swift */; };
 		EC300B3D2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */; };
+		EC300B402CBFEA7B00BA4EC3 /* DistanceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B3F2CBFEA7B00BA4EC3 /* DistanceSettingsView.swift */; };
+		EC300B422CBFEDD400BA4EC3 /* DistanceWidgetOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B412CBFEDD400BA4EC3 /* DistanceWidgetOne.swift */; };
+		EC300B452CC6B01D00BA4EC3 /* AlbumSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B442CC6B01D00BA4EC3 /* AlbumSettingsView.swift */; };
+		EC300B472CC6B04B00BA4EC3 /* AlbumWidgetOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC300B462CC6B04B00BA4EC3 /* AlbumWidgetOne.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
 		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
@@ -46,7 +50,7 @@
 		EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F062C57D1F20015F103 /* SignInUpBackground.swift */; };
 		EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0A2C57D2DE0015F103 /* SignUpView.swift */; };
 		EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0C2C57D46D0015F103 /* MailTextField.swift */; };
-		EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0E2C57E1040015F103 /* SignInView.swift */; };
+		EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F0E2C57E1040015F103 /* LoginView.swift */; };
 		EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F102C58BDD90015F103 /* AuthenticationManager.swift */; };
 		EC606F132C58D2100015F103 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F122C58D2100015F103 /* SettingsView.swift */; };
 		EC606F152C58F61F0015F103 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F142C58F61F0015F103 /* RootView.swift */; };
@@ -58,12 +62,15 @@
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
+		ECAB9C7D2CD9066C005DF293 /* DrawSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAB9C7C2CD9066C005DF293 /* DrawSettingsView.swift */; };
+		ECAB9C7F2CD90B56005DF293 /* DrawWidgetOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAB9C7E2CD90B56005DF293 /* DrawWidgetOne.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
 		ECC4FCD32C6CBBEF00E78F7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECC4FCD22C6CBBEF00E78F7F /* GoogleService-Info.plist */; };
 		ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD42C6CD01C00E78F7F /* UserManager.swift */; };
+		ECCB799C2CDA163D000A1923 /* JWTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB799B2CDA163D000A1923 /* JWTService.swift */; };
 		ECCC7B322CAAB3FB00B16C91 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */; };
 		ECCC7B342CAAB3FB00B16C91 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */; };
 		ECCC7B372CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */; };
@@ -72,6 +79,7 @@
 		ECCC7B3D2CAAB3FB00B16C91 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B3C2CAAB3FB00B16C91 /* AppIntent.swift */; };
 		ECCC7B3F2CAAB3FD00B16C91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */; };
 		ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +121,10 @@
 		EC300B372CBE75D400BA4EC3 /* CountDownWidgetThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetThree.swift; sourceTree = "<group>"; };
 		EC300B392CBEC08200BA4EC3 /* CountDownWidgetFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetFour.swift; sourceTree = "<group>"; };
 		EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidgetViewModel.swift; sourceTree = "<group>"; };
+		EC300B3F2CBFEA7B00BA4EC3 /* DistanceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingsView.swift; sourceTree = "<group>"; };
+		EC300B412CBFEDD400BA4EC3 /* DistanceWidgetOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceWidgetOne.swift; sourceTree = "<group>"; };
+		EC300B442CC6B01D00BA4EC3 /* AlbumSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSettingsView.swift; sourceTree = "<group>"; };
+		EC300B462CC6B04B00BA4EC3 /* AlbumWidgetOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumWidgetOne.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -125,7 +137,7 @@
 		EC606F062C57D1F20015F103 /* SignInUpBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpBackground.swift; sourceTree = "<group>"; };
 		EC606F0A2C57D2DE0015F103 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EC606F0C2C57D46D0015F103 /* MailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailTextField.swift; sourceTree = "<group>"; };
-		EC606F0E2C57E1040015F103 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		EC606F0E2C57E1040015F103 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EC606F102C58BDD90015F103 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		EC606F122C58D2100015F103 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EC606F142C58F61F0015F103 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -136,12 +148,15 @@
 		EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonComp.swift; sourceTree = "<group>"; };
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
+		ECAB9C7C2CD9066C005DF293 /* DrawSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSettingsView.swift; sourceTree = "<group>"; };
+		ECAB9C7E2CD90B56005DF293 /* DrawWidgetOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawWidgetOne.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ECC4FCD22C6CBBEF00E78F7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECC4FCD42C6CD01C00E78F7F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		ECCB799B2CDA163D000A1923 /* JWTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTService.swift; sourceTree = "<group>"; };
 		ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetiverseWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -153,6 +168,7 @@
 		ECCC7B402CAAB3FD00B16C91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECCC7B482CAAB41200B16C91 /* PetiverseWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetiverseWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
+		ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,10 +209,14 @@
 			isa = PBXGroup;
 			children = (
 				EC8AA8FD2C610142000C2478 /* HomeView.swift */,
+				EC300B3E2CBFEA3A00BA4EC3 /* DistanceWidget */,
 				EC300B3B2CBFE1AA00BA4EC3 /* CountDownWidget */,
+				EC300B432CC6AFF600BA4EC3 /* AlbumWidget */,
+				ECAB9C7B2CD90638005DF293 /* DrawView */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC606F122C58D2100015F103 /* SettingsView.swift */,
+				ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */,
 				ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */,
 				EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */,
 				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
@@ -221,6 +241,24 @@
 				EC300B3C2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift */,
 			);
 			path = CountDownWidget;
+			sourceTree = "<group>";
+		};
+		EC300B3E2CBFEA3A00BA4EC3 /* DistanceWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EC300B3F2CBFEA7B00BA4EC3 /* DistanceSettingsView.swift */,
+				EC300B412CBFEDD400BA4EC3 /* DistanceWidgetOne.swift */,
+			);
+			path = DistanceWidget;
+			sourceTree = "<group>";
+		};
+		EC300B432CC6AFF600BA4EC3 /* AlbumWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EC300B442CC6B01D00BA4EC3 /* AlbumSettingsView.swift */,
+				EC300B462CC6B04B00BA4EC3 /* AlbumWidgetOne.swift */,
+			);
+			path = AlbumWidget;
 			sourceTree = "<group>";
 		};
 		EC606ECA2C57B7040015F103 = {
@@ -249,6 +287,7 @@
 				ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */,
 				EC606F1F2C5FB4D80015F103 /* Info.plist */,
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
+				ECCB799A2CDA161C000A1923 /* Services */,
 				EC606F202C5FB7E40015F103 /* Utilities */,
 				EC606EE62C57B8A00015F103 /* Firebase */,
 				EC606F082C57D2A80015F103 /* SignInUp */,
@@ -300,7 +339,7 @@
 			children = (
 				EC606ED82C57B7040015F103 /* SplashView.swift */,
 				EC606F0A2C57D2DE0015F103 /* SignUpView.swift */,
-				EC606F0E2C57E1040015F103 /* SignInView.swift */,
+				EC606F0E2C57E1040015F103 /* LoginView.swift */,
 			);
 			path = SignInUp;
 			sourceTree = "<group>";
@@ -311,6 +350,23 @@
 				EC606F212C5FB7F80015F103 /* Utilities.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		ECAB9C7B2CD90638005DF293 /* DrawView */ = {
+			isa = PBXGroup;
+			children = (
+				ECAB9C7C2CD9066C005DF293 /* DrawSettingsView.swift */,
+				ECAB9C7E2CD90B56005DF293 /* DrawWidgetOne.swift */,
+			);
+			path = DrawView;
+			sourceTree = "<group>";
+		};
+		ECCB799A2CDA161C000A1923 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ECCB799B2CDA163D000A1923 /* JWTService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		ECCC7B302CAAB3FB00B16C91 /* Frameworks */ = {
@@ -459,22 +515,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECAB9C7F2CD90B56005DF293 /* DrawWidgetOne.swift in Sources */,
+				ECCB799C2CDA163D000A1923 /* JWTService.swift in Sources */,
 				EC2B97CA2CB95FD200CE15CD /* CountDownWidgetOne.swift in Sources */,
+				EC300B402CBFEA7B00BA4EC3 /* DistanceSettingsView.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
+				EC300B422CBFEDD400BA4EC3 /* DistanceWidgetOne.swift in Sources */,
 				EC300B382CBE75D400BA4EC3 /* CountDownWidgetThree.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
+				ECAB9C7D2CD9066C005DF293 /* DrawSettingsView.swift in Sources */,
 				EC606F112C58BDD90015F103 /* AuthenticationManager.swift in Sources */,
 				EC300B3D2CBFE52000BA4EC3 /* CountDownWidgetViewModel.swift in Sources */,
 				EC2B97C82CB6AD1400CE15CD /* CountDownSettingsView.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
-				EC606F0F2C57E1040015F103 /* SignInView.swift in Sources */,
+				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
 				EC8AA8F82C60DD9A000C2478 /* GoogleSignInHelper.swift in Sources */,
 				EC606F132C58D2100015F103 /* SettingsView.swift in Sources */,
 				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
+				ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
+				EC300B472CC6B04B00BA4EC3 /* AlbumWidgetOne.swift in Sources */,
 				EC2B97CC2CB9626700CE15CD /* CountDownWidgetTwo.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC300B3A2CBEC08200BA4EC3 /* CountDownWidgetFour.swift in Sources */,
@@ -482,6 +545,7 @@
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				ECC4FCD52C6CD01D00E78F7F /* UserManager.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
+				EC300B452CC6B01D00BA4EC3 /* AlbumSettingsView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,

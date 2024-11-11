@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>3.74.213.54</key> <!-- Buraya IP adresinizi yazın -->
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+    
+    
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,8 +30,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>GIDClientID</key>
-	<string>526182637332-p2cdc2149et3p1h2j94djg7ic6lrstoe.apps.googleusercontent.com</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>May I access your gallery ? </string>
 </dict>
