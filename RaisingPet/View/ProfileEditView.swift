@@ -7,8 +7,7 @@
 
 import SwiftUI
 import PhotosUI
-import FirebaseStorage
-import FirebaseFirestore
+
 
 @MainActor
 private class ProfileEditViewModel : ObservableObject {

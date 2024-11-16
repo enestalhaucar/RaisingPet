@@ -20,6 +20,7 @@ import SwiftUI
 //}
 
 struct ProfileView: View {
+    @ObservedObject var appViewModel: AppViewModel
     @State private var isShowPremiumView = false
 //    @StateObject private var viewModel = ProfileViewModel()
     
@@ -127,7 +128,7 @@ struct ProfileView: View {
                             Divider()
                             Row(iconName: "link", title: "Linked Account")
                             Divider()
-                            LogOutRow(iconName: "arrow.right.to.line", title: "Log Out")
+                            LogOutRow(appViewModel: appViewModel, iconName: "arrow.right.to.line", title: "Log Out")
                         }
                         
                         .padding()
@@ -152,7 +153,7 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(appViewModel: AppViewModel())
     
 }
 
@@ -176,23 +177,13 @@ struct Row: View {
 }
 
 struct LogOutRow : View {
+    @ObservedObject var appViewModel: AppViewModel
     var iconName: String
     var title: String 
 //    @StateObject private var viewModel = ProfileViewModel()
     var body: some View {
         Button(action: {
-            Task {
-//                do {
-////                    try viewModel.logOut()
-//                    print("loggedout")
-//                    isSuccess = true
-//                    print(_isSuccess)
-//                    print(isSuccess)
-//                }
-//                catch {
-//                    print(error)
-//                }
-            }
+            appViewModel.logOut()
         }, label: {
             HStack(spacing: 10) {
                 Image(systemName: iconName) // Sistem simgesi

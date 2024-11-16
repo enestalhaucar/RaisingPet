@@ -9,12 +9,12 @@ import SwiftUI
 
 struct RootView: View {
     
-    @EnvironmentObject var loginViewModel : LoginViewModel
-    @EnvironmentObject var signUpViewModel : SignUpViewModel
+  
+    @StateObject private var appViewModel = AppViewModel()
     var body: some View {
         ZStack {
             SignInUpBackground()
-            if  {
+            if appViewModel.isLoggedIn {
                 VStack {
                     TabView {
                         Group {
@@ -42,7 +42,7 @@ struct RootView: View {
                                 }
                             
                             
-                            ProfileView()
+                            ProfileView(appViewModel: appViewModel)
                                 .tabItem {
                                     VStack {
                                         Image(systemName: "person")
@@ -55,12 +55,11 @@ struct RootView: View {
                     }
                 }
             } else {
-                LoginView()
-                    .environmentObject(loginViewModel)
+                LoginView(appViewModel: appViewModel)
             }
-           
             
-            
+        }.onAppear {
+            appViewModel.checkIfLoggedIn()
         }
         
         
