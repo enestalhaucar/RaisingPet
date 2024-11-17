@@ -1,13 +1,13 @@
-//
-//  LuckyBoxView.swift
-//  RaisingPet
-//
-//  Created by Enes Talha Uçar  on 1.11.2024.
-//
+
 
 import SwiftUI
 
 struct LuckyBoxView: View {
+    @State private var selectedPrize: String? // Seçilen ödül
+    @State private var isRevealed: Bool = false // Ödülün gösterilip gösterilmediği
+
+    let prizes = ["Gold", "Diamond", "Silver", "Ruby", "Emerald", "Sapphire", "Amethyst", "Pearl", "Topaz"]
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -15,103 +15,89 @@ struct LuckyBoxView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 25) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 25.0)
                             .foregroundStyle(.white.opacity(0.7))
-                            
                         
-                        GiftBoxView()
+                        GiftBoxView(prizes: prizes, onBoxSelected: { prize in
+                            withAnimation {
+                                selectedPrize = prize
+                                isRevealed = true
+                            }
+                        })
                         
                     }.frame(width: 320, height: 320)
                         .padding(.top, 30)
-                    
-                    DRAWButtonView()
-                    
+
+                    DRAWButtonView {
+                        selectRandomPrize()
+                    }
+
                     DailyTaskView()
-                        
-                    
-                    
-                    
-                    
+
                     Spacer()
-                }.navigationTitle("Lucky Draw")
-                    .navigationBarTitleDisplayMode(.inline)
+                }
+                .navigationTitle("Lucky Draw")
+                .navigationBarTitleDisplayMode(.inline)
+                .overlay(
+                    PrizeRevealView(prize: selectedPrize, isRevealed: $isRevealed)
+                )
             }
         }
     }
-}
 
-#Preview {
-    LuckyBoxView()
+    func selectRandomPrize() {
+        selectedPrize = prizes.randomElement()
+        isRevealed = true
+    }
 }
 
 struct GiftBoxView: View {
+    let prizes: [String]
+    let onBoxSelected: (String) -> Void
+
     var body: some View {
         Grid(alignment: .center, horizontalSpacing: 50, verticalSpacing: 30) {
-            GridRow {
-                ForEach(0..<3) {_ in
-                    VStack(spacing: 10) {
+            ForEach(0..<3, id: \.self) { row in
+                GridRow {
+                    ForEach(0..<3, id: \.self) { column in
+                        let prizeIndex = row * 3 + column
+                        let prize = prizes[prizeIndex]
                         Button {
-                            
+                            onBoxSelected(prize)
                         } label: {
-                            VStack {
+                            VStack(spacing: 10) {
                                 Image("giftBox")
+                                    .resizable()
                                     .frame(width: 50, height: 50)
                                 Text("Prize")
-                            }
-                        }
-                        
-                    }.padding(.top)
-                }
-            }
-            GridRow {
-                ForEach(0..<3) {_ in
-                    VStack(spacing: 10) {
-                        Button {
-                            
-                        } label: {
-                            VStack {
-                                Image("giftBox")
-                                    .frame(width: 50, height: 50)
-                                Text("Prize")
+                                    .font(.caption)
                             }
                         }
                     }
                 }
             }
-            GridRow {
-                ForEach(0..<3) {_ in
-                    VStack(spacing: 10) {
-                        Button {
-                            
-                        } label: {
-                            VStack {
-                                Image("giftBox")
-                                    .frame(width: 50, height: 50)
-                                Text("Prize")
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }.padding(20)
+        }
+        .padding(20)
     }
 }
 
 struct DRAWButtonView: View {
+    var onDraw: () -> Void
+
     var body: some View {
         Button {
-            
+            onDraw()
         } label: {
             ZStack {
                 Circle()
                     .fill(.white.opacity(0.7))
-                    .frame(width: 75 ,height: 75)
+                    .frame(width: 75, height: 75)
                 
                 Text("DRAW!")
+                    .bold()
             }
         }
     }
@@ -129,48 +115,68 @@ struct DailyTaskView: View {
                         Spacer()
                         Text("Renewal Period : 24Hr").font(.caption)
                     }.padding()
-                    
+
                     VStack(spacing: 10) {
-                        HStack {
-                            Text("Task 1")
-                            Spacer()
-                            Text("Completed").font(.caption2)
-                                .padding(.vertical,5)
-                                .padding(.horizontal)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 25.0)
-                                        .stroke(.gray, lineWidth: 1)
-                                }
-                            
-                        }.padding(.horizontal)
-                        HStack {
-                            Text("Task 2")
-                            Spacer()
-                            Text("Completed").font(.caption2)
-                                .padding(.vertical,5)
-                                .padding(.horizontal)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 25.0)
-                                        .stroke(.gray, lineWidth: 1)
-                                }
-                            
-                        }.padding(.horizontal)
-                        HStack {
-                            Text("Task 3")
-                            Spacer()
-                            Text("Completed").font(.caption2)
-                                .padding(.vertical,5)
-                                .padding(.horizontal)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 25.0)
-                                        .stroke(.gray, lineWidth: 1)
-                                }
-                            
-                        }.padding(.horizontal)
+                        ForEach(1...3, id: \.self) { index in
+                            HStack {
+                                Text("Task \(index)")
+                                Spacer()
+                                Text("Completed")
+                                    .font(.caption2)
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 25.0)
+                                            .stroke(.gray, lineWidth: 1)
+                                    }
+                            }.padding(.horizontal)
+                        }
                     }
                     Spacer()
                 }
             }.frame(width: 320)
         }
     }
+}
+
+struct PrizeRevealView: View {
+    let prize: String?
+    @Binding var isRevealed: Bool
+
+    var body: some View {
+        if isRevealed, let prize = prize {
+            ZStack {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+
+                VStack(spacing: 20) {
+                    Text("Congratulations!")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.white)
+                    
+                    Text("You won a \(prize)!")
+                        .font(.title2)
+                        .foregroundColor(.yellow)
+
+                    Button("Close") {
+                        withAnimation {
+                            isRevealed = false
+                        }
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                }
+                .padding()
+                .background(Color.black.opacity(0.8))
+                .cornerRadius(15)
+            }
+            .transition(.scale)
+        }
+    }
+}
+
+#Preview {
+    LuckyBoxView()
 }
