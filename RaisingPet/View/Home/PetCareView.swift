@@ -29,21 +29,26 @@ struct PetCareView: View {
                                         .foregroundStyle(.black)
                                     
                                 }
-                                VStack {
-                                    Image("shopIcon")
-                                    Text("Shop")
-                                        .foregroundStyle(.black)
+                                NavigationLink(destination: ShopScreenView()) {
+                                    VStack {
+                                        Image("shopIcon")
+                                        Text("Shop")
+                                            .foregroundStyle(.black)
+                                    }
                                 }
+                                
                             }
                             Spacer()
                             Image("pet")
                             Spacer()
                             VStack {
-                                VStack {
-                                    Image("PlayGameIcon")
-                                    Text("Play Game")
-                                        .foregroundStyle(.black)
-                                    
+                                NavigationLink(destination: LuckyBoxView()) {
+                                    VStack {
+                                        Image("LuckyDraw")
+                                        Text("Lucky Draw")
+                                            .foregroundStyle(.black)
+                                        
+                                    }
                                 }
                                 VStack {
                                     Image("DormIcon")

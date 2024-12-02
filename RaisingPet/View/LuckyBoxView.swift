@@ -1,12 +1,18 @@
-
-
 import SwiftUI
 
 struct LuckyBoxView: View {
     @State private var selectedPrize: String? // Seçilen ödül
     @State private var isRevealed: Bool = false // Ödülün gösterilip gösterilmediği
+    @State private var currentHighlightIndex: Int? = nil // Hangi kutunun vurgulandığı
+    @State private var isAnimating: Bool = false // Animasyon durumu
+    @State private var prizeStates: [String: Bool] = [:] // Ödül durumu (seçildi mi?)
 
     let prizes = ["Gold", "Diamond", "Silver", "Ruby", "Emerald", "Sapphire", "Amethyst", "Pearl", "Topaz"]
+
+    init() {
+        // Ödül durumlarını başlangıçta "false" olarak ayarla
+        _prizeStates = State(initialValue: Dictionary(uniqueKeysWithValues: prizes.map { ($0, false) }))
+    }
 
     var body: some View {
         NavigationStack {
@@ -20,19 +26,14 @@ struct LuckyBoxView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 25.0)
                             .foregroundStyle(.white.opacity(0.7))
-                        
-                        GiftBoxView(prizes: prizes, onBoxSelected: { prize in
-                            withAnimation {
-                                selectedPrize = prize
-                                isRevealed = true
-                            }
-                        })
-                        
-                    }.frame(width: 320, height: 320)
-                        .padding(.top, 30)
+
+                        GiftBoxView(prizes: prizes, currentHighlightIndex: currentHighlightIndex, prizeStates: prizeStates)
+                    }
+                    .frame(width: 320, height: 320)
+                    .padding(.top, 30)
 
                     DRAWButtonView {
-                        selectRandomPrize()
+                        startAnimation()
                     }
 
                     DailyTaskView()
@@ -48,15 +49,55 @@ struct LuckyBoxView: View {
         }
     }
 
-    func selectRandomPrize() {
-        selectedPrize = prizes.randomElement()
-        isRevealed = true
+    func startAnimation() {
+        guard !isAnimating else { return } // Zaten animasyon çalışıyorsa başlatma
+        guard prizeStates.contains(where: { !$0.value }) else { return } // Tüm ödüller seçilmişse animasyonu başlatma
+
+        isAnimating = true
+        var currentIndex = 0
+
+        // Rastgele bir ödül seçilecek hedef index
+        let availablePrizes = prizes.enumerated().filter { !prizeStates[$0.element]! }
+        guard let randomTarget = availablePrizes.randomElement() else { return }
+        let targetIndex = randomTarget.offset
+
+        let totalDuration = 8.0
+        let interval = 0.4
+        let steps = Int(totalDuration / interval)
+        var stepCount = 0
+
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+            withAnimation {
+                currentHighlightIndex = currentIndex
+            }
+
+            currentIndex = (currentIndex + 1) % prizes.count
+            stepCount += 1
+
+            if stepCount >= steps || currentIndex == targetIndex {
+                timer.invalidate()
+                stopAnimation(targetIndex: targetIndex)
+            }
+        }
     }
+
+    func stopAnimation(targetIndex: Int) {
+        guard isAnimating else { return }
+        isAnimating = false
+
+        let selected = prizes[targetIndex]
+        selectedPrize = selected
+        isRevealed = true
+        // Ödül seçildi olarak işaretle (opaklık için)
+        prizeStates[selected] = true
+    }
+
 }
 
 struct GiftBoxView: View {
     let prizes: [String]
-    let onBoxSelected: (String) -> Void
+    let currentHighlightIndex: Int?
+    let prizeStates: [String: Bool]
 
     var body: some View {
         Grid(alignment: .center, horizontalSpacing: 50, verticalSpacing: 30) {
@@ -64,16 +105,24 @@ struct GiftBoxView: View {
                 GridRow {
                     ForEach(0..<3, id: \.self) { column in
                         let prizeIndex = row * 3 + column
-                        let prize = prizes[prizeIndex]
-                        Button {
-                            onBoxSelected(prize)
-                        } label: {
+                        if prizeIndex < prizes.count {
+                            let prize = prizes[prizeIndex]
+                            let index = prizeIndex - 1
+                            let isSelected = prizeStates[prize] ?? false
                             VStack(spacing: 10) {
-                                Image("giftBox")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                Text("Prize")
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(currentHighlightIndex == index ? Color.yellow : Color.clear, lineWidth: 4)
+                                        .frame(width: 60, height: 60)
+
+                                    Image("giftBox")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .opacity(isSelected ? 0.3 : 1.0) // Seçildiyse opaklığı düşür
+                                }
+                                Text(prize)
                                     .font(.caption)
+                                    .opacity(isSelected ? 0.5 : 1.0) // Seçildiyse metin opaklığı düşür
                             }
                         }
                     }
@@ -86,7 +135,7 @@ struct GiftBoxView: View {
 
 struct DRAWButtonView: View {
     var onDraw: () -> Void
-
+    
     var body: some View {
         Button {
             onDraw()
@@ -103,6 +152,45 @@ struct DRAWButtonView: View {
     }
 }
 
+struct PrizeRevealView: View {
+    let prize: String?
+    @Binding var isRevealed: Bool
+    
+    var body: some View {
+        if isRevealed, let prize = prize {
+            ZStack {
+                Color.black.opacity(0.5)
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 20) {
+                    Text("Congratulations!")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.white)
+                    
+                    Text("You won a \(prize)!")
+                        .font(.title2)
+                        .foregroundColor(.yellow)
+                    
+                    Button("Close") {
+                        withAnimation {
+                            isRevealed = false
+                        }
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                }
+                .padding()
+                .background(Color.black.opacity(0.8))
+                .cornerRadius(15)
+            }
+            .transition(.scale)
+        }
+    }
+}
+
+
 struct DailyTaskView: View {
     var body: some View {
         VStack {
@@ -115,7 +203,7 @@ struct DailyTaskView: View {
                         Spacer()
                         Text("Renewal Period : 24Hr").font(.caption)
                     }.padding()
-
+                    
                     VStack(spacing: 10) {
                         ForEach(1...3, id: \.self) { index in
                             HStack {
@@ -135,44 +223,6 @@ struct DailyTaskView: View {
                     Spacer()
                 }
             }.frame(width: 320)
-        }
-    }
-}
-
-struct PrizeRevealView: View {
-    let prize: String?
-    @Binding var isRevealed: Bool
-
-    var body: some View {
-        if isRevealed, let prize = prize {
-            ZStack {
-                Color.black.opacity(0.5)
-                    .ignoresSafeArea()
-
-                VStack(spacing: 20) {
-                    Text("Congratulations!")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.white)
-                    
-                    Text("You won a \(prize)!")
-                        .font(.title2)
-                        .foregroundColor(.yellow)
-
-                    Button("Close") {
-                        withAnimation {
-                            isRevealed = false
-                        }
-                    }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                }
-                .padding()
-                .background(Color.black.opacity(0.8))
-                .cornerRadius(15)
-            }
-            .transition(.scale)
         }
     }
 }

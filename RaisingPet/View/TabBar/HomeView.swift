@@ -14,6 +14,9 @@ struct HomeView: View {
     @State private var DistanceItem : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .small, title: "")
     @State private var DistanceItem2 : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .medium, title: "")
     
+    @State private var AlbumItem : AlbumWidget = AlbumWidget(backgroundImage: [Image("profile1")], size: widgetSizeOne.small)
+    @State private var AlbumItem2 : AlbumWidget = AlbumWidget(backgroundImage: [Image("profile2")], size: widgetSizeOne.small)
+    
     
     @State private var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // Default 23 days later
     @State private var timeRemaining: (days: Int, hours: Int, minutes: Int) = (0, 0, 0)
@@ -61,6 +64,19 @@ struct HomeView: View {
                                 }
                             }
                             
+                            HStack {
+                                NavigationLink(destination: AlbumSettingsView()) {
+                                    ZStack {
+                                        AlbumWidgetPreviewDesign(item: AlbumItem)
+                                    }
+                                }
+                                NavigationLink(destination: AlbumSettingsView()) {
+                                    ZStack {
+                                        AlbumWidgetPreviewDesign(item: AlbumItem2)
+                                    }
+                                }
+                                
+                            }
                             
                             
                             
