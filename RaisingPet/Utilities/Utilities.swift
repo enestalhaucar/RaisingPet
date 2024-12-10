@@ -32,4 +32,21 @@ final class Utilities {
         return controller
     }
     
+    func getUserDetailsFromUserDefaults() -> [String: String] {
+        let firstname = UserDefaults.standard.string(forKey: "userFirstname") ?? "N/A"
+        let surname = UserDefaults.standard.string(forKey: "userSurname") ?? "N/A"
+        let email = UserDefaults.standard.string(forKey: "userEmail") ?? "N/A"
+        let friendTag = UserDefaults.standard.string(forKey: "userFriendTag") ?? "N/A"
+        let userId = UserDefaults.standard.string(forKey: "userId") ?? "N/A"
+        
+        return [
+            "firstname": firstname,
+            "surname": surname,
+            "email": email,
+            "friendTag": friendTag,
+            "userId": userId
+        ]
+    }
+
+    
 }

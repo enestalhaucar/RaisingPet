@@ -11,19 +11,16 @@ import GoogleSignInSwift
 import Combine
 
 struct SignUpView: View {
-    @ObservedObject var appViewModel: AppViewModel
-    @StateObject var signUpViewModel: SignUpViewModel
-    
+    @StateObject var viewModel = SignUpViewModel()
+    @EnvironmentObject var appState: AppState
     @State private var firstname = ""
-       @State private var surname = ""
-       @State private var email = ""
-       @State private var password = ""
-       @State private var passwordConfirm = ""
-       
-    init(appViewModel: AppViewModel) {
-            self.appViewModel = appViewModel
-            _signUpViewModel = StateObject(wrappedValue: SignUpViewModel(appViewModel: appViewModel))
-    }
+    @State private var surname = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var passwordConfirm = ""
+    @State private var showError = false
+    
+    var onRegisterSuccess: () -> Void
     
     var body: some View {
         NavigationStack {
@@ -45,62 +42,74 @@ struct SignUpView: View {
                     MailTextField(placeholder: "Enter your email", text: $email)
                     PasswordTextField(placeholder: "Enter Your Password", text: $password)
                     PasswordTextField(placeholder: "Enter Your Password Again", text: $passwordConfirm)
-              
+                    
                     Spacer()
+                    
+                    
                     Button(action: {
-                        if !firstname.isEmpty, !surname.isEmpty, !email.isEmpty, !password.isEmpty, !passwordConfirm.isEmpty, passwordConfirm == password {
-                            signUpViewModel.register(firstname: firstname, surname: surname, email: email, password: password, passwordConfirm: passwordConfirm)
+                        if validateInputs() {
+                            let requestBody = SignUpRequestBody(
+                                firstname: firstname,
+                                surname: surname,
+                                email: email,
+                                password: password,
+                                passwordConfirm: passwordConfirm
+                            )
+                            viewModel.register(with: requestBody)
                         }
-                    }, label: {
-                        if password == passwordConfirm, !password.isEmpty, !passwordConfirm.isEmpty {
-                            Text("Sign Up")
-                                .foregroundStyle(.white)
-                                .frame(width: 250, height: 50)
-                                .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
-                        } else {
-                            Text("Sign Up")
-                                .foregroundStyle(.white)
-                                .frame(width: 250, height: 50)
-                                .background(Color("buttonBackgroundColor").opacity(0.3), in: .rect(cornerRadius: 25))
-                        }
-                    })
-                    
-                  
-                    
-                    HStack(spacing: 15) {
-//                        GoogleSignInButton(scheme: .light, style: .icon, state: .normal) {
-//                            Task {
-//                                do {
-//                                    try await viewModel.signInGoogle()
-//                                    isSuccess = false
-//                                    print(isSuccess)
-//                                } catch {
-//                                    print("error while google  + \(error)")
-//                                }
-//                            }
-//                        }
-                        Image("Apple")
-                        Image("Facebook")
-                            
+                    }) {
+                        Text("Sign Up")
+                            .foregroundStyle(.white)
+                            .frame(width: 250, height: 50)
+                            .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
                     }
+                    .disabled(!validateInputs())
+                    
+                    
+                    
+                    
+                    
                     HStack {
                         Text("Already have an account ?")
                         NavigationLink {
-                            LoginView(appViewModel: appViewModel)
+                            LoginView(onLoginSuccess: onRegisterSuccess)
                         } label: {
                             Text("Sign In")
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
-
+                        
                     }
                 }.padding()
+                    .onChange(of: viewModel.isRegistered) { registered in
+                        if registered {
+                            appState.isLoggedIn = true
+                            onRegisterSuccess()
+                        }
+                    }
+                    .onChange(of: viewModel.errorMessage) { error in
+                        if error != nil {
+                            showError = true
+                        }
+                    }
+                    .alert(isPresented: $showError) {
+                        Alert(
+                            title: Text("Registration Error"),
+                            message: Text(viewModel.errorMessage ?? "Unknown error"),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
             }
         }
+    }
+    private func validateInputs() -> Bool {
+        return !firstname.isEmpty && !surname.isEmpty &&
+        !email.isEmpty && !password.isEmpty &&
+        password == passwordConfirm
     }
 }
 
 #Preview {
-    SignUpView(appViewModel: AppViewModel())
+    SignUpView {
+        print("Registration successful!")
+    }
 }
-
-

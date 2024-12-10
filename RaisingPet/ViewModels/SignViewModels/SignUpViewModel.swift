@@ -6,70 +6,59 @@
 //
 
 import Foundation
-import Combine
 import SwiftUI
+import Alamofire
 
-@MainActor
+struct ServerError: Codable {
+    let message: String
+}
+
+
 class SignUpViewModel: ObservableObject {
-    @Published var token: String?
+    @Published var token : String?
     @Published var isRegistered = false
-    private var signUpURL = "http://3.74.213.54:3000/api/v1/users/signup"
-    private var cancellables = Set<AnyCancellable>()
+    @Published var errorMessage: String?
+    var isLoading: ((Bool) -> Void)?
     
-    private let appViewModel: AppViewModel
     
-    init(appViewModel: AppViewModel) {
-        self.appViewModel = appViewModel
-    }
     
-    func register(firstname: String, surname: String, email: String, password: String, passwordConfirm: String) {
-        guard let url = URL(string: signUpURL) else {
-            print("Invalid URL")
-            return
-        }
+    func register(with body: SignUpRequestBody) {
+        let url = "http://3.74.213.54:3000/api/v1/users/signup"
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        isLoading?(true)
         
-        let body = SignUpRequestBody(
-            firstname: firstname,
-            surname: surname,
-            email: email,
-            password: password,
-            passwordConfirm: passwordConfirm
-        )
-        
-        request.httpBody = try? JSONEncoder().encode(body)
-        
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { output in
-                guard let httpResponse = output.response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
-                    throw URLError(.badServerResponse)
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseDecodable(of: SignUpResponseBody.self) { [weak self] response in
+                DispatchQueue.main.async {
+                    self?.isLoading?(false)
+                    switch response.result {
+                    case .success(let data):
+                        // Kullanıcı Bilgilerini Local'e Kaydetme
+                        self?.saveUserToUserDefaults(data: data)
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        print("Token saved: \(data.token)")
+                        self?.isRegistered = true // Kayıt başarıyla tamamlandı
+                    case .failure(let error):
+                        if let data = response.data,
+                           let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                            self?.errorMessage = serverError.message
+                        } else {
+                            self?.errorMessage = error.localizedDescription
+                        }
+                    }
                 }
-                return output.data
             }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                if case .failure(let error) = completion {
-                    print("Sign Up failed with error: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] data in
-                do {
-                    let response = try JSONDecoder().decode(LoginResponse.self, from: data)
-                    self?.token = response.token
-                    self?.isRegistered = response.status == "success"
-                    print("\(response.status)")
-                    
-                    // Save Token
-                    UserDefaults.standard.set(response.token, forKey: "userToken")
-                    self?.appViewModel.isLoggedIn = true
-                    
-                    print("Token received: \(response.token)")
-                } catch {
-                    print("Decoding failed with error: \(error.localizedDescription)")
-                }
-            })
-            .store(in: &cancellables)
     }
+    
+    private func saveUserToUserDefaults(data: SignUpResponseBody) {
+        UserDefaults.standard.set(data.token, forKey: "authToken")
+        UserDefaults.standard.set(data.data.user.firstname, forKey: "userFirstname")
+        UserDefaults.standard.set(data.data.user.surname, forKey: "userSurname")
+        UserDefaults.standard.set(data.data.user.email, forKey: "userEmail")
+        UserDefaults.standard.set(data.data.user.friendTag, forKey: "userFriendTag")
+        UserDefaults.standard.set(data.data.user._id, forKey: "userId")
+        print("User details saved to UserDefaults")
+    }
+    
 }

@@ -9,62 +9,71 @@ import SwiftUI
 
 struct RootView: View {
     
-  
-    @StateObject private var appViewModel = AppViewModel()
+    @EnvironmentObject var appState: AppState
     var body: some View {
         ZStack {
             SignInUpBackground()
-            if appViewModel.isLoggedIn {
+            if appState.isLoggedIn {
                 VStack {
                     TabView {
-                        Group {
-                            HomeView()
-                                .tabItem {
-                                    VStack {
-                                        Image(systemName: "house")
-                                        Text("Home")
-                                    }
+                        HomeView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "house")
+                                    Text("Home")
                                 }
-                            
-                            EmotionsView()
-                                .tabItem {
-                                    VStack {
-                                        Image(systemName: "hands.and.sparkles")
-                                        Text("Emotions")
-                                    }
+                            }
+                        EmotionsView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "hands.and.sparkles")
+                                    Text("Emotions")
                                 }
-                            CoupleQuestionView()
-                                .tabItem {
-                                    VStack {
-                                        Image(systemName: "person.fill.questionmark")
-                                        Text("Couple Questions")
-                                    }
+                            }
+                        CoupleQuestionView()
+                            .tabItem {
+                                VStack {
+                                    Image(
+                                        systemName: "person.fill.questionmark"
+                                    )
+                                    Text("Couple Questions")
                                 }
-                            
-                            
-                            ProfileView(appViewModel: appViewModel)
-                                .tabItem {
-                                    VStack {
-                                        Image(systemName: "person")
-                                        Text("Profile")
-                                    }
+                            }
+                        ProfileView(onLogout: handleLogout)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "person")
+                                    Text("Profile")
                                 }
-                        }
-                        .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
-                            .toolbarBackground(.visible, for: .tabBar)
-                    }
+                            }
+                    }.toolbarBackground(.gray.opacity(0.1), for: .tabBar)
+                        .toolbarBackground(.visible, for: .tabBar)
                 }
             } else {
-                LoginView(appViewModel: appViewModel)
+                NavigationStack {
+                    LoginView(onLoginSuccess: handleLoginSuccess)
+                        .navigationDestination(for: String.self) { destination in
+                            if destination == "SignUpView" {
+                                SignUpView(onRegisterSuccess: handleLoginSuccess)
+                            }
+                        }
+                }
             }
             
-        }.onAppear {
-            appViewModel.checkIfLoggedIn()
         }
         
         
-        
     }
+    
+    
+    
+    private func handleLoginSuccess() {
+           appState.isLoggedIn = true
+       }
+
+       private func handleLogout() {
+           appState.isLoggedIn = false
+       }
 }
 
 #Preview {

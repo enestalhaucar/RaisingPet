@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SplashView: View {
-    @ObservedObject var appViewModel : AppViewModel
     @Binding var isSuccess : Bool
     var body: some View {
         NavigationStack {
@@ -27,7 +26,9 @@ struct SplashView: View {
                         .multilineTextAlignment(.center)
                     
                     NavigationLink {
-                        SignUpView(appViewModel: appViewModel)
+                        SignUpView {
+                            isSuccess = true
+                        }
                     } label: {
                         // Components/Button
                         button(title: "Get Started")
@@ -43,5 +44,5 @@ struct SplashView: View {
 }
 
 #Preview {
-    SplashView(appViewModel: AppViewModel(), isSuccess: .constant(false))
+    SplashView(isSuccess: .constant(false))
 }

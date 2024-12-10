@@ -5,69 +5,58 @@
 //  Created by Enes Talha Uçar  on 16.11.2024.
 //
 
-import Foundation
-import Combine
 
-@MainActor
+import Foundation
+import Alamofire
+
 class LoginViewModel: ObservableObject {
-    @Published var token: String?
-    @Published var isLoggedIn = false
-    private var loginURL = "http://3.74.213.54:3000/api/v1/users/login"
-    private var cancellables = Set<AnyCancellable>()
+    // View'a geri bildirim sağlamak için published değişkenler
+    @Published var isLoading: Bool = false
+    @Published var loginSuccess: Bool = false
+    @Published var errorMessage: String?
     
-    private let appViewModel: AppViewModel
-    
-    init(appViewModel: AppViewModel) {
-        self.appViewModel = appViewModel
-    }
-    
-    
-    func login(email: String, password: String) {
-        guard let url = URL(string: loginURL) else {
-            print("Invalid URL")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body: [String: Any] = ["email": email, "password": password]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-        
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { output in
-                guard let httpResponse = output.response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
+    func login(with email: String, password: String) {
+        let url = "http://3.74.213.54:3000/api/v1/users/login" // Backend login endpoint'i
+        let requestBody = LoginRequestBody(email: email, password: password)
+
+        // İstek başlatılmadan önce durumu güncelle
+        isLoading = true
+
+        // Alamofire request
+        AF.request(url,
+                   method: .post,
+                   parameters: requestBody,
+                   encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseDecodable(of: LoginResponse.self) { [weak self] response in
+                DispatchQueue.main.async {
+                    self?.isLoading = false
+                    switch response.result {
+                    case .success(let data):
+                        // Başarılı giriş
+                        UserDefaults.standard.set(data.token, forKey: "authToken")
+                        UserDefaults.standard.set(data.data.user.email, forKey: "userEmail")
+                        UserDefaults.standard.set(data.data.user.firstname, forKey: "userFirstName")
+                        UserDefaults.standard.set(data.data.user.surname, forKey: "userSurname")
+                        UserDefaults.standard.set(data.data.user.friendTag, forKey: "userFriendTag")
+                        UserDefaults.standard.set(data.data.user.role, forKey: "userRole")
+
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        self?.loginSuccess = true
+                        print("user logged in succesfully")
+                    case .failure(let error):
+                        // Hata yönetimi
+                        if let data = response.data,
+                           let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                            
+                            self?.errorMessage = serverError.message
+                        } else {
+                            self?.errorMessage = error.localizedDescription
+                        }
+                    }
                 }
-                return output.data
             }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                if case .failure(let error) = completion {
-                    print("Login failed with error: \(error.localizedDescription)")
-                }
-            }, receiveValue: { [weak self] data in
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("Received JSON response: \(jsonString)")
-                    
-                }
-                
-                do {
-                    let response = try JSONDecoder().decode(LoginResponse.self, from: data)
-                    self?.token = response.token
-                    self?.isLoggedIn = response.status == "success"
-                    print("\(response.status)")
-                    
-                    UserDefaults.standard.set(response.token, forKey: "userToken")
-                    self?.appViewModel.isLoggedIn = true
-                    print("Token received: \(response.token)")
-                   
-                    
-                } catch {
-                    print("Decoding failed with error: \(error.localizedDescription)")
-                }
-            })
-            .store(in: &cancellables)
     }
 }
+
+

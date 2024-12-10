@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import Combine
+import Alamofire
+
 
 struct FriendsView: View {
+    @StateObject var viewModel = FriendsViewModel()
     var body: some View {
         NavigationStack {
             ZStack {
@@ -80,6 +84,9 @@ struct FriendsView: View {
             }.toolbar(.hidden, for: .tabBar)
             .navigationTitle("Friends & Relations")
                 .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    viewModel.fetchFriends()
+                }
         }
     }
 }

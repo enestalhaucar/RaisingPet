@@ -9,15 +9,13 @@ import SwiftUI
 import Combine
 
 struct LoginView: View {
-    @StateObject var loginViewModel : LoginViewModel
-    @ObservedObject var appViewModel : AppViewModel
+    @StateObject var viewModel = LoginViewModel()
     @State private var email = "omerdmn1@hotmail.com"
     @State private var password = "Renekton1"
+    @State private var showError = false
+    @EnvironmentObject var appState: AppState
+    var onLoginSuccess: () -> Void
     
-    init(appViewModel: AppViewModel) {
-        self.appViewModel = appViewModel
-        _loginViewModel = StateObject(wrappedValue: LoginViewModel(appViewModel: appViewModel))
-    }
     var body: some View {
         NavigationStack {
             ZStack {
@@ -34,6 +32,24 @@ struct LoginView: View {
                     MailTextField(placeholder: "Enter Your Email", text: $email)
                     PasswordTextField(placeholder: "Enter Your Password", text: $password)
                     
+                    
+                    Spacer()
+                    
+                    
+                    if viewModel.isLoading {
+                        ProgressView()
+                    } else {
+                        Button(action: {
+                            viewModel.login(with: email, password: password)
+                        }) {
+                            Text("Log In")
+                                .foregroundStyle(.white)
+                                .frame(width: 250, height: 50)
+                                .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
+                        }
+                        .disabled(email.isEmpty || password.isEmpty)
+                    }
+                    
                     NavigationLink {
                         
                     } label: {
@@ -43,23 +59,14 @@ struct LoginView: View {
                     }
                     
                     
-                    Spacer()
                     
-                    Button {
-                        loginViewModel.login(email: email, password: password) 
-                        
-                    } label: {
-                        Text("Sign In")
-                            .foregroundStyle(.white)
-                            .frame(width: 250, height: 50)
-                            .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
-                        
-                    }
                     
                     HStack {
                         Text("Don't you have an account ?")
                         NavigationLink {
-                            SignUpView(appViewModel: appViewModel)
+                            SignUpView {
+                                print("register successfull")
+                            }
                         } label: {
                             Text("Sign Up")
                                 .foregroundStyle(Color("buttonBackgroundColor"))
@@ -70,6 +77,24 @@ struct LoginView: View {
                     
                     
                 }.padding()
+                    .onChange(of: viewModel.loginSuccess) { success in
+                        if success {
+                            appState.isLoggedIn = true
+                            onLoginSuccess()
+                        }
+                    }
+                    .onChange(of: viewModel.errorMessage) { error in
+                        if let error = error {
+                            showError = true
+                        }
+                    }
+                    .alert(isPresented: $showError) {
+                        Alert(
+                            title: Text("Login Error"),
+                            message: Text(viewModel.errorMessage ?? "Unknown error"),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
                 
             }
         }
@@ -77,5 +102,9 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(appViewModel: AppViewModel())
+    LoginView {
+        print("login successfull")
+    }
 }
+
+

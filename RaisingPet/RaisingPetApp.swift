@@ -19,10 +19,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct RaisingPetApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate  
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var appState = AppState()
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(appState)
         }
     }
 }

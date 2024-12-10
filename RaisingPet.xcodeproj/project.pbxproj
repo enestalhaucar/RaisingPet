@@ -36,14 +36,20 @@
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
+		EC8D59C12D084DB30050740C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EC8D59C02D084DB30050740C /* Alamofire */; };
+		EC8D59C72D0876300050740C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C62D0876300050740C /* AppState.swift */; };
+		EC8D59C92D089B9F0050740C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C82D089B9F0050740C /* LoginModel.swift */; };
+		EC8D59CB2D089BAE0050740C /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CA2D089BAE0050740C /* SignupModel.swift */; };
+		EC8D59CD2D089BC80050740C /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CC2D089BC80050740C /* FriendsModel.swift */; };
+		EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */; };
+		EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */; };
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
 		EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */; };
-		EC989DB72CE8BF6200E3FA82 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB62CE8BF6200E3FA82 /* AppViewModel.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
-		ECCB799C2CDA163D000A1923 /* JWTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB799B2CDA163D000A1923 /* JWTService.swift */; };
+		ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB799B2CDA163D000A1923 /* UserModel.swift */; };
 		ECCC7B322CAAB3FB00B16C91 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */; };
 		ECCC7B342CAAB3FB00B16C91 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */; };
 		ECCC7B372CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */; };
@@ -66,6 +72,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EC8D59C52D085B2B0050740C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECCC7B442CAAB3FD00B16C91 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,14 +123,19 @@
 		EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonComp.swift; sourceTree = "<group>"; };
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
+		EC8D59C62D0876300050740C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		EC8D59C82D089B9F0050740C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		EC8D59CA2D089BAE0050740C /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
+		EC8D59CC2D089BC80050740C /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
+		EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		EC989DB62CE8BF6200E3FA82 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		ECCB799B2CDA163D000A1923 /* JWTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTService.swift; sourceTree = "<group>"; };
+		ECCB799B2CDA163D000A1923 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetiverseWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -138,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -247,9 +269,18 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		EC8D59D02D089C430050740C /* FriendsViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */,
+			);
+			path = FriendsViewModels;
+			sourceTree = "<group>";
+		};
 		EC989DAD2CE8B0DD00E3FA82 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EC8D59D02D089C430050740C /* FriendsViewModels */,
 				EC989DAE2CE8B0E600E3FA82 /* SignViewModels */,
 			);
 			path = ViewModels;
@@ -259,8 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */,
-				EC989DB62CE8BF6200E3FA82 /* AppViewModel.swift */,
 				EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */,
+				EC8D59C62D0876300050740C /* AppState.swift */,
 			);
 			path = SignViewModels;
 			sourceTree = "<group>";
@@ -300,7 +331,11 @@
 		ECCB799A2CDA161C000A1923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB799B2CDA163D000A1923 /* JWTService.swift */,
+				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
+				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
+				EC8D59CA2D089BAE0050740C /* SignupModel.swift */,
+				EC8D59C82D089B9F0050740C /* LoginModel.swift */,
+				EC8D59CC2D089BC80050740C /* FriendsModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -340,6 +375,7 @@
 				EC606ED02C57B7040015F103 /* Frameworks */,
 				EC606ED12C57B7040015F103 /* Resources */,
 				ECCC7B442CAAB3FD00B16C91 /* Embed Foundation Extensions */,
+				EC8D59C52D085B2B0050740C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -353,6 +389,7 @@
 			packageProductDependencies = (
 				EC606F172C5FB44C0015F103 /* GoogleSignIn */,
 				EC606F192C5FB44C0015F103 /* GoogleSignInSwift */,
+				EC8D59C02D084DB30050740C /* Alamofire */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -404,6 +441,7 @@
 			mainGroup = EC606ECA2C57B7040015F103;
 			packageReferences = (
 				EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -440,15 +478,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCB799C2CDA163D000A1923 /* JWTService.swift in Sources */,
+				ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
+				EC8D59CB2D089BAE0050740C /* SignupModel.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
-				EC989DB72CE8BF6200E3FA82 /* AppViewModel.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
+				EC8D59CD2D089BC80050740C /* FriendsModel.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
 				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
 				ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */,
@@ -459,8 +498,11 @@
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
+				EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
+				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
+				EC8D59C92D089B9F0050740C /* LoginModel.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
@@ -468,6 +510,7 @@
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
+				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
@@ -779,6 +822,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -791,6 +842,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		EC8D59C02D084DB30050740C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

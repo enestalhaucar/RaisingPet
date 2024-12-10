@@ -7,55 +7,24 @@
 
 import SwiftUI
 
-//@MainActor
-//final class ProfileViewModel : ObservableObject {
-//    @Published private(set) var user : DBUser? = nil
-//    func loadCurrentUser() async throws {
-//        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-//        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
-//    }
-//    func logOut() throws {
-//        try AuthenticationManager.shared.signOut()
-//    }
-//}
+@MainActor
+final class ProfileViewModel : ObservableObject {
+    func logOut() {
+        UserDefaults.standard.removeObject(forKey: "authToken")
+        print("User logged out successfully")
+    }
+    
+}
 
 struct ProfileView: View {
-    @ObservedObject var appViewModel: AppViewModel
     @State private var isShowPremiumView = false
-//    @StateObject private var viewModel = ProfileViewModel()
-    
+    @StateObject private var viewModel = ProfileViewModel()
+    var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 25) {
                     VStack(spacing: 10) {
-//                        if let user = viewModel.user {
-//                            AsyncImage(url: URL(string: user.profilePhotoUrl ?? "")) { phase in
-//                                if let image = phase.image {
-//                                    image.resizable()
-//                                        .scaledToFit()
-//                                        .clipShape(Circle())
-//                                        .frame(width: 155, height: 155)
-//                                } else if phase.error != nil {
-//                                    Color.red.frame(width: 155, height: 155).clipShape(Circle())
-//                                } else {
-//                                    Color.gray
-//                                        .frame(width: 155, height: 155)
-//                                        .clipShape(Circle())
-//                                }
-//                            }
-//                        } else {
-//                            Image("personIcon")
-//                                .resizable()
-//                                .frame(width: 155, height: 155)
-//                                
-//                        }
-//                         
-//                        if let user = viewModel.user  {
-//                            Text("\(user.name ?? "default")")
-//                            Text("\(user.email)")
-//                        }
-                        
                         
                     }
                     
@@ -128,7 +97,10 @@ struct ProfileView: View {
                             Divider()
                             Row(iconName: "link", title: "Linked Account")
                             Divider()
-                            LogOutRow(appViewModel: appViewModel, iconName: "arrow.right.to.line", title: "Log Out")
+                            LogOutRow(onLogout: {
+                                viewModel.logOut()
+                                onLogout()
+                            }, iconName: "arrow.right.to.line", title: "Log Out")
                         }
                         
                         .padding()
@@ -152,10 +124,10 @@ struct ProfileView: View {
     }
 }
 
-#Preview {
-    ProfileView(appViewModel: AppViewModel())
-    
-}
+//#Preview {
+//    ProfileView()
+//    
+//}
 
 struct Row: View {
     var iconName: String
@@ -177,13 +149,14 @@ struct Row: View {
 }
 
 struct LogOutRow : View {
-    @ObservedObject var appViewModel: AppViewModel
+    var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var iconName: String
     var title: String 
-//    @StateObject private var viewModel = ProfileViewModel()
+    @StateObject private var viewModel = ProfileViewModel()
     var body: some View {
         Button(action: {
-            appViewModel.logOut()
+            viewModel.logOut()
+            onLogout()
         }, label: {
             HStack(spacing: 10) {
                 Image(systemName: iconName) // Sistem simgesi
