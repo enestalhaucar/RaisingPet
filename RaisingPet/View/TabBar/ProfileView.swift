@@ -14,18 +14,31 @@ final class ProfileViewModel : ObservableObject {
         print("User logged out successfully")
     }
     
+    func getUserDetailsForProfileView() -> [String:String] {
+        var userDetails : [String:String] = [:]
+        let tempUserDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+        userDetails = tempUserDetails
+        print("ProfileView UserDetails Fetched :  \(userDetails)")
+        return userDetails
+    }
+    
 }
 
 struct ProfileView: View {
     @State private var isShowPremiumView = false
     @StateObject private var viewModel = ProfileViewModel()
+    @State private var userDetails : [String:String] = [:]
     var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 25) {
                     VStack(spacing: 10) {
-                        
+                        Text(userDetails["token"] ?? "N/A")
+                        Text(userDetails["firstname"] ?? "N/A")
+                        Text(userDetails["surname"] ?? "N/A")
+                        Text(userDetails["email"] ?? "N/A")
+                        Text(userDetails["friendTag"] ?? "N/A")
                     }
                     
                     // Upgrade Premium Button
@@ -117,6 +130,9 @@ struct ProfileView: View {
             }.scrollIndicators(.hidden).task {
 //                try? await viewModel.loadCurrentUser()
             }
+            .onAppear {
+                userDetails = viewModel.getUserDetailsForProfileView()
+            }
             
         }.fullScreenCover(isPresented: $isShowPremiumView, content: {
             PremiumView(isShow: $isShowPremiumView)
@@ -126,7 +142,7 @@ struct ProfileView: View {
 
 //#Preview {
 //    ProfileView()
-//    
+//
 //}
 
 struct Row: View {

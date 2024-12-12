@@ -88,11 +88,12 @@ struct HomeView: View {
                         
                     }.toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            HStack {
-                                Image("squareBtn")
-                                Text("Stacks")
-                            }
-                            
+                                NavigationLink(destination: MyWidgetsView()) {
+                                    HStack {
+                                        Image("squareBtn")
+                                        Text("Stacks")
+                                    }
+                                }
                         }
                         
                         ToolbarItem(placement: .topBarTrailing) {

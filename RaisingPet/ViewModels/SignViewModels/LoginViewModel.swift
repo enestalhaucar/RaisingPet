@@ -34,14 +34,8 @@ class LoginViewModel: ObservableObject {
                     switch response.result {
                     case .success(let data):
                         // Başarılı giriş
-                        UserDefaults.standard.set(data.token, forKey: "authToken")
-                        UserDefaults.standard.set(data.data.user.email, forKey: "userEmail")
-                        UserDefaults.standard.set(data.data.user.firstname, forKey: "userFirstName")
-                        UserDefaults.standard.set(data.data.user.surname, forKey: "userSurname")
-                        UserDefaults.standard.set(data.data.user.friendTag, forKey: "userFriendTag")
-                        UserDefaults.standard.set(data.data.user.role, forKey: "userRole")
-
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        self?.saveUserToUserDefaults(data: data)
+                        
                         self?.loginSuccess = true
                         print("user logged in succesfully")
                     case .failure(let error):
@@ -56,6 +50,19 @@ class LoginViewModel: ObservableObject {
                     }
                 }
             }
+    }
+    
+    private func saveUserToUserDefaults(data: LoginResponse) {
+        UserDefaults.standard.set(data.token, forKey: "authToken")
+        UserDefaults.standard.set(data.data.user.firstname, forKey: "userFirstname")
+        UserDefaults.standard.set(data.data.user.surname, forKey: "userSurname")
+        UserDefaults.standard.set(data.data.user.email, forKey: "userEmail")
+        UserDefaults.standard.set(data.data.user.friendTag, forKey: "userFriendTag")
+        UserDefaults.standard.set(data.data.user._id, forKey: "userId")
+        
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        
+        print("User details saved to UserDefaults")
     }
 }
 
