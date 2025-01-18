@@ -23,7 +23,7 @@ struct WidgetBackgroundPhotoPickerView : View {
                     Image(systemName: "photo.on.rectangle.angled")
                 }.padding(.horizontal)
             }
-            .onChange(of: selectedBackgroundPhoto) {
+            .onChange(of: selectedBackgroundPhoto) { _ in
                 Task {
                     if let loaded = try? await selectedBackgroundPhoto?.loadTransferable(type: Image.self) {
                         backgroundImage = loaded

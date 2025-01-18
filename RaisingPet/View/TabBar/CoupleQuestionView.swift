@@ -1,128 +1,129 @@
 import SwiftUI
 
-struct Question: Identifiable {
+struct QuestionType : Identifiable, Hashable {
     let id = UUID()
-    let title: String
-    var isFavorite: Bool = false
+    let title : String
+    let imageName : String
+    
 }
 
-struct CoupleQuestionView: View {
-    @State private var questions: [Question] = [
-        Question(title: "Relationships and Future Goals"),
-        Question(title: "Hobbies and Interests"),
-        Question(title: "Emotional Intimacy and Communication"),
-        Question(title: "Family and Childhood Memories"),
-        Question(title: "Values and Beliefs"),
-        Question(title: "Daily Life and Habits"),
-        Question(title: "Travel and Adventure"),
-        Question(title: "Dreams and Fears"),
-        Question(title: "An Ideal Day"),
-        Question(title: "Surprises and Romance")
+
+
+class CoupleQuestionViewModel : ObservableObject {
+    let QuestionTypeList : [QuestionType] = [
+        QuestionType(title: "Favorites", imageName: "favoritesQuizIcon"),
+        QuestionType(title: "Habits", imageName: "routineQuizIcon"),
+        QuestionType(title: "Firsts & Memories", imageName: "memoriesQuizIcon"),
+        QuestionType(title: "Dreams & Plans", imageName: "dreamsQuizIcon"),
+        QuestionType(title: "Who’s More?", imageName: "whowhoQuizIcon"),
+        QuestionType(title: "Details", imageName: "detailsQuizIcon"),
+        QuestionType(title: "Personality", imageName: "charachterQuizIcon"),
+        QuestionType(title: "Love & Romance", imageName: "loveQuizIcon"),
+        QuestionType(title: "Family & Friends", imageName: "familyQuizIcon"),
+        QuestionType(title: "Dislikes", imageName: "dislikesQuizIcon"),
     ]
     
+    
+}
 
+
+struct CoupleQuestionView: View {
+    @StateObject private var viewModel = CoupleQuestionViewModel()
     
     var body: some View {
         NavigationStack {
-            ScrollView(showsIndicators: false) {
-                VStack {
-                    // Eğer favoriler varsa başlık gösterilecek
-                    if !favoriteQuestions.isEmpty {
-                        HStack {
-                            Text("Favorite Questions")
-                                .font(.title3)
-                                .bold()
-                                .padding()
-                            Spacer()
-                        }.padding(.horizontal)
-                    }
-                    
-                    // Favori sorular
-                    ForEach(favoriteQuestions) { question in
-                        HStack {
-                            Image("trainIcon")
-                            Spacer()
-                            Text(question.title)
-                            Spacer()
-                            Image(systemName: question.isFavorite ? "heart.fill" : "heart")
-                                .onTapGesture {
-                                    toggleFavorite(for: question)
-                                }
-                        }
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width * 8 / 10)
-                        .background(Color.blue.opacity(0.4).gradient)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .padding()
-                    }
-                    
-                    // Eğer sorular varsa başlık gösterilecek
-                    if !questions.isEmpty {
-                        HStack {
-                            Text("Main Questions")
-                                .font(.title3)
-                                .bold()
-                                .padding()
-                            Spacer()
-                        }.padding(.horizontal)
-                    }
-                    
-                    // Ana sorular
-                    ForEach(questions) { question in
-                        HStack {
-                            Image("trainIcon")
-                            Spacer()
-                            Text(question.title)
-                            Spacer()
-                            Image(systemName: question.isFavorite ? "heart.fill" : "heart")
-                                .onTapGesture {
-                                    toggleFavorite(for: question)
-                                }
-                        }
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width * 8 / 10)
-                        .background(Color.blue.opacity(0.4).gradient)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .padding()
-                    }
-                    
-                    Spacer()
-                }
-                .navigationTitle("Couple Questions")
+            ZStack {
+                Color("mainbgColor").ignoresSafeArea()
+                QuizesView(questionTypeList: viewModel.QuestionTypeList)
+            }.navigationTitle("Couple Questions")
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: AddNewQuestionView()) {
-                            Image(systemName : "plus")
-                        }
-                    }
+                .navigationDestination(for: QuestionType.self) { questionType in
+                    QuizQuestionView(title: questionType.title)
                 }
-            }
-        }
-    }
-    
-    // Filtrelenmiş favori soru listesi
-    var favoriteQuestions: [Question] {
-        return questions.filter { $0.isFavorite }
-    }
-    
-    // Sorunun favori durumunu değiştiren fonksiyon
-    func toggleFavorite(for question: Question) {
-        if let index = questions.firstIndex(where: { $0.id == question.id }) {
-            questions[index].isFavorite.toggle()
         }
     }
 }
+
+
+
 
 #Preview {
     CoupleQuestionView()
 }
 
-
-struct AddNewQuestionView : View {
+struct QuizesView: View {
+    let questionTypeList: [QuestionType]
     var body: some View {
-        VStack {
-            Text("Hello")
+        ScrollView {
+            GeometryReader { geometry in
+                let screenWidth = geometry.size.width
+                
+                ZStack {
+                    ForEach(0..<questionTypeList.count, id: \.self) { index in
+                        
+                        let question = questionTypeList[index]
+                        // Çemberler
+                        let xOffset = index % 2 == 0 ? screenWidth * 0.3 : screenWidth * 0.7
+                        let yOffset = CGFloat(index) * 150 + 100
+                        
+                        
+                  
+                        
+                        
+                        // Pati İzleri (Çemberler arasındaki bağlantılar)
+                        if index < 9 { // Son çember için bağlantı eklemiyoruz
+                            let nextXOffset = (index + 1) % 2 == 0 ? screenWidth * 0.3 : screenWidth * 0.7
+                            let nextYOffset = CGFloat(index + 1) * 150 + 100
+                            
+                            ForEach(0..<7, id: \.self) { step in
+                                let progress = CGFloat(step) / 6
+                                let pawX = xOffset + (nextXOffset - xOffset) * progress
+                                let pawY = yOffset + (nextYOffset - yOffset) * progress
+                                
+                                Image(systemName: "pawprint.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.pink)
+                                    .position(x: pawX, y: pawY)
+                            }
+                        }
+                        NavigationLink(value: question) {
+                            CircleProgressView(imageName: question.imageName)
+                        }.position(x: xOffset, y: yOffset)
+                    }
+                }
+            }
+            .padding(.vertical, 20)
+            .frame(height: 1500)
         }
     }
 }
+
+
+
+
+struct CircleProgressView: View {
+    var imageName : String
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(.gray.opacity(1))
+                .frame(width: 100, height: 100)
+            
+            Image("\(imageName)")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+            
+            Circle()
+                .trim(from: 0.0, to: 0.0) // Çözümüne göre değişecek
+                .stroke(Color.blue, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+            
+                .frame(width: 100, height: 100)
+                .shadow(radius: 10)
+        }
+    }
+}
+
+

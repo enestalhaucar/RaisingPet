@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 // MARK: User Model
 struct User: Codable {
     let _id: String
@@ -24,8 +21,6 @@ struct User: Codable {
     let friendTag : String?
     let __v: Int
 }
-
-
 
 struct UserData: Codable {
     let user: User

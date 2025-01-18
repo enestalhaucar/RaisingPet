@@ -28,7 +28,15 @@ struct ProfileView: View {
     @State private var isShowPremiumView = false
     @StateObject private var viewModel = ProfileViewModel()
     @State private var userDetails : [String:String] = [:]
-    var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
+    
+    
+    
+    /// Raw Data ile çalışırken
+    @State private var profileImage: UIImage? = nil // Kullanıcı profil fotoğrafı
+    private let placeholderImage = UIImage(named: "placeholder") // Yer tutucu fotoğraf
+    
+    
+//    var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -39,6 +47,25 @@ struct ProfileView: View {
                         Text(userDetails["surname"] ?? "N/A")
                         Text(userDetails["email"] ?? "N/A")
                         Text(userDetails["friendTag"] ?? "N/A")
+                        
+                        
+                        if let image = profileImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 120, height: 120)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                        } else {
+                            Image(uiImage: placeholderImage ?? UIImage())
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 120, height: 120)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                        }
                     }
                     
                     // Upgrade Premium Button
@@ -112,7 +139,7 @@ struct ProfileView: View {
                             Divider()
                             LogOutRow(onLogout: {
                                 viewModel.logOut()
-                                onLogout()
+//                                onLogout()
                             }, iconName: "arrow.right.to.line", title: "Log Out")
                         }
                         
@@ -128,7 +155,7 @@ struct ProfileView: View {
                 .navigationTitle("Profile Screen")
                 .navigationBarTitleDisplayMode(.inline)
             }.scrollIndicators(.hidden).task {
-//                try? await viewModel.loadCurrentUser()
+                //                try? await viewModel.loadCurrentUser()
             }
             .onAppear {
                 userDetails = viewModel.getUserDetailsForProfileView()
@@ -167,7 +194,7 @@ struct Row: View {
 struct LogOutRow : View {
     var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var iconName: String
-    var title: String 
+    var title: String
     @StateObject private var viewModel = ProfileViewModel()
     var body: some View {
         Button(action: {
@@ -208,4 +235,8 @@ struct ProfileRow : View {
             .padding(.horizontal)
         }
     }
+}
+
+#Preview {
+    ProfileView()
 }

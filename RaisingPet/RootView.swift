@@ -39,7 +39,9 @@ struct RootView: View {
                                     Text("Couple Questions")
                                 }
                             }
-                        ProfileView(onLogout: handleLogout)
+                        ProfileView(
+//                            onLogout: handleLogout
+                        )
                             .tabItem {
                                 VStack {
                                     Image(systemName: "person")

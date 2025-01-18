@@ -11,175 +11,97 @@ import PhotosUI
 
 @MainActor
 private class ProfileEditViewModel : ObservableObject {
-//    @Published private(set) var user : DBUser? = nil
-    @State private var uploadStatusMessage: String = ""
-    @State var isLoading : Bool = true
-    @Published var profileImage: UIImage? = nil // Profil resmi burada tutulacak
     
-    
-    // Current User'ın datasını indirme
-//    func loadCurrentUser() async throws {
-//        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-//        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
-//        
-//        // Firestore'dan profil fotoğrafı URL'sini al
-//        if let user = user, let profilePhotoUrl = user.profilePhotoUrl {
-//            // URL'den resmi indir
-//            await downloadImageFromFirebase(urlString: profilePhotoUrl)
-//            
-//        }
-//    }
-    // Fotoğrafı Firebase e gönderme
-//    func uploadImageToFirebase(image: UIImage, completion: @escaping () -> Void) {
-//            guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
-//
-//            let storageRef = Storage.storage().reference().child("profileImages/\(UUID().uuidString).jpg")
-//            storageRef.putData(imageData, metadata: nil) { metadata, error in
-//                if let error = error {
-//                    self.uploadStatusMessage = "Resim yükleme hatası: \(error.localizedDescription)"
-//                    completion() // Yükleme tamamlandığında bile hata olsa bile çağır
-//                    return
-//                }
-//
-//                storageRef.downloadURL { url, error in
-//                    if let error = error {
-//                        self.uploadStatusMessage = "URL alma hatası: \(error.localizedDescription)"
-//                        completion() // Yükleme tamamlandığında bile hata olsa bile çağır
-//                        return
-//                    }
-//
-//                    if let url = url {
-//                        self.saveImageUrlToFirestore(imageUrl: url.absoluteString)
-//                    }
-//                    completion() // Yükleme tamamlandığında başarılıysa çağır
-//                }
-//            }
-//        }
-//    // Fotoğrafın URL'ini Firestore'da tutma
-//    func saveImageUrlToFirestore(imageUrl: String) {
-//        let db = Firestore.firestore()
-//        guard let userId = user?.userId else {
-//            self.uploadStatusMessage = "Kullanıcı ID bulunamadı."
-//            return
-//        }
-//        
-//        // Firestore'a URL'yi kaydet
-//        
-//        db.collection("users").document(userId).setData(["profile_photo_url": imageUrl], merge: true) { error in
-//            if let error = error {
-//                self.uploadStatusMessage = "Veritabanı hatası: \(error.localizedDescription)"
-//            } else {
-//                self.uploadStatusMessage = "Resim başarıyla kaydedildi!"
-//            }
-//        }
-//        
-//    }
-//    // User'ın fotoğrafını firebase'den indirme
-//    func downloadImageFromFirebase(urlString: String) async {
-//        guard let url = URL(string: urlString) else { return }
-//        
-//        do {
-//            let (data, _) = try await URLSession.shared.data(from: url)
-//            if let image = UIImage(data: data) {
-//                // İndirilen resmi atama
-//                self.profileImage = image
-//                
-//            }
-//        } catch {
-//            print("Resim indirme hatası: \(error)")
-//        }
-//    }
-//    // Önceki fotoğrafı silme
-//    func deleteOldImageFromFirebase(urlString: String) {
-//        let storageRef = Storage.storage().reference(forURL: urlString)
-//        
-//        // Firebase Storage'dan eski resmi sil
-//        storageRef.delete { error in
-//            if let error = error {
-//                print("Eski resmi silerken hata oluştu: \(error.localizedDescription)")
-//            } else {
-//                print("Eski resim başarıyla silindi.")
-//            }
-//        }
-//    }
-//    // Kullanıcının ismini kaydetme
-//    func saveUsersName(name : String) {
-//        let db = Firestore.firestore()
-//        guard let userId = user?.userId else {
-//            self.uploadStatusMessage = "Kullanıcı ID bulunamadı."
-//            return
-//        }
-//        
-//        db.collection("users").document(userId).setData(["name": name], merge: true) { error in
-//            if let error = error {
-//                self.uploadStatusMessage = "Veritabanı hatası: \(error.localizedDescription)"
-//            } else {
-//                self.uploadStatusMessage = "Kullanıcının ismi başarıyla kaydedildi!"
-//            }
-//        }
-//        
-//    }
 }
 
 struct ProfileEditView: View {
     @StateObject private var viewModel = ProfileEditViewModel()
     @Binding var isSuccess : Bool
-    @State private var avatarImage : UIImage?
-    @State private var photosPickerItem : PhotosPickerItem?
-    @State private var userName : String = ""
-    @State private var isUploading: Bool = false // Yükleme durumunu takip etmek için
-   
+    var copied : String = "Copied"
+    
+    @State private var profileImage: UIImage? = nil // Kullanıcı profil fotoğrafı
+    private let placeholderImage = UIImage(named: "placeholder") // Yer tutucu fotoğraf
+    @State private var isPhotoPickerPresented = false // Fotoğraf seçici durum
+    
+    @State private var showCopiedMessage = false // Kopyalandı mesajı
     
     var body: some View {
-        VStack {
-            NavigationStack {
-                    VStack {
-//                        if let user = viewModel.user {
-//                            ZStack {
-//                                PhotosPicker(selection : $photosPickerItem, matching: .images) {
-//                                    Image(uiImage: avatarImage ?? viewModel.profileImage ?? UIImage(resource: .personIcon))
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fill)
-//                                        .frame(width: 100, height: 100)
-//                                        .clipShape(Circle())
-//                                }
-//                                
-//                                if isUploading {
-//                                    ProgressView()
-//                                        .progressViewStyle(CircularProgressViewStyle())
-//                                        .frame(width: 40, height: 40) // Daire boyutu
-//                                }
-//                            }
-//                            
-//                            TextField("\(user.name ?? "default")", text: $userName)
-//                                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                                .padding()
-//                        }
+        NavigationStack {
+            ZStack {
+                Color("mainbgColor").ignoresSafeArea()
+                
+                VStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .foregroundStyle(.white)
                         
-//                        Button("Save") {
-//                            if let image = avatarImage {
-//                                isUploading = true
-////                                viewModel.uploadImageToFirebase(image: image) {
-////                                    isUploading = false
-////                                }
-//                                
-//                            }
-//                            viewModel.saveUsersName(name: userName)
-//                        }
-                    }.task {
-//                        try? await viewModel.loadCurrentUser()
-                    }
-                    .onChange(of: photosPickerItem) { oldValue, newValue in
-                        Task {
-                            if let photosPickerItem,
-                               let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
-                                if let image = UIImage(data: data) {
-                                    avatarImage = image
+                        VStack(spacing: 30) {
+                            if let image = profileImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 120, height: 120)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                            } else {
+                                Image(uiImage: placeholderImage ?? UIImage())
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 120, height: 120)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                            }
+                            
+                            VStack(spacing: 10) {
+                                Text("Enes Talha Uçar")
+                                    .font(.title2)
+                                    .fontWeight(.heavy)
+                                
+                                HStack {
+                                    Image(systemName: "document.on.document.fill")
+                                        .foregroundStyle(.black)
+                                    
+                                    Text(showCopiedMessage ? copied : "#EnesUcar2142")
+                                        .font(.callout)
+                                        .fontWeight(.bold)
+                                        .onTapGesture {
+                                            UIPasteboard.general.string = "#EnesUcar5234"
+                                            withAnimation {
+                                                showCopiedMessage = true // Geri bildirim için
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                withAnimation {
+                                                    showCopiedMessage = false // Geri bildirimi gizle
+                                                }
+                                            }
+                                        }
                                 }
                             }
                         }
+                        
+                    }.frame(maxHeight: UIScreen.main.bounds.size.height * 0.3)
+                    
+                    
+                    Button(action: {
+                        isPhotoPickerPresented = true
+                    }) {
+                        Text("Fotoğraf Yükle")
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
                     }
-                
+                    .padding()
+                    
+                    Spacer()
+                }.padding()
+                    .sheet(isPresented: $isPhotoPickerPresented) {
+                        PhotoPicker(selectedImage: $profileImage)
+                    }
             }
         }
     }
@@ -192,3 +114,42 @@ struct ProfileEditView: View {
 }
 
 
+struct PhotoPicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+    
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, PHPickerViewControllerDelegate {
+        let parent: PhotoPicker
+        
+        init(_ parent: PhotoPicker) {
+            self.parent = parent
+        }
+        
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            picker.dismiss(animated: true)
+            
+            guard let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
+            
+            itemProvider.loadObject(ofClass: UIImage.self) { image, _ in
+                DispatchQueue.main.async {
+                    self.parent.selectedImage = image as? UIImage
+                }
+            }
+        }
+    }
+}
