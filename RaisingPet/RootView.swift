@@ -48,6 +48,7 @@ struct RootView: View {
                                     Text("Profile")
                                 }
                             }
+                            .environmentObject(appState)
                     }.toolbarBackground(.gray.opacity(0.1), for: .tabBar)
                         .toolbarBackground(.visible, for: .tabBar)
                 }

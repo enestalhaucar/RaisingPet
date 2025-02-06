@@ -53,6 +53,7 @@
 		EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */; };
 		ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA066FE2D11756700540FDE /* QuizQuestionView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
+		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
 		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
@@ -148,6 +149,7 @@
 		EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetsView.swift; sourceTree = "<group>"; };
 		ECA066FE2D11756700540FDE /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
+		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
 		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		EC989DAD2CE8B0DD00E3FA82 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */,
 				EC1CE99E2D5237FD0082FD4F /* CoupleQuestionViewModel */,
 				EC8D59D02D089C430050740C /* FriendsViewModels */,
 				EC989DAE2CE8B0E600E3FA82 /* SignViewModels */,
@@ -382,6 +385,14 @@
 				EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */,
 			);
 			path = Premium;
+			sourceTree = "<group>";
+		};
+		ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */,
+			);
+			path = ProfileViewModel;
 			sourceTree = "<group>";
 		};
 		ECC1D0902D440C44008D2C92 /* RequestModels */ = {
@@ -561,6 +572,7 @@
 				EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
+				ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
 				ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,

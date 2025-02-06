@@ -7,36 +7,18 @@
 
 import SwiftUI
 
-@MainActor
-final class ProfileViewModel : ObservableObject {
-    func logOut() {
-        UserDefaults.standard.removeObject(forKey: "authToken")
-        print("User logged out successfully")
-    }
-    
-    func getUserDetailsForProfileView() -> [String:String] {
-        var userDetails : [String:String] = [:]
-        let tempUserDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-        userDetails = tempUserDetails
-        print("ProfileView UserDetails Fetched :  \(userDetails)")
-        return userDetails
-    }
-    
-}
-
 struct ProfileView: View {
+    
     @State private var isShowPremiumView = false
     @StateObject private var viewModel = ProfileViewModel()
     @State private var userDetails : [String:String] = [:]
-    
+    @EnvironmentObject var appState : AppState
     
     
     /// Raw Data ile çalışırken
-    @State private var profileImage: UIImage? = nil // Kullanıcı profil fotoğrafı
-    private let placeholderImage = UIImage(named: "placeholder") // Yer tutucu fotoğraf
+    @State private var profileImage: UIImage? = nil
+    private let placeholderImage = UIImage(named: "placeholder")
     
-    
-//    var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -138,7 +120,7 @@ struct ProfileView: View {
                             Row(iconName: "link", title: "Linked Account")
                             Divider()
                             LogOutRow(onLogout: {
-                                viewModel.logOut()
+                                viewModel.logOut(appState: appState)
                             }, iconName: "arrow.right.to.line", title: "Log Out")
                         }
                         
@@ -194,10 +176,9 @@ struct LogOutRow : View {
     var onLogout: () -> Void // Çıkış sonrası tetiklenecek callback
     var iconName: String
     var title: String
-    @StateObject private var viewModel = ProfileViewModel()
+    @EnvironmentObject var appState: AppState  // AppState erişimi
     var body: some View {
         Button(action: {
-            viewModel.logOut()
             onLogout()
         }, label: {
             HStack(spacing: 10) {

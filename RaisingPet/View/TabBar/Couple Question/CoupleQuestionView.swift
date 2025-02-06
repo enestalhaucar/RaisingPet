@@ -26,6 +26,7 @@ struct CoupleQuestionView : View {
                     .frame(width: Utilities.Constants.width, height: 6)
                     .foregroundStyle(.gray.opacity(0.2))
                 
+                
                 // Quiz List or AI Terapist
                 if selectedIcon == 0 {
                     if viewModel.isLoading {
@@ -88,29 +89,32 @@ struct CoupleQuestionQuizSection: View {
     var text : String
     var isSolvedBefore : Bool
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25)
-                .frame(height: 56)
-                .foregroundStyle(.blue.opacity(0.09))
-            
-            HStack(spacing: 25) {
-                // Icon
-                Image(imageName)
-                    .resizable()
-                    .frame(width: 30,height: 30)
+        
+        NavigationLink(destination: QuestionView()) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(height: 56)
+                    .foregroundStyle(.blue.opacity(0.09))
                 
-                Text(text)
-                    .fontWeight(.heavy)
-                
-                Spacer()
-                
-                if isSolvedBefore {
-                    Image(systemName: "checkmark")
-                }
-                
-                
-            }.padding(.horizontal, 20)
-        }.frame(width: Utilities.Constants.widthWithoutEdge)
+                HStack(spacing: 25) {
+                    // Icon
+                    Image(imageName)
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                    
+                    Text(text)
+                        .fontWeight(.heavy)
+                    
+                    Spacer()
+                    
+                    if isSolvedBefore {
+                        Image(systemName: "checkmark")
+                    }
+                    
+                    
+                }.padding(.horizontal, 20)
+            }.frame(width: Utilities.Constants.widthWithoutEdge)
+        }
     }
 }
 struct AITherapistView: View {
@@ -135,5 +139,12 @@ struct AITherapistView: View {
             .padding(.horizontal, 24)
         }
         .padding()
+    }
+}
+
+
+struct QuestionView : View {
+    var body: some View {
+        Text("merhaba ben uzaylı")
     }
 }
