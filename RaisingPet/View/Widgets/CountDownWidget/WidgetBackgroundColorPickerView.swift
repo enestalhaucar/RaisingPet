@@ -15,7 +15,7 @@ struct WidgetBackgroundColorPickerView : View {
     var body : some View {
         ColorPicker("Select background color", selection: $backgroundColor)
             .padding(.horizontal)
-            .onChange(of: backgroundColor) {
+            .onChange(of: backgroundColor) { _ in
                 for index in viewModel.itemsOne.indices {
                     viewModel.itemsOne[index].backgroundColor = backgroundColor
                     viewModel.itemsOne[index].bgSelected = false // Deselect photo when color is picked

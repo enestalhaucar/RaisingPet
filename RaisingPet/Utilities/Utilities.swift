@@ -15,6 +15,13 @@ final class Utilities {
     struct Constants {
         static let baseURL = "http://3.74.213.54:3000/api/v1"
         
+        // Screen Size
+        static let width = UIScreen.main.bounds.width
+        static let height = UIScreen.main.bounds.height
+        static let widthHalf: CGFloat = .init(width / 2)
+        static let heightHalf: CGFloat = .init(height / 2)
+        static let widthWithoutEdge : CGFloat = .init(width - 24)
+        
         struct Endpoints {
             // Auth Endpoints
             struct Auth {
@@ -49,6 +56,12 @@ final class Utilities {
             // Inventory Endpoints
             struct Inventory {
                 static let myInventory = "\(baseURL)/inventory/my-inventory"
+            }
+            
+            // Quiz
+            
+            struct Quiz {
+                static let getAllQuizes = "\(baseURL)/quiz"
             }
         }
     }

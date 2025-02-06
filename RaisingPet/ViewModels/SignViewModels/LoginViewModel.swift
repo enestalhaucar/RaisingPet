@@ -16,7 +16,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     func login(with email: String, password: String) {
-        let url = "http://3.74.213.54:3000/api/v1/users/login" // Backend login endpoint'i
+        let url = Utilities.Constants.Endpoints.Auth.login
         let requestBody = LoginRequestBody(email: email, password: password)
 
         // İstek başlatılmadan önce durumu güncelle

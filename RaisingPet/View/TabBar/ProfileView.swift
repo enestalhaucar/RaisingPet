@@ -139,7 +139,6 @@ struct ProfileView: View {
                             Divider()
                             LogOutRow(onLogout: {
                                 viewModel.logOut()
-//                                onLogout()
                             }, iconName: "arrow.right.to.line", title: "Log Out")
                         }
                         

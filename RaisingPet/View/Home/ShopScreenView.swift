@@ -60,7 +60,14 @@ struct ShopScreenView: View {
                             Text("Pet").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("shopBackgroundColor2"))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
                         
                         HStack {
                             Image("goldIcon")
@@ -69,7 +76,14 @@ struct ShopScreenView: View {
                             Text("Gold").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("shopBackgroundColor2"))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
                         
                         HStack {
                             Image("assetIcon")
@@ -78,7 +92,14 @@ struct ShopScreenView: View {
                             Text("Asset").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("shopBackgroundColor2"))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
                         HStack {
                             Image("sofaIcon")
                                 .resizable()
@@ -86,7 +107,14 @@ struct ShopScreenView: View {
                             Text("Home").font(.system(size: 12))
                         }
                         .padding(5)
-                        .background(RoundedRectangle(cornerRadius: 10).stroke(.black,lineWidth: 2).fill(Color("shopBackgroundColor2")))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color("shopBackgroundColor2"))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
                     }
                     .padding()
                     
@@ -119,20 +147,6 @@ struct ShopScreenView: View {
                 }.padding(.top, 100)
                 
             }.toolbar(.hidden, for: .tabBar)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            // Restore butonu aksiyonu
-                        }) {
-                            Text("Restore")
-                                .padding(8)
-                                .font(.caption)
-                                .foregroundStyle(.black)
-                                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(Color("shopBackgroundColor2")))
-                        }
-                    }
-                }
         }
     }
 }

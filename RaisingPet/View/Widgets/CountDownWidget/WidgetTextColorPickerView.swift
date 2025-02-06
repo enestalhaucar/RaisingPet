@@ -14,7 +14,7 @@ struct WidgetTextColorPickerView : View {
     var body: some View {
         ColorPicker("Select text color", selection: $textColor)
             .padding(.horizontal)
-            .onChange(of: textColor) {
+            .onChange(of: textColor) { _ in
                 for index in viewModel.itemsOne.indices {
                     viewModel.itemsOne[index].textColor = textColor
                     viewModel.itemsTwo[index].textColor = textColor

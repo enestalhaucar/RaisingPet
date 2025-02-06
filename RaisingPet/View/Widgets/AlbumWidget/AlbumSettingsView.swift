@@ -68,10 +68,10 @@ struct AlbumSettingsView: View {
                                     Spacer()
                                     if items.first?.frameColor != nil {
                                         Stepper("", value: $stepValue, in: 1...12)
-                                            .onChange(of: stepValue) { for index in items.indices {
-                                                items[index].lineWidth = CGFloat(stepValue)
-                                            }
-                                                
+                                            .onChange(of: stepValue) { _ in
+                                                for index in items.indices {
+                                                    items[index].lineWidth = CGFloat(stepValue)
+                                                }
                                             }
                                     }
                                 }.padding()
@@ -242,7 +242,7 @@ struct AlbumSettingsView: View {
                                 
                                 
                                 
-                            }.onChange(of: photosPickerItems) { _, _ in
+                            }.onChange(of: photosPickerItems) { _ in
                                 Task {
                                     for item in photosPickerItems {
                                         if let data = try? await item.loadTransferable(type: Data.self) {

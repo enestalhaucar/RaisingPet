@@ -16,10 +16,3 @@ struct SignUpRequestBody: Codable {
     let passwordConfirm: String
 }
 
-
-// MARK: Sign Up Response
-struct SignUpResponseBody : Codable {
-    let status : String
-    let token : String
-    let data : UserData
-}

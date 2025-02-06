@@ -11,7 +11,7 @@ import Alamofire
 
 class FriendsViewModel: ObservableObject {
     @Published private(set) var friends: [Friend] = []
-    private let apiUrl = "http://3.74.213.54:3000/api/v1/friends/list"
+    private let apiUrl = Utilities.Constants.Endpoints.Friends.list
     
     func fetchFriends() {
         let userDetails = Utilities.shared.getUserDetailsFromUserDefaults()

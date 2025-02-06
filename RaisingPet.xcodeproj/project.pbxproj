@@ -13,6 +13,11 @@
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
 		EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */; };
+		EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */; };
+		EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */; };
+		EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */; };
+		EC1CE99D2D5235720082FD4F /* GetAllQuizesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE99C2D5235720082FD4F /* GetAllQuizesResponse.swift */; };
+		EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */; };
 		EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */; };
 		EC2B97C32CB69C9900CE15CD /* CountDownWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */; };
 		EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2B97C42CB6A63900CE15CD /* CountDownView.swift */; };
@@ -38,9 +43,9 @@
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
 		EC8D59C12D084DB30050740C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EC8D59C02D084DB30050740C /* Alamofire */; };
 		EC8D59C72D0876300050740C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C62D0876300050740C /* AppState.swift */; };
-		EC8D59C92D089B9F0050740C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C82D089B9F0050740C /* LoginModel.swift */; };
-		EC8D59CB2D089BAE0050740C /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CA2D089BAE0050740C /* SignupModel.swift */; };
-		EC8D59CD2D089BC80050740C /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CC2D089BC80050740C /* FriendsModel.swift */; };
+		EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */; };
+		EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */; };
+		EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */; };
 		EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */; };
 		EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */; };
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
@@ -48,6 +53,8 @@
 		EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */; };
 		ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA066FE2D11756700540FDE /* QuizQuestionView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
+		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
+		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
@@ -104,6 +111,11 @@
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionComponent.swift; sourceTree = "<group>"; };
+		EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		EC1CE99C2D5235720082FD4F /* GetAllQuizesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllQuizesResponse.swift; sourceTree = "<group>"; };
+		EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionViewModel.swift; sourceTree = "<group>"; };
 		EC2B97C12CB69BF500CE15CD /* CountDownWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownWidget.swift; sourceTree = "<group>"; };
 		EC2B97C42CB6A63900CE15CD /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
@@ -126,9 +138,9 @@
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
 		EC8D59C62D0876300050740C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		EC8D59C82D089B9F0050740C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		EC8D59CA2D089BAE0050740C /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
-		EC8D59CC2D089BC80050740C /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
+		EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRequestModel.swift; sourceTree = "<group>"; };
+		EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponseModel.swift; sourceTree = "<group>"; };
 		EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
 		EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +148,8 @@
 		EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetsView.swift; sourceTree = "<group>"; };
 		ECA066FE2D11756700540FDE /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
+		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
+		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -184,6 +198,7 @@
 		EC1108302C622BDA00E91D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC1CE96E2D4D3C130082FD4F /* OnBoarding */,
 				EC989DB92CE8DA2900E3FA82 /* Widgets */,
 				EC606F082C57D2A80015F103 /* SignInUp */,
 				EC989DD62CE8DAE500E3FA82 /* TabBar */,
@@ -192,6 +207,39 @@
 				EC989DD82CE8DC2600E3FA82 /* Premium */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EC1CE96C2D4D3A840082FD4F /* Couple Question */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
+			);
+			path = "Couple Question";
+			sourceTree = "<group>";
+		};
+		EC1CE96E2D4D3C130082FD4F /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		EC1CE9712D4D411A0082FD4F /* FONT */ = {
+			isa = PBXGroup;
+			children = (
+				EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */,
+				EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */,
+			);
+			path = FONT;
+			sourceTree = "<group>";
+		};
+		EC1CE99E2D5237FD0082FD4F /* CoupleQuestionViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */,
+			);
+			path = CoupleQuestionViewModel;
 			sourceTree = "<group>";
 		};
 		EC606ECA2C57B7040015F103 = {
@@ -217,6 +265,7 @@
 		EC606ED52C57B7040015F103 /* RaisingPet */ = {
 			isa = PBXGroup;
 			children = (
+				EC1CE9712D4D411A0082FD4F /* FONT */,
 				ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */,
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
 				EC606F142C58F61F0015F103 /* RootView.swift */,
@@ -284,6 +333,7 @@
 		EC989DAD2CE8B0DD00E3FA82 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EC1CE99E2D5237FD0082FD4F /* CoupleQuestionViewModel */,
 				EC8D59D02D089C430050740C /* FriendsViewModels */,
 				EC989DAE2CE8B0E600E3FA82 /* SignViewModels */,
 			);
@@ -304,9 +354,9 @@
 			isa = PBXGroup;
 			children = (
 				EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */,
+				EC1CE96C2D4D3A840082FD4F /* Couple Question */,
 				ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */,
 				EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */,
-				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
 				ECA066FE2D11756700540FDE /* QuizQuestionView.swift */,
 				EC8AA8FD2C610142000C2478 /* HomeView.swift */,
 			);
@@ -334,14 +384,33 @@
 			path = Premium;
 			sourceTree = "<group>";
 		};
+		ECC1D0902D440C44008D2C92 /* RequestModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */,
+				ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */,
+				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
+				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
+			);
+			path = RequestModels;
+			sourceTree = "<group>";
+		};
+		ECC1D0912D440C4B008D2C92 /* ResponseModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
+				EC1CE99C2D5235720082FD4F /* GetAllQuizesResponse.swift */,
+				ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */,
+				EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */,
+			);
+			path = ResponseModels;
+			sourceTree = "<group>";
+		};
 		ECCB799A2CDA161C000A1923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
-				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
-				EC8D59CA2D089BAE0050740C /* SignupModel.swift */,
-				EC8D59C82D089B9F0050740C /* LoginModel.swift */,
-				EC8D59CC2D089BC80050740C /* FriendsModel.swift */,
+				ECC1D0902D440C44008D2C92 /* RequestModels */,
+				ECC1D0912D440C4B008D2C92 /* ResponseModels */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -464,6 +533,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
+				EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */,
 				EC606EDE2C57B7060015F103 /* Preview Assets.xcassets in Resources */,
 				EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */,
 			);
@@ -484,9 +555,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
 				ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
-				EC8D59CB2D089BAE0050740C /* SignupModel.swift in Sources */,
+				EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */,
+				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
 				ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */,
@@ -494,12 +567,13 @@
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
-				EC8D59CD2D089BC80050740C /* FriendsModel.swift in Sources */,
+				EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
 				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
 				ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
+				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
@@ -510,8 +584,9 @@
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */,
 				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
-				EC8D59C92D089B9F0050740C /* LoginModel.swift in Sources */,
+				EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
+				ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
@@ -522,6 +597,7 @@
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
+				EC1CE99D2D5235720082FD4F /* GetAllQuizesResponse.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +759,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RaisingPet/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "May I access your gallery ? ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -716,6 +793,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RaisingPet/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "May I access your gallery ? ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -23,7 +23,7 @@ class SignUpViewModel: ObservableObject {
     
     
     func register(with body: SignUpRequestBody) {
-        let url = "http://3.74.213.54:3000/api/v1/users/signup"
+        let url = Utilities.Constants.Endpoints.Auth.signup
         
         isLoading?(true)
         
