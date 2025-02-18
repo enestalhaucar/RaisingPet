@@ -36,9 +36,10 @@ struct CoupleQuestionView : View {
                     } else {
                         ScrollView {
                             VStack(spacing: 15) {
-                                ForEach(viewModel.quizTitles, id: \.self) { title in
-                                    CoupleQuestionQuizSection(imageName: "harmonyIcon", text: title, isSolvedBefore: true)
-                                    
+                                ForEach(viewModel.quizTitles.indices.sorted(by: { viewModel.quizTitles[$0] < viewModel.quizTitles[$1] }), id: \.self) { index in
+                                    NavigationLink(destination: QuestionView(quizId: viewModel.quizTitles[index])) {
+                                        CoupleQuestionQuizSection(imageName: "harmonyIcon", text: viewModel.quizTitles[index], isSolvedBefore: true, quizId: viewModel.quizIds[index])
+                                    }
                                 }
                             }
                         }.scrollIndicators(.hidden)
@@ -49,7 +50,7 @@ struct CoupleQuestionView : View {
                 
                 Spacer()
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(Color(.systemBackground))
+                .background(Color(.systemBackground))
         }.onAppear {
             viewModel.fetchQuizzes()
         }
@@ -88,9 +89,10 @@ struct CoupleQuestionQuizSection: View {
     var imageName : String
     var text : String
     var isSolvedBefore : Bool
+    var quizId : String
     var body: some View {
         
-        NavigationLink(destination: QuestionView()) {
+        NavigationLink(destination: QuestionView(quizId: quizId)) {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
                     .frame(height: 56)
@@ -103,7 +105,9 @@ struct CoupleQuestionQuizSection: View {
                         .frame(width: 30,height: 30)
                     
                     Text(text)
-                        .fontWeight(.heavy)
+                        .font(.nunito(.light, .caption12))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Spacer()
                     
@@ -113,7 +117,7 @@ struct CoupleQuestionQuizSection: View {
                     
                     
                 }.padding(.horizontal, 20)
-            }.frame(width: Utilities.Constants.widthWithoutEdge)
+            }.frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
         }
     }
 }
@@ -130,7 +134,7 @@ struct AITherapistView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundStyle(.primary)
-
+                
                 Text("Şu anda AI Terapist özelliğimizi en iyi hale getirmek için çalışıyoruz. Çok yakında size yapay zeka destekli rehberlik sunacağız. Lütfen bizi takip etmeye devam edin!")
                     .font(.body)
                     .multilineTextAlignment(.center)
@@ -143,8 +147,3 @@ struct AITherapistView: View {
 }
 
 
-struct QuestionView : View {
-    var body: some View {
-        Text("merhaba ben uzaylı")
-    }
-}

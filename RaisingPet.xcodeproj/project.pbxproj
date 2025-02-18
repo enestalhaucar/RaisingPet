@@ -54,6 +54,9 @@
 		ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA066FE2D11756700540FDE /* QuizQuestionView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* PetView.swift */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
+		ECB5F56E2D54E767001AC419 /* QuestionResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56D2D54E760001AC419 /* QuestionResponseModel.swift */; };
+		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
+		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
 		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
 		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
@@ -69,6 +72,12 @@
 		ECCC7B3F2CAAB3FD00B16C91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */; };
 		ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */; };
+		ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */; };
+		ECF3EAC42D637F8700EEFBB2 /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC32D637F8700EEFBB2 /* Adapty */; };
+		ECF3EAC62D637F8700EEFBB2 /* AdaptyPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */; };
+		ECF3EAC82D637F8700EEFBB2 /* AdaptyUI in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */; };
+		ECF3EACA2D637F8700EEFBB2 /* AdaptyUITesting in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */; };
+		ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +159,9 @@
 		ECA066FE2D11756700540FDE /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* PetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetView.swift; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		ECB5F56D2D54E760001AC419 /* QuestionResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionResponseModel.swift; sourceTree = "<group>"; };
+		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
 		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -168,6 +180,8 @@
 		ECCC7B482CAAB41200B16C91 /* PetiverseWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetiverseWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
 		ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyBoxView.swift; sourceTree = "<group>"; };
+		ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
+		ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -179,9 +193,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF3EAC62D637F8700EEFBB2 /* AdaptyPlugin in Frameworks */,
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
+				ECF3EAC42D637F8700EEFBB2 /* Adapty in Frameworks */,
+				ECF3EAC82D637F8700EEFBB2 /* AdaptyUI in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
+				ECF3EACA2D637F8700EEFBB2 /* AdaptyUITesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +218,7 @@
 		EC1108302C622BDA00E91D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECF3EACB2D6384E100EEFBB2 /* Paywall */,
 				EC1CE96E2D4D3C130082FD4F /* OnBoarding */,
 				EC989DB92CE8DA2900E3FA82 /* Widgets */,
 				EC606F082C57D2A80015F103 /* SignInUp */,
@@ -215,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */,
+				ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */,
+				ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */,
 			);
 			path = "Couple Question";
 			sourceTree = "<group>";
@@ -319,6 +340,7 @@
 		EC606F202C5FB7E40015F103 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				ECB5F5972D563792001AC419 /* Extensions */,
 				EC606F212C5FB7F80015F103 /* Utilities.swift */,
 			);
 			path = Utilities;
@@ -395,6 +417,14 @@
 			path = ProfileViewModel;
 			sourceTree = "<group>";
 		};
+		ECB5F5972D563792001AC419 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		ECC1D0902D440C44008D2C92 /* RequestModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +439,7 @@
 		ECC1D0912D440C4B008D2C92 /* ResponseModels */ = {
 			isa = PBXGroup;
 			children = (
+				ECB5F56D2D54E760001AC419 /* QuestionResponseModel.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
 				EC1CE99C2D5235720082FD4F /* GetAllQuizesResponse.swift */,
 				ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */,
@@ -450,6 +481,14 @@
 			path = PetiverseWidgetExtension;
 			sourceTree = "<group>";
 		};
+		ECF3EACB2D6384E100EEFBB2 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -476,6 +515,10 @@
 				EC606F172C5FB44C0015F103 /* GoogleSignIn */,
 				EC606F192C5FB44C0015F103 /* GoogleSignInSwift */,
 				EC8D59C02D084DB30050740C /* Alamofire */,
+				ECF3EAC32D637F8700EEFBB2 /* Adapty */,
+				ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */,
+				ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */,
+				ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -528,6 +571,7 @@
 			packageReferences = (
 				EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -581,6 +625,7 @@
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
 				EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
+				ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */,
 				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
 				ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
@@ -590,6 +635,7 @@
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
+				ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
@@ -601,14 +647,17 @@
 				ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
+				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
+				ECB5F56E2D54E767001AC419 /* QuestionResponseModel.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
+				ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */,
 				EC1CE99D2D5235720082FD4F /* GetAllQuizesResponse.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
@@ -930,6 +979,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -947,6 +1004,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		ECF3EAC32D637F8700EEFBB2 /* Adapty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = Adapty;
+		};
+		ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyPlugin;
+		};
+		ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyUI;
+		};
+		ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
+			productName = AdaptyUITesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

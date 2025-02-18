@@ -21,6 +21,7 @@ final class Utilities {
         static let widthHalf: CGFloat = .init(width / 2)
         static let heightHalf: CGFloat = .init(height / 2)
         static let widthWithoutEdge : CGFloat = .init(width - 24)
+        static let widthEight: CGFloat = .init(width * 8 / 10)
         
         struct Endpoints {
             // Auth Endpoints
@@ -62,6 +63,7 @@ final class Utilities {
             
             struct Quiz {
                 static let getAllQuizes = "\(baseURL)/quiz"
+                static let getQuizById = "\(baseURL)/quiz/:id"
             }
         }
     }
