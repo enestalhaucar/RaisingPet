@@ -64,6 +64,7 @@ final class Utilities {
             struct Quiz {
                 static let getAllQuizes = "\(baseURL)/quiz"
                 static let getQuizById = "\(baseURL)/quiz/:id"
+                static let getUserQuizes = "\(baseURL)/quiz/myQuizzes"
             }
         }
     }

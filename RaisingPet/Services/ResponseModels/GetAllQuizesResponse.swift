@@ -10,27 +10,33 @@ import Foundation
 struct GetAllQuizesResponseModel: Codable {
     let status: String
     let results: Int
-    let data: QuizListModel
-}
-
-struct QuizListModel: Codable {
     let data: [QuizModel]
 }
 
+
+
 struct QuizModel: Codable {
-    let id: String
-    let title: String
-    let category: QuizCategoryModel
-    let createdAt : String
-    let questions : [QuestionModel]
+    let id: String?
+    let title: String?
+    let category: QuizCategoryModel?
+    let createdAt : String?
+    let questions : [QuestionModel]?
+    let v : Int?
+    let quizStatus : QuizStatus?
+    let accuracy : Double?
+    let quizResult : String?
     
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case title
-        case category 
-        case createdAt
-        case questions
-    }
+            case id = "_id"
+            case title
+            case category
+            case createdAt
+            case questions
+            case v = "__v"
+            case quizStatus
+            case accuracy
+            case quizResult
+        }
 }
 
 struct QuestionModel: Codable, Identifiable {
@@ -82,4 +88,9 @@ enum QuizCategoryModel: String, Codable {
         let rawValue = try container.decode(String.self)
         self = QuizCategoryModel(rawValue: rawValue) ?? .unknown
     }
+}
+enum QuizStatus : String, Codable {
+    case continued = "continued"
+    case finished = "finished"
+    case never = "never"
 }

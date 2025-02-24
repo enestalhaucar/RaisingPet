@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
-import Adapty
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
-        
-        
         return true
     }
 }
@@ -22,12 +19,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RaisingPetApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var appState = AppState()
-    
-    init() {
-        Adapty.activate("public_live_9k1t7EdG.hfclzB11QAU2UvTn6RM1")
-        }
-           
-    
     var body: some Scene {
         WindowGroup {
             RootView()

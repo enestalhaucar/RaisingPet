@@ -31,14 +31,19 @@ struct CoupleQuestionView : View {
                 if selectedIcon == 0 {
                     if viewModel.isLoading {
                         ProgressView("Yükleniyor...")
-                    } else if viewModel.quizTitles.isEmpty {
+                    } else if let errorMessage = viewModel.errorMessage {
+                        // Hata varsa errorMessage'ı göster
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                    } else if viewModel.quiz.isEmpty {
+                        // Veri gelmediyse "Veri Bulunamadı" mesajını göster
                         Text("Veri Bulunamadı")
                     } else {
                         ScrollView {
                             VStack(spacing: 15) {
-                                ForEach(viewModel.quizTitles.indices.sorted(by: { viewModel.quizTitles[$0] < viewModel.quizTitles[$1] }), id: \.self) { index in
-                                    NavigationLink(destination: QuestionView(quizId: viewModel.quizTitles[index])) {
-                                        CoupleQuestionQuizSection(imageName: "harmonyIcon", text: viewModel.quizTitles[index], isSolvedBefore: true, quizId: viewModel.quizIds[index])
+                                ForEach(viewModel.quiz.indices.sorted(by: { viewModel.quiz[$0].title ?? "-" < viewModel.quiz[$1].title ?? "-" }), id: \.self) { index in
+                                    NavigationLink(destination: QuestionView(quizId: viewModel.quiz[index].title ?? "-")) {
+                                        CoupleQuestionQuizSection(imageName: "harmonyIcon", text: viewModel.quiz[index].title ?? "-", isSolvedBefore: viewModel.quiz[index].quizStatus == .finished , quizId: viewModel.quiz[index].id ?? "-")
                                     }
                                 }
                             }
@@ -84,7 +89,6 @@ struct CoupleQuestionHeaderBarIcon: View {
         )
     }
 }
-
 struct CoupleQuestionQuizSection: View {
     var imageName : String
     var text : String

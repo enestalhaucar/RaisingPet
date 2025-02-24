@@ -73,10 +73,6 @@
 		ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */; };
 		ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */; };
-		ECF3EAC42D637F8700EEFBB2 /* Adapty in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC32D637F8700EEFBB2 /* Adapty */; };
-		ECF3EAC62D637F8700EEFBB2 /* AdaptyPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */; };
-		ECF3EAC82D637F8700EEFBB2 /* AdaptyUI in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */; };
-		ECF3EACA2D637F8700EEFBB2 /* AdaptyUITesting in Frameworks */ = {isa = PBXBuildFile; productRef = ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */; };
 		ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
 
@@ -193,13 +189,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECF3EAC62D637F8700EEFBB2 /* AdaptyPlugin in Frameworks */,
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
-				ECF3EAC42D637F8700EEFBB2 /* Adapty in Frameworks */,
-				ECF3EAC82D637F8700EEFBB2 /* AdaptyUI in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
-				ECF3EACA2D637F8700EEFBB2 /* AdaptyUITesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,10 +507,6 @@
 				EC606F172C5FB44C0015F103 /* GoogleSignIn */,
 				EC606F192C5FB44C0015F103 /* GoogleSignInSwift */,
 				EC8D59C02D084DB30050740C /* Alamofire */,
-				ECF3EAC32D637F8700EEFBB2 /* Adapty */,
-				ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */,
-				ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */,
-				ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -571,7 +559,6 @@
 			packageReferences = (
 				EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
-				ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -826,7 +813,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -860,7 +847,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -979,14 +966,6 @@
 				minimumVersion = 5.10.2;
 			};
 		};
-		ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adaptyteam/AdaptySDK-iOS.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.3.6;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1004,26 +983,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		ECF3EAC32D637F8700EEFBB2 /* Adapty */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = Adapty;
-		};
-		ECF3EAC52D637F8700EEFBB2 /* AdaptyPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyPlugin;
-		};
-		ECF3EAC72D637F8700EEFBB2 /* AdaptyUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyUI;
-		};
-		ECF3EAC92D637F8700EEFBB2 /* AdaptyUITesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ECF3EAC22D637F8700EEFBB2 /* XCRemoteSwiftPackageReference "AdaptySDK-iOS" */;
-			productName = AdaptyUITesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

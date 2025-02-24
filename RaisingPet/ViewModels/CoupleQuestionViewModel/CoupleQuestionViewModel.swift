@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 class CoupleQuestionViewModel: ObservableObject {
-    @Published var quizTitles : [String] = []
+    @Published var quiz : [QuizModel] = []
     @Published var isLoading = false
     @Published var errorMessage : String?
     @Published var quizIds: [String] = []
     @Published var selectedQuiz: GetQuizResponseModel.QuizDetailModel?
     
     func fetchQuizzes() {
-        let url = Utilities.Constants.Endpoints.Quiz.getAllQuizes
+        let url = Utilities.Constants.Endpoints.Quiz.getUserQuizes
         
         let headers : HTTPHeaders = [
             "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
@@ -31,13 +31,14 @@ class CoupleQuestionViewModel: ObservableObject {
                     self.isLoading = false
                     switch response.result {
                     case .success(let data):
-                        self.quizTitles = data.data.data.map { $0.title }
-                        self.quizIds = data.data.data.map { $0.id } 
+                        print(data)
+                        self.quiz = data.data
                     case .failure(let error):
                         self.errorMessage = "Hata: \(error.localizedDescription)"
                     }
                 }
             }
+
     }
     
     
