@@ -2,18 +2,16 @@ import SwiftUI
 
 struct CoupleQuestionView : View {
     @StateObject private var viewModel = CoupleQuestionViewModel()
+    @State private var selectedTab: Tab = .harmony
     @State private var selectedIcon : Int = 0
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                // Buttons
                 HStack(spacing: 20) {
-                    // Questions
                     CoupleQuestionHeaderBarIcon(imageName: "harmonyIcon", text: "Harmony", color: .blue.opacity(0.2), isSelected: selectedIcon == 0)
                         .onTapGesture {
                             selectedIcon = 0
                         }
-                    // AI Terapist
                     CoupleQuestionHeaderBarIcon(imageName: "aiTerapistIcon", text: "AI Terapist", color: .red.opacity(0.05), isSelected: selectedIcon == 1)
                         .onTapGesture {
                             selectedIcon = 1
@@ -21,22 +19,17 @@ struct CoupleQuestionView : View {
                 }.frame(height: 75)
                     .background(Color.white)
                 
-                // Divider
                 Rectangle()
                     .frame(width: Utilities.Constants.width, height: 6)
                     .foregroundStyle(.gray.opacity(0.2))
                 
-                
-                // Quiz List or AI Terapist
-                if selectedIcon == 0 {
+                if selectedTab == .harmony {
                     if viewModel.isLoading {
-                        ProgressView("Yükleniyor...")
+                        LoadingAnimationView()
                     } else if let errorMessage = viewModel.errorMessage {
-                        // Hata varsa errorMessage'ı göster
                         Text(errorMessage)
                             .foregroundColor(.red)
                     } else if viewModel.quiz.isEmpty {
-                        // Veri gelmediyse "Veri Bulunamadı" mesajını göster
                         Text("Veri Bulunamadı")
                     } else {
                         ScrollView {
@@ -44,6 +37,8 @@ struct CoupleQuestionView : View {
                                 ForEach(viewModel.quiz.indices.sorted(by: { viewModel.quiz[$0].title ?? "-" < viewModel.quiz[$1].title ?? "-" }), id: \.self) { index in
                                     NavigationLink(destination: QuestionView(quizId: viewModel.quiz[index].title ?? "-")) {
                                         CoupleQuestionQuizSection(imageName: "harmonyIcon", text: viewModel.quiz[index].title ?? "-", isSolvedBefore: viewModel.quiz[index].quizStatus == .finished , quizId: viewModel.quiz[index].id ?? "-")
+                                    }.onTapGesture {
+                                        viewModel.startQuiz()
                                     }
                                 }
                             }
@@ -52,7 +47,6 @@ struct CoupleQuestionView : View {
                 } else {
                     AITherapistView()
                 }
-                
                 Spacer()
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .background(Color(.systemBackground))
@@ -66,7 +60,9 @@ struct CoupleQuestionView : View {
     CoupleQuestionView()
 }
 
-
+enum Tab {
+    case harmony, aiTherapist
+}
 
 struct CoupleQuestionHeaderBarIcon: View {
     var imageName : String

@@ -65,6 +65,9 @@ final class Utilities {
                 static let getAllQuizes = "\(baseURL)/quiz"
                 static let getQuizById = "\(baseURL)/quiz/:id"
                 static let getUserQuizes = "\(baseURL)/quiz/myQuizzes"
+                static let startQuizResult = "\(baseURL)/quiz/initiateQuizResult"
+                static let takeQuiz = "\(baseURL)/quiz/takeQuiz"
+                static let quizResultForQuiz = "\(baseURL)/quiz/getQuizResultForQuiz"
             }
         }
     }

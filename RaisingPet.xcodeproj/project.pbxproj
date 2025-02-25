@@ -72,6 +72,15 @@
 		ECCC7B3F2CAAB3FD00B16C91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */; };
 		ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */; };
+		ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ECDFC43F2D6D1C6A00FA450D /* Lottie */; };
+		ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */; };
+		ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = ECDFC4482D6D211400FA450D /* LoadingAnimation.json */; };
+		ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */; };
+		ECDFC44D2D6D30BB00FA450D /* StartQuizResultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44C2D6D30BB00FA450D /* StartQuizResultResponse.swift */; };
+		ECDFC44F2D6D380D00FA450D /* TakeQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */; };
+		ECDFC4512D6D387900FA450D /* TakeQuizResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */; };
+		ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */; };
+		ECDFC4552D6D46F400FA450D /* QuizResultForQuizResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */; };
 		ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */; };
 		ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
@@ -176,6 +185,14 @@
 		ECCC7B482CAAB41200B16C91 /* PetiverseWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetiverseWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
 		ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyBoxView.swift; sourceTree = "<group>"; };
+		ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
+		ECDFC4482D6D211400FA450D /* LoadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
+		ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizResultRequest.swift; sourceTree = "<group>"; };
+		ECDFC44C2D6D30BB00FA450D /* StartQuizResultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizResultResponse.swift; sourceTree = "<group>"; };
+		ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizRequest.swift; sourceTree = "<group>"; };
+		ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizResponse.swift; sourceTree = "<group>"; };
+		ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizRequest.swift; sourceTree = "<group>"; };
+		ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizResponse.swift; sourceTree = "<group>"; };
 		ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +209,7 @@
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
+				ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +350,7 @@
 		EC606F202C5FB7E40015F103 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				ECDFC4412D6D1C8300FA450D /* Animation */,
 				ECB5F5972D563792001AC419 /* Extensions */,
 				EC606F212C5FB7F80015F103 /* Utilities.swift */,
 			);
@@ -423,7 +442,10 @@
 				EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */,
 				ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */,
 				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
+				ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */,
+				ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */,
 				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
+				ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */,
 			);
 			path = RequestModels;
 			sourceTree = "<group>";
@@ -432,8 +454,11 @@
 			isa = PBXGroup;
 			children = (
 				ECB5F56D2D54E760001AC419 /* QuestionResponseModel.swift */,
+				ECDFC44C2D6D30BB00FA450D /* StartQuizResultResponse.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
+				ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */,
 				EC1CE99C2D5235720082FD4F /* GetAllQuizesResponse.swift */,
+				ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */,
 				ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */,
 				EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */,
 			);
@@ -473,6 +498,15 @@
 			path = PetiverseWidgetExtension;
 			sourceTree = "<group>";
 		};
+		ECDFC4412D6D1C8300FA450D /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				ECDFC4482D6D211400FA450D /* LoadingAnimation.json */,
+				ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		ECF3EACB2D6384E100EEFBB2 /* Paywall */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +541,7 @@
 				EC606F172C5FB44C0015F103 /* GoogleSignIn */,
 				EC606F192C5FB44C0015F103 /* GoogleSignInSwift */,
 				EC8D59C02D084DB30050740C /* Alamofire */,
+				ECDFC43F2D6D1C6A00FA450D /* Lottie */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -559,6 +594,7 @@
 			packageReferences = (
 				EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -579,6 +615,7 @@
 				EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */,
 				EC606EDE2C57B7060015F103 /* Preview Assets.xcassets in Resources */,
 				EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */,
+				ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,26 +634,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */,
 				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
 				ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
 				EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
+				ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */,
 				ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
 				ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
+				ECDFC44F2D6D380D00FA450D /* TakeQuizRequest.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* PetView.swift in Sources */,
 				EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
+				ECDFC4512D6D387900FA450D /* TakeQuizResponse.swift in Sources */,
 				ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */,
 				EC2B97C52CB6A63900CE15CD /* CountDownView.swift in Sources */,
 				ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
+				ECDFC4552D6D46F400FA450D /* QuizResultForQuizResponse.swift in Sources */,
 				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
@@ -632,6 +674,7 @@
 				EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
 				ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */,
+				ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
@@ -641,6 +684,7 @@
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
 				ECB5F56E2D54E767001AC419 /* QuestionResponseModel.swift in Sources */,
+				ECDFC44D2D6D30BB00FA450D /* StartQuizResultResponse.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
@@ -966,6 +1010,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -983,6 +1035,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		ECDFC43F2D6D1C6A00FA450D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

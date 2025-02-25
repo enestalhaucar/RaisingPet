@@ -37,7 +37,7 @@ struct LoginView: View {
                     
                     
                     if viewModel.isLoading {
-                        ProgressView()
+                        LoadingAnimationView()
                     } else {
                         Button(action: {
                             viewModel.login(with: email, password: password)
