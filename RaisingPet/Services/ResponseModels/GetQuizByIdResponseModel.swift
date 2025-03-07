@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetQuizResponseModel: Codable {
+struct GetQuizByIdResponseModel: Codable {
     let status: String
     let data: QuizDataContainer
     
@@ -16,12 +16,12 @@ struct GetQuizResponseModel: Codable {
     }
     
     struct QuizDetailModel: Codable {
-        let id: String
-        let category : QuizCategoryModel
-        let createdAt: String
-        let v : Int
-        let title: String
-        let questions: [QuestionModel]
+        let id: String?
+        let category : QuizCategoryModel?
+        let createdAt: String?
+        let v : Int?
+        let title: String?
+        let questions: [QuestionModel]?
 
         enum CodingKeys: String, CodingKey {
             case id = "_id"
