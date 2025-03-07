@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetAllQuizesResponseModel: Codable {
+struct GetUserQuizes: Codable {
     let status: String
     let results: Int
     let data: [QuizModel]

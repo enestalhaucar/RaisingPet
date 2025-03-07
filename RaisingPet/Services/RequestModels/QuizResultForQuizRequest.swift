@@ -8,5 +8,5 @@
 import Foundation
 
 struct QuizResultForQuizRequest: Codable {
-    var quizId: Int
+    var quizId: String
 }

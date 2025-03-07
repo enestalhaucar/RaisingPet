@@ -4,6 +4,7 @@
 //
 //  Created by Enes Talha Uçar on 6.02.2025.
 //
+
 import SwiftUI
 import Alamofire
 
@@ -13,62 +14,43 @@ struct QuestionView: View {
     @State private var currentQuestionIndex = 0
     @State private var isQuizCompleted = false
     @State private var selectedAnswers: [QuizAnswer] = []
+    @State private var sendableQuizObject: TakeQuizRequest = TakeQuizRequest(quizId: "", preAnswers: [])
     
     func selectAnswer(_ answer: String, questionId: String) {
-        let selectedAnswer = QuizAnswer(questionId: questionId, option: answer)
+        let selectedAnswer = QuizAnswer(question: .init(id: questionId), option: answer)
         selectedAnswers.append(selectedAnswer)
-        if currentQuestionIndex < (viewModel.selectedQuiz?.questions.count ?? 0) - 1 {
+        if currentQuestionIndex < (viewModel.selectedQuiz?.questions?.count ?? 0) - 1 {
             withAnimation {
                 currentQuestionIndex += 1
             }
         } else {
             isQuizCompleted = true
-            submitQuiz()
+            print("Seçilen Cevap Sayısı: \(selectedAnswers.count)")
+            if selectedAnswers.isEmpty {
+                print("gönderilen cevaplar boş")
+                return
+            }
+            sendableQuizObject = TakeQuizRequest(quizId: quizId, preAnswers: selectedAnswers)
+            print("Gönderilen Veri: \(sendableQuizObject)")
+            submitQuiz(sendableQuizObject)
         }
     }
-
-    func submitQuiz() {
-        let request = TakeQuizRequest(quizId: quizId, preAnswers: selectedAnswers)
-        sendQuizAnswersToServer(request: request)
-    }
     
-    func sendQuizAnswersToServer(request: TakeQuizRequest) {
-        let url = Utilities.Constants.Endpoints.Quiz.takeQuiz
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
-            .validate()
-            .responseDecodable(of: QuizResponse.self) { response in
-                switch response.result {
-                case .success(let data):
-                    print("Quiz başarıyla gönderildi:", data)
-                    // Başarıyla gönderildiyse kullanıcıyı sonuç ekranına yönlendir
-                    self.isQuizCompleted = true
-                case .failure(let error):
-                    print("Hata:", error.localizedDescription)
-                    // Hata mesajını göster
-                }
-            }
+    func submitQuiz(_ object: TakeQuizRequest) {
+        viewModel.takeQuiz(takeQuizObject: object)
     }
-
-
-
     
     var body: some View {
         NavigationStack {
             if isQuizCompleted {
-                QuizResultView(selectedAnswers: selectedAnswers.map { $0.option })
+                QuizResultView(quizId: quizId)
             } else {
                 VStack {
                     if viewModel.isLoading {
                         LoadingAnimationView()
-                    } else if let quiz = viewModel.selectedQuiz {
-                        if currentQuestionIndex < quiz.questions.count {
-                            let question = quiz.questions[currentQuestionIndex]
+                    } else if let quiz = viewModel.selectedQuiz?.questions, let questionQuiz = viewModel.selectedQuiz?.questions?[currentQuestionIndex] {
+                        if currentQuestionIndex < quiz.count {
+                            let question = questionQuiz
                             
                             VStack(spacing: 20) {
                                 QuestionOptionView(option: question.options[0])
@@ -77,9 +59,9 @@ struct QuestionView: View {
                                     }
                                 Text("vs")
                                     .font(.nunito(.medium, .title320))
-                                QuestionOptionView(option: question.options[0])
+                                QuestionOptionView(option: question.options[1])
                                     .onTapGesture {
-                                        selectAnswer(question.options[0], questionId: question.id)
+                                        selectAnswer(question.options[1], questionId: question.id)
                                     }
                             }
                             .transition(.slide)
@@ -91,7 +73,8 @@ struct QuestionView: View {
                     }
                 }
                 .onAppear {
-                    viewModel.fetchQuizDetails(quizId: quizId)
+                    viewModel.fetchQuizById(quizId: quizId)
+                    print("Fetch By Quiz Id ile gönderilen QuizID : \(quizId)")
                 }
             }
         }
@@ -108,5 +91,3 @@ struct QuestionOptionView: View {
             .cornerRadius(20)
     }
 }
-
-

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct QuizResultView: View {
-    let selectedAnswers: [String]
-    @State var percentage : Double = 0.0
+    let quizId: String
+    @StateObject private var viewModel = CoupleQuestionViewModel()
+    @State private var percentage: Double = 0.0
     
     var body: some View {
         NavigationStack {
@@ -21,36 +22,40 @@ struct QuizResultView: View {
                         .multilineTextAlignment(.center)
                         .padding()
                     
-//                    Text(String(format: "%.0f%%", percentage * 100))
-//                        .font(.largeTitle)
-//                        .bold()
-//                        .foregroundColor(.blue)
-                    
-                    VStack(spacing: 15) {
-                        ForEach(selectedAnswers.indices, id: \ .self) { index in
-                            HStack {
-                                Text(selectedAnswers[index])
-                                    .frame(maxWidth: .infinity)
-                                    .padding(10)
-                                    .background(Color.blue.opacity(0.2))
-                                    .cornerRadius(10)
-                                
-                                Text("VS")
-                                    .font(.nunito(.medium, .title320))
-                                    .bold()
-                                    .padding(.horizontal, 8)
-                                
-                                Text("?")
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.blue.opacity(0.2))
-                                    .cornerRadius(10)
+                    if viewModel.isLoading {
+                        LoadingAnimationView()
+                    } else if let quizResultAnswers = viewModel.quizResult?.answers {
+                        VStack(spacing: 15) {
+                            ForEach(quizResultAnswers, id: \.self) { answer in
+                                HStack {
+                                    
+                                    Text(answer.userAnswer ?? "N/A")
+                                        .frame(maxWidth: .infinity)
+                                        .padding(10)
+                                        .background(Color.blue.opacity(0.2))
+                                        .cornerRadius(10)
+                                    
+                                    Text("VS")
+                                        .font(.nunito(.medium, .title320))
+                                        .bold()
+                                        .padding(.horizontal, 8)
+                                    
+                                    Text(answer.friendAnswer ?? "?")
+                                        .frame(maxWidth: .infinity)
+                                        .padding(10)
+                                        .background(Color.blue.opacity(0.2))
+                                        .cornerRadius(10)
+                                }
                             }
                         }
+                        .padding()
+                    } else {
+                        Text("Sonuçlar yüklenemedi.")
                     }
-                    .padding()
                     
-                    Button(action: {  }) {
+                    Button(action: {
+                        // Testi tekrar çözmek için bir aksiyon eklenebilir
+                    }) {
                         Text("Testi Tekrar Çöz")
                             .frame(width: 200, height: 50)
                             .background(Color.blue)
@@ -59,15 +64,18 @@ struct QuizResultView: View {
                     }
                     .padding()
                 }
-
             }
-        }.onAppear {
-            self.percentage = calculateMatchPercentage()
+            .onAppear {
+                if viewModel.quizResult == nil {
+                    viewModel.fetchQuizResult(quizId: quizId)
+                    print("Fetch Quiz Result ile gönderilen quizId: \(quizId)")
+                }
+            }
         }
     }
     
     private func calculateMatchPercentage() -> Double {
-        return Double(selectedAnswers.count) / 15.0 // Örnek bir hesaplama
+        guard let quizResult = viewModel.quizResult, let totalQuestions = quizResult.answers?.count else { return 0.0 }
+        return totalQuestions > 0 ? Double(5) / Double(totalQuestions) * 100 : 0.0
     }
 }
-

@@ -8,11 +8,19 @@
 import Foundation
 
 struct TakeQuizRequest: Codable {
-    let quizId: String
-    let preAnswers: [QuizAnswer]
+    let quizId: String?
+    let preAnswers: [QuizAnswer]?
+    
+    enum CodingKeys: String, CodingKey {
+        case quizId
+        case preAnswers = "pre_answers"
+    }
 }
 
 struct QuizAnswer: Codable {
-    let questionId: String
-    let option: String
+    let question: TakeQuizQuestionID
+    let option : String
+}
+struct TakeQuizQuestionID : Codable {
+    let id : String
 }

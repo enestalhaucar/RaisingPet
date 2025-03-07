@@ -19,9 +19,11 @@ final class Utilities {
         static let width = UIScreen.main.bounds.width
         static let height = UIScreen.main.bounds.height
         static let widthHalf: CGFloat = .init(width / 2)
+        static let widthQuarter: CGFloat = .init(width / 4)
         static let heightHalf: CGFloat = .init(height / 2)
         static let widthWithoutEdge : CGFloat = .init(width - 24)
         static let widthEight: CGFloat = .init(width * 8 / 10)
+        static let widthFour: CGFloat = .init(width * 4 / 10)
         
         struct Endpoints {
             // Auth Endpoints
@@ -62,10 +64,8 @@ final class Utilities {
             // Quiz
             
             struct Quiz {
-                static let getAllQuizes = "\(baseURL)/quiz"
                 static let getQuizById = "\(baseURL)/quiz/:id"
                 static let getUserQuizes = "\(baseURL)/quiz/myQuizzes"
-                static let startQuizResult = "\(baseURL)/quiz/initiateQuizResult"
                 static let takeQuiz = "\(baseURL)/quiz/takeQuiz"
                 static let quizResultForQuiz = "\(baseURL)/quiz/getQuizResultForQuiz"
             }

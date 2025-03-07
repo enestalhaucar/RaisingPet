@@ -7,20 +7,16 @@
 
 import SwiftUI
 
+struct NavigationItem {
+    let title : String?
+    let imageName : String?
+    let subTitle : String?
+    let destination : AnyView?
+}
+
+
 struct HomeView: View {
-    @State private var CountDownItem: CountDownWidgetOne =
-    CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date())
     
-    @State private var DistanceItem : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .small, title: "")
-    @State private var DistanceItem2 : DistanceWidget = DistanceWidget(bgSelected: true, backgroundImage: Image("backgroundImageForDistance"), backgroundColor: .green.opacity(0.3), textColor: .white, size: .medium, title: "")
-    
-    @State private var AlbumItem : AlbumWidget = AlbumWidget(backgroundImage: [Image("profile1")], size: widgetSizeOne.small)
-    @State private var AlbumItem2 : AlbumWidget = AlbumWidget(backgroundImage: [Image("profile2")], size: widgetSizeOne.small)
-    
-    
-    @State private var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // Default 23 days later
-    @State private var timeRemaining: (days: Int, hours: Int, minutes: Int) = (0, 0, 0)
-    @State private var title : String = "To Maldives"
     var body: some View {
         NavigationStack {
             ZStack {
@@ -35,65 +31,18 @@ struct HomeView: View {
                         
                         HomeNewsSection()
                         
+                        WidgetsPreviewSection()
                         
-                        
-                        VStack {
-                            HStack {
-                                Text("Hot Widgets 🔥")
-                                    .font(.title3)
-                                    .bold()
-                                Spacer()
-                            }
-                            
-                            HStack {
-                                NavigationLink(destination: CountDownSettingsView()) {
-                                    ZStack {
-                                        CountDownWidgetPreviewDesignOne(item: CountDownItem, targetDate: $targetDate, timeRemaining: timeRemaining, title: $title)
-                                    }
-                                }
-                                NavigationLink(destination: DistanceSettingsView()) {
-                                    ZStack {
-                                        DistanceWidgetPreviewDesignOne(item: DistanceItem, title: $title)
-                                    }
-                                }
-                            }
-                            
-                            NavigationLink(destination: DistanceSettingsView()) {
-                                ZStack {
-                                    DistanceWidgetPreviewDesignOne(item: DistanceItem2, title: $title)
-                                }
-                            }
-                            
-                            HStack {
-                                NavigationLink(destination: AlbumSettingsView()) {
-                                    ZStack {
-                                        AlbumWidgetPreviewDesign(item: AlbumItem)
-                                    }
-                                }
-                                NavigationLink(destination: AlbumSettingsView()) {
-                                    ZStack {
-                                        AlbumWidgetPreviewDesign(item: AlbumItem2)
-                                    }
-                                }
-                                
-                            }
-                            
-                            
-                            
-                        }.frame(width: UIScreen.main.bounds.width * 9 / 10)
-                        Spacer()
-                        
-                        
-                        
+                        WidgetsNavigationSection()   
                         
                     }.toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                                NavigationLink(destination: MyWidgetsView()) {
-                                    HStack {
-                                        Image("squareBtn")
-                                        Text("Stacks")
-                                    }
+                            NavigationLink(destination: MyWidgetsView()) {
+                                HStack {
+                                    Image("squareBtn")
+                                    Text("Stacks").font(.nunito(.semiBold, .callout14))
                                 }
+                            }
                         }
                         
                         ToolbarItem(placement: .topBarTrailing) {
@@ -142,6 +91,7 @@ struct CustomNavigationLink<Destination: View> : View {
                         Image("\(imageName)")
                             .scaleEffect(0.8)
                         Text("\(text)")
+                            .font(.nunito(.semiBold, .callout14))
                             .bold()
                     }
                 }
@@ -156,8 +106,7 @@ struct HomePetSection: View {
         NavigationLink(destination: PetView()) {
             ZStack {
                 Image("petBackgroundImage")
-                    .resizable(resizingMode: .tile)
-                    .opacity(0.3)
+                    .resizable()
                     .foregroundStyle(.white)
                 
                     .overlay {
@@ -199,6 +148,7 @@ struct HomeNavigationButtons: View {
                                 .frame(width: 44, height: 44)
                                 .scaleEffect(0.8)
                             Text("Notes")
+                                .font(.nunito(.semiBold, .callout14))
                                 .bold()
                         }
                     }
@@ -217,5 +167,69 @@ struct HomeNewsSection: View {
                 .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 75)
             Text("News").bold()
         }
+    }
+}
+
+struct WidgetsPreviewSection: View {
+    let navigationItemsForWidget : [NavigationItem] = [
+        NavigationItem(title: "Pets", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
+        NavigationItem(title: "Daily Frequence", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "Distance", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
+        NavigationItem(title: "Pin It!", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "Send Emotions!", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "Pet Care", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "Draw", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "Daily", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView()))
+    ]
+    var body: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Text("Hot Widgets 🔥")
+                    .font(.title3)
+                    .bold()
+                Spacer()
+            }
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 16) {
+                ForEach(navigationItemsForWidget, id: \.title) { item in
+                    NavigationLink(destination: AnyView(item.destination)) {
+                        ZStack {
+                            PreviewDesignComponent(title: item.title ?? "-", subTitle: item.subTitle ?? "-")
+                        }
+                    }
+                }
+            }
+        }.frame(width: UIScreen.main.bounds.width * 9 / 10)
+    }
+}
+
+struct WidgetsNavigationSection : View {
+    let navigationItems : [NavigationItem] = [
+        NavigationItem(title: "Signal", imageName: "signalIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "Countdown", imageName: "countDownIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "X-panel", imageName: "signalIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "Photo", imageName: "photoIcon", subTitle: nil, destination: nil)
+    ]
+    var body: some View {
+        ZStack {
+            Color("navigationHomeViewBackgroundColor")
+            VStack {
+                ForEach(navigationItems, id: \.title) { item in
+                    HStack {
+                        Image(item.imageName ?? "")
+                            .resizable()
+                            .frame(width: 28, height: 28)
+                        Text(item.title ?? "-")
+                            .font(.nunito(.semiBold, .callout14))
+                        Spacer()
+                        Image("arrowIcon")
+                            .resizable()
+                            .frame(width: 26, height: 26)
+                    }.padding(.horizontal)
+                        .padding(.vertical, 4)
+                    Divider()
+                }
+            }.padding(12)
+        }.background(RoundedRectangle(cornerRadius: 10).stroke(Color("navigationHomeViewBorderColor"), lineWidth: 1))
+            .padding(.horizontal)
     }
 }

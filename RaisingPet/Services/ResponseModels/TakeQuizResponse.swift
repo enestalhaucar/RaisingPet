@@ -7,45 +7,66 @@
 
 import Foundation
 
-struct QuizResponse: Codable {
-    let status: String
-    let data: QuizData
+struct TakeQuizResponse : Codable {
+    let status: String?
+    let data: QuizResultData?
 }
 
-struct QuizData: Codable {
-    let _id: String
-    let quizId: QuizInfo
-    let user1: String
-    let user2: String
-    let answers: [QuizAnswerResponse]
-    let status: String
-    let createdAt: String
-    let __v: Int
+struct QuizResultData: Codable {
+    let quizId: QuizDetail?
+    let user1: String?
+    let user2: String?
+    let answers: [AnswerModel]?
+    let status: String?
+    let flagUser1EverDone: Bool?
+    let flagUser2EverDone: Bool?
+    let id: String?
+    let createdAt: String?
+    let v : Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case quizId
+        case user1
+        case user2
+        case answers
+        case status
+        case flagUser1EverDone
+        case flagUser2EverDone
+        case id = "_id"
+        case createdAt
+        case v = "__v"
+    }
 }
 
-struct QuizInfo: Codable {
-    let _id: String
+struct QuizDetail: Codable {
+    let id: String
     let title: String
     let category: String
     let createdAt: String
-    let __v: Int
-    let questions: [Question]
+    let questions: [QuestionModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case title
+        case category
+        case createdAt
+        case questions
+    }
 }
 
-struct Question: Codable {
-    let _id: String
-    let order: Int
-    let options: [String]
-    let quiz: String
-    let __v: Int
-}
-
-struct QuizAnswerResponse: Codable {
+struct AnswerModel: Codable {
     let question: String
-    let user1Answer: String
+    let user1Answer: String?
     let user2Answer: String?
     let isMatched: Bool?
-    let _id: String
+    let id: String
+    
+    enum CodingKeys: String, CodingKey {
+        case question
+        case user1Answer
+        case user2Answer
+        case isMatched
+        case id = "_id"
+    }
 }
-
 

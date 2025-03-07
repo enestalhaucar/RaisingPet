@@ -4,6 +4,8 @@ struct CoupleQuestionView : View {
     @StateObject private var viewModel = CoupleQuestionViewModel()
     @State private var selectedTab: Tab = .harmony
     @State private var selectedIcon : Int = 0
+    @State private var sentQuizId : String = ""
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -34,12 +36,8 @@ struct CoupleQuestionView : View {
                     } else {
                         ScrollView {
                             VStack(spacing: 15) {
-                                ForEach(viewModel.quiz.indices.sorted(by: { viewModel.quiz[$0].title ?? "-" < viewModel.quiz[$1].title ?? "-" }), id: \.self) { index in
-                                    NavigationLink(destination: QuestionView(quizId: viewModel.quiz[index].title ?? "-")) {
-                                        CoupleQuestionQuizSection(imageName: "harmonyIcon", text: viewModel.quiz[index].title ?? "-", isSolvedBefore: viewModel.quiz[index].quizStatus == .finished , quizId: viewModel.quiz[index].id ?? "-")
-                                    }.onTapGesture {
-                                        viewModel.startQuiz()
-                                    }
+                                ForEach(viewModel.quiz.sorted(by: { ($0.title ?? "-") < ($1.title ?? "-") }), id: \.id) { quiz in
+                                    QuizRowView(quiz: quiz)
                                 }
                             }
                         }.scrollIndicators(.hidden)
@@ -59,6 +57,38 @@ struct CoupleQuestionView : View {
 #Preview {
     CoupleQuestionView()
 }
+
+struct QuizRowView : View {
+    let quiz : QuizModel
+    var body: some View {
+        NavigationLink(destination: QuestionView(quizId: quiz.id ?? "-")) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(height: 56)
+                    .foregroundStyle(.blue.opacity(0.09))
+                
+                HStack(spacing: 25) {
+                    // Icon
+                    Image("harmonyIcon")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                    
+                    Text(quiz.title ?? "-")
+                        .font(.nunito(.light, .caption12))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Spacer()
+                    
+                    if quiz.quizStatus == .continued {
+                        Image(systemName: "checkmark")
+                    }
+                }.padding(.horizontal, 20)
+            }.frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
+        }
+    }
+}
+
 
 enum Tab {
     case harmony, aiTherapist
@@ -83,42 +113,6 @@ struct CoupleQuestionHeaderBarIcon: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(isSelected ? Color.blue : Color.clear, lineWidth: 2)
         )
-    }
-}
-struct CoupleQuestionQuizSection: View {
-    var imageName : String
-    var text : String
-    var isSolvedBefore : Bool
-    var quizId : String
-    var body: some View {
-        
-        NavigationLink(destination: QuestionView(quizId: quizId)) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .frame(height: 56)
-                    .foregroundStyle(.blue.opacity(0.09))
-                
-                HStack(spacing: 25) {
-                    // Icon
-                    Image(imageName)
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                    
-                    Text(text)
-                        .font(.nunito(.light, .caption12))
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Spacer()
-                    
-                    if isSolvedBefore {
-                        Image(systemName: "checkmark")
-                    }
-                    
-                    
-                }.padding(.horizontal, 20)
-            }.frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
-        }
     }
 }
 struct AITherapistView: View {

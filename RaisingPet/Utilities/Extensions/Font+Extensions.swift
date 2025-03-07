@@ -33,6 +33,7 @@ enum NunitoTypography: CGFloat {
     case caption12 = 12
     case caption211 = 11
     case footnote13 = 13
+    case xsmall = 8
 }
 
 extension Font {
