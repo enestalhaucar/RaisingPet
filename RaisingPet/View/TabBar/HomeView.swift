@@ -127,9 +127,9 @@ struct HomePetSection: View {
 struct HomeNavigationButtons: View {
     var body: some View {
         HStack(spacing: 25) {
-            CustomNavigationLink(view: ShopScreenView(), imageName: "shopIcon", text: "Shop")
-            CustomNavigationLink(view: FriendsView(), imageName: "friendsIcon", text: "Friends")
-            CustomNavigationLink(view: PetView(), imageName: "petIcon", text: "Pet")
+            CustomNavigationLink(view: ShopScreenView(), imageName: "shopIcon", text: "shop".localized())
+            CustomNavigationLink(view: FriendsView(), imageName: "friendsIcon", text: "friends".localized())
+            CustomNavigationLink(view: PetView(), imageName: "petIcon", text: "pet".localized())
             VStack {
                 NavigationLink {
                     NoteView()
@@ -147,7 +147,7 @@ struct HomeNavigationButtons: View {
                                 .resizable()
                                 .frame(width: 44, height: 44)
                                 .scaleEffect(0.8)
-                            Text("Notes")
+                            Text("notes".localized())
                                 .font(.nunito(.semiBold, .callout14))
                                 .bold()
                         }
@@ -165,26 +165,26 @@ struct HomeNewsSection: View {
             Image("homeViewNewRect")
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 75)
-            Text("News").bold()
+            Text("news".localized()).bold()
         }
     }
 }
 
 struct WidgetsPreviewSection: View {
     let navigationItemsForWidget : [NavigationItem] = [
-        NavigationItem(title: "Pets", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-        NavigationItem(title: "Daily Frequence", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "Distance", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-        NavigationItem(title: "Pin It!", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "Send Emotions!", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "Pet Care", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "Draw", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
+        NavigationItem(title: "daily_frequence".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "distance".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
+        NavigationItem(title: "pin_it".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "send_emotions".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "pet_care".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+        NavigationItem(title: "draw".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
         NavigationItem(title: "Daily", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView()))
     ]
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Text("Hot Widgets 🔥")
+                Text("hot_widgets".localized())
                     .font(.nunito(.bold, .title320))
                 Spacer()
             }

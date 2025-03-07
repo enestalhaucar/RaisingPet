@@ -106,12 +106,12 @@ struct ProfileView: View {
                             Divider()
                             Row(iconName: "bell", title: "Notification")
                             Divider()
-                            Row(iconName: "globe", title: "Language")
+                            LanguageRow(iconName: "globe", title: "Language")
                             Divider()
                             Row(iconName: "gift", title: "Gift Card")
                         }.padding()
-                        .background(Color("profileBackgroundColor")) // Mavi arka plan
-                        .cornerRadius(10)
+                            .background(Color("profileBackgroundColor")) // Mavi arka plan
+                            .cornerRadius(10)
                     }
                     
                     VStack(alignment: .leading, spacing: 16) {
@@ -136,13 +136,13 @@ struct ProfileView: View {
                         .background(Color("profileBackgroundColor")) // Mavi arka plan
                         .cornerRadius(10)
                     }
-                        
+                    
                     
                     
                     
                 }.padding(.horizontal)
-                .navigationTitle("Profile Screen")
-                .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("Profile Screen")
+                    .navigationBarTitleDisplayMode(.inline)
             }.scrollIndicators(.hidden)
                 .onAppear {
                     userDetails = viewModel.getUserDetailsForProfileView()
@@ -198,6 +198,54 @@ struct LogOutRow : View {
     }
 }
 
+struct LanguageRow : View {
+    var iconName: String
+    var title: String
+    
+    var body: some View {
+        NavigationLink(destination: LanguageSelectionView()) {
+            HStack(spacing: 10) {
+                Image(systemName: iconName) // Sistem simgesi
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                Text(title)
+                    .font(.body)
+                Spacer()
+                Image("arrowIcon")
+                    .resizable()
+                    .frame(width: 26, height: 26)
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+}
+
+struct LanguageSelectionView : View {
+    @State private var selectedLanguage: Languages = Localizable.currentLanguage
+    var body: some View {
+        NavigationStack {
+            VStack {
+                List {
+                    ForEach(Array(Languages.allCases.enumerated()), id: \.element.hashValue) { (index, language) in
+                        Button(action: {
+                            Localizable.setCurrentLanguage(language)
+                            selectedLanguage = language
+                        }) {
+                            HStack {
+                                Text(language.stringValue)
+                                Spacer()
+                                if selectedLanguage == language {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 struct ProfileRow : View {
     var iconName: String
     var title: String
@@ -221,5 +269,5 @@ struct ProfileRow : View {
 }
 
 #Preview {
-    ProfileView()
+    LanguageSelectionView()
 }

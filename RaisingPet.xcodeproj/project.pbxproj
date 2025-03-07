@@ -49,6 +49,10 @@
 		EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */; };
 		EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */; };
 		EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E5A462D7A6C59001B2335 /* PreviewDesignComponent.swift */; };
+		EC8E5A4A2D7AA4E4001B2335 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E5A492D7AA4E4001B2335 /* Localizable.swift */; };
+		EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */; };
+		EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A512D7AA8EA001B2335 /* Localizable.strings */; };
+		EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A532D7AA94A001B2335 /* Localizable.strings */; };
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
 		EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */; };
 		EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */; };
@@ -159,6 +163,9 @@
 		EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
 		EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		EC8E5A462D7A6C59001B2335 /* PreviewDesignComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDesignComponent.swift; sourceTree = "<group>"; };
+		EC8E5A492D7AA4E4001B2335 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		EC8E5A522D7AA8EA001B2335 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Localizable.strings; sourceTree = "<group>"; };
+		EC8E5A542D7AA94A001B2335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetsView.swift; sourceTree = "<group>"; };
@@ -208,6 +215,7 @@
 			files = (
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
+				EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
 				ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */,
 			);
@@ -303,6 +311,8 @@
 				EC606ED62C57B7040015F103 /* RaisingPetApp.swift */,
 				EC606F142C58F61F0015F103 /* RootView.swift */,
 				EC606F1F2C5FB4D80015F103 /* Info.plist */,
+				EC8E5A4E2D7AA899001B2335 /* Resources */,
+				EC8E5A482D7AA4D3001B2335 /* Helpers */,
 				EC989DAD2CE8B0DD00E3FA82 /* ViewModels */,
 				ECCB799A2CDA161C000A1923 /* Services */,
 				EC606F202C5FB7E40015F103 /* Utilities */,
@@ -364,6 +374,39 @@
 				EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */,
 			);
 			path = FriendsViewModels;
+			sourceTree = "<group>";
+		};
+		EC8E5A482D7AA4D3001B2335 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EC8E5A492D7AA4E4001B2335 /* Localizable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EC8E5A4E2D7AA899001B2335 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC8E5A502D7AA8CB001B2335 /* en.lproj */,
+				EC8E5A4F2D7AA8BB001B2335 /* tr.lproj */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EC8E5A4F2D7AA8BB001B2335 /* tr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				EC8E5A512D7AA8EA001B2335 /* Localizable.strings */,
+			);
+			path = tr.lproj;
+			sourceTree = "<group>";
+		};
+		EC8E5A502D7AA8CB001B2335 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				EC8E5A532D7AA94A001B2335 /* Localizable.strings */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		EC989DAD2CE8B0DD00E3FA82 /* ViewModels */ = {
@@ -542,6 +585,7 @@
 				EC606F192C5FB44C0015F103 /* GoogleSignInSwift */,
 				EC8D59C02D084DB30050740C /* Alamofire */,
 				ECDFC43F2D6D1C6A00FA450D /* Lottie */,
+				EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -588,6 +632,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				tr,
 				Base,
 			);
 			mainGroup = EC606ECA2C57B7040015F103;
@@ -595,6 +640,7 @@
 				EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -612,7 +658,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
+				EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */,
 				EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */,
+				EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */,
 				EC606EDE2C57B7060015F103 /* Preview Assets.xcassets in Resources */,
 				EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */,
 				ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */,
@@ -641,6 +689,7 @@
 				EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				EC2B97C22CB69BF500CE15CD /* CountDownWidget.swift in Sources */,
+				EC8E5A4A2D7AA4E4001B2335 /* Localizable.swift in Sources */,
 				ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */,
 				ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
@@ -716,6 +765,25 @@
 			targetProxy = ECCC7B412CAAB3FD00B16C91 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC8E5A512D7AA8EA001B2335 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC8E5A522D7AA8EA001B2335 /* tr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		EC8E5A532D7AA94A001B2335 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC8E5A542D7AA94A001B2335 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EC606EDF2C57B7060015F103 /* Debug */ = {
@@ -1010,6 +1078,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Localize-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 		ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -1035,6 +1111,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */;
+			productName = Localize_Swift;
 		};
 		ECDFC43F2D6D1C6A00FA450D /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

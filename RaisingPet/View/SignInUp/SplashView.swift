@@ -12,9 +12,7 @@ struct SplashView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                
                 SignInUpBackground()
-                
                 VStack(spacing: 45) {
                     Spacer()
                     Image("splashViewPhoto")
@@ -38,6 +36,8 @@ struct SplashView: View {
                     Spacer()
                     
                 }.padding(.horizontal)
+            }.onAppear {
+                _ = Localizable.currentLanguage
             }
         }
     }
