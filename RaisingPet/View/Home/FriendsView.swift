@@ -19,29 +19,26 @@ struct FriendsView: View {
                 Color("mainbgColor").ignoresSafeArea()
                 
                 VStack {
-                    // Kullanıcı Bilgisi
                     HStack {
                         Circle().frame(width: 60, height: 60)
-                        
                         Text(userDetails["firstname"] ?? "N/A")
-                            .font(.title2)
+                            .font(.nunito(.medium, .title320))
                         
                         Spacer()
-                    }
-                    .padding(.horizontal)
+                    }.padding(.top)
                     .padding(.trailing)
-                    .padding()
+
                     
-                    // Arkadaş Listesi Başlığı
-                    Text("Your Friends")
-                        .font(.headline)
-                        .padding(.top, 10)
+                    HStack {
+                        Text("Your Friends")
+                            .font(.nunito(.medium, .title320))
+                            .padding(.top, 10)
+                        Spacer()
+                    }
                     
-                    // Arkadaş Listesi
                     ScrollView {
                         ForEach(viewModel.friends, id: \._id) { friend in
                             FriendRow(friend: friend)
-                                .padding(.horizontal)
                                 .padding(.vertical, 5)
                         }
                     }
@@ -62,7 +59,7 @@ struct FriendsView: View {
                         .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 60)
                         .background(Color("friendsViewbuttonColor"), in: .rect(cornerRadius: 25))
                     })
-                }
+                }.padding(.horizontal)
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationTitle("Friends & Relations")
@@ -79,40 +76,45 @@ struct FriendRow: View {
     let friend: Friend
     
     var body: some View {
-        HStack {
-            // Fotoğraf veya Placeholder
-            Circle()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.gray)
-                .overlay(
-                    Image(systemName: "person.fill")
-                        .foregroundStyle(.white)
-                )
+        ZStack {
+            RoundedRectangle(cornerRadius: 21)
+                .foregroundStyle(.blue.opacity(0.05))
             
-            // Ad ve Soyad
-            VStack(alignment: .leading) {
-                Text(friend.friend.firstname)
-                    .font(.headline)
-                Text(friend.friend.surname)
-                    .font(.subheadline)
+            HStack {
+                Circle()
+                    .frame(width: 64, height: 64)
                     .foregroundStyle(.gray)
+                    .overlay(
+                        Image(systemName: "person.fill")
+                            .foregroundStyle(.gray)
+                    )
+                VStack(alignment: .leading) {
+                    Text(friend.friend.firstname)
+                        .font(.nunito(.medium, .title320))
+                    Text(friend.friend.surname)
+                        .font(.nunito(.medium, .title320))
+                        .foregroundStyle(.gray)
+                }
+                Spacer()
+                switch friend.status {
+                case .accepted:
+                    Image("ringBellIcon")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                    Image("pencilIcon")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                case .pending:
+                    Image(systemName: "hourglass")
+                        .foregroundStyle(.orange)
+                case .rejected:
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.red)
+                }
             }
-            Spacer()
-            
-            // Duruma Göre İkon
-            switch friend.status {
-            case .accepted:
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-            case .pending:
-                Image(systemName: "hourglass")
-                    .foregroundStyle(.orange)
-            case .rejected:
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundStyle(.red)
-            }
+            .padding(10)
         }
-        .padding(.vertical, 10)
+        .frame(height: 110)
     }
 }
 

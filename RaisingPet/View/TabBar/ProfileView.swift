@@ -13,9 +13,7 @@ struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @State private var userDetails : [String:String] = [:]
     @EnvironmentObject var appState : AppState
-    
-    
-    /// Raw Data ile çalışırken
+    @State private var showCopiedMessage = false
     @State private var profileImage: UIImage? = nil
     private let placeholderImage = UIImage(named: "placeholder")
     
@@ -24,13 +22,6 @@ struct ProfileView: View {
             ScrollView {
                 VStack(spacing: 25) {
                     VStack(spacing: 10) {
-                        Text(userDetails["token"] ?? "N/A")
-                        Text(userDetails["firstname"] ?? "N/A")
-                        Text(userDetails["surname"] ?? "N/A")
-                        Text(userDetails["email"] ?? "N/A")
-                        Text(userDetails["friendTag"] ?? "N/A")
-                        
-                        
                         if let image = profileImage {
                             Image(uiImage: image)
                                 .resizable()
@@ -49,6 +40,30 @@ struct ProfileView: View {
                                 .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                         }
                     }
+                    // User name and tag
+                    VStack {
+                        Text("\(userDetails["firstname"] ?? "") \(userDetails["lastname"] ?? "")")
+                            .font(.nunito(.semiBold, .body16))
+                        
+                        HStack {
+                            Image(systemName: "doc.on.doc")
+                            Text("\(userDetails["friendTag"] ?? "")")
+                                .font(.nunito(.bold, .body16))
+                                .foregroundStyle(.blue)
+                                .onTapGesture {
+                                    UIPasteboard.general.string = userDetails["friendTag"] ?? "It could not pasted on pasteboard."
+                                    withAnimation {
+                                        showCopiedMessage = true
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                        withAnimation {
+                                            showCopiedMessage = false
+                                        }
+                                    }
+                                }
+                        }
+                        
+                    }
                     
                     // Upgrade Premium Button
                     Button(action: {
@@ -60,7 +75,6 @@ struct ProfileView: View {
                             Text("Upgrade Premium")
                                 .font(.system(size: 20))
                                 .foregroundColor(.black)
-                            
                         }.frame(width: UIScreen.main.bounds.width * 7 / 10)
                             .padding()
                             .background(
@@ -82,8 +96,7 @@ struct ProfileView: View {
                     
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Profile")
-                            .font(.system(size: 16))
-                            .bold()
+                            .font(.nunito(.bold, .title320))
                             .padding(.bottom, 8)
                         
                         // Arka plan
@@ -96,18 +109,14 @@ struct ProfileView: View {
                             Row(iconName: "globe", title: "Language")
                             Divider()
                             Row(iconName: "gift", title: "Gift Card")
-                        }
-                        
-                        .padding()
+                        }.padding()
                         .background(Color("profileBackgroundColor")) // Mavi arka plan
                         .cornerRadius(10)
-                    }.frame(width: UIScreen.main.bounds.width * 8 / 10)
-                        .padding()
+                    }
                     
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Settings")
-                            .font(.system(size: 16))
-                            .bold()
+                            .font(.nunito(.bold, .title320))
                             .padding(.bottom, 8)
                         
                         // Arka plan
@@ -123,35 +132,26 @@ struct ProfileView: View {
                                 viewModel.logOut(appState: appState)
                             }, iconName: "arrow.right.to.line", title: "Log Out")
                         }
-                        
                         .padding()
                         .background(Color("profileBackgroundColor")) // Mavi arka plan
                         .cornerRadius(10)
-                    }.frame(width: UIScreen.main.bounds.width * 8 / 10)
-                        .padding()
+                    }
+                        
                     
                     
                     
-                }
+                }.padding(.horizontal)
                 .navigationTitle("Profile Screen")
                 .navigationBarTitleDisplayMode(.inline)
-            }.scrollIndicators(.hidden).task {
-                //                try? await viewModel.loadCurrentUser()
-            }
-            .onAppear {
-                userDetails = viewModel.getUserDetailsForProfileView()
-            }
-            
+            }.scrollIndicators(.hidden)
+                .onAppear {
+                    userDetails = viewModel.getUserDetailsForProfileView()
+                }
         }.fullScreenCover(isPresented: $isShowPremiumView, content: {
             PremiumView(isShow: $isShowPremiumView)
         })
     }
 }
-
-//#Preview {
-//    ProfileView()
-//
-//}
 
 struct Row: View {
     var iconName: String
@@ -163,12 +163,13 @@ struct Row: View {
                 .resizable()
                 .frame(width: 24, height: 24)
             Text(title)
-                .font(.body)
+                .font(.nunito(.medium, .body16))
             Spacer()
-            Image(systemName: "chevron.right") // Sağ ok simgesi
+            Image("arrowIcon")
+                .resizable()
+                .frame(width: 26, height: 26)
                 .foregroundColor(.gray)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -188,10 +189,11 @@ struct LogOutRow : View {
                 Text(title)
                     .font(.body)
                 Spacer()
-                Image(systemName: "chevron.right") // Sağ ok simgesi
+                Image("arrowIcon")
+                    .resizable()
+                    .frame(width: 26, height: 26)
                     .foregroundColor(.gray)
             }
-            .padding(.horizontal)
         })
     }
 }
@@ -209,10 +211,11 @@ struct ProfileRow : View {
                 Text(title)
                     .font(.body)
                 Spacer()
-                Image(systemName: "chevron.right") // Sağ ok simgesi
+                Image("arrowIcon")
+                    .resizable()
+                    .frame(width: 26, height: 26)
                     .foregroundColor(.gray)
             }
-            .padding(.horizontal)
         }
     }
 }

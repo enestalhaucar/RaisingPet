@@ -33,10 +33,10 @@ struct OnBoardingViewOne: View {
             
             VStack(alignment: .center, spacing: 20) {
                 Text("Welcome to Petiverse")
-                    .font(.system(size: 20))
+                    .font(.nunito(.medium, .title320))
                 
                 Text("Bring your screen to life with lovable companions and unique widgets.")
-                    .font(.system(size: 16))
+                    .font(.nunito(.medium, .body16))
                     .multilineTextAlignment(.center)
             }.padding(.horizontal, 25)
         }

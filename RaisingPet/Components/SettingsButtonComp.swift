@@ -17,6 +17,7 @@ struct SettingsButtonComp: View {
                 .resizable()
                 .frame(width: 30, height: 30)
             Text("\(title)")
+                .font(.nunito(.medium, .title320))
                 .font(.system(size: 20))
                 .padding(.leading,10)
             Spacer()

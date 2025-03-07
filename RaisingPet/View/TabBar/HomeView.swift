@@ -185,8 +185,7 @@ struct WidgetsPreviewSection: View {
         VStack(spacing: 16) {
             HStack {
                 Text("Hot Widgets 🔥")
-                    .font(.title3)
-                    .bold()
+                    .font(.nunito(.bold, .title320))
                 Spacer()
             }
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 16) {

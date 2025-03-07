@@ -18,12 +18,12 @@ struct ProfileEditView: View {
     @StateObject private var viewModel = ProfileEditViewModel()
     @Binding var isSuccess : Bool
     var copied : String = "Copied"
+    @State private var userDetails: [String: String] = [:]
+    @State private var profileImage: UIImage? = nil
+    private let placeholderImage = UIImage(named: "placeholder")
+    @State private var isPhotoPickerPresented = false
     
-    @State private var profileImage: UIImage? = nil // Kullanıcı profil fotoğrafı
-    private let placeholderImage = UIImage(named: "placeholder") // Yer tutucu fotoğraf
-    @State private var isPhotoPickerPresented = false // Fotoğraf seçici durum
-    
-    @State private var showCopiedMessage = false // Kopyalandı mesajı
+    @State private var showCopiedMessage = false
     
     var body: some View {
         NavigationStack {
@@ -56,24 +56,24 @@ struct ProfileEditView: View {
                             
                             VStack(spacing: 10) {
                                 Text("Enes Talha Uçar")
-                                    .font(.title2)
+                                    .font(.nunito(.medium, .title222))
                                     .fontWeight(.heavy)
                                 
                                 HStack {
-                                    Image(systemName: "document.on.document.fill")
+                                    Image(systemName: "document.on.document")
                                         .foregroundStyle(.black)
                                     
-                                    Text(showCopiedMessage ? copied : "#EnesUcar2142")
-                                        .font(.callout)
-                                        .fontWeight(.bold)
+                                    Text(showCopiedMessage ? copied : userDetails["friendTag"] ?? "-")
+                                        .font(.nunito(.semiBold, .body16))
+                                        .foregroundStyle(.blue)
                                         .onTapGesture {
-                                            UIPasteboard.general.string = "#EnesUcar5234"
+                                            UIPasteboard.general.string = userDetails["friendTag"] ?? "It could not pasted on pasteboard."
                                             withAnimation {
-                                                showCopiedMessage = true // Geri bildirim için
+                                                showCopiedMessage = true
                                             }
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                 withAnimation {
-                                                    showCopiedMessage = false // Geri bildirimi gizle
+                                                    showCopiedMessage = false
                                                 }
                                             }
                                         }
@@ -102,6 +102,8 @@ struct ProfileEditView: View {
                     .sheet(isPresented: $isPhotoPickerPresented) {
                         PhotoPicker(selectedImage: $profileImage)
                     }
+            }.onAppear {
+                userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
             }
         }
     }
