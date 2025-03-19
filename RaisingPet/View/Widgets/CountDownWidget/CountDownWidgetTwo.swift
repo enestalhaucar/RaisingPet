@@ -8,69 +8,53 @@
 import Foundation
 import SwiftUI
 
-struct CountDownWidgetTwo: Identifiable {
-    let id = UUID()
-    var bgSelected: Bool
-    var backgroundImage: Image?
-    var backgroundColor: Color
-    var textColor : Color
-    var size : widgetSizeOne
-    var title : String
-    var targetDate : Date
-}
-
-enum widgetSizeTwo {
-    case small, medium
-}
-
-struct CountDownWidgetPreviewDesignTwo: View {
-    let item: CountDownWidgetTwo
-    @Binding var targetDate: Date
-    var timeRemaining: (days: Int, hours: Int, minutes: Int)
-    @Binding var title : String
-    
-    
-    
-    
+struct CountdownWidgetPreviewDesignTwo: View {
+    let item: PetiverseWidgetItem
+    let timeRemaining: (days: Int, hours: Int, minutes: Int)
+    let backgroundColor: Color
+    let textColor: Color
     var body: some View {
         ZStack {
-            if item.bgSelected {
-                item.backgroundImage?.resizable()
+            if let imageData = item.backgroundImageData, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
                     .clipShape(RoundedRectangle(cornerRadius: 25))
             } else {
-                item.backgroundColor
+                Color(backgroundColor)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
-                
             }
             
-            VStack(alignment: .leading, content: {
+            VStack(alignment: .leading) {
                 HStack(alignment: .bottom) {
-                    Text(title).padding(.top, 20).padding(.leading, 10).foregroundStyle(item.textColor)
+                    Text(item.title)
+                        .padding(.top, 20)
+                        .padding(.leading, 10)
+                        .foregroundStyle(textColor)
                         .font(.title3)
                         .fontWeight(.heavy)
                     Spacer()
                 }
                 Spacer()
-                
-                
                 HStack(alignment: .bottom) {
-                    Text("\(timeRemaining.days)").font(.system(size: 60)).bold().foregroundStyle(item.textColor).padding(.leading).offset(y: 10)
-                    
-                    
-                    Text("Days").font(.title).foregroundStyle(item.textColor).fontWeight(.light)
-                    
+                    Text("\(timeRemaining.days)")
+                        .font(.system(size: 60))
+                        .bold()
+                        .foregroundStyle(textColor)
+                        .padding(.leading)
+                        .offset(y: 10)
+                    Text("Days")
+                        .font(.title)
+                        .foregroundStyle(textColor)
+                        .fontWeight(.light)
                     Spacer()
-                }.padding(.bottom, 10)
-                
-                
-            }).foregroundColor(.white)
-        }.frame(width: item.size == .small ? 170 : 350, height: 170)
+                }
+                .padding(.bottom, 10)
+            }
+        }
+        .frame(
+            width: item.size == .small ? 170 : item.size == .medium ? 350 : 500,
+            height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
+        )
     }
 }
-
-#Preview {
-    CountDownSettingsView()
-}
-
-
 

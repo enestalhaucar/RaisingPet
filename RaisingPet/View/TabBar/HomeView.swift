@@ -37,7 +37,7 @@ struct HomeView: View {
                         
                     }.toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: MyWidgetsView()) {
+                            NavigationLink(destination: EmptyView()) {
                                 HStack {
                                     Image("squareBtn")
                                     Text("Stacks").font(.nunito(.semiBold, .callout14))
@@ -173,13 +173,13 @@ struct HomeNewsSection: View {
 struct WidgetsPreviewSection: View {
     let navigationItemsForWidget : [NavigationItem] = [
         NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-        NavigationItem(title: "daily_frequence".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "distance".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-        NavigationItem(title: "pin_it".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "send_emotions".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "pet_care".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "draw".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-        NavigationItem(title: "Daily", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView()))
+//        NavigationItem(title: "daily_frequence".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+//        NavigationItem(title: "distance".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
+//        NavigationItem(title: "pin_it".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+//        NavigationItem(title: "send_emotions".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+//        NavigationItem(title: "pet_care".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+//        NavigationItem(title: "draw".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
+//        NavigationItem(title: "Daily", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView()))
     ]
     var body: some View {
         VStack(spacing: 16) {

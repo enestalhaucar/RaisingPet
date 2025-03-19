@@ -8,51 +8,54 @@
 import Foundation
 import SwiftUI
 
-struct CountDownWidgetOne: Identifiable {
-    let id = UUID()
-    var bgSelected: Bool
-    var backgroundImage: Image?
-    var backgroundColor: Color
-    var textColor : Color
-    var size : widgetSizeOne
-    var title : String
-    var targetDate : Date
-}
-enum widgetSizeOne {
-    case small, medium, large
-}
-
-struct CountDownWidgetPreviewDesignOne: View {
-    let item: CountDownWidgetOne
-    @Binding var targetDate: Date
-    var timeRemaining: (days: Int, hours: Int, minutes: Int)
-    @Binding var title : String
+struct CountdownWidgetPreviewDesignOne: View {
+    let item: PetiverseWidgetItem
+    let timeRemaining: (days: Int, hours: Int, minutes: Int)
+    let backgroundColor: Color
+    let textColor: Color
+    
     var body: some View {
         ZStack {
-            if item.bgSelected {
-                item.backgroundImage?.resizable()
+            if let imageData = item.backgroundImageData, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
                     .clipShape(RoundedRectangle(cornerRadius: 25))
             } else {
-                item.backgroundColor
+                backgroundColor
                     .clipShape(RoundedRectangle(cornerRadius: 25))
-                
             }
             
-            VStack(alignment: .leading, content: {
+            VStack(alignment: .leading) {
                 HStack(alignment: .bottom) {
-                    Text(title).padding(.top, 20).padding(.leading, 10).foregroundStyle(item.textColor)
+                    Text(item.title)
+                        .padding(.top, 20)
+                        .padding(.leading, 10)
+                        .foregroundStyle(textColor)
                         .font(.title3)
                         .fontWeight(.heavy)
                     Spacer()
                 }
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("\(timeRemaining.days) Days").font(.title).bold().foregroundStyle(item.textColor)
-                    Text("\(timeRemaining.hours) Hours").bold().foregroundStyle(item.textColor)
-                    Text("\(timeRemaining.minutes) Minutes").bold().foregroundStyle(item.textColor)
-                }.padding(.bottom, 10)
-                    .padding(.leading)
-            }).foregroundColor(.white)
-        }.frame(width: item.size == .small ? 170 : 350, height: 170)
+                    Text("\(timeRemaining.days) Days")
+                        .font(.title)
+                        .bold()
+                        .foregroundStyle(textColor)
+                    Text("\(timeRemaining.hours) Hours")
+                        .bold()
+                        .foregroundStyle(textColor)
+                    Text("\(timeRemaining.minutes) Minutes")
+                        .bold()
+                        .foregroundStyle(textColor)
+                }
+                .padding(.bottom, 10)
+                .padding(.leading)
+            }
+        }
+        .frame(
+            width: item.size == .small ? 170 : item.size == .medium ? 350 : 500,
+            height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
+        )
     }
 }
