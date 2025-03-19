@@ -22,5 +22,7 @@ struct QuizAnswer: Codable {
     let option : String
 }
 struct TakeQuizQuestionID : Codable {
-    let id : String
+    let _id : String 
+    
+    
 }

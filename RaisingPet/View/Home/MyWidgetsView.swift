@@ -64,7 +64,7 @@ struct MyWidgetsView: View {
                     Spacer()
                 }
             }
-            .navigationTitle("My Widgets")
+            .navigationTitle("my_widgets".localized())
             .navigationBarTitleDisplayMode(.inline)
         }
     }

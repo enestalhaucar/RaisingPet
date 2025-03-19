@@ -5,15 +5,36 @@
 //  Created by Enes Talha Uçar  on 30.07.2024.
 //
 
+
 import SwiftUI
 
 struct RootView: View {
-    
     @EnvironmentObject var appState: AppState
+    @State private var showSplash = true
+    @State private var showOnboarding = false
+    
+    // Test için manuel kontrol
+    private let isTesting = true // Test ederken true yap, production'da false olacak
+    
     var body: some View {
         ZStack {
             SignInUpBackground()
-            if appState.isLoggedIn {
+            
+            if showSplash {
+                SplashScreenView(onSplashComplete: {
+                    showSplash = false
+                    // İlk açılışta onboarding gösterilecek mi kontrol et
+                    let hasSeenOnboarding = UserDefaults.hasSeenOnboarding
+                    if isTesting || !hasSeenOnboarding {
+                        showOnboarding = true
+                    }
+                })
+            } else if showOnboarding {
+                OnboardingView(onOnboardingComplete: {
+                    showOnboarding = false
+                    UserDefaults.hasSeenOnboarding = true // Onboarding tamamlandı
+                })
+            } else if appState.isLoggedIn {
                 VStack {
                     TabView {
                         HomeView()
@@ -33,15 +54,11 @@ struct RootView: View {
                         CoupleQuestionView()
                             .tabItem {
                                 VStack {
-                                    Image(
-                                        systemName: "person.fill.questionmark"
-                                    )
+                                    Image(systemName: "person.fill.questionmark")
                                     Text("Couple Questions")
                                 }
                             }
-                        ProfileView(
-//                            onLogout: handleLogout
-                        )
+                        ProfileView()
                             .tabItem {
                                 VStack {
                                     Image(systemName: "person")
@@ -49,8 +66,9 @@ struct RootView: View {
                                 }
                             }
                             .environmentObject(appState)
-                    }.toolbarBackground(.gray.opacity(0.1), for: .tabBar)
-                        .toolbarBackground(.visible, for: .tabBar)
+                    }
+                    .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
+                    .toolbarBackground(.visible, for: .tabBar)
                 }
             } else {
                 NavigationStack {
@@ -62,23 +80,19 @@ struct RootView: View {
                         }
                 }
             }
-            
         }
-        
-        
     }
     
-    
-    
     private func handleLoginSuccess() {
-           appState.isLoggedIn = true
-       }
-
-       private func handleLogout() {
-           appState.isLoggedIn = false
-       }
+        appState.isLoggedIn = true
+    }
+    
+    private func handleLogout() {
+        appState.isLoggedIn = false
+    }
 }
 
 #Preview {
     RootView()
+        .environmentObject(AppState()) // Preview için AppState ekle
 }

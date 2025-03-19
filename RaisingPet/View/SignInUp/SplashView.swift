@@ -7,42 +7,31 @@
 
 import SwiftUI
 
-struct SplashView: View {
-    @Binding var isSuccess : Bool
+struct SplashScreenView: View {
+    @State private var isActive = false
+    var onSplashComplete: () -> Void
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                SignInUpBackground()
-                VStack(spacing: 45) {
-                    Spacer()
-                    Image("splashViewPhoto")
-                    Text("Get your Pet with PetApps")
-                        .fontWeight(.bold)
-                        .font(.title2)
-                    
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate volutpat cursus euismod nunc sapien. Dictum id hac feugiat laoreet.")
-                        .multilineTextAlignment(.center)
-                    
-                    NavigationLink {
-                        SignUpView {
-                            isSuccess = true
-                        }
-                    } label: {
-                        // Components/Button
-                        button(title: "Get Started")
-                    }
-
-                    
-                    Spacer()
-                    
-                }.padding(.horizontal)
-            }.onAppear {
-                _ = Localizable.currentLanguage
+        ZStack {
+            Color.white
+                .ignoresSafeArea()
+            
+            Image("logoPetiverse")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                withAnimation {
+                    isActive = true
+                    onSplashComplete()
+                }
             }
         }
     }
 }
 
 #Preview {
-    SplashView(isSuccess: .constant(false))
+    SplashScreenView(onSplashComplete: {})
 }

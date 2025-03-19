@@ -53,6 +53,7 @@
 		EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */; };
 		EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A512D7AA8EA001B2335 /* Localizable.strings */; };
 		EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A532D7AA94A001B2335 /* Localizable.strings */; };
+		EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC95E5AD2D8B4B5E0011EA7A /* UserDefaults+Extensions.swift */; };
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
 		EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */; };
 		EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */; };
@@ -62,6 +63,7 @@
 		ECB5F56E2D54E767001AC419 /* GetQuizByIdResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
+		ECB7C01B2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */; };
 		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
 		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
@@ -166,6 +168,7 @@
 		EC8E5A492D7AA4E4001B2335 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		EC8E5A522D7AA8EA001B2335 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Localizable.strings; sourceTree = "<group>"; };
 		EC8E5A542D7AA94A001B2335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		EC95E5AD2D8B4B5E0011EA7A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetsView.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 		ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuizByIdResponseModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
+		ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendWithTagResponse.swift; sourceTree = "<group>"; };
 		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
 		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 		ECB5F5972D563792001AC419 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				EC95E5AD2D8B4B5E0011EA7A /* UserDefaults+Extensions.swift */,
 				ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */,
 			);
 			path = Extensions;
@@ -498,6 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */,
+				ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
 				ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */,
 				EC1CE99C2D5235720082FD4F /* GetUserQuizesResponse.swift */,
@@ -717,6 +723,7 @@
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
+				ECB7C01B2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */,
 				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
@@ -738,6 +745,7 @@
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
 				ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */,
+				EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */,
 				EC1CE99D2D5235720082FD4F /* GetUserQuizesResponse.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);

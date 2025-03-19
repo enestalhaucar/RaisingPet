@@ -58,10 +58,19 @@ struct CoupleQuestionView : View {
     CoupleQuestionView()
 }
 
+
+
 struct QuizRowView : View {
     let quiz : QuizModel
+    private func destinationView(for quiz : QuizModel) -> some View {
+        if quiz.quizStatus == .finished {
+            return AnyView(QuizResultView(quizId: quiz.id ?? "-"))
+        } else {
+            return AnyView(QuestionView(quizId: quiz.id ?? "-"))
+        }
+    }
     var body: some View {
-        NavigationLink(destination: QuestionView(quizId: quiz.id ?? "-")) {
+        NavigationLink(destination: destinationView(for: quiz)) {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
                     .frame(height: 56)
@@ -80,7 +89,7 @@ struct QuizRowView : View {
                     
                     Spacer()
                     
-                    if quiz.quizStatus == .continued {
+                    if quiz.quizStatus == .finished {
                         Image(systemName: "checkmark")
                     }
                 }.padding(.horizontal, 20)

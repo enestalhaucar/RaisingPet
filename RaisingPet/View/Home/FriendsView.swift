@@ -12,13 +12,14 @@ import Alamofire
 struct FriendsView: View {
     @StateObject var viewModel = FriendsViewModel()
     @State private var userDetails: [String: String] = [:]
-
+    @State private var showSearchFriend : Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("mainbgColor").ignoresSafeArea()
                 
-                VStack {
+                VStack(spacing: 25) {
                     HStack {
                         Circle().frame(width: 60, height: 60)
                         Text(userDetails["firstname"] ?? "N/A")
@@ -26,8 +27,8 @@ struct FriendsView: View {
                         
                         Spacer()
                     }.padding(.top)
-                    .padding(.trailing)
-
+                        .padding(.trailing)
+                    
                     
                     HStack {
                         Text("Your Friends")
@@ -36,36 +37,64 @@ struct FriendsView: View {
                         Spacer()
                     }
                     
-                    ScrollView {
+                    if !viewModel.friends.isEmpty {
+                        VStack(spacing: 20) {
+                            Image(systemName: "person.2.slash")
+                                .font(.system(size: 60))
+                                .foregroundColor(.gray.opacity(0.5))
+                            
+                            Text("no_friends_title".localized())
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                            
+                            // Açıklama
+                            Text("no_friends_subtitle".localized())
+                                .font(.body)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .navigationTitle("Arkadaşlar")
+                    } else {
                         ForEach(viewModel.friends, id: \._id) { friend in
                             FriendRow(friend: friend)
                                 .padding(.vertical, 5)
                         }
                     }
                     
+                    
+                    
                     Spacer()
                     
-                    // Yeni Arkadaş Ekle Butonu
-                    Button(action: {
-                        // Arkadaş ekleme işlemi
-                    }, label: {
-                        HStack {
-                            Image(systemName: "person.badge.plus")
-                                .foregroundStyle(.white)
-                            Text("Add Friends")
-                                .foregroundStyle(.white)
-                                .font(.title2)
-                        }
-                        .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 60)
-                        .background(Color("friendsViewbuttonColor"), in: .rect(cornerRadius: 25))
-                    })
+                    if !viewModel.friends.isEmpty {
+                        // Yeni Arkadaş Ekle Butonu
+                        Button(action: {
+                            showSearchFriend = true
+                        }, label: {
+                            HStack {
+                                Image(systemName: "person.badge.plus")
+                                    .foregroundStyle(.white)
+                                Text("Add Friends")
+                                    .foregroundStyle(.white)
+                                    .font(.title2)
+                            }
+                            .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 60)
+                            .background(Color("friendsViewbuttonColor"), in: .rect(cornerRadius: 25))
+                        })
+                    }
                 }.padding(.horizontal)
             }
+            .sheet(isPresented: $showSearchFriend) {
+                SearchFriendView()
+                    .presentationDetents([.height(Utilities.Constants.heightFour)])
+            }
             .toolbar(.hidden, for: .tabBar)
-            .navigationTitle("Friends & Relations")
+            .navigationTitle("friends_relations")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                viewModel.fetchFriends()
+                viewModel.fetchFriendsList()
                 userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
             }
         }
@@ -118,6 +147,61 @@ struct FriendRow: View {
     }
 }
 
-#Preview {
-    FriendsView()
+//#Preview {
+//    FriendsView()
+//}
+
+struct SearchFriendView : View {
+    @State private var searchText = ""
+    @StateObject var viewModel = FriendsViewModel()
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Arkadaş Ara")
+                .font(.headline)
+                .foregroundColor(.primary)
+                .padding(.top, 16)
+            
+            TextField("Kullanıcı adı gir", text: $searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+                .frame(height: 40)
+            
+            
+            HStack {
+                Circle().frame(width: 60, height: 60)
+                VStack {
+                    Text(viewModel.searchedFriend.firstname)
+                        .font(.nunito(.medium, .title320))
+                    Text(viewModel.searchedFriend.surname)
+                        .font(.nunito(.medium, .body16))
+                }
+                Spacer()
+            }.padding()
+                
+            
+            Spacer()
+            
+            Button {
+                viewModel.searchFriendWithTag(searchText)
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12).foregroundStyle(.yellow.opacity(0.3))
+                    
+                    Text("Send Invite")
+                        .font(.nunito(.medium, .body16))
+                }.padding(.horizontal)
+                    .frame(height: 55)
+            }
+            
+            
+                
+            
+
+            
+            
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color(.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
 }

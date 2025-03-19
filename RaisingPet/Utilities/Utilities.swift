@@ -24,6 +24,7 @@ final class Utilities {
         static let widthWithoutEdge : CGFloat = .init(width - 24)
         static let widthEight: CGFloat = .init(width * 8 / 10)
         static let widthFour: CGFloat = .init(width * 4 / 10)
+        static let heightFour: CGFloat = .init(height * 4 / 10)
         
         struct Endpoints {
             // Auth Endpoints
@@ -34,7 +35,7 @@ final class Utilities {
             
             // Friends Endpoints
             struct Friends {
-                static let search = "\(baseURL)/friends/search"
+                static let searchFriendWithTag = "\(baseURL)/friends/search"
                 static let sendRequest = "\(baseURL)/friends/send-request"
                 static let acceptRequest = "\(baseURL)/friends/accept-request"
                 static let rejectRequest = "\(baseURL)/friends/reject-request"

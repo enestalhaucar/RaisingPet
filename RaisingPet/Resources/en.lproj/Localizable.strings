@@ -2,6 +2,13 @@
 "lang_english" = "English";
 "lang_turkish" = "Turkish";
 
+//All Pages
+"my_widgets" = "My Widgets";
+"friends_relations" = "Friends & Relations";
+"results" = "Results";
+
+
+
 // HomeView
 "shop" = "Shop";
 "friends" = "Friends";
@@ -15,3 +22,19 @@
 "send_emotions" = "Send Emotions!";
 "pet_care" = "Pet Care";
 "draw" = "Draw";
+
+
+//FriendsView
+"no_friends_title" = "You Don't Have Friends Yet";
+"no_friends_subtitle" = "You can add friends and solve fun quizzes with them!";
+
+// OnboardingView
+"onboarding_first_title" = "Grow Your Bond with Petiverse!";
+"onboarding_first_subtitle" = "Adopt a virtual pet with your partner, raise it, and enjoy fun moments together.";
+"onboarding_second_title" = "Discover Each Other!";
+"onboarding_second_subtitle" = "Test your compatibility with fun quizzes and share special moments with widgets.";
+"onboarding_third_title" = "Petiverse Awaits You!";
+"onboarding_third_subtitle" = "Create your profile, share your love with drawings, and start your pet adventure.";
+"continue_button" = "Continue";
+"start_button" = "Get Started";
+

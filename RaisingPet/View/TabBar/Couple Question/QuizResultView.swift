@@ -29,7 +29,7 @@ struct QuizResultView: View {
                             ForEach(quizResultAnswers, id: \.self) { answer in
                                 HStack {
                                     
-                                    Text(answer.userAnswer ?? "N/A")
+                                    Text(answer.userAnswer ?? "?")
                                         .frame(maxWidth: .infinity)
                                         .padding(10)
                                         .background(Color.blue.opacity(0.2))

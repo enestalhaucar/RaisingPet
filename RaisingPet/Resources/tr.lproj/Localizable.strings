@@ -2,6 +2,11 @@
 "lang_english" = "İngilizce";
 "lang_turkish" = "Türkçe";
 
+//All Pages
+"my_widgets" = "My Widgets";
+"friends_relations" = "Friends & Relations";
+"results" = "Results";
+
 "shop" = "Mağaza";
 "friends" = "Arkadaşlar";
 "pet" = "Evcil Hayvan";
@@ -15,4 +20,16 @@
 "pet_care" = "Evcil Hayvan Bakımı";
 "draw" = "Çiz";
 
+//FriendsView
+"no_friends_title" = "Henüz Arkadaşın Yok";
+"no_friends_subtitle" = "Arkadaş ekleyerek onlarla eğlenceli quizler çözebilirsin!";
 
+// Onboarding
+"onboarding_first_title" = "Petiverse ile Bağınızı Büyütün!";
+"onboarding_first_subtitle" = "Sevgilinizle birlikte sanal bir hayvan sahiplenin, onu büyütün ve eğlenceli anlar yaşayın.";
+"onboarding_second_title" = "Birbirinizi Keşfedin!";
+"onboarding_second_subtitle" = "Eğlenceli quizlerle uyumunuzu test edin ve özel anlarınızı widgetlarla paylaşın.";
+"onboarding_third_title" = "Petiverse Sizi Bekliyor!";
+"onboarding_third_subtitle" = "Profilinizi oluşturun, çizimlerle sevginizi paylaşın ve ortak hayvanınızla maceraya başlayın.";
+"continue_button" = "Devam Et";
+"start_button" = "Başla";

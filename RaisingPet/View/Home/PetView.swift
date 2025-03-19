@@ -114,7 +114,6 @@ struct PetView: View {
                     Spacer()
                     
                 }.padding(.horizontal)
-                    .navigationTitle("Pet Screen")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {

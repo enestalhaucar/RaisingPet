@@ -143,7 +143,7 @@ struct QuizResultsView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("Results")
+        .navigationTitle("results".localized())
         .navigationBarTitleDisplayMode(.inline)
     }
 }

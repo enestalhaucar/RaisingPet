@@ -15,9 +15,10 @@ struct QuestionView: View {
     @State private var isQuizCompleted = false
     @State private var selectedAnswers: [QuizAnswer] = []
     @State private var sendableQuizObject: TakeQuizRequest = TakeQuizRequest(quizId: "", preAnswers: [])
+    @State private var isInitialized = false 
     
     func selectAnswer(_ answer: String, questionId: String) {
-        let selectedAnswer = QuizAnswer(question: .init(id: questionId), option: answer)
+        let selectedAnswer = QuizAnswer(question: .init(_id: questionId), option: answer)
         selectedAnswers.append(selectedAnswer)
         if currentQuestionIndex < (viewModel.selectedQuiz?.questions?.count ?? 0) - 1 {
             withAnimation {
@@ -42,13 +43,13 @@ struct QuestionView: View {
     
     var body: some View {
         NavigationStack {
-            if isQuizCompleted {
+            if isQuizCompleted && viewModel.quizResultLoaded {
                 QuizResultView(quizId: quizId)
+            } else if viewModel.isLoading {
+                LoadingAnimationView()
             } else {
                 VStack {
-                    if viewModel.isLoading {
-                        LoadingAnimationView()
-                    } else if let quiz = viewModel.selectedQuiz?.questions, let questionQuiz = viewModel.selectedQuiz?.questions?[currentQuestionIndex] {
+                    if let quiz = viewModel.selectedQuiz?.questions, let questionQuiz = viewModel.selectedQuiz?.questions?[currentQuestionIndex] {
                         if currentQuestionIndex < quiz.count {
                             let question = questionQuiz
                             
@@ -73,8 +74,11 @@ struct QuestionView: View {
                     }
                 }
                 .onAppear {
-                    viewModel.fetchQuizById(quizId: quizId)
-                    print("Fetch By Quiz Id ile gönderilen QuizID : \(quizId)")
+                    if !isInitialized { // Yalnızca ilk yüklemede çalışır
+                        viewModel.fetchQuizById(quizId: quizId)
+                        print("Fetch By Quiz Id ile gönderilen QuizID: \(quizId)")
+                        isInitialized = true // Bayrağı true yap
+                    }
                 }
             }
         }
@@ -91,3 +95,4 @@ struct QuestionOptionView: View {
             .cornerRadius(20)
     }
 }
+
