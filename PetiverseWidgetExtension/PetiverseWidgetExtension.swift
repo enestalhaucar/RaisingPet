@@ -22,7 +22,6 @@ struct Provider: AppIntentTimelineProvider {
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let selectedWidget = loadSelectedWidget(from: configuration)
         let entry = SimpleEntry(date: Date(), selectedWidget: selectedWidget)
-        
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
         return Timeline(entries: [entry], policy: .after(nextUpdate))
     }
@@ -59,25 +58,59 @@ struct PetiverseWidgetExtensionEntryView: View {
             let backgroundColor = colorFromString(widget.backgroundColor)
             let textColor = colorFromString(widget.textColor)
             let timeRemaining = calculateTimeRemaining(from: widget.targetDate ?? Date())
-            switch widget.type {
-            case .countdown:
-                if let targetDate = widget.targetDate,
-                   let style = widget.countdownStyle {
-                    let timeRemaining = calculateTimeRemaining(from: targetDate)
-                    switch style {
-                    case .style1:
-                        CountdownWidgetPreviewDesignOne(item: widget, timeRemaining: timeRemaining, backgroundColor: backgroundColor, textColor: textColor)
-                    case .style2:
-                        CountdownWidgetPreviewDesignTwo(item: widget, timeRemaining: timeRemaining, backgroundColor: backgroundColor, textColor: textColor)
-                    case .style3:
-                        CountdownWidgetPreviewDesignThree(item: widget, timeRemaining: timeRemaining, backgroundColor: backgroundColor, textColor: textColor)
-                    case .style4:
-                        CountdownWidgetPreviewDesignFour(item: widget, timeRemaining: timeRemaining, backgroundColor: backgroundColor, textColor: textColor)
+            
+            Group {
+                switch widget.type {
+                case .countdown:
+                    if let targetDate = widget.targetDate,
+                       let style = widget.countdownStyle {
+                        switch style {
+                        case .style1:
+                            CountdownWidgetPreviewDesignOne(
+                                item: widget,
+                                timeRemaining: timeRemaining,
+                                backgroundColor: backgroundColor,
+                                textColor: textColor
+                            )
+                        case .style2:
+                            CountdownWidgetPreviewDesignTwo(
+                                item: widget,
+                                timeRemaining: timeRemaining,
+                                backgroundColor: backgroundColor,
+                                textColor: textColor
+                            )
+                        case .style3:
+                            CountdownWidgetPreviewDesignThree(
+                                item: widget,
+                                timeRemaining: timeRemaining,
+                                backgroundColor: backgroundColor,
+                                textColor: textColor
+                            )
+                        case .style4:
+                            CountdownWidgetPreviewDesignFour(
+                                item: widget,
+                                timeRemaining: timeRemaining,
+                                backgroundColor: backgroundColor,
+                                textColor: textColor
+                            )
+                        }
+                    } else {
+                        Text("Countdown widget için tarih veya stil eksik")
+                            .font(.caption)
+                            .foregroundStyle(textColor)
+                            .background(backgroundColor)
                     }
+                case .album, .distance, .draw:
+                    Text("Coming Soon: \(widget.type.rawValue)")
+                        .font(.caption)
+                        .foregroundStyle(textColor)
+                        .background(backgroundColor)
                 }
-            case .album, .distance, .draw:
-                Text("Coming Soon: \(widget.type.rawValue)") // Diğer türler için placeholder
             }
+            .frame(
+                width: widget.size == .small ? 170 : widget.size == .medium ? 350 : 500,
+                height: widget.size == .small ? 170 : widget.size == .medium ? 170 : 250
+            )
         } else {
             Text("Uzun basın ve listeden widget seçin")
                 .font(.caption)
@@ -85,8 +118,10 @@ struct PetiverseWidgetExtensionEntryView: View {
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.gray)
+                .foregroundStyle(Color.white)
         }
     }
+    
     func colorFromString(_ string: String) -> Color {
         switch string.lowercased() {
         case "blue": return .blue
@@ -118,6 +153,6 @@ struct PetiverseWidgetExtension: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .contentMarginsDisabled()
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium]) // Large’ı kaldırmışsın, emin misin?
     }
 }

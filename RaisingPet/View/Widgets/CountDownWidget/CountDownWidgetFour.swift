@@ -24,12 +24,23 @@ struct CountdownWidgetPreviewDesignFour: View {
     
     var body: some View {
         ZStack {
-            if let imageData = item.backgroundImageData, let uiImage = UIImage(data: imageData) {
+            if let base64String = item.backgroundImageData,
+               let data = Data(base64Encoded: base64String),
+               let uiImage = UIImage(data: data) {
                 Image(uiImage: uiImage)
                     .resizable()
+                    .frame(
+                        width: item.size == .small ? 170 : item.size == .medium ? 350 : 500,
+                        height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
+                    )
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
             } else {
-                Color(backgroundColor)
+                backgroundColor
+                    .frame(
+                        width: item.size == .small ? 170 : item.size == .medium ? 350 : 350,
+                        height: item.size == .small ? 170 : item.size == .medium ? 170 : 350
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 25))
             }
             

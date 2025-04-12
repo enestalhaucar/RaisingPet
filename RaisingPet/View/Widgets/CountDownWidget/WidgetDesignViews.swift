@@ -13,7 +13,7 @@ struct WidgetDesignViews: View {
     @Binding var title: String
     var backgroundColor: Color
     var textColor: Color
-    var backgroundImage: Image?
+    var backgroundImageData: String?
     
     // Stil için örnek bir widget oluştur
     private func previewWidget(for style: CountdownStyle) -> PetiverseWidgetItem {
@@ -22,7 +22,7 @@ struct WidgetDesignViews: View {
             title: title,
             backgroundColor: backgroundColor.description,
             textColor: textColor.description,
-            backgroundImageData: backgroundImage != nil ? uiImage(from: backgroundImage!)?.jpegData(compressionQuality: 1.0) : nil,
+            backgroundImageData: backgroundImageData,
             size: .small, // Varsayılan olarak small kullanıyoruz, çünkü bu preview
             countdownStyle: style,
             targetDate: viewModel.targetDate

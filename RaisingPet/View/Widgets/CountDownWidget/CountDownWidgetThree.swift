@@ -15,6 +15,10 @@ struct CountdownWidgetPreviewDesignThree: View {
     var body: some View {
         ZStack {
             Color(backgroundColor)
+                .frame(
+                    width: item.size == .small ? 170 : item.size == .medium ? 350 : 500,
+                    height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
+                )
                 .clipShape(RoundedRectangle(cornerRadius: 25))
             
             VStack(alignment: .leading) {

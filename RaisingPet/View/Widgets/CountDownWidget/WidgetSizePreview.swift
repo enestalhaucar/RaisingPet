@@ -14,7 +14,7 @@ struct WidgetSizePreview: View {
     let title: String
     let backgroundColor: Color
     let textColor: Color
-    let backgroundImage: Image?
+    let backgroundImageData: String?
     
     private func previewWidget(for size: WidgetSize) -> PetiverseWidgetItem {
         PetiverseWidgetItem(
@@ -22,7 +22,7 @@ struct WidgetSizePreview: View {
             title: title,
             backgroundColor: backgroundColor.description,
             textColor: textColor.description,
-            backgroundImageData: backgroundImage != nil ? uiImage(from: backgroundImage!)?.jpegData(compressionQuality: 1.0) : nil,
+            backgroundImageData: backgroundImageData,
             size: size,
             countdownStyle: CountdownStyle(rawValue: styleIndex),
             targetDate: viewModel.targetDate

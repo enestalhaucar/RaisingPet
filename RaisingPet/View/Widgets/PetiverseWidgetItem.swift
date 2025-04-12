@@ -36,24 +36,32 @@ enum WidgetSize: String, Codable {
 struct PetiverseWidgetItem: Identifiable, Codable {
     let id: UUID
     let type: WidgetType
-    let title: String
-    let backgroundColor: String
-    let textColor: String
-    let backgroundImageData: Data?
+    let title: String // Album widget için kullanılmayabilir, ama uyumluluk için tutuyoruz
+    let backgroundColor: String // Album’da kullanılmayacak, ama varsayılan olarak tutuyoruz
+    let textColor: String // Kullanılmayacak
+    let backgroundImageData: String? // Countdown’da tek resim, burada liste olacak
     let size: WidgetSize
     let countdownStyle: CountdownStyle?
     let targetDate: Date?
+    let albumImages: [String]? // Album widget için Base64 string listesi
+    let frameColor: String? // Çerçeve rengi
+    let lineWidth: CGFloat? // Çerçeve kalınlığı
+    let changeFrequency: String? // Değişim sıklığı
     
     init(
         id: UUID = UUID(),
         type: WidgetType,
-        title: String,
-        backgroundColor: String,
-        textColor: String,
-        backgroundImageData: Data? = nil,
+        title: String = "",
+        backgroundColor: String = "gray",
+        textColor: String = "white",
+        backgroundImageData: String? = nil,
         size: WidgetSize,
         countdownStyle: CountdownStyle? = nil,
-        targetDate: Date? = nil
+        targetDate: Date? = nil,
+        albumImages: [String]? = nil,
+        frameColor: String? = nil,
+        lineWidth: CGFloat? = nil,
+        changeFrequency: String? = nil
     ) {
         self.id = id
         self.type = type
@@ -64,5 +72,9 @@ struct PetiverseWidgetItem: Identifiable, Codable {
         self.size = size
         self.countdownStyle = countdownStyle
         self.targetDate = targetDate
+        self.albumImages = albumImages
+        self.frameColor = frameColor
+        self.lineWidth = lineWidth
+        self.changeFrequency = changeFrequency
     }
 }

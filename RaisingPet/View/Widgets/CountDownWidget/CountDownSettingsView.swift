@@ -1,14 +1,14 @@
 
 
 
-
 import SwiftUI
 import PhotosUI
+
 
 struct CountDownSettingsView: View {
     @StateObject private var viewModel = CountDownSettingsViewModel()
     @State private var selectedBackgroundPhoto: PhotosPickerItem?
-    @State private var backgroundImage: Image?
+    @State private var backgroundImageData: String?
     @State private var backgroundColor: Color = .blue
     @State private var textColor: Color = .white
     @State private var styleIndex: Int = 0
@@ -22,9 +22,9 @@ struct CountDownSettingsView: View {
                 ScrollView {
                     VStack(spacing: 15) {
                         TabView(selection: $sizeIndex) {
-                            previewWidget(size: .small).tag(0)
-                            previewWidget(size: .medium).tag(1)
-                            previewWidget(size: .large).tag(2)
+                            WidgetPreview(viewModel: viewModel, size: .small, title: title, styleIndex: styleIndex, backgroundColor: backgroundColor, textColor: textColor, backgroundImageData: backgroundImageData).tag(0)
+                            WidgetPreview(viewModel: viewModel, size: .medium, title: title, styleIndex: styleIndex, backgroundColor: backgroundColor, textColor: textColor, backgroundImageData: backgroundImageData).tag(1)
+                            WidgetPreview(viewModel: viewModel, size: .large, title: title, styleIndex: styleIndex, backgroundColor: backgroundColor, textColor: textColor, backgroundImageData: backgroundImageData).tag(2)
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                         .frame(height: 300)
@@ -62,7 +62,7 @@ struct CountDownSettingsView: View {
                         WidgetBackgroundPhotoPickerView(
                             styleIndex: $styleIndex,
                             selectedBackgroundPhoto: $selectedBackgroundPhoto,
-                            backgroundImage: $backgroundImage
+                            backgroundImageData: $backgroundImageData
                         )
                         
                         WidgetBackgroundColorPickerView(
@@ -90,14 +90,74 @@ struct CountDownSettingsView: View {
         }
     }
     
-    @ViewBuilder
-    func previewWidget(size: WidgetSize) -> some View {
+    func saveWidget() {
+        let size: WidgetSize = {
+            switch sizeIndex {
+            case 0: return .small
+            case 1: return .medium
+            case 2: return .large
+            default: return .small
+            }
+        }()
+        
         let widget = PetiverseWidgetItem(
             type: .countdown,
             title: title,
             backgroundColor: backgroundColor.description,
             textColor: textColor.description,
-            backgroundImageData: backgroundImage != nil ? uiImage(from: backgroundImage!)?.jpegData(compressionQuality: 1.0) : nil,
+            backgroundImageData: backgroundImageData,
+            size: size,
+            countdownStyle: CountdownStyle(rawValue: styleIndex),
+            targetDate: viewModel.targetDate
+        )
+        
+        saveToUserDefaults(widget: widget)
+        
+        title = "Title"
+        selectedBackgroundPhoto = nil
+        backgroundImageData = nil
+    }
+    
+    func saveToUserDefaults(widget: PetiverseWidgetItem) {
+        let suiteName = "group.com.petiverse.widgets"
+        guard let userDefaults = UserDefaults(suiteName: suiteName) else {
+            print("UserDefaults nil döndü, App Group doğru ayarlanmamış!")
+            return
+        }
+        
+        var savedWidgets: [PetiverseWidgetItem] = []
+        if let data = userDefaults.data(forKey: "savedWidgets"),
+           let decoded = try? JSONDecoder().decode([PetiverseWidgetItem].self, from: data) {
+            savedWidgets = decoded
+        }
+        
+        savedWidgets.append(widget)
+        if let encoded = try? JSONEncoder().encode(savedWidgets) {
+            userDefaults.set(encoded, forKey: "savedWidgets")
+            print("Widget kaydedildi: \(widget.title) - Size: \(widget.size.rawValue)")
+        } else {
+            print("Widget encode edilemedi")
+        }
+    }
+}
+
+// Yeni WidgetPreview struct’ı
+struct WidgetPreview: View {
+    let viewModel: CountDownSettingsViewModel
+    let size: WidgetSize
+    let title: String
+    let styleIndex: Int
+    let backgroundColor: Color
+    let textColor: Color
+    let backgroundImageData: String?
+    
+    var body: some View {
+        let widget = PetiverseWidgetItem(
+            type: .countdown,
+            title: title,
+            backgroundColor: backgroundColor.description,
+            textColor: textColor.description,
+            backgroundImageData: backgroundImageData,
             size: size,
             countdownStyle: CountdownStyle(rawValue: styleIndex),
             targetDate: viewModel.targetDate
@@ -145,70 +205,9 @@ struct CountDownSettingsView: View {
                 .stroke(Color.black.opacity(0.3), lineWidth: 2)
         )
     }
-    
-    func saveWidget() {
-        let imageData: Data? = backgroundImage != nil ? uiImage(from: backgroundImage!)?.jpegData(compressionQuality: 1.0) : nil
-        
-        let size: WidgetSize = {
-            switch sizeIndex {
-            case 0: return .small
-            case 1: return .medium
-            case 2: return .large
-            default: return .small
-            }
-        }()
-        
-        let widget = PetiverseWidgetItem(
-            type: .countdown,
-            title: title,
-            backgroundColor: backgroundColor.description,
-            textColor: textColor.description,
-            backgroundImageData: imageData,
-            size: size,
-            countdownStyle: CountdownStyle(rawValue: styleIndex),
-            targetDate: viewModel.targetDate
-        )
-        
-        saveToUserDefaults(widget: widget)
-        
-        title = "Title"
-        selectedBackgroundPhoto = nil
-        backgroundImage = nil
-    }
-    
-    func saveToUserDefaults(widget: PetiverseWidgetItem) {
-        let suiteName = "group.com.petiverse.widgets"
-        guard let userDefaults = UserDefaults(suiteName: suiteName) else {
-            print("UserDefaults nil döndü, App Group doğru ayarlanmamış!")
-            return
-        }
-        
-        var savedWidgets: [PetiverseWidgetItem] = []
-        if let data = userDefaults.data(forKey: "savedWidgets"),
-           let decoded = try? JSONDecoder().decode([PetiverseWidgetItem].self, from: data) {
-            savedWidgets = decoded
-        }
-        
-        savedWidgets.append(widget)
-        if let encoded = try? JSONEncoder().encode(savedWidgets) {
-            userDefaults.set(encoded, forKey: "savedWidgets")
-            print("Widget kaydedildi: \(widget.title) - Size: \(widget.size.rawValue)")
-        } else {
-            print("Widget encode edilemedi")
-        }
-    }
-    
-    func uiImage(from image: Image) -> UIImage? {
-        let controller = UIHostingController(rootView: image)
-        let view = controller.view
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 170, height: 170))
-        return renderer.image { _ in
-            view?.drawHierarchy(in: renderer.format.bounds, afterScreenUpdates: true)
-        }
-    }
 }
 
-
+// Diğer struct’lar aynı kalır
 struct WidgetSettingsBackground: View {
     var body: some View {
         Color("WidgetSettingsBackgroundColor").ignoresSafeArea()
