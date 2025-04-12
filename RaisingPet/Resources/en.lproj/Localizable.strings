@@ -38,3 +38,9 @@
 "continue_button" = "Continue";
 "start_button" = "Get Started";
 
+// Shop View
+
+"pets" = "Pets";
+"gold" = "Gold";
+"home" = "Home";
+"restore" = "Restore";

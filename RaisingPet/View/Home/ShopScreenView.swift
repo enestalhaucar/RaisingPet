@@ -28,6 +28,7 @@ struct ShopScreenView: View {
                 }
             }.ignoresSafeArea(edges : .top)
             .toolbar(.hidden, for: .tabBar)
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -93,9 +94,10 @@ struct RoofSideView: View {
 }
 
 struct BackButtonView : View {
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
-            Image(systemName: "arrow.left")
+            Image("arrow_back")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .padding(5)
@@ -108,13 +110,15 @@ struct BackButtonView : View {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundStyle(.white)
                 )
+        }.onTapGesture {
+            dismiss()
         }
     }
 }
 struct RestoreButtonView : View {
     var body: some View {
         ZStack {
-            Text("Restore")
+            Text("restore".localized())
                 .font(.nunito(.medium, .caption12))
                 .frame(height: 20)
                 .padding(5)
@@ -133,13 +137,13 @@ struct RestoreButtonView : View {
 
 
 struct ShopCategoryView : View {
-    @State private var selectedCategory: String = "Pets"
+    @State private var selectedCategory: String = "pets".localized()
     var body: some View {
         ZStack {
             HStack(spacing: 16) {
-                ShopCategoryComponentView(isSelected: selectedCategory == "Pets", imageName: "pawIcon", text: "Pets").onTapGesture { selectedCategory = "Pets"}
-                ShopCategoryComponentView(isSelected: selectedCategory == "Gold", imageName: "goldIcon", text: "Gold").onTapGesture { selectedCategory = "Gold"}
-                ShopCategoryComponentView(isSelected: selectedCategory == "Home", imageName: "homeCategoryIcon", text: "Home").onTapGesture { selectedCategory = "Home"}
+                ShopCategoryComponentView(isSelected: selectedCategory == "pets".localized(), imageName: "pawIcon", text: "Pets".localized()).onTapGesture { selectedCategory = "pets".localized()}
+                ShopCategoryComponentView(isSelected: selectedCategory == "gold".localized(), imageName: "goldIcon", text: "gold".localized()).onTapGesture { selectedCategory = "gold".localized()}
+                ShopCategoryComponentView(isSelected: selectedCategory == "home".localized(), imageName: "homeCategoryIcon", text: "home".localized()).onTapGesture { selectedCategory = "home".localized()}
             }
         }
     }
@@ -181,7 +185,7 @@ struct ShopItemsView : View {
         ZStack {
             LazyVGrid(columns: columns) {
                 ForEach(0..<9) { _ in
-                    ShopItemView(goldCost: 10, diamondCost: 20)
+                    ShopItemView(goldCost: nil, diamondCost: 10)
                         .background(Color.pink.opacity(0.3))
                         .cornerRadius(10)
                         .overlay(
@@ -195,11 +199,9 @@ struct ShopItemsView : View {
     }
 }
 
-
-
 struct ShopItemView: View {
-    let goldCost: Int
-    let diamondCost: Int
+    let goldCost: Int?
+    let diamondCost: Int?
 
     var body: some View {
         ZStack {
@@ -217,24 +219,50 @@ struct ShopItemView: View {
                     .fill(Color.black)
                     .frame(width: 120, height: 1)
 
+                // Koşullu olarak altın ve elmas göstergesi
                 HStack(spacing: 5) {
-                    Image("goldIcon")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Text("\(goldCost)")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.black)
+                    // Sadece altın varsa
+                    if let goldCost = goldCost, diamondCost == nil {
+                        Image("goldIcon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("\(goldCost)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                    }
+                    // Sadece elmas varsa
+                    else if let diamondCost = diamondCost, goldCost == nil {
+                        Image("diamondIcon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("\(diamondCost)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                    }
+                    // İkisi de varsa
+                    else if let goldCost = goldCost, let diamondCost = diamondCost {
+                        Image("goldIcon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("\(goldCost)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
 
-                    Text("/")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.black)
+                        Text("/")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
 
-                    Image("diamondIcon")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Text("\(diamondCost)")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.black)
+                        Image("diamondIcon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("\(diamondCost)")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                    }
+                    // Hiçbiri yoksa boş bırak (isteğe bağlı)
+                    else {
+                        EmptyView()
+                    }
                 }
                 .padding(5)
                 .background(

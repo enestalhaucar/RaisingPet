@@ -8,7 +8,7 @@
 "results" = "Results";
 
 "shop" = "Mağaza";
-"friends" = "Arkadaşlar";
+"friends" = "Arkadaş";
 "pet" = "Evcil Hayvan";
 "notes" = "Notlar";
 "news" = "Haberler";
@@ -33,3 +33,11 @@
 "onboarding_third_subtitle" = "Profilinizi oluşturun, çizimlerle sevginizi paylaşın ve ortak hayvanınızla maceraya başlayın.";
 "continue_button" = "Devam Et";
 "start_button" = "Başla";
+
+
+// Shop
+
+"pets" = "Hayvanlar";
+"gold" = "Altın";
+"home" = "Ev";
+"restore" = "Yenile";

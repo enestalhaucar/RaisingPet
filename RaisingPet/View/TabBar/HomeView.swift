@@ -210,7 +210,7 @@ struct WidgetsNavigationSection : View {
     ]
     var body: some View {
         ZStack {
-            Color("navigationHomeViewBackgroundColor")
+//            Color("navigationHomeViewBackgroundColor")
             VStack {
                 ForEach(navigationItems, id: \.title) { item in
                     HStack {
