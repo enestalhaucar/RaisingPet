@@ -14,7 +14,7 @@ struct RootView: View {
     @State private var showOnboarding = false
     
     // Test için manuel kontrol
-    private let isTesting = true // Test ederken true yap, production'da false olacak
+    private let isTesting = false // Test ederken true yap, production'da false olacak
     
     var body: some View {
         ZStack {

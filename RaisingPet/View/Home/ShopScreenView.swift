@@ -7,49 +7,297 @@
 
 import SwiftUI
 
+enum MainCategory : String, CaseIterable {
+    case diamonds = "Diamonds"
+    case pets = "Pets"
+}
 struct ShopScreenView: View {
-    @StateObject private var viewModel = ShopScreenViewModel()
-    @State private var selectedCategory: ShopItemCategory = .eggs
+    @StateObject private var vm = ShopScreenViewModel()
+    @State private var selectedMain: MainCategory = .diamonds
+    
+    @State private var selectedShopItem: ShopItem?
+    @State private var counterNumber = 1
+    @State private var showCounter = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("shopBackgroundColor")
                     .ignoresSafeArea()
                 
-                if viewModel.isLoading {
-                    ProgressView()
+                if vm.isLoading {
+                    ProgressView().padding(.top, 50)
                 } else {
-                    VStack(spacing: 0) {
+                    VStack(spacing : 0) {
                         RoofSideView()
                             .frame(maxWidth: .infinity)
                             .offset(y: -30)
                         
-                        ShopCategoryView(selectedCategory: $selectedCategory)
+                        CategoryPicker(selected: $selectedMain)
                         
-                        if let shopItems = viewModel.allItems?.shopItems {
-                            ShopItemsView(shopItems: shopItems, selectedCategory: selectedCategory).padding(.top, 25)
-                        } else {
-                            ProgressView()
-                                .padding(.top, 30)
-                        }
+                        Group {
+                            switch selectedMain {
+                            case .diamonds:
+                                DiamondGrid(items: vm.allItems?.shopItems ?? [], onSelect: openSheet)
+                            case .pets:
+                                PetSections(allItems: vm.allItems, onSelect: openSheet)
+                            }
+                        }.padding(.top,25)
                         
                         Spacer()
                     }
                 }
-            }.onAppear {
-                viewModel.fetchAllShopItem()
-                print("Fetch")
-            }
-            .ignoresSafeArea(edges: .top)
+            }.onAppear {vm.fetchAllShopItem()}
+                .ignoresSafeArea(edges: .top)
             .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
+            .sheet(item: $selectedShopItem) { item in
+                BottomSheetView(item: item, counterNumber: $counterNumber, showCounter: $showCounter)
+                    .environmentObject(vm)
+                    .presentationDetents([.fraction(0.5)])
+            }
         }
+    }
+    private func openSheet(for item: ShopItem) {
+        counterNumber = 1
+        // showCounter, item'in petItems olup olmamasına bağlı olarak ayarlanıyor
+        showCounter = item.category == .home && vm.allItems?.petItems.contains(where: { $0.id == item.id }) ?? false
+        selectedShopItem = item
     }
 }
 
 #Preview {
     ShopScreenView()
 }
+
+struct CategoryPicker: View {
+    @Binding var selected: MainCategory
+    var body: some View {
+        HStack(spacing: 16) {
+            ForEach(MainCategory.allCases, id: \.self) { cat in
+                Text(cat.rawValue)
+                    .font(.nunito(.bold, .callout14))
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(selected == cat ? Color.accentColor.opacity(0.1) : .white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.black, lineWidth: 1)
+                            )
+                    )
+                    .opacity(selected == cat ? 1 : 0.5)
+                    .onTapGesture { selected = cat }
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+struct DiamondGrid: View {
+    let items: [ShopItem]
+    let onSelect: (ShopItem) -> Void
+    let columns = [ GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()) ]
+
+    var body: some View {
+        LazyVGrid(columns: columns, spacing: 16) {
+            ForEach(items.filter { $0.category == .gameCurrencyDiamond }) { item in
+                ShopItemView(
+                    imageName: item.name ?? "diamondPlaceholder",
+                    goldCost: item.goldPrice,
+                    diamondCost: item.diamondPrice,
+                    price: item.price.map { "$\($0)" }
+                ) {
+                    onSelect(item)
+                }
+            }
+        }.padding(.horizontal)
+        .frame(width: Utilities.Constants.width)
+    }
+}
+
+struct PetSections: View {
+    let allItems: AllItems?
+    let onSelect: (ShopItem) -> Void
+
+    // petItems’i effectType’a göre grupluyoruz
+    private let petGroups: [(title: String, key: String)] = [
+        ("Edible Material",    "edibleMaterial"),
+        ("Drinkable Material", "drinkableMaterial"),
+        ("Cleaning Material",  "cleaningMaterial"),
+        ("Fun Material",       "funMaterial")
+    ]
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .center ,spacing: 32) {
+                // 1) Pet Item Packages
+                if let pkgs = allItems?.petItemPackages, !pkgs.isEmpty {
+                    SectionGrid(
+                        title: "Pet Item Packages",
+                        items: pkgs.map { pkg in
+                            DisplayItem(
+                                id: pkg.id ?? UUID().uuidString,
+                                imageName: pkg.name ?? "Egg",
+                                goldCost: nil,
+                                diamondCost: nil,
+                                priceText: nil,
+                                model: pkg.toShopItem()
+                            )
+                        },
+                        onSelect: onSelect
+                    )
+                }
+
+                // 2) Egg Packages
+                if let eggs = allItems?.eggPackages, !eggs.isEmpty {
+                    SectionGrid(
+                        title: "Egg Packages",
+                        items: eggs.map { egg in
+                            DisplayItem(
+                                id: egg.id ?? UUID().uuidString,
+                                imageName: egg.name ?? "Enchanted Egg",
+                                goldCost: egg.goldPrice,
+                                diamondCost: egg.diamondPrice,
+                                priceText: nil,
+                                model: ShopItem(
+                                    id: egg.id,
+                                    name: egg.name,
+                                    description: egg.description,
+                                    category: .eggs,
+                                    isDeleted: egg.isDeleted,
+                                    v: egg.v,
+                                    duration: egg.eggType?.duration,
+                                    isPurchasable: egg.isPurchasable,
+                                    diamondPrice: egg.diamondPrice,
+                                    goldPrice: egg.goldPrice,
+                                    quantity: egg.amount,
+                                    price: nil,
+                                    isOwned: false
+                                )
+                            )
+                        },
+                        onSelect: onSelect
+                    )
+                }
+
+                // 3) petItems gruplu bölümler
+                if let pets = allItems?.petItems {
+                    ForEach(petGroups, id: \.key) { group in
+                        let filtered = pets.filter { $0.effectType == group.key }
+                        if !filtered.isEmpty {
+                            SectionGrid(
+                                title: group.title,
+                                items: filtered.map { pet in
+                                    DisplayItem(
+                                        id: pet.id ?? UUID().uuidString,
+                                        imageName: pet.name ?? "foodIcon",
+                                        goldCost: pet.goldPrice,
+                                        diamondCost: pet.diamondPrice,
+                                        priceText: nil,
+                                        model: pet.toShopItem()
+                                    )
+                                },
+                                onSelect: onSelect
+                            )
+                        }
+                    }
+                }
+            }
+            .padding(.vertical)
+        }
+    }
+}
+
+// MARK: - Model conversion helpers
+extension PetItemPackage {
+    func toShopItem() -> ShopItem {
+        ShopItem(
+            id: id,
+            name: name,
+            description: description,
+            category: .home,
+            isDeleted: isDeleted,
+            v: v,
+            duration: nil,
+            isPurchasable: true,
+            diamondPrice: nil,
+            goldPrice: nil,
+            quantity: limit,
+            price: nil,
+            isOwned: false
+        )
+    }
+}
+
+extension PetItem {
+    func toShopItem() -> ShopItem {
+        ShopItem(
+            id: id,
+            name: name,
+            description: description,
+            category: .home,
+            isDeleted: isDeleted,
+            v: v,
+            duration: nil,
+            isPurchasable: true,
+            diamondPrice: diamondPrice,
+            goldPrice: goldPrice,
+            quantity: nil,
+            price: nil,
+            isOwned: false
+        )
+    }
+}
+
+
+struct SectionGrid: View {
+    let title: String
+    let items: [DisplayItem]
+    let onSelect: (ShopItem) -> Void
+
+    private let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.nunito(.semiBold, .callout14))
+                .padding(.horizontal)
+
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(items) { display in
+                    ShopItemView(
+                        imageName: display.imageName,
+                        goldCost: display.goldCost,
+                        diamondCost: display.diamondCost,
+                        price: display.priceText
+                    ) {
+                        onSelect(display.model)
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .frame(width: Utilities.Constants.width)
+        }
+    }
+}
+
+
+// 7) Grid’te kullanmak için basit model
+struct DisplayItem: Identifiable {
+    let id: String
+    let imageName: String
+    let goldCost: Int?
+    let diamondCost: Int?
+    let priceText: String?
+    let model: ShopItem
+}
+
 
 struct AssetNumberView: View {
     var iconName: String
@@ -191,70 +439,6 @@ struct ShopCategoryComponentView: View {
     }
 }
 
-struct ShopItemsView: View {
-    let shopItems: [ShopItem]
-    let selectedCategory: ShopItemCategory
-    @State private var selectedItem: ShopItem?
-    @State private var counterNumber: Int = 1
-    @State private var showCounter: Bool = false
-
-    var filteredItems: [ShopItem] {
-        shopItems.filter { $0.category == selectedCategory }
-    }
-
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-
-    var body: some View {
-        ZStack {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(filteredItems, id: \.id) { item in
-                    let imageName: String = {
-                        if let name = item.name, !name.isEmpty {
-                            return name
-                        } else {
-                            switch selectedCategory {
-                            case .eggs:
-                                return "eggPlaceholder"
-                            case .gameCurrencyDiamond:
-                                return "diamondPlaceholder"
-                            case .home:
-                                return "homePlaceholder"
-                            }
-                        }
-                    }()
-
-                    let displayPrice: String? = {
-                        if selectedCategory == .gameCurrencyDiamond, let price = item.price {
-                            return "$\(price)"
-                        }
-                        return nil
-                    }()
-
-                    ShopItemView(imageName: imageName,
-                                 goldCost: item.goldPrice,
-                                 diamondCost: item.diamondPrice,
-                                 price: displayPrice) {
-                        selectedItem = item
-                    }
-                }
-            }
-            .padding(.horizontal)
-        }
-        .sheet(item: $selectedItem) { item in
-            BottomSheetView(item: item, counterNumber: $counterNumber, showCounter: $showCounter)
-                .transition(.move(edge: .bottom))
-                .zIndex(1)
-                .presentationDetents([.fraction(0.5)])
-                .presentationDragIndicator(.hidden)
-        }
-        .frame(width: Utilities.Constants.width)
-    }
-}
-
 struct ShopItemView: View {
     let imageName: String
     let goldCost: Int?
@@ -270,7 +454,7 @@ struct ShopItemView: View {
             VStack(spacing: 0) {
                 Image(imageName)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .frame(width: 80, height: 80)
                 
                 Rectangle()

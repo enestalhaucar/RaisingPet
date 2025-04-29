@@ -45,9 +45,9 @@ final class Utilities {
             // Pets Endpoints
             struct Pets {
                 static let myPets = "\(baseURL)/pets/my-pets"
-                static let petItems = "\(baseURL)/pets/pet-items"
+                static let buyPetItem = "\(baseURL)/pets/buy-pet-item"
                 static let petItemInteraction = "\(baseURL)/pets/pet-item-interaction"
-                static let petCareInteraction = "\(baseURL)/pets/pet-care-interaction"
+                
             }
             
             // Shop Endpoints

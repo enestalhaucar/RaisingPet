@@ -43,7 +43,7 @@ class ShopScreenViewModel : ObservableObject {
             }
     }
     
-    func buyItem(itemId: String, mine : MineEnum) {
+    func buyShopItem(itemId: String, mine : MineEnum) {
         let url = Utilities.Constants.Endpoints.Shop.buyItem
         isLoading = true
         errorMessage = nil
@@ -70,6 +70,38 @@ class ShopScreenViewModel : ObservableObject {
                         self.isLoading = false
                         self.errorMessage = "Hata: \(error.localizedDescription)"
                         print("Purchase failed: \(error.localizedDescription)")
+                    }
+                }
+            }
+    }
+    
+    func buyPetItem(itemId: String, amount: Int, mine: MineEnum) {
+        let url = Utilities.Constants.Endpoints.Pets.buyPetItem
+        isLoading = true
+        errorMessage = nil
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
+            "Content-Type": "application/json"
+        ]
+        let parameters: [String: Any] = [
+            "petItemId": itemId,
+            "amount": amount,
+            "mine": mine.rawValue
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .response { response in
+                DispatchQueue.main.async {
+                    switch response.result {
+                    case .success(let data):
+                        self.isLoading = false
+                        print("Item purchased successfully: \(data)")
+                        // Başarılı satın alma sonrası envanteri güncelle veya kullanıcıya bildirim göster
+                    case .failure(let error):
+                        self.isLoading = false
+                        self.errorMessage = "Hata: \(error.localizedDescription), Detay: \(error)"
+                        print("Hata Detayı: \(error), Response: \(String(data: response.data ?? Data(), encoding: .utf8) ?? "Yok")")
                     }
                 }
             }

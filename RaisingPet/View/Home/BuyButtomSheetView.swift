@@ -9,111 +9,110 @@ import SwiftUI
 
 struct BottomSheetView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var vm: ShopScreenViewModel
     var item: ShopItem
     @Binding var counterNumber: Int
     @State private var selectedMine: MineEnum? = nil
-    @State private var viewModel = ShopScreenViewModel()
     @Binding var showCounter: Bool
     @State private var bottomSheetHeight: CGFloat = 0
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                VStack(spacing: 20) {
-                    HStack {
-                        AssetNumberView(iconName: "diamondIcon", number: 50)
-                        AssetNumberView(iconName: "goldIcon", number: 50)
-                        Spacer()
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                        }
+        ZStack {
+            VStack(spacing: 20) {
+                HStack {
+                    AssetNumberView(iconName: "diamondIcon", number: 50)
+                    AssetNumberView(iconName: "goldIcon", number: 50)
+                    Spacer()
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
                     }
-                    .padding(.horizontal, 20)
-                    
-                    HStack {
-                        ItemImageView(imageName: item.name ?? "egg")
-                        if showCounter {
-                            Spacer()
-                            BuyCounterView(counterNumber: $counterNumber).minimumScaleFactor(0.8)
-                        } else {
-                            DescriptionOfItemView(item: item)
-                            Spacer()
-                        }
-                    }
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 10)
-                    .background(RoundedRectangle(cornerRadius: 15).fill(.yellow.opacity(0.05)))
-                    .padding(.horizontal, 20)
-                    
-                    Text("Item purchase requires \(item.goldPrice ?? 0) you are \(item.goldPrice ?? 0) short")
-                        .font(.nunito(.medium, .callout14))
-                        .foregroundStyle(.gray)
-                        .padding(.horizontal, 20)
-                    
-                    VStack(spacing: 10) {
-                        if let diamondPrice = item.diamondPrice, diamondPrice > 0, item.goldPrice == nil || item.goldPrice == 0 {
-                            // Sadece Diamond Butonu
-                            BuyPurchaseView(
-                                iconName: "diamondIcon",
-                                itemName: item.name ?? "-",
-                                counterNumber: counterNumber
-                            ) {
-                                selectedMine = .diamond
-                                purchaseItem()
-                            }
-                        } else if let goldPrice = item.goldPrice, goldPrice > 0, item.diamondPrice == nil || item.diamondPrice == 0 {
-                            // Sadece Gold Butonu
-                            BuyPurchaseView(
-                                iconName: "goldIcon",
-                                itemName: item.name ?? "-",
-                                counterNumber: counterNumber
-                            ) {
-                                selectedMine = .gold
-                                purchaseItem()
-                            }
-                        } else if let diamondPrice = item.diamondPrice, let goldPrice = item.goldPrice, diamondPrice > 0, goldPrice > 0 {
-                            // Hem Diamond hem Gold Butonları
-                            BuyPurchaseView(
-                                iconName: "diamondIcon",
-                                itemName: item.name ?? "-",
-                                counterNumber: counterNumber
-                            ) {
-                                selectedMine = .diamond
-                                purchaseItem()
-                            }
-                            
-                            Divider()
-                            
-                            BuyPurchaseView(
-                                iconName: "goldIcon",
-                                itemName: item.name ?? "-",
-                                counterNumber: counterNumber
-                            ) {
-                                selectedMine = .gold
-                                purchaseItem()
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top)
                 }
-                .background(Color.white)
-                .cornerRadius(25)
-                .padding(.top, 10)
-            }.onAppear {
-                bottomSheetHeight = geometry.size.height
+                .padding(.horizontal, 20)
+                
+                HStack {
+                    ItemImageView(imageName: item.name ?? "egg")
+                    if showCounter {
+                        Spacer()
+                        BuyCounterView(counterNumber: $counterNumber).minimumScaleFactor(0.8)
+                    } else {
+                        DescriptionOfItemView(item: item)
+                        Spacer()
+                    }
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 10)
+                .background(RoundedRectangle(cornerRadius: 15).fill(.yellow.opacity(0.05)))
+                .padding(.horizontal, 20)
+                
+                Text("Item purchase requires \(item.goldPrice ?? 0) you are \(item.goldPrice ?? 0) short")
+                    .font(.nunito(.medium, .callout14))
+                    .foregroundStyle(.gray)
+                    .padding(.horizontal, 20)
+                
+                VStack(spacing: 10) {
+                    if let diamondPrice = item.diamondPrice, diamondPrice > 0, item.goldPrice == nil || item.goldPrice == 0 {
+                        // Sadece Diamond Butonu
+                        BuyPurchaseView(
+                            iconName: "diamondIcon",
+                            itemName: item.name ?? "-",
+                            counterNumber: counterNumber
+                        ) {
+                            selectedMine = .diamond
+                            purchaseItem()
+                        }
+                    } else if let goldPrice = item.goldPrice, goldPrice > 0, item.diamondPrice == nil || item.diamondPrice == 0 {
+                        // Sadece Gold Butonu
+                        BuyPurchaseView(
+                            iconName: "goldIcon",
+                            itemName: item.name ?? "-",
+                            counterNumber: counterNumber
+                        ) {
+                            selectedMine = .gold
+                            purchaseItem()
+                        }
+                    } else if let diamondPrice = item.diamondPrice, let goldPrice = item.goldPrice, diamondPrice > 0, goldPrice > 0 {
+                        // Hem Diamond hem Gold Butonları
+                        BuyPurchaseView(
+                            iconName: "diamondIcon",
+                            itemName: item.name ?? "-",
+                            counterNumber: counterNumber
+                        ) {
+                            selectedMine = .diamond
+                            purchaseItem()
+                        }
+                        
+                        Divider()
+                        
+                        BuyPurchaseView(
+                            iconName: "goldIcon",
+                            itemName: item.name ?? "-",
+                            counterNumber: counterNumber
+                        ) {
+                            selectedMine = .gold
+                            purchaseItem()
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.top)
             }
+            .background(Color.white)
+            .cornerRadius(25)
+            .padding(.top, 10)
         }
     }
     
     private func purchaseItem() {
-        guard let selectedMine = selectedMine,
-              let id = item.id else {
-            return
+        guard let id = item.id, let mine = selectedMine else { return }
+        
+        // petItems için buyPetItem, shopItems için buyShopItem çağır
+        if item.category == .home && vm.allItems?.petItems.contains(where: { $0.id == item.id }) ?? false {
+            vm.buyPetItem(itemId: id, amount: counterNumber, mine: mine)
+        } else {
+            vm.buyShopItem(itemId: id, mine: mine)
         }
-        viewModel.buyItem(itemId: id, mine: selectedMine)
     }
 }
 
