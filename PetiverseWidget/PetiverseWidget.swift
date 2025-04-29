@@ -31,9 +31,6 @@ struct Provider: AppIntentTimelineProvider {
         return Timeline(entries: entries, policy: .atEnd)
     }
 
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -45,12 +42,27 @@ struct PetiverseWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Image("logoPetiverse")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                
+                Text("Petiverse")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(.black)
+            }
+            
+            
+            
+            VStack(alignment: .leading ,spacing: 5) {
+                Text("1. Widget'a uzun basın").font(.system(size: 10, weight: .regular))
+                Text("2. Widgeti düzenlemek için üzerine dokunun")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .font(.system(size: 10, weight: .regular))
+                Text("3. Widgetinizi listeden seçin").font(.system(size: 10, weight: .regular)).fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer()
         }
     }
 }

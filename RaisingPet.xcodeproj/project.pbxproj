@@ -49,6 +49,11 @@
 		EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */; };
 		EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A512D7AA8EA001B2335 /* Localizable.strings */; };
 		EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A532D7AA94A001B2335 /* Localizable.strings */; };
+		EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */; };
+		EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9111892DAAD5D5007D92B1 /* ShopScreenViewModel.swift */; };
+		EC9111912DAC361E007D92B1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9111902DAC361E007D92B1 /* WidgetKit.framework */; };
+		EC9111922DAC361E007D92B1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */; };
+		EC9111A32DAC361F007D92B1 /* PetiverseWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EC91118F2DAC361E007D92B1 /* PetiverseWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC95E5AD2D8B4B5E0011EA7A /* UserDefaults+Extensions.swift */; };
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
 		EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */; };
@@ -60,20 +65,13 @@
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
 		ECB7C01B2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */; };
+		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
 		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
 		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
 		ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB799B2CDA163D000A1923 /* UserModel.swift */; };
-		ECCC7B322CAAB3FB00B16C91 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */; };
-		ECCC7B342CAAB3FB00B16C91 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */; };
-		ECCC7B372CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */; };
-		ECCC7B392CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B382CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift */; };
-		ECCC7B3B2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B3A2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift */; };
-		ECCC7B3D2CAAB3FB00B16C91 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC7B3C2CAAB3FB00B16C91 /* AppIntent.swift */; };
-		ECCC7B3F2CAAB3FD00B16C91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */; };
-		ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ECDEB2EF2CD4FB4900FD8496 /* LuckyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */; };
 		ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ECDFC43F2D6D1C6A00FA450D /* Lottie */; };
 		ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */; };
@@ -88,12 +86,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		ECCC7B412CAAB3FD00B16C91 /* PBXContainerItemProxy */ = {
+		EC9111A12DAC361F007D92B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC606ECB2C57B7040015F103 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = ECCC7B2E2CAAB3FB00B16C91;
-			remoteInfo = PetiverseWidgetExtensionExtension;
+			remoteGlobalIDString = EC91118E2DAC361E007D92B1;
+			remoteInfo = PetiverseWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -114,7 +112,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				ECCC7B432CAAB3FD00B16C91 /* PetiverseWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				EC9111A32DAC361F007D92B1 /* PetiverseWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +160,10 @@
 		EC8E5A492D7AA4E4001B2335 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		EC8E5A522D7AA8EA001B2335 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Localizable.strings; sourceTree = "<group>"; };
 		EC8E5A542D7AA94A001B2335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopItems.swift; sourceTree = "<group>"; };
+		EC9111892DAAD5D5007D92B1 /* ShopScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenViewModel.swift; sourceTree = "<group>"; };
+		EC91118F2DAC361E007D92B1 /* PetiverseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetiverseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9111902DAC361E007D92B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EC95E5AD2D8B4B5E0011EA7A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -173,22 +175,14 @@
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 		ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendWithTagResponse.swift; sourceTree = "<group>"; };
+		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
 		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
 		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ECCB799B2CDA163D000A1923 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetiverseWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetiverseWidgetExtensionBundle.swift; sourceTree = "<group>"; };
-		ECCC7B382CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetiverseWidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
-		ECCC7B3A2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetiverseWidgetExtension.swift; sourceTree = "<group>"; };
-		ECCC7B3C2CAAB3FB00B16C91 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ECCC7B402CAAB3FD00B16C91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECCC7B482CAAB41200B16C91 /* PetiverseWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetiverseWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
 		ECDEB2EE2CD4FB4900FD8496 /* LuckyBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuckyBoxView.swift; sourceTree = "<group>"; };
 		ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
@@ -203,21 +197,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		EC95E5B22D8B5E3F0011EA7A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		EC9111A42DAC361F007D92B1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				CountDownWidget/CountDownWidgetFour.swift,
-				CountDownWidget/CountDownWidgetOne.swift,
-				CountDownWidget/CountDownWidgetThree.swift,
-				CountDownWidget/CountDownWidgetTwo.swift,
-				PetiverseWidgetItem.swift,
+				Info.plist,
 			);
-			target = ECCC7B2E2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension */;
+			target = EC91118E2DAC361E007D92B1 /* PetiverseWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		EC989DB92CE8DA2900E3FA82 /* Widgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (EC95E5B22D8B5E3F0011EA7A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Widgets; sourceTree = "<group>"; };
+		EC9111932DAC361E007D92B1 /* PetiverseWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (EC9111A42DAC361F007D92B1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PetiverseWidget; sourceTree = "<group>"; };
+		EC989DB92CE8DA2900E3FA82 /* Widgets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Widgets; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,12 +224,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ECCC7B2C2CAAB3FB00B16C91 /* Frameworks */ = {
+		EC91118C2DAC361E007D92B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCC7B342CAAB3FB00B16C91 /* SwiftUI.framework in Frameworks */,
-				ECCC7B322CAAB3FB00B16C91 /* WidgetKit.framework in Frameworks */,
+				EC9111922DAC361E007D92B1 /* SwiftUI.framework in Frameworks */,
+				EC9111912DAC361E007D92B1 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,9 +289,8 @@
 		EC606ECA2C57B7040015F103 = {
 			isa = PBXGroup;
 			children = (
-				ECCC7B482CAAB41200B16C91 /* PetiverseWidgetExtensionExtension.entitlements */,
 				EC606ED52C57B7040015F103 /* RaisingPet */,
-				ECCC7B352CAAB3FB00B16C91 /* PetiverseWidgetExtension */,
+				EC9111932DAC361E007D92B1 /* PetiverseWidget */,
 				ECCC7B302CAAB3FB00B16C91 /* Frameworks */,
 				EC606ED42C57B7040015F103 /* Products */,
 			);
@@ -310,7 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				EC606ED32C57B7040015F103 /* RaisingPet.app */,
-				ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */,
+				EC91118F2DAC361E007D92B1 /* PetiverseWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -421,9 +411,18 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
+		EC9111882DAAD5CB007D92B1 /* ShopScreenViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EC9111892DAAD5D5007D92B1 /* ShopScreenViewModel.swift */,
+			);
+			path = ShopScreenViewModel;
+			sourceTree = "<group>";
+		};
 		EC989DAD2CE8B0DD00E3FA82 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EC9111882DAAD5CB007D92B1 /* ShopScreenViewModel */,
 				ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */,
 				EC1CE99E2D5237FD0082FD4F /* CoupleQuestionViewModel */,
 				EC8D59D02D089C430050740C /* FriendsViewModels */,
@@ -463,6 +462,7 @@
 				EC561BFA2C88A31900D90B4A /* PetCareView.swift */,
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
+				ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */,
 				EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */,
 			);
 			path = Home;
@@ -510,6 +510,7 @@
 		ECC1D0912D440C4B008D2C92 /* ResponseModels */ = {
 			isa = PBXGroup;
 			children = (
+				EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */,
 				ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */,
 				ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
@@ -534,23 +535,10 @@
 		ECCC7B302CAAB3FB00B16C91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ECCC7B312CAAB3FB00B16C91 /* WidgetKit.framework */,
 				ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */,
+				EC9111902DAC361E007D92B1 /* WidgetKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		ECCC7B352CAAB3FB00B16C91 /* PetiverseWidgetExtension */ = {
-			isa = PBXGroup;
-			children = (
-				ECCC7B362CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift */,
-				ECCC7B382CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift */,
-				ECCC7B3A2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift */,
-				ECCC7B3C2CAAB3FB00B16C91 /* AppIntent.swift */,
-				ECCC7B3E2CAAB3FD00B16C91 /* Assets.xcassets */,
-				ECCC7B402CAAB3FD00B16C91 /* Info.plist */,
-			);
-			path = PetiverseWidgetExtension;
 			sourceTree = "<group>";
 		};
 		ECDFC4412D6D1C8300FA450D /* Animation */ = {
@@ -586,7 +574,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				ECCC7B422CAAB3FD00B16C91 /* PBXTargetDependency */,
+				EC9111A22DAC361F007D92B1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				EC989DB92CE8DA2900E3FA82 /* Widgets */,
@@ -603,21 +591,26 @@
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ECCC7B2E2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension */ = {
+		EC91118E2DAC361E007D92B1 /* PetiverseWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ECCC7B472CAAB3FD00B16C91 /* Build configuration list for PBXNativeTarget "PetiverseWidgetExtensionExtension" */;
+			buildConfigurationList = EC9111A52DAC361F007D92B1 /* Build configuration list for PBXNativeTarget "PetiverseWidgetExtension" */;
 			buildPhases = (
-				ECCC7B2B2CAAB3FB00B16C91 /* Sources */,
-				ECCC7B2C2CAAB3FB00B16C91 /* Frameworks */,
-				ECCC7B2D2CAAB3FB00B16C91 /* Resources */,
+				EC91118B2DAC361E007D92B1 /* Sources */,
+				EC91118C2DAC361E007D92B1 /* Frameworks */,
+				EC91118D2DAC361E007D92B1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PetiverseWidgetExtensionExtension;
-			productName = PetiverseWidgetExtensionExtension;
-			productReference = ECCC7B2F2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension.appex */;
+			fileSystemSynchronizedGroups = (
+				EC9111932DAC361E007D92B1 /* PetiverseWidget */,
+			);
+			name = PetiverseWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PetiverseWidgetExtension;
+			productReference = EC91118F2DAC361E007D92B1 /* PetiverseWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -627,14 +620,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					EC606ED22C57B7040015F103 = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					ECCC7B2E2CAAB3FB00B16C91 = {
-						CreatedOnToolsVersion = 15.4;
+					EC91118E2DAC361E007D92B1 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -659,7 +652,7 @@
 			projectRoot = "";
 			targets = (
 				EC606ED22C57B7040015F103 /* RaisingPet */,
-				ECCC7B2E2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension */,
+				EC91118E2DAC361E007D92B1 /* PetiverseWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -679,11 +672,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ECCC7B2D2CAAB3FB00B16C91 /* Resources */ = {
+		EC91118D2DAC361E007D92B1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCC7B3F2CAAB3FD00B16C91 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +686,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */,
 				ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */,
 				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
 				ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */,
@@ -718,6 +711,8 @@
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				ECDFC4552D6D46F400FA450D /* QuizResultForQuizResponse.swift in Sources */,
+				EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */,
+				EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */,
 				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
@@ -755,24 +750,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ECCC7B2B2CAAB3FB00B16C91 /* Sources */ = {
+		EC91118B2DAC361E007D92B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCC7B392CAAB3FB00B16C91 /* PetiverseWidgetExtensionLiveActivity.swift in Sources */,
-				ECCC7B3D2CAAB3FB00B16C91 /* AppIntent.swift in Sources */,
-				ECCC7B3B2CAAB3FB00B16C91 /* PetiverseWidgetExtension.swift in Sources */,
-				ECCC7B372CAAB3FB00B16C91 /* PetiverseWidgetExtensionBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		ECCC7B422CAAB3FD00B16C91 /* PBXTargetDependency */ = {
+		EC9111A22DAC361F007D92B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ECCC7B2E2CAAB3FB00B16C91 /* PetiverseWidgetExtensionExtension */;
-			targetProxy = ECCC7B412CAAB3FD00B16C91 /* PBXContainerItemProxy */;
+			target = EC91118E2DAC361E007D92B1 /* PetiverseWidgetExtension */;
+			targetProxy = EC9111A12DAC361F007D92B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -983,26 +974,26 @@
 			};
 			name = Release;
 		};
-		ECCC7B452CAAB3FD00B16C91 /* Debug */ = {
+		EC9111A62DAC361F007D92B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PetiverseWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PetiverseWidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PetiverseWidgetExtension;
+				INFOPLIST_FILE = PetiverseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PetiverseWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1011,26 +1002,26 @@
 			};
 			name = Debug;
 		};
-		ECCC7B462CAAB3FD00B16C91 /* Release */ = {
+		EC9111A72DAC361F007D92B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PetiverseWidgetExtensionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PetiverseWidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PetiverseWidgetExtension;
+				INFOPLIST_FILE = PetiverseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PetiverseWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1060,11 +1051,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ECCC7B472CAAB3FD00B16C91 /* Build configuration list for PBXNativeTarget "PetiverseWidgetExtensionExtension" */ = {
+		EC9111A52DAC361F007D92B1 /* Build configuration list for PBXNativeTarget "PetiverseWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECCC7B452CAAB3FD00B16C91 /* Debug */,
-				ECCC7B462CAAB3FD00B16C91 /* Release */,
+				EC9111A62DAC361F007D92B1 /* Debug */,
+				EC9111A72DAC361F007D92B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

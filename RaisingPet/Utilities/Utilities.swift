@@ -52,9 +52,9 @@ final class Utilities {
             
             // Shop Endpoints
             struct Shop {
-                static let base = "\(baseURL)/shop/"
+                static let getAllShopItems = "\(baseURL)/shop/get-all-shop-items"
                 static let buyItem = "\(baseURL)/shop/buy-item"
-                static let shopDetails = "\(baseURL)/shop"
+                
             }
             
             // Inventory Endpoints
