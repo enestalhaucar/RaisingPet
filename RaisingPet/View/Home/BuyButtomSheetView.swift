@@ -105,15 +105,31 @@ struct BottomSheetView: View {
     }
     
     private func purchaseItem() {
-        guard let id = item.id, let mine = selectedMine else { return }
-        
-        // petItems için buyPetItem, shopItems için buyShopItem çağır
-        if item.category == .home && vm.allItems?.petItems.contains(where: { $0.id == item.id }) ?? false {
-            vm.buyPetItem(itemId: id, amount: counterNumber, mine: mine)
-        } else {
-            vm.buyShopItem(itemId: id, mine: mine)
-        }
+      guard let id = item.id, let mine = selectedMine else { return }
+
+      // 1) Eğer bu bir EggPackage ise:
+      if let qty = item.quantity, item.category == .eggs {
+        vm.buyPackageItem(
+          packageType: .eggPackage,
+          packageId: id,
+          mine: mine
+        )
+        dismiss()
+        return
+      }
+
+      // 2) Eğer petItem ise (home+petItems)
+      if item.category == .home && (vm.allItems?.petItems.contains { $0.id == id } ?? false) {
+        vm.buyPetItem(itemId: id, amount: counterNumber, mine: mine)
+        dismiss()
+        return
+      }
+
+      // 3) Aksi hâlde basit shopItem
+      vm.buyShopItem(itemId: id, mine: mine)
+      dismiss()
     }
+
 }
 
 #Preview {
@@ -218,7 +234,7 @@ struct DescriptionOfItemView: View {
     var item: ShopItem
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(" 1 \(item.name ?? " - ")")
+            Text("\(item.name ?? " - ")")
                 .font(.nunito(.semiBold, .body16))
             Text("\(item.description ?? " - ")")
                 .font(.nunito(.medium, .callout14))

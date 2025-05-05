@@ -31,6 +31,7 @@ final class Utilities {
             struct Auth {
                 static let login = "\(baseURL)/users/login"
                 static let signup = "\(baseURL)/users/signup"
+                static let stats = "\(baseURL)/users/stats"
             }
             
             // Friends Endpoints
@@ -48,6 +49,10 @@ final class Utilities {
                 static let buyPetItem = "\(baseURL)/pets/buy-pet-item"
                 static let petItemInteraction = "\(baseURL)/pets/pet-item-interaction"
                 
+            }
+            
+            struct Package {
+                static let buyPackageItems = "\(baseURL)/package/buy-package-item"
             }
             
             // Shop Endpoints

@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC02EBC52DC921F30019668C /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = EC02EBC42DC921F30019668C /* netfox */; };
 		EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */; };
 		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
+		EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
 		EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */; };
 		EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */; };
@@ -124,6 +126,7 @@
 		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPackageCounterPopUpView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionComponent.swift; sourceTree = "<group>"; };
 		EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 			files = (
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
+				EC02EBC52DC921F30019668C /* netfox in Frameworks */,
 				EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
 				ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */,
@@ -463,6 +467,7 @@
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
 				ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */,
+				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
 				EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */,
 			);
 			path = Home;
@@ -586,6 +591,7 @@
 				EC8D59C02D084DB30050740C /* Alamofire */,
 				ECDFC43F2D6D1C6A00FA450D /* Lottie */,
 				EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */,
+				EC02EBC42DC921F30019668C /* netfox */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -646,6 +652,7 @@
 				EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */,
+				EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -714,6 +721,7 @@
 				EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */,
 				EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */,
 				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
+				EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
@@ -1063,6 +1071,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kasketis/netfox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.21.0;
+			};
+		};
 		EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -1098,6 +1114,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC02EBC42DC921F30019668C /* netfox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = netfox;
+		};
 		EC606F172C5FB44C0015F103 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;

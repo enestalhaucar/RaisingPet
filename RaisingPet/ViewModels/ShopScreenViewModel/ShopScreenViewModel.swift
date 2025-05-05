@@ -107,10 +107,67 @@ class ShopScreenViewModel : ObservableObject {
             }
     }
     
+    func buyPackageItem(packageType : PackageType, packageId : String, mine : MineEnum? = nil, petItemsWithAmounts : [PetItemWithAmount]? = nil) {
+        let url = Utilities.Constants.Endpoints.Package.buyPackageItems
+        isLoading = true
+        errorMessage = nil
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
+            "Content-Type": "application/json"
+        ]
+        
+        var parameters: [String: Any] = [
+            "packageType": packageType.rawValue,
+            "packageId": packageId
+        ]
+        
+        switch packageType {
+        case .eggPackage, .petPackage:
+            if let m = mine {
+                parameters["mine"] = m.rawValue
+            }
+        case .petItemPackage:
+            guard let items = petItemsWithAmounts else {
+                self.errorMessage = "Pet-item-package için petItemsWithAmounts gerekli"
+                return
+            }
+            parameters["petItemsWithAmounts"] = items.map {
+                ["petItemId": $0.petItemId, "amount": $0.amount]
+            }
+        }
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .response { response in
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    switch response.result {
+                    case .success:
+                        print("Package purchased successfully!")
+                    case .failure(let error):
+                        self.errorMessage = "Hata: \(error.localizedDescription)"
+                        print("Package purchase failed: \(error.localizedDescription)")
+                    }
+                }
+            }
+    }
+    
     
 }
 
 enum MineEnum : String {
     case diamond
     case gold
+}
+
+enum PackageType: String {
+    case eggPackage
+    case petPackage
+    case petItemPackage
+}
+
+struct PetItemWithAmount: Encodable {
+    let petItemId: String
+    let amount: Int
 }
