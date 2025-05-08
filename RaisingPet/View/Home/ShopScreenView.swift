@@ -17,6 +17,7 @@ enum MainCategory: String, CaseIterable {
 
 struct ShopScreenView: View {
     @StateObject private var vm = ShopScreenViewModel()
+    @EnvironmentObject var currentUserVM: CurrentUserViewModel
     @State private var selectedMain: MainCategory = .diamonds
 
     // — single ShopItem için
@@ -112,7 +113,11 @@ struct ShopScreenView: View {
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
-            .onAppear(perform: vm.fetchAllShopItem)
+            .onAppear {
+                vm.fetchAllShopItem() {
+                    currentUserVM.refresh()
+                }
+            }
             .ignoresSafeArea(edges: .top)
             .sheet(item: $selectedShopItem) { item in
                 BottomSheetView(
@@ -354,6 +359,7 @@ struct CategoryPicker: View {
 }
 
 struct RoofSideView: View {
+    @EnvironmentObject var currentUser: CurrentUserViewModel
     var body: some View {
         ZStack {
             Image("shopRoof")
@@ -366,14 +372,18 @@ struct RoofSideView: View {
             HStack(spacing: 16) {
                 BackButtonView()
                     .padding(.leading, 16)
-                AssetNumberView(iconName: "goldIcon", number: 5)
-                AssetNumberView(iconName: "diamondIcon", number: 5)
+                
+                AssetNumberView(iconName: "goldIcon", number: currentUser.user?.gameCurrencyGold ?? 0)
+                AssetNumberView(iconName: "diamondIcon", number: currentUser.user?.gameCurrencyDiamond ?? 0)
                 Spacer()
                 RestoreButtonView()
                     .padding(.trailing, 16)
                 
             }.frame(width: Utilities.Constants.width)
             .padding(.top, 50)
+            .onAppear {
+                print(currentUser.user)
+            }
         }
     }
 }

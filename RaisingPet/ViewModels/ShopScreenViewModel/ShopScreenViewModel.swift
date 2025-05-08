@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 
 class ShopScreenViewModel : ObservableObject {
@@ -14,7 +15,8 @@ class ShopScreenViewModel : ObservableObject {
     @Published var errorMessage: String?
     @Published var allItems: AllItems?
     
-    func fetchAllShopItem() {
+    
+    func fetchAllShopItem(completion: @escaping () -> Void = {}) {
         let url = Utilities.Constants.Endpoints.Shop.getAllShopItems
         isLoading = true
         errorMessage = nil
@@ -30,10 +32,7 @@ class ShopScreenViewModel : ObservableObject {
                 DispatchQueue.main.async {
                     switch response.result {
                     case .success(let data):
-                        print(data)
                         self.allItems = data.data
-                        print(self.allItems as Any)
-                        print("allItems")
                         self.isLoading = false
                     case .failure(let error):
                         self.errorMessage = "Hata:1 \(error.localizedDescription)"
@@ -43,7 +42,7 @@ class ShopScreenViewModel : ObservableObject {
             }
     }
     
-    func buyShopItem(itemId: String, mine : MineEnum) {
+    func buyShopItem(itemId: String, mine : MineEnum, completion: (() -> Void)? = nil) {
         let url = Utilities.Constants.Endpoints.Shop.buyItem
         isLoading = true
         errorMessage = nil
@@ -75,7 +74,7 @@ class ShopScreenViewModel : ObservableObject {
             }
     }
     
-    func buyPetItem(itemId: String, amount: Int, mine: MineEnum) {
+    func buyPetItem(itemId: String, amount: Int, mine: MineEnum, completion: (() -> Void)? = nil) {
         let url = Utilities.Constants.Endpoints.Pets.buyPetItem
         isLoading = true
         errorMessage = nil
@@ -107,7 +106,7 @@ class ShopScreenViewModel : ObservableObject {
             }
     }
     
-    func buyPackageItem(packageType : PackageType, packageId : String, mine : MineEnum? = nil, petItemsWithAmounts : [PetItemWithAmount]? = nil) {
+    func buyPackageItem(packageType : PackageType, packageId : String, mine : MineEnum? = nil, petItemsWithAmounts : [PetItemWithAmount]? = nil, completion: (() -> Void)? = nil) {
         let url = Utilities.Constants.Endpoints.Package.buyPackageItems
         isLoading = true
         errorMessage = nil

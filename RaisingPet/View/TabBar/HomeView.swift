@@ -103,7 +103,7 @@ struct CustomNavigationLink<Destination: View> : View {
 
 struct HomePetSection: View {
     var body: some View {
-        NavigationLink(destination: PetView()) {
+        NavigationLink(destination: EggAndPetsView()) {
             ZStack {
                 Image("petBackgroundImage")
                     .resizable()
@@ -129,7 +129,7 @@ struct HomeNavigationButtons: View {
         HStack(spacing: 25) {
             CustomNavigationLink(view: ShopScreenView(), imageName: "shopIcon", text: "shop".localized())
             CustomNavigationLink(view: FriendsView(), imageName: "friendsIcon", text: "friends".localized())
-            CustomNavigationLink(view: PetView(), imageName: "petIcon", text: "pet".localized())
+            CustomNavigationLink(view: EggAndPetsView(), imageName: "petIcon", text: "pet".localized())
             VStack {
                 NavigationLink {
                     NoteView()
@@ -172,14 +172,7 @@ struct HomeNewsSection: View {
 
 struct WidgetsPreviewSection: View {
     let navigationItemsForWidget : [NavigationItem] = [
-        NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-//        NavigationItem(title: "daily_frequence".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-//        NavigationItem(title: "distance".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView())),
-//        NavigationItem(title: "pin_it".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-//        NavigationItem(title: "send_emotions".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-//        NavigationItem(title: "pet_care".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-//        NavigationItem(title: "draw".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView())),
-//        NavigationItem(title: "Daily", imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(DistanceSettingsView()))
+        NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView()))
     ]
     var body: some View {
         VStack(spacing: 16) {
@@ -202,6 +195,7 @@ struct WidgetsPreviewSection: View {
 }
 
 struct WidgetsNavigationSection : View {
+    @EnvironmentObject var currentVM : CurrentUserViewModel
     let navigationItems : [NavigationItem] = [
         NavigationItem(title: "Signal", imageName: "signalIcon", subTitle: nil, destination: nil),
         NavigationItem(title: "Countdown", imageName: "countDownIcon", subTitle: nil, destination: nil),

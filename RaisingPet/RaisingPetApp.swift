@@ -24,10 +24,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RaisingPetApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var appState = AppState()
+    @StateObject var currentUserVM = CurrentUserViewModel()
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(appState)
+                .environmentObject(currentUserVM)
+                .onAppear {
+                    if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+                        currentUserVM.refresh()
+                    }
+                }
         }
     }
     

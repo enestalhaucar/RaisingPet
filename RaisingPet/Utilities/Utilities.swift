@@ -31,7 +31,7 @@ final class Utilities {
             struct Auth {
                 static let login = "\(baseURL)/users/login"
                 static let signup = "\(baseURL)/users/signup"
-                static let stats = "\(baseURL)/users/stats"
+                static let me = "\(baseURL)/users/me"
             }
             
             // Friends Endpoints
@@ -45,7 +45,7 @@ final class Utilities {
             
             // Pets Endpoints
             struct Pets {
-                static let myPets = "\(baseURL)/pets/my-pets"
+                static let getPets = "\(baseURL)/pets/my-pets"
                 static let buyPetItem = "\(baseURL)/pets/buy-pet-item"
                 static let petItemInteraction = "\(baseURL)/pets/pet-item-interaction"
                 
@@ -65,6 +65,7 @@ final class Utilities {
             // Inventory Endpoints
             struct Inventory {
                 static let myInventory = "\(baseURL)/inventory/my-inventory"
+                static let hatchPets = "\(baseURL)/inventory/hatch-pets"
             }
             
             // Quiz

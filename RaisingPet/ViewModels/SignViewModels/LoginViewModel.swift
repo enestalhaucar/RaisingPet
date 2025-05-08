@@ -53,14 +53,16 @@ class LoginViewModel: ObservableObject {
     }
     
     private func saveUserToUserDefaults(data: LoginResponse) {
-        UserDefaults.standard.set(data.token, forKey: "authToken")
-        UserDefaults.standard.set(data.data.user.firstname, forKey: "userFirstname")
-        UserDefaults.standard.set(data.data.user.surname, forKey: "userSurname")
-        UserDefaults.standard.set(data.data.user.email, forKey: "userEmail")
-        UserDefaults.standard.set(data.data.user.friendTag, forKey: "userFriendTag")
-        UserDefaults.standard.set(data.data.user._id, forKey: "userId")
+        let defaults = UserDefaults.standard
+        defaults.set(data.token, forKey: "authToken")
+        defaults.set(data.data.user.firstname, forKey: "userFirstname")
+        defaults.set(data.data.user.surname, forKey: "userSurname")
+        defaults.set(data.data.user.email, forKey: "userEmail")
+        defaults.set(data.data.user.friendTag, forKey: "userFriendTag")
+        defaults.set(data.data.user._id, forKey: "userId")
+        defaults.set(true, forKey: "isLoggedIn")
         
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        defaults.synchronize() 
         
         print("User details saved to UserDefaults")
     }
