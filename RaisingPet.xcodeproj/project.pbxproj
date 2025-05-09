@@ -48,6 +48,7 @@
 		EC731E692DCBD8D4005A064A /* PetTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E682DCBD8D0005A064A /* PetTabBarView.swift */; };
 		EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */; };
 		EC731E6D2DCBD8FB005A064A /* PetDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */; };
+		EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */; };
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
@@ -78,7 +79,6 @@
 		ECB5F56E2D54E767001AC419 /* GetQuizByIdResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
-		ECB7C01B2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */; };
 		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
 		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
 		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
@@ -176,6 +176,7 @@
 		EC731E682DCBD8D0005A064A /* PetTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTabBarView.swift; sourceTree = "<group>"; };
 		EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemGridView.swift; sourceTree = "<group>"; };
 		EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDeleteAlertView.swift; sourceTree = "<group>"; };
+		EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendView.swift; sourceTree = "<group>"; };
 		EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonComp.swift; sourceTree = "<group>"; };
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
@@ -203,7 +204,6 @@
 		ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuizByIdResponseModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
-		ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendWithTagResponse.swift; sourceTree = "<group>"; };
 		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
 		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
 		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
@@ -418,12 +418,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		EC8D59D02D089C430050740C /* FriendsViewModels */ = {
+		EC7A55D02DCD6261006619EB /* FriendsView */ = {
 			isa = PBXGroup;
 			children = (
 				EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */,
+				EC1108332C622F1200E91D93 /* FriendsView.swift */,
+				EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */,
 			);
-			path = FriendsViewModels;
+			path = FriendsView;
 			sourceTree = "<group>";
 		};
 		EC8E5A482D7AA4D3001B2335 /* Helpers */ = {
@@ -473,7 +475,6 @@
 				EC9111882DAAD5CB007D92B1 /* ShopScreenViewModel */,
 				ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */,
 				EC1CE99E2D5237FD0082FD4F /* CoupleQuestionViewModel */,
-				EC8D59D02D089C430050740C /* FriendsViewModels */,
 				EC989DAE2CE8B0E600E3FA82 /* SignViewModels */,
 			);
 			path = ViewModels;
@@ -505,10 +506,10 @@
 		EC989DD72CE8DB8C00E3FA82 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EC7A55D02DCD6261006619EB /* FriendsView */,
 				EC1B965D2C9EF6E7001C5773 /* NoteView.swift */,
 				EC561BFA2C88A31900D90B4A /* PetCareView.swift */,
 				EC02EBC62DC950700019668C /* PetCareView */,
-				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
 				ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */,
 				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
@@ -547,7 +548,6 @@
 			children = (
 				EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */,
 				ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */,
-				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
 				ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */,
 				ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */,
 				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
@@ -565,8 +565,8 @@
 				EC02EBC92DC951BC0019668C /* GetInventoryResponseModel.swift */,
 				ECCDFAF32DC954BF0044DAC2 /* GetMeResponseModel.swift */,
 				EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */,
+				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
 				ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */,
-				ECB7C01A2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
 				ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */,
 				EC1CE99C2D5235720082FD4F /* GetUserQuizesResponse.swift */,
@@ -795,7 +795,6 @@
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
-				ECB7C01B2D7C9A66007B08DB /* SearchFriendWithTagResponse.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */,
 				EC731E5B2DCB86EC005A064A /* HatchPetsResponseModel.swift in Sources */,
@@ -809,6 +808,7 @@
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
+				EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */,
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,

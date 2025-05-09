@@ -41,6 +41,7 @@ final class Utilities {
                 static let acceptRequest = "\(baseURL)/friends/accept-request"
                 static let rejectRequest = "\(baseURL)/friends/reject-request"
                 static let list = "\(baseURL)/friends/list"
+                static let removeFriend = "\(baseURL)/friends/remove-friend"
             }
             
             // Pets Endpoints
@@ -48,6 +49,7 @@ final class Utilities {
                 static let getPets = "\(baseURL)/pets/my-pets"
                 static let buyPetItem = "\(baseURL)/pets/buy-pet-item"
                 static let petItemInteraction = "\(baseURL)/pets/pet-item-interaction"
+                static let deletePet = "\(baseURL)/pets/:id"
                 
             }
             

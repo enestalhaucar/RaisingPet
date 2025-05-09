@@ -10,6 +10,8 @@ import SwiftUI
 struct PetDeleteAlertView: View {
     let pet: Pet
     @Binding var isPresented: Bool
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var vm: InventoryViewModel
 
     var body: some View {
         ZStack {
@@ -44,7 +46,15 @@ struct PetDeleteAlertView: View {
                     }
                     Spacer()
                     Button {
-                        // Peti sil (sonra implement edilecek)
+                        Task {
+                            do {
+                                try await vm.deletePet(petId: pet.id ?? "")
+                                isPresented = false
+                                dismiss() // PetCareView'ı kapatıp EggAndPetsView'a dön
+                            } catch {
+                                print("Pet silme hatası: \(error)")
+                            }
+                        }
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -86,4 +96,5 @@ struct PetDeleteAlertView: View {
         nextBarUpdate: "2025-05-08T16:56:58.777Z",
         isHatchedByThisEgg: nil
     ), isPresented: .constant(true))
+        .environmentObject(InventoryViewModel())
 }

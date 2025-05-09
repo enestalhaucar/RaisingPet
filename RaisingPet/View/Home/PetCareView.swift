@@ -12,6 +12,7 @@ struct PetCareView: View {
     @StateObject private var vm = InventoryViewModel()
     @State private var deletePetShow: Bool = false
     @State private var selectedTab: Int = 0
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationStack {
@@ -22,6 +23,7 @@ struct PetCareView: View {
                 }
                 if deletePetShow {
                     PetDeleteAlertView(pet: pet, isPresented: $deletePetShow)
+                        .environmentObject(vm) // ViewModel'ı aktar
                 }
             }
             .toolbar {

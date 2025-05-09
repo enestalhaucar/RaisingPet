@@ -30,6 +30,7 @@ final class InventoryViewModel: ObservableObject {
     private let inventoryURL = Utilities.Constants.Endpoints.Inventory.myInventory
     private let hatchURL = Utilities.Constants.Endpoints.Inventory.hatchPets
     private let petsURL = Utilities.Constants.Endpoints.Pets.getPets
+    private let deletePetURL = Utilities.Constants.Endpoints.Pets.deletePet
 
     private var headers: HTTPHeaders {
         let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
@@ -115,7 +116,34 @@ final class InventoryViewModel: ObservableObject {
             throw error
         }
     }
+    
+    func deletePet(petId: String) async throws {
+            isLoading = true
+            errorMessage = nil
+            defer { isLoading = false }
 
+            let url = deletePetURL.replacingOccurrences(of: ":id", with: petId) // Dinamik :id ile URL oluştur
+
+            do {
+                let response = try await AF.request(url,
+                                                    method: .get,
+                                                    headers: headers)
+                    .validate()
+
+
+                if let httpResponse = response.response, httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
+                    // 200 veya 204 ile başarı kabul edilir
+                    await fetchPets()
+                } else {
+                    throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.response?.statusCode ?? 500))
+                }
+            } catch {
+                errorMessage = "Pet silme başarısız: \(error.localizedDescription)"
+                print("Delete pet hatası: \(error)")
+                throw error
+            }
+        }
+    
     func groupedPetItems() -> [GroupedPetItem] {
         // Aynı isimdeki item'ları grupla
         let groupedItems = Dictionary(grouping: petItems, by: { $0.itemId.name })
