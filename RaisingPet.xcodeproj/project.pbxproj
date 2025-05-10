@@ -14,13 +14,13 @@
 		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
+		EC15E6392DCEBD1000B885A2 /* QuizResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */; };
 		EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
 		EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */; };
 		EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */; };
 		EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */; };
 		EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */; };
-		EC1CE99D2D5235720082FD4F /* GetUserQuizesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE99C2D5235720082FD4F /* GetUserQuizesResponse.swift */; };
 		EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
@@ -76,7 +76,6 @@
 		ECA066FF2D11756700540FDE /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA066FE2D11756700540FDE /* QuizQuestionView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
-		ECB5F56E2D54E767001AC419 /* GetQuizByIdResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
 		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
@@ -94,9 +93,7 @@
 		ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = ECDFC4482D6D211400FA450D /* LoadingAnimation.json */; };
 		ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */; };
 		ECDFC44F2D6D380D00FA450D /* TakeQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */; };
-		ECDFC4512D6D387900FA450D /* TakeQuizResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */; };
 		ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */; };
-		ECDFC4552D6D46F400FA450D /* QuizResultForQuizResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */; };
 		ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */; };
 		ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
@@ -142,13 +139,13 @@
 		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResponseModels.swift; sourceTree = "<group>"; };
 		EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPackageCounterPopUpView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		EC1B965F2C9EFC83001C5773 /* QuestionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionComponent.swift; sourceTree = "<group>"; };
 		EC1CE96F2D4D3C400082FD4F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
-		EC1CE99C2D5235720082FD4F /* GetUserQuizesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserQuizesResponse.swift; sourceTree = "<group>"; };
 		EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionViewModel.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
@@ -201,7 +198,6 @@
 		ECA066FE2D11756700540FDE /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggAndPetsView.swift; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuizByIdResponseModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
@@ -220,9 +216,7 @@
 		ECDFC4482D6D211400FA450D /* LoadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
 		ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizResultRequest.swift; sourceTree = "<group>"; };
 		ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizRequest.swift; sourceTree = "<group>"; };
-		ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizResponse.swift; sourceTree = "<group>"; };
 		ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizRequest.swift; sourceTree = "<group>"; };
-		ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizResponse.swift; sourceTree = "<group>"; };
 		ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -566,11 +560,8 @@
 				ECCDFAF32DC954BF0044DAC2 /* GetMeResponseModel.swift */,
 				EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */,
 				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
-				ECB5F56D2D54E760001AC419 /* GetQuizByIdResponseModel.swift */,
 				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
-				ECDFC4502D6D387900FA450D /* TakeQuizResponse.swift */,
-				EC1CE99C2D5235720082FD4F /* GetUserQuizesResponse.swift */,
-				ECDFC4542D6D46F400FA450D /* QuizResultForQuizResponse.swift */,
+				EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */,
 				ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */,
 				EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */,
 			);
@@ -776,11 +767,9 @@
 				ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */,
 				EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
-				ECDFC4512D6D387900FA450D /* TakeQuizResponse.swift in Sources */,
 				ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
-				ECDFC4552D6D46F400FA450D /* QuizResultForQuizResponse.swift in Sources */,
 				EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */,
 				EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */,
 				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
@@ -801,6 +790,7 @@
 				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
 				EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
+				EC15E6392DCEBD1000B885A2 /* QuizResponseModels.swift in Sources */,
 				ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */,
 				ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
@@ -815,14 +805,12 @@
 				EC731E652DCBD463005A064A /* PetItemView.swift in Sources */,
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
-				ECB5F56E2D54E767001AC419 /* GetQuizByIdResponseModel.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
 				EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */,
 				ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */,
 				EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */,
-				EC1CE99D2D5235720082FD4F /* GetUserQuizesResponse.swift in Sources */,
 				EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */,
 				ECCDFAF42DC954C50044DAC2 /* GetMeResponseModel.swift in Sources */,
 				ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */,

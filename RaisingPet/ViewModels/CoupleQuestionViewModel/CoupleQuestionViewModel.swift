@@ -8,157 +8,166 @@
 import Foundation
 import Alamofire
 
-
+@MainActor
 class CoupleQuestionViewModel: ObservableObject {
     @Published var quiz: [QuizModel] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var selectedQuiz: GetQuizByIdResponseModel.QuizDetailModel?
-    @Published var quizResult: QuizResultForQuizResponseFormattedQuizResult? // quizResultForQuiz sonucu
+    @Published var quizResult: QuizResultForQuizResponseFormattedQuizResult?
     @Published var quizResultLoaded: Bool = false
-    func fetchQuizzes() {
+    var cachedQuizResults: [String: QuizResultForQuizResponseFormattedQuizResult] = [:]
+
+    private var headers: HTTPHeaders {
+        let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
+        return [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+    }
+
+    func checkFriendship() async -> Bool {
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
+
+        let url = Utilities.Constants.Endpoints.Friends.list
+
+        do {
+            let response = try await AF.request(url, method: .get, headers: headers)
+                .validate()
+                .serializingDecodable(FriendResponse.self)
+                .value
+            return !response.data.friends.isEmpty
+        } catch {
+            errorMessage = "Arkadaş kontrolü başarısız: \(error.localizedDescription)"
+            print("Check friendship error: \(error)")
+            return false
+        }
+    }
+
+    func fetchQuizzes() async {
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
+
         let url = Utilities.Constants.Endpoints.Quiz.getUserQuizes
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
+
+        do {
+            let response = try await AF.request(url, method: .get, headers: headers)
+                .validate()
+                .serializingDecodable(GetUserQuizes.self)
+                .value
+            self.quiz = response.data
+        } catch {
+            errorMessage = "Hata: Quiz’ler yüklenemedi - \(error.localizedDescription)"
+            print("Fetch quizzes error: \(error)")
+        }
+    }
+
+    func fetchQuizById(quizId: String) async {
         isLoading = true
         errorMessage = nil
-        
-        AF.request(url, method: .get, headers: headers)
-            .validate()
-            .responseDecodable(of: GetUserQuizes.self) { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let data):
-                        print(data)
-                        self.quiz = data.data
-                        self.isLoading = false
-                    case .failure(let error):
-                        self.errorMessage = "Hata:1 \(error.localizedDescription)"
-                        self.isLoading = false
-                    }
-                }
-            }
-    }
-    
-    func fetchQuizById(quizId: String) {
+        defer { isLoading = false }
+
         let url = Utilities.Constants.Endpoints.Quiz.getQuizById.replacingOccurrences(of: ":id", with: quizId)
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        
+
+        do {
+            let response = try await AF.request(url, method: .get, headers: headers)
+                .validate()
+                .serializingDecodable(GetQuizByIdResponseModel.self)
+                .value
+            self.selectedQuiz = response.data.data
+        } catch {
+            errorMessage = "Hata: Quiz yüklenemedi - \(error.localizedDescription)"
+            print("Fetch quiz by id error: \(error)")
+        }
+    }
+
+    func takeQuiz(takeQuizObject: TakeQuizRequest) async {
         isLoading = true
         errorMessage = nil
-        
-        AF.request(url, method: .get, headers: headers)
-            .validate()
-            .responseDecodable(of: GetQuizByIdResponseModel.self) { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let data):
-                        self.selectedQuiz = data.data.data
-                        print(self.selectedQuiz as Any)
-                        self.isLoading = false
-                    case .failure(let error):
-                        self.errorMessage = "Hata:2 \(error.localizedDescription)"
-                        print(self.errorMessage as Any)
-                        self.isLoading = false
-                    }
-                }
-            }
-    }
-    
-    func takeQuiz(takeQuizObject: TakeQuizRequest) {
-        let url = Utilities.Constants.Endpoints.Quiz.takeQuiz
-        isLoading = true
+        defer { isLoading = false }
+
         guard let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] else {
-            self.errorMessage = "Hata: Token bulunamadı."
-            self.isLoading = false
+            errorMessage = "Hata: Token bulunamadı."
             return
         }
         guard let quizId = takeQuizObject.quizId else {
-            self.errorMessage = "Hata: Quiz ID eksik."
-            self.isLoading = false
+            errorMessage = "Hata: Quiz ID eksik."
             return
         }
         guard let answers = takeQuizObject.preAnswers, !answers.isEmpty else {
-            self.errorMessage = "Hata: Cevaplar eksik."
-            self.isLoading = false
+            errorMessage = "Hata: Cevaplar eksik."
             return
         }
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)",
-            "Content-Type": "application/json"
-        ]
-        errorMessage = nil
-        
-        AF.request(url, method: .post, parameters: takeQuizObject, encoder: JSONParameterEncoder.default, headers: headers)
-            .validate()
-            .responseString { response in
-                print("Sunucu Yanıtı : \(String(describing: response.value))")
+
+        let url = Utilities.Constants.Endpoints.Quiz.takeQuiz
+        let headers = self.headers
+
+        do {
+            let response = try await AF.request(url, method: .post, parameters: takeQuizObject, encoder: JSONParameterEncoder.default, headers: headers)
+                .validate()
+                .serializingDecodable(TakeQuizResponse.self)
+                .value
+            print("TakeQuiz Başarılı: \(response)")
+            await fetchQuizResult(quizId: quizId) {
+                self.quizResultLoaded = true
+                // takeQuiz sonrası cache’i güncelle
+                self.cachedQuizResults[quizId] = self.quizResult
             }
-            .responseDecodable(of: TakeQuizResponse.self) { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let data):
-                        print("TakeQuiz Başarılı: \(data)")
-                        self.fetchQuizResult(quizId: quizId) {
-                            self.quizResultLoaded = true
-                        }
-                        self.isLoading = false
-                    case .failure(let error):
-                        self.errorMessage = "Hata: \(error.localizedDescription)"
-                        print(self.errorMessage as Any)
-                        self.isLoading = false
-                    }
-                }
-            }
-        
+        } catch {
+            errorMessage = "Hata: Quiz gönderilemedi - \(error.localizedDescription)"
+            print("Take quiz error: \(error)")
+        }
     }
-    
-    func fetchQuizResult(quizId: String, completion : @escaping () -> Void = {}) {
-        let url = Utilities.Constants.Endpoints.Quiz.quizResultForQuiz
+
+    func fetchQuizResult(quizId: String, completion: @escaping () -> Void = {}) async {
         isLoading = true
-        
-        guard let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] else {
-            self.errorMessage = "Hata: Token bulunamadı."
-            self.isLoading = false
-            return
-        }
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(token)",
-            "Content-Type": "application/json"
-        ]
-        
-        let parameters: [String: String] = ["quizId": quizId]
-        
         errorMessage = nil
-        
-        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-            .validate()
-            .responseString { response in
-                print("Sunucudan gelen cevap : \(response)")
-            }
-            .responseDecodable(of: QuizResultForQuizResponse.self) { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let data):
-                        self.quizResult = data.data?.formattedQuizResult
-                        self.isLoading = false
-                        completion()
-                    case .failure(let error):
-                        self.errorMessage = "Hata: \(error.localizedDescription)"
-                        print(self.errorMessage as Any)
-                        self.isLoading = false
-                        completion()
-                    }
-                }
-            }
+        defer { isLoading = false }
+
+        let url = Utilities.Constants.Endpoints.Quiz.quizResultForQuiz
+        let parameters: [String: String] = ["quizId": quizId]
+        let headers = self.headers
+
+        do {
+            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+                .validate()
+                .serializingDecodable(QuizResultForQuizResponse.self)
+                .value
+            self.quizResult = response.data?.formattedQuizResult
+            self.cachedQuizResults[quizId] = self.quizResult // Cache’i güncelle
+            completion()
+        } catch let error as AFError where error.responseCode == 500 {
+            print("Fetch quiz result error (500): \(error.localizedDescription)")
+            self.quizResult = nil // İkisi de çözmemiş, QuestionView’e yönlendir
+            self.cachedQuizResults[quizId] = nil // Cache’i temizle
+            completion()
+        } catch {
+            errorMessage = "Hata: Quiz sonucu yüklenemedi - \(error.localizedDescription)"
+            print("Fetch quiz result error: \(error)")
+            self.quizResult = nil
+            self.cachedQuizResults[quizId] = nil // Cache’i temizle
+            completion()
+        }
+    }
+
+    // Kullanıcının quiz’i çözüp çözmediğini kontrol et
+    func isUserDoneQuiz(quizId: String) async -> (Bool, Bool)? { // (isDone, hasAnswers)
+        if let cachedResult = cachedQuizResults[quizId] {
+            print("isUserDoneQuiz: Cache’ten alındı, quizId: \(quizId)")
+            let hasUserAnswers = cachedResult.answers?.contains(where: { $0.userAnswer != nil }) ?? false
+            let hasFriendAnswers = cachedResult.answers?.contains(where: { $0.friendAnswer != nil }) ?? false
+            return (hasUserAnswers, hasFriendAnswers)
+        }
+        await fetchQuizResult(quizId: quizId)
+        if let result = self.quizResult {
+            print("isUserDoneQuiz: Taze veri çekildi, quizId: \(quizId)")
+            let hasUserAnswers = result.answers?.contains(where: { $0.userAnswer != nil }) ?? false
+            let hasFriendAnswers = result.answers?.contains(where: { $0.friendAnswer != nil }) ?? false
+            return (hasUserAnswers, hasFriendAnswers)
+        }
+        return nil // Hata durumunda null
     }
 }

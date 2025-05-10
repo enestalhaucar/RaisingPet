@@ -1,13 +1,22 @@
+//
+//  QuestionView.swift
+//  RaisingPet
+//
+//  Created by Enes Talha Uçar on 6.02.2025.
+//
+
 import SwiftUI
 
-struct CoupleQuestionView : View {
+struct CoupleQuestionView: View {
     @StateObject private var viewModel = CoupleQuestionViewModel()
     @State private var selectedTab: Tab = .harmony
-    @State private var selectedIcon : Int = 0
-    @State private var sentQuizId : String = ""
-    
+    @State private var selectedIcon: Int = 0
+    @State private var sentQuizId: String = ""
+    @State private var shouldNavigateToFriends = false
+    @State private var navigationPath = NavigationPath()
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             VStack(spacing: 20) {
                 HStack(spacing: 20) {
                     CoupleQuestionHeaderBarIcon(imageName: "harmonyIcon", text: "Harmony", color: .blue.opacity(0.2), isSelected: selectedIcon == 0)
@@ -18,102 +27,210 @@ struct CoupleQuestionView : View {
                         .onTapGesture {
                             selectedIcon = 1
                         }
-                }.frame(height: 75)
-                    .background(Color.white)
-                
+                }
+                .frame(height: 75)
+                .background(Color.white)
+                .font(.nunito(.medium, .body16))
+
                 Rectangle()
                     .frame(width: Utilities.Constants.width, height: 6)
                     .foregroundStyle(.gray.opacity(0.2))
-                
+
                 if selectedTab == .harmony {
                     if viewModel.isLoading {
                         LoadingAnimationView()
-                    } else if let errorMessage = viewModel.errorMessage {
+                    } else if let errorMessage = viewModel.errorMessage, errorMessage.contains("500") == false {
                         Text(errorMessage)
+                            .font(.nunito(.medium, .body16))
                             .foregroundColor(.red)
+                    } else if shouldNavigateToFriends {
+                        VStack {
+                            Text("Bu sayfayı sadece arkadaşın olduğunda kullanabilirsin!")
+                                .font(.nunito(.medium, .subheadline15))
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            Button(action: {
+                                shouldNavigateToFriends = false
+                                navigateToFriends()
+                            }) {
+                                Text("Arkadaş Ekle")
+                                    .frame(width: 200, height: 50)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .font(.nunito(.medium, .body16))
+                            }
+                        }
                     } else if viewModel.quiz.isEmpty {
                         Text("Veri Bulunamadı")
+                            .font(.nunito(.medium, .body16))
                     } else {
                         ScrollView {
                             VStack(spacing: 15) {
                                 ForEach(viewModel.quiz.sorted(by: { ($0.title ?? "-") < ($1.title ?? "-") }), id: \.id) { quiz in
-                                    QuizRowView(quiz: quiz)
+                                    QuizRowView(quiz: quiz, viewModel: viewModel, navigationPath: $navigationPath)
                                 }
                             }
-                        }.scrollIndicators(.hidden)
+                        }
+                        .scrollIndicators(.hidden)
                     }
                 } else {
                     AITherapistView()
                 }
                 Spacer()
-            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .background(Color(.systemBackground))
-        }.onAppear {
-            viewModel.fetchQuizzes()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(Color(.systemBackground))
+            .navigationDestination(isPresented: $shouldNavigateToFriends) {
+                FriendsView()
+            }
+            .navigationDestination(for: String.self) { destination in
+                if destination.starts(with: "question_") {
+                    let quizId = destination.replacingOccurrences(of: "question_", with: "")
+                    QuestionView(quizId: quizId)
+                } else if destination.starts(with: "result_") {
+                    let quizId = destination.replacingOccurrences(of: "result_", with: "")
+                    QuizResultView(quizId: quizId)
+                } else {
+                    EmptyView()
+                }
+            }
         }
-    }
-}
-
-#Preview {
-    CoupleQuestionView()
-}
-
-
-
-struct QuizRowView : View {
-    let quiz : QuizModel
-    private func destinationView(for quiz : QuizModel) -> some View {
-        if quiz.quizStatus == .finished {
-            return AnyView(QuizResultView(quizId: quiz.id ?? "-"))
-        } else {
-            return AnyView(QuestionView(quizId: quiz.id ?? "-"))
+        .onAppear {
+            Task {
+                let hasFriend = await viewModel.checkFriendship()
+                if !hasFriend {
+                    shouldNavigateToFriends = true
+                } else {
+                    await viewModel.fetchQuizzes()
+                }
+            }
         }
-    }
-    var body: some View {
-        NavigationLink(destination: destinationView(for: quiz)) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .frame(height: 56)
-                    .foregroundStyle(.blue.opacity(0.09))
-                
-                HStack(spacing: 25) {
-                    // Icon
-                    Image("harmonyIcon")
-                        .resizable()
-                        .frame(width: 30,height: 30)
-                    
-                    Text(quiz.title ?? "-")
-                        .font(.nunito(.light, .caption12))
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Spacer()
-                    
-                    if quiz.quizStatus == .finished {
-                        Image(systemName: "checkmark")
+        .onChange(of: navigationPath) { newPath in
+            // navigationPath boşaldığında (geri dönüldüğünde) quiz’leri yeniden çek ve cache’i temizle
+            if newPath.isEmpty {
+                Task {
+                    let hasFriend = await viewModel.checkFriendship()
+                    if !hasFriend {
+                        shouldNavigateToFriends = true
+                    } else {
+                        print("navigationPath boşaldı, quiz’ler yeniden çekiliyor ve cache temizleniyor")
+                        viewModel.cachedQuizResults.removeAll() // Cache’i sıfırla
+                        await viewModel.fetchQuizzes()
                     }
-                }.padding(.horizontal, 20)
-            }.frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
+                }
+            }
         }
+    }
+
+    private func navigateToFriends() {
+        shouldNavigateToFriends = true
     }
 }
 
+struct QuizRowView: View {
+    let quiz: QuizModel
+    @ObservedObject var viewModel: CoupleQuestionViewModel
+    @Binding var navigationPath: NavigationPath
+    @State private var isUserDone: Bool = false
+    @State private var hasFriendDone: Bool = false
+    @State private var isLoading: Bool = false
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 25)
+                .frame(height: 56)
+                .foregroundStyle(.blue.opacity(0.09))
+
+            HStack(spacing: 25) {
+                Image(systemName: getCategoryIcon(quiz.category))
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundStyle(.gray)
+
+                Text(quiz.title ?? "-")
+                    .font(.nunito(.light, .body16))
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                Spacer()
+
+                if quiz.quizStatus == .continued {
+                    Image(systemName: "clock")
+                        .foregroundStyle(.orange)
+                } else if quiz.quizStatus == .finished {
+                    Image(systemName: "checkmark")
+                        .foregroundStyle(.green)
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+        .frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
+        .onTapGesture {
+            Task {
+                isLoading = true
+                print("Quiz’e tıklandı: \(quiz.id ?? "-")")
+                if let (userDone, friendDone) = await viewModel.isUserDoneQuiz(quizId: quiz.id ?? "") {
+                    isUserDone = userDone
+                    hasFriendDone = friendDone
+                    print("isUserDone: \(isUserDone), hasFriendDone: \(hasFriendDone)")
+                } else {
+                    isUserDone = false
+                    hasFriendDone = false
+                    print("Hata durumu: isUserDone ve hasFriendDone false")
+                }
+                isLoading = false
+
+                // Yönlendirme
+                if !isUserDone {
+                    print("QuestionView’e yönlendiriliyor: question_\(quiz.id ?? "-")")
+                    navigationPath.append("question_\(quiz.id ?? "-")")
+                } else {
+                    print("QuizResultView’e yönlendiriliyor: result_\(quiz.id ?? "-")")
+                    navigationPath.append("result_\(quiz.id ?? "-")")
+                }
+            }
+        }
+        .overlay {
+            if isLoading {
+                ProgressView()
+            }
+        }
+    }
+
+    private func getCategoryIcon(_ category: QuizCategoryModel?) -> String {
+        switch category {
+        case .drink: return "cup.and.saucer"
+        case .fashion: return "tshirt"
+        case .food: return "fork.knife"
+        case .hobby: return "paintbrush"
+        case .movie: return "film"
+        case .music: return "music.note"
+        case .pet: return "pawprint"
+        case .sport: return "figure.walk"
+        case .tech: return "laptopcomputer"
+        case .travel: return "airplane"
+        case .unknown, .none: return "questionmark.circle"
+        }
+    }
+}
 
 enum Tab {
     case harmony, aiTherapist
 }
 
 struct CoupleQuestionHeaderBarIcon: View {
-    var imageName : String
-    var text : String
-    var color : Color
-    var isSelected : Bool
+    var imageName: String
+    var text: String
+    var color: Color
+    var isSelected: Bool
     var body: some View {
         HStack(spacing: 10) {
             Image(imageName)
                 .resizable()
                 .frame(width: 30, height: 30)
             Text(text)
+                .font(.nunito(.medium, .body16))
         }
         .padding()
         .background(color)
@@ -124,6 +241,7 @@ struct CoupleQuestionHeaderBarIcon: View {
         )
     }
 }
+
 struct AITherapistView: View {
     var body: some View {
         VStack(spacing: 20) {
@@ -134,12 +252,11 @@ struct AITherapistView: View {
                 .foregroundStyle(.gray.opacity(0.4))
             VStack(spacing: 8) {
                 Text("AI Terapist Geliştiriliyor")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.nunito(.semiBold, .title222))
                     .foregroundStyle(.primary)
-                
+
                 Text("Şu anda AI Terapist özelliğimizi en iyi hale getirmek için çalışıyoruz. Çok yakında size yapay zeka destekli rehberlik sunacağız. Lütfen bizi takip etmeye devam edin!")
-                    .font(.body)
+                    .font(.nunito(.regular, .body16))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
             }
@@ -148,5 +265,3 @@ struct AITherapistView: View {
         .padding()
     }
 }
-
-

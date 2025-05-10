@@ -15,8 +15,8 @@ struct QuestionView: View {
     @State private var isQuizCompleted = false
     @State private var selectedAnswers: [QuizAnswer] = []
     @State private var sendableQuizObject: TakeQuizRequest = TakeQuizRequest(quizId: "", preAnswers: [])
-    @State private var isInitialized = false 
-    
+    @State private var isInitialized = false
+
     func selectAnswer(_ answer: String, questionId: String) {
         let selectedAnswer = QuizAnswer(question: .init(_id: questionId), option: answer)
         selectedAnswers.append(selectedAnswer)
@@ -33,53 +33,56 @@ struct QuestionView: View {
             }
             sendableQuizObject = TakeQuizRequest(quizId: quizId, preAnswers: selectedAnswers)
             print("Gönderilen Veri: \(sendableQuizObject)")
-            submitQuiz(sendableQuizObject)
+            Task {
+                await submitQuiz(sendableQuizObject)
+            }
         }
     }
-    
-    func submitQuiz(_ object: TakeQuizRequest) {
-        viewModel.takeQuiz(takeQuizObject: object)
+
+    func submitQuiz(_ object: TakeQuizRequest) async {
+        await viewModel.takeQuiz(takeQuizObject: object)
     }
-    
+
     var body: some View {
-        NavigationStack {
+        Group {
             if isQuizCompleted && viewModel.quizResultLoaded {
+                // Üstteki NavigationStack tarafından yönetilecek
                 QuizResultView(quizId: quizId)
             } else if viewModel.isLoading {
                 LoadingAnimationView()
-            } else {
-                VStack {
-                    if let quiz = viewModel.selectedQuiz?.questions, let questionQuiz = viewModel.selectedQuiz?.questions?[currentQuestionIndex] {
-                        if currentQuestionIndex < quiz.count {
-                            let question = questionQuiz
-                            
-                            VStack(spacing: 20) {
-                                QuestionOptionView(option: question.options[0])
-                                    .onTapGesture {
-                                        selectAnswer(question.options[0], questionId: question.id)
-                                    }
-                                Text("vs")
-                                    .font(.nunito(.medium, .title320))
-                                QuestionOptionView(option: question.options[1])
-                                    .onTapGesture {
-                                        selectAnswer(question.options[1], questionId: question.id)
-                                    }
-                            }
-                            .transition(.slide)
-                            .animation(.easeInOut, value: currentQuestionIndex)
-                            .padding()
+            } else if let errorMessage = viewModel.errorMessage {
+                Text("Hata: \(errorMessage)")
+                    .font(.nunito(.medium, .body16))
+                    .foregroundColor(.red)
+            } else if let quiz = viewModel.selectedQuiz?.questions, !quiz.isEmpty, currentQuestionIndex < quiz.count {
+                let question = quiz[currentQuestionIndex]
+                VStack(spacing: 20) {
+                    QuestionOptionView(option: question.options[0])
+                        .onTapGesture {
+                            selectAnswer(question.options[0], questionId: question.id)
                         }
-                    } else {
-                        Text("Veri bulunamadı")
-                    }
+                    Text("vs")
+                        .font(.nunito(.medium, .title320))
+                    QuestionOptionView(option: question.options[1])
+                        .onTapGesture {
+                            selectAnswer(question.options[1], questionId: question.id)
+                        }
                 }
-                .onAppear {
-                    if !isInitialized { // Yalnızca ilk yüklemede çalışır
-                        viewModel.fetchQuizById(quizId: quizId)
-                        print("Fetch By Quiz Id ile gönderilen QuizID: \(quizId)")
-                        isInitialized = true // Bayrağı true yap
-                    }
+                .transition(.slide)
+                .animation(.easeInOut, value: currentQuestionIndex)
+                .padding()
+            } else {
+                Text("Soru yüklenemedi veya veri bulunamadı.")
+                    .font(.nunito(.medium, .body16))
+            }
+        }
+        .onAppear {
+            if !isInitialized {
+                Task {
+                    await viewModel.fetchQuizById(quizId: quizId)
+                    print("Fetch By Quiz Id ile gönderilen QuizID: \(quizId)")
                 }
+                isInitialized = true
             }
         }
     }
@@ -95,4 +98,3 @@ struct QuestionOptionView: View {
             .cornerRadius(20)
     }
 }
-
