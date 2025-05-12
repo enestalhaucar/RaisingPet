@@ -2,7 +2,7 @@
 //  PetView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 21.08.2024.
+//  Created by Enes Talha Uçar on 21.08.2024.
 //
 
 import SwiftUI
@@ -24,10 +24,10 @@ struct EggAndPetsView: View {
                         .padding(.top, 50)
                 } else if let error = vm.errorMessage {
                     VStack {
-                        Text("Hata: \(error)")
+                        Text(String(format: "egg_pets_error".localized(), error))
                             .foregroundColor(.red)
                             .padding()
-                        Button("Yeniden Dene") {
+                        Button("egg_pets_retry".localized()) {
                             Task {
                                 await vm.fetchInventory()
                                 await vm.fetchPets()
@@ -41,7 +41,7 @@ struct EggAndPetsView: View {
                             headerButtons
 
                             // Yumurtalar Bölümü
-                            SectionHeaderView(title: "Yumurtalar")
+                            SectionHeaderView(title: "egg_pets_eggs".localized())
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(vm.eggs, id: \.id) { egg in
                                     EggCellView(item: egg) {
@@ -62,7 +62,7 @@ struct EggAndPetsView: View {
                             .padding(.horizontal, 16)
 
                             // Sahiplendiklerin Bölümü
-                            SectionHeaderView(title: "Sahiplendiklerin")
+                            SectionHeaderView(title: "egg_pets_adopted".localized())
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(vm.pets) { pet in
                                     PetCellView(pet: pet)
@@ -84,7 +84,11 @@ struct EggAndPetsView: View {
                 await vm.fetchPets()
             }
             .alert(isPresented: .init(get: { vm.errorMessage != nil }, set: { _ in vm.errorMessage = nil })) {
-                Alert(title: Text("Hata"), message: Text(vm.errorMessage ?? "Bilinmeyen hata"), dismissButton: .default(Text("Tamam")))
+                Alert(
+                    title: Text("friends_error_title".localized()),
+                    message: Text(vm.errorMessage ?? "friends_unknown_error".localized()),
+                    dismissButton: .default(Text("friends_alert_ok".localized()))
+                )
             }
         }
     }
@@ -94,21 +98,21 @@ struct EggAndPetsView: View {
             Button { /* Yeni yumurta al */ } label: {
                 VStack(spacing: 8) {
                     Image("getNewEgg").resizable().frame(width: 32, height: 32)
-                    Text("Yeni Yumurta Al").font(.system(size: 12))
+                    Text("egg_pets_get_new_egg".localized()).font(.system(size: 12))
                 }
             }
             Spacer()
             NavigationLink(destination: ShopScreenView()) {
                 VStack(spacing: 8) {
                     Image("GoMarket")
-                    Text("Markete Git").font(.system(size: 12))
+                    Text("egg_pets_go_market".localized()).font(.system(size: 12))
                 }
             }
             Spacer()
             Button { /* Ebeveynlik Yap */ } label: {
                 VStack(spacing: 8) {
                     Image("parent")
-                    Text("Ebeveynlik Yap").font(.system(size: 12))
+                    Text("egg_pets_parenting".localized()).font(.system(size: 12))
                 }
             }
         }
@@ -132,8 +136,4 @@ struct SectionHeaderView: View {
         .background(Color.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
-}
-
-#Preview {
-    EggAndPetsView()
 }

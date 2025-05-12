@@ -15,6 +15,9 @@ final class Utilities {
     struct Constants {
         static let baseURL = "http://3.74.213.54:3000/api/v1"
         
+        // Test için onboarding
+        static let onboarding : Bool = false
+        
         // Screen Size
         static let width = UIScreen.main.bounds.width
         static let height = UIScreen.main.bounds.height
@@ -32,6 +35,7 @@ final class Utilities {
                 static let login = "\(baseURL)/users/login"
                 static let signup = "\(baseURL)/users/signup"
                 static let me = "\(baseURL)/users/me"
+                static let updateMe = "\(baseURL)/users/update-me"
             }
             
             // Friends Endpoints
@@ -88,14 +92,16 @@ final class Utilities {
         let email = UserDefaults.standard.string(forKey: "userEmail") ?? "N/A"
         let friendTag = UserDefaults.standard.string(forKey: "userFriendTag") ?? "N/A"
         let userId = UserDefaults.standard.string(forKey: "userId") ?? "N/A"
+        let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") ?? "N/A"
         
         return [
-            "token" : token,
+            "token": token,
             "firstname": firstname,
             "surname": surname,
             "email": email,
             "friendTag": friendTag,
-            "userId": userId
+            "userId": userId,
+            "phoneNumber": phoneNumber
         ]
     }
 

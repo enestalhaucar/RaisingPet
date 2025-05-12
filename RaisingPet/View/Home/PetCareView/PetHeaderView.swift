@@ -28,11 +28,11 @@ struct PetHeaderView: View {
             Image("petCareViewBg")
                 .resizable()
                 .scaledToFill()
-                .frame(height: UIScreen.main.bounds.height * 0.4) // 10'da 4
+                .frame(height: UIScreen.main.bounds.height * 0.4)
                 .clipped()
             VStack(spacing: 0) {
                 Spacer()
-                    
+                Spacer()
                 HStack {
                     VStack(spacing: 20) {
                         Image("historyIcon")
@@ -60,6 +60,9 @@ struct PetHeaderView: View {
         }
         .frame(height: UIScreen.main.bounds.height * 0.4)
         .ignoresSafeArea(.all)
+        .onAppear {
+            vm.currentPet = pet // Pet’i ayarla
+        }
     }
 }
 

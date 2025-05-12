@@ -2,9 +2,8 @@
 //  RootView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 30.07.2024.
+//  Created by Enes Talha Uçar on 30.07.2024.
 //
-
 
 import SwiftUI
 
@@ -12,9 +11,6 @@ struct RootView: View {
     @EnvironmentObject var appState: AppState
     @State private var showSplash = true
     @State private var showOnboarding = false
-    
-    // Test için manuel kontrol
-    private let isTesting = true // Test ederken true yap, production'da false olacak
     
     var body: some View {
         ZStack {
@@ -25,7 +21,7 @@ struct RootView: View {
                     showSplash = false
                     // İlk açılışta onboarding gösterilecek mi kontrol et
                     let hasSeenOnboarding = UserDefaults.hasSeenOnboarding
-                    if isTesting || !hasSeenOnboarding {
+                    if Utilities.Constants.onboarding || !hasSeenOnboarding {
                         showOnboarding = true
                     }
                 })
@@ -41,28 +37,28 @@ struct RootView: View {
                             .tabItem {
                                 VStack {
                                     Image(systemName: "house")
-                                    Text("Home")
+                                    Text("home_tab".localized())
                                 }
                             }
-                        EmotionsView()
+                        WallpaperView()
                             .tabItem {
                                 VStack {
-                                    Image(systemName: "hands.and.sparkles")
-                                    Text("Emotions")
+                                    Image(systemName: "photo")
+                                    Text("wallpapers_tab".localized())
                                 }
                             }
                         CoupleQuestionView()
                             .tabItem {
                                 VStack {
                                     Image(systemName: "person.fill.questionmark")
-                                    Text("Couple Questions")
+                                    Text("couple_questions_tab".localized())
                                 }
                             }
                         ProfileView()
                             .tabItem {
                                 VStack {
                                     Image(systemName: "person")
-                                    Text("Profile")
+                                    Text("profile_tab".localized())
                                 }
                             }
                             .environmentObject(appState)
@@ -94,5 +90,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .environmentObject(AppState()) // Preview için AppState ekle
+        .environmentObject(AppState())
 }

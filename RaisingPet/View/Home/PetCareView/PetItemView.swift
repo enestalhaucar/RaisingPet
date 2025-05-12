@@ -9,16 +9,8 @@ import SwiftUI
 
 struct PetItemView: View {
     let groupedItem: GroupedPetItem
-
-    private var itemImageName: String {
-        switch groupedItem.name.lowercased() {
-        case "soup", "meat", "fruit", "dessert", "vegetable", "nuts": return "fork.knife"
-        case "cola", "water", "milk", "cocktail", "fruit juice", "coffee": return "drop.fill"
-        case "normal soap", "wet wipe", "sponge", "rainbow soap", "perfume", "toilet paper": return "soap.fill"
-        case "love", "rope", "trampoline", "music", "ball", "rattle": return "heart.circle.fill"
-        default: return "questionmark.square.fill"
-        }
-    }
+    @EnvironmentObject var vm: InventoryViewModel
+    @State private var isUsing = false
 
     var body: some View {
         VStack(spacing: 8) {
@@ -27,7 +19,8 @@ struct PetItemView: View {
                     .fill(Color.white)
                     .frame(width: 50, height: 50)
                     .shadow(radius: 4)
-                Image(systemName: itemImageName)
+                // Asset’ten görsel çek, yoksa sistem ikonu placeholder
+                Image("\(groupedItem.name)")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
@@ -45,17 +38,25 @@ struct PetItemView: View {
                 .background(Color.indigo.opacity(0.6))
                 .clipShape(Capsule())
             Button(action: {
-                // Şimdilik boş, ileride servis eklenecek
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isUsing = true
+                }
+                Task {
+                    await vm.usePetItem(petId: vm.currentPet?.id ?? "", petItemId: groupedItem.id)
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isUsing = false
+                    }
+                }
             }) {
-                Text("Kullan")
+                Text("pet_item_use_button".localized())
                     .font(.caption2)
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 4)
-                    .background(Color.green.opacity(0.7))
+                    .background(isUsing ? Color.gray.opacity(0.7) : Color.green.opacity(0.7))
                     .cornerRadius(10)
             }
-            .disabled(groupedItem.totalQuantity == 0)
+            .disabled(groupedItem.totalQuantity == 0 || isUsing)
             .opacity(groupedItem.totalQuantity == 0 ? 0.5 : 1)
         }
         .frame(width: 100, height: 140)
@@ -67,34 +68,4 @@ struct PetItemView: View {
         .opacity(groupedItem.totalQuantity > 0 ? 1 : 0.5)
         .transition(.opacity.combined(with: .scale))
     }
-}
-
-#Preview {
-    PetItemView(groupedItem: GroupedPetItem(
-        id: "67fa5e6cc335521510894ac7",
-        name: "soup",
-        effectType: .edibleMaterial,
-        totalQuantity: 3,
-        item: InventoryItem(
-            id: "67fa5e6cc335521510894ac7",
-            itemType: .petItem,
-            itemId: ItemDetail(
-                id: "67fa5e6cc335521510894ac7",
-                name: "soup",
-                description: "xxx",
-                category: nil,
-                isDeleted: false,
-                version: 0,
-                effectAmount: 50,
-                effectType: .edibleMaterial,
-                barAffected: .hunger,
-                diamondPrice: 20,
-                goldPrice: 200,
-                currencyType: .both,
-                idAlias: nil
-            ),
-            acquiredAt: nil,
-            properties: ItemProperties(egg: nil, quantity: 3, isOwned: nil)
-        )
-    ))
 }

@@ -2,7 +2,7 @@
 //  RegisterView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 29.07.2024.
+//  Created by Enes Talha Uçar on 29.07.2024.
 //
 
 import SwiftUI
@@ -29,22 +29,21 @@ struct SignUpView: View {
                 
                 VStack(spacing: 25) {
                     Spacer()
-                    Text("Welcome Onboard")
+                    Text("signup_welcome_title".localized())
                         .font(.title3)
                         .fontWeight(.semibold)
-                    Text("Let's help you meet your pet")
+                    Text("signup_welcome_subtitle".localized())
                         .font(.headline)
                         .fontWeight(.regular)
                     
                     Spacer()
-                    MailTextField(placeholder: "Enter your Firstname", text: $firstname)
-                    MailTextField(placeholder: "Enter your Surname", text: $surname)
-                    MailTextField(placeholder: "Enter your email", text: $email)
-                    PasswordTextField(placeholder: "Enter Your Password", text: $password)
-                    PasswordTextField(placeholder: "Enter Your Password Again", text: $passwordConfirm)
+                    MailTextField(placeholder: "signup_firstname_placeholder".localized(), text: $firstname)
+                    MailTextField(placeholder: "signup_surname_placeholder".localized(), text: $surname)
+                    MailTextField(placeholder: "signup_email_placeholder".localized(), text: $email)
+                    PasswordTextField(placeholder: "signup_password_placeholder".localized(), text: $password)
+                    PasswordTextField(placeholder: "signup_password_confirm_placeholder".localized(), text: $passwordConfirm)
                     
                     Spacer()
-                    
                     
                     Button(action: {
                         if validateInputs() {
@@ -58,26 +57,21 @@ struct SignUpView: View {
                             viewModel.register(with: requestBody)
                         }
                     }) {
-                        Text("Sign Up")
+                        Text("signup_button".localized())
                             .foregroundStyle(.white)
                             .frame(width: 250, height: 50)
                             .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
                     }
                     .disabled(!validateInputs())
                     
-                    
-                    
-                    
-                    
                     HStack {
-                        Text("Already have an account ?")
+                        Text("signup_already_account".localized())
                         NavigationLink {
                             LoginView(onLoginSuccess: onRegisterSuccess)
                         } label: {
-                            Text("Sign In")
+                            Text("signin_button".localized())
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
-                        
                     }
                 }.padding()
                     .onChange(of: viewModel.isRegistered) { registered in
@@ -93,18 +87,19 @@ struct SignUpView: View {
                     }
                     .alert(isPresented: $showError) {
                         Alert(
-                            title: Text("Registration Error"),
-                            message: Text(viewModel.errorMessage ?? "Unknown error"),
-                            dismissButton: .default(Text("OK"))
+                            title: Text("signup_error_title".localized()),
+                            message: Text(viewModel.errorMessage ?? "signup_unknown_error".localized()),
+                            dismissButton: .default(Text("signup_alert_ok".localized()))
                         )
                     }
             }
         }
     }
+    
     private func validateInputs() -> Bool {
         return !firstname.isEmpty && !surname.isEmpty &&
-        !email.isEmpty && !password.isEmpty &&
-        password == passwordConfirm
+               !email.isEmpty && !password.isEmpty &&
+               password == passwordConfirm
     }
 }
 

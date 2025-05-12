@@ -2,18 +2,17 @@
 //  HomeView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 5.08.2024.
+//  Created by Enes Talha Uçar on 5.08.2024.
 //
 
 import SwiftUI
 
 struct NavigationItem {
-    let title : String?
-    let imageName : String?
-    let subTitle : String?
-    let destination : AnyView?
+    let title: String?
+    let imageName: String?
+    let subTitle: String?
+    let destination: AnyView?
 }
-
 
 struct HomeView: View {
     
@@ -33,14 +32,15 @@ struct HomeView: View {
                         
                         WidgetsPreviewSection()
                         
-                        WidgetsNavigationSection()   
+                        WidgetsNavigationSection()
                         
                     }.toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             NavigationLink(destination: EmptyView()) {
                                 HStack {
                                     Image("squareBtn")
-                                    Text("Stacks").font(.nunito(.semiBold, .callout14))
+                                    Text("home_stacks".localized())
+                                        .font(.nunito(.semiBold, .callout14))
                                 }
                             }
                         }
@@ -53,11 +53,12 @@ struct HomeView: View {
                                 Image("Petiverse")
                                     .resizable()
                                     .frame(width: 32, height: 32)
-                                Text("Petiverse").bold()
+                                Text("home_petiverse".localized())
+                                    .bold()
                             }
                         }
                     }
-                    .padding(.top,30)
+                    .padding(.top, 30)
                     
                 }.scrollIndicators(.hidden)
             }.navigationBarBackButtonHidden()
@@ -69,10 +70,10 @@ struct HomeView: View {
     HomeView()
 }
 
-struct CustomNavigationLink<Destination: View> : View {
-    let view : Destination
-    var imageName : String
-    var text : String
+struct CustomNavigationLink<Destination: View>: View {
+    let view: Destination
+    var imageName: String
+    var text: String
     
     var body: some View {
         VStack {
@@ -171,8 +172,8 @@ struct HomeNewsSection: View {
 }
 
 struct WidgetsPreviewSection: View {
-    let navigationItemsForWidget : [NavigationItem] = [
-        NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "Co-parenting with your pet", destination: AnyView(CountDownSettingsView()))
+    let navigationItemsForWidget: [NavigationItem] = [
+        NavigationItem(title: "pets".localized(), imageName: nil, subTitle: "widgets_pets_subtitle".localized(), destination: AnyView(CountDownSettingsView()))
     ]
     var body: some View {
         VStack(spacing: 16) {
@@ -194,13 +195,13 @@ struct WidgetsPreviewSection: View {
     }
 }
 
-struct WidgetsNavigationSection : View {
-    @EnvironmentObject var currentVM : CurrentUserViewModel
-    let navigationItems : [NavigationItem] = [
-        NavigationItem(title: "Signal", imageName: "signalIcon", subTitle: nil, destination: nil),
-        NavigationItem(title: "Countdown", imageName: "countDownIcon", subTitle: nil, destination: nil),
-        NavigationItem(title: "X-panel", imageName: "signalIcon", subTitle: nil, destination: nil),
-        NavigationItem(title: "Photo", imageName: "photoIcon", subTitle: nil, destination: nil)
+struct WidgetsNavigationSection: View {
+    @EnvironmentObject var currentVM: CurrentUserViewModel
+    let navigationItems: [NavigationItem] = [
+        NavigationItem(title: "widgets_signal".localized(), imageName: "signalIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "widgets_countdown".localized(), imageName: "countDownIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "widgets_x_panel".localized(), imageName: "signalIcon", subTitle: nil, destination: nil),
+        NavigationItem(title: "widgets_photo".localized(), imageName: "photoIcon", subTitle: nil, destination: nil)
     ]
     var body: some View {
         ZStack {

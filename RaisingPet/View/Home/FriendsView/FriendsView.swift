@@ -2,7 +2,7 @@
 //  FriendsView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 6.08.2024.
+//  Created by Enes Talha Uçar on 6.08.2024.
 //
 
 import SwiftUI
@@ -59,7 +59,7 @@ struct FriendsView: View {
 
                     // Your Friends Başlığı
                     HStack {
-                        Text("Your Friends")
+                        Text("friends_your_friends".localized())
                             .font(.nunito(.medium, .title320))
                             .padding(.top, 10)
                         Spacer()
@@ -148,7 +148,7 @@ struct FriendsView: View {
                             HStack {
                                 Image(systemName: "person.badge.plus")
                                     .foregroundStyle(.white)
-                                Text("Add Friend")
+                                Text("friends_add_friend".localized())
                                     .foregroundStyle(.white)
                                     .font(.title2)
                             }
@@ -170,7 +170,7 @@ struct FriendsView: View {
                     .presentationDetents([.height(UIScreen.main.bounds.height * 0.3)])
             }
             .toolbar(.hidden, for: .tabBar)
-            .navigationTitle("friends_relations")
+            .navigationTitle("friends_relations".localized())
             .navigationBarTitleDisplayMode(.inline)
             .task {
                 await viewModel.fetchFriendsList()
@@ -178,9 +178,9 @@ struct FriendsView: View {
             }
             .alert(isPresented: $showDeleteConfirmation) {
                 Alert(
-                    title: Text("Arkadaş Silme"),
-                    message: Text("Arkadaşını silmek istediğine emin misin?"),
-                    primaryButton: .destructive(Text("Sil")) {
+                    title: Text("friends_delete_friend_title".localized()),
+                    message: Text("friends_delete_friend_message".localized()),
+                    primaryButton: .destructive(Text("friends_delete_button".localized())) {
                         if let friend = friendToDelete {
                             Task {
                                 do {
@@ -191,14 +191,18 @@ struct FriendsView: View {
                             }
                         }
                     },
-                    secondaryButton: .cancel(Text("İptal"))
+                    secondaryButton: .cancel(Text("friends_cancel_button".localized()))
                 )
             }
-            .alert("Tag Kopyalandı!", isPresented: $showCopyConfirmation) {
-                Button("Tamam", role: .cancel) {}
+            .alert("friends_tag_copied".localized(), isPresented: $showCopyConfirmation) {
+                Button("friends_alert_ok".localized(), role: .cancel) {}
             }
             .alert(isPresented: .init(get: { viewModel.errorMessage != nil }, set: { _ in viewModel.errorMessage = nil })) {
-                Alert(title: Text("Hata"), message: Text(viewModel.errorMessage ?? "Bilinmeyen hata"), dismissButton: .default(Text("Tamam")))
+                Alert(
+                    title: Text("friends_error_title".localized()),
+                    message: Text(viewModel.errorMessage ?? "friends_unknown_error".localized()),
+                    dismissButton: .default(Text("friends_alert_ok".localized()))
+                )
             }
         }
     }

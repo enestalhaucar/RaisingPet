@@ -2,7 +2,7 @@
 //  SignInView.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 29.07.2024.
+//  Created by Enes Talha Uçar on 29.07.2024.
 //
 
 import SwiftUI
@@ -24,17 +24,15 @@ struct LoginView: View {
                 VStack(spacing: 25) {
                     Spacer()
                     Spacer()
-                    Text("Welcome Back!")
+                    Text("signin_welcome_title".localized())
                         .font(.title3)
                         .fontWeight(.semibold)
                     Image("signInDog")
                     Spacer()
-                    MailTextField(placeholder: "Enter Your Email", text: $email)
-                    PasswordTextField(placeholder: "Enter Your Password", text: $password)
-                    
+                    MailTextField(placeholder: "signin_email_placeholder".localized(), text: $email)
+                    PasswordTextField(placeholder: "signin_password_placeholder".localized(), text: $password)
                     
                     Spacer()
-                    
                     
                     if viewModel.isLoading {
                         LoadingAnimationView()
@@ -42,7 +40,7 @@ struct LoginView: View {
                         Button(action: {
                             viewModel.login(with: email, password: password)
                         }) {
-                            Text("Log In")
+                            Text("signin_button".localized())
                                 .foregroundStyle(.white)
                                 .frame(width: 250, height: 50)
                                 .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
@@ -53,29 +51,22 @@ struct LoginView: View {
                     NavigationLink {
                         
                     } label: {
-                        Text("Forgot Password")
+                        Text("signin_forgot_password".localized())
                             .foregroundStyle(Color("buttonBackgroundColor"))
                             .font(.headline)
                     }
                     
-                    
-                    
-                    
                     HStack {
-                        Text("Don't you have an account ?")
+                        Text("signin_no_account".localized())
                         NavigationLink {
                             SignUpView {
                                 print("register successfull")
                             }
                         } label: {
-                            Text("Sign Up")
+                            Text("signup_button".localized())
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
-                        
                     }
-                    
-                    
-                    
                 }.padding()
                     .onChange(of: viewModel.loginSuccess) { success in
                         if success {
@@ -90,12 +81,11 @@ struct LoginView: View {
                     }
                     .alert(isPresented: $showError) {
                         Alert(
-                            title: Text("Login Error"),
-                            message: Text(viewModel.errorMessage ?? "Unknown error"),
-                            dismissButton: .default(Text("OK"))
+                            title: Text("signin_error_title".localized()),
+                            message: Text(viewModel.errorMessage ?? "signin_unknown_error".localized()),
+                            dismissButton: .default(Text("signin_alert_ok".localized()))
                         )
                     }
-                
             }
         }
     }
@@ -106,5 +96,3 @@ struct LoginView: View {
         print("login successfull")
     }
 }
-
-

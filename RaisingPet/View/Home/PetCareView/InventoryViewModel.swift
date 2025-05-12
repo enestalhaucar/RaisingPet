@@ -8,13 +8,12 @@
 import Foundation
 import Alamofire
 
-// Gruplanmış PetItem için yeni struct
 struct GroupedPetItem: Identifiable {
-    let id: String // itemId._id
+    let id: String
     let name: String
     let effectType: EffectType
     let totalQuantity: Int
-    let item: InventoryItem // Orjinal item'dan bir örnek
+    let item: InventoryItem
 }
 
 @MainActor
@@ -26,11 +25,13 @@ final class InventoryViewModel: ObservableObject {
     @Published var selectedCategory: EffectType? = nil
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var currentPet: Pet?
 
     private let inventoryURL = Utilities.Constants.Endpoints.Inventory.myInventory
     private let hatchURL = Utilities.Constants.Endpoints.Inventory.hatchPets
     private let petsURL = Utilities.Constants.Endpoints.Pets.getPets
     private let deletePetURL = Utilities.Constants.Endpoints.Pets.deletePet
+    private let petItemInteractionURL = Utilities.Constants.Endpoints.Pets.petItemInteraction
 
     private var headers: HTTPHeaders {
         let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
@@ -118,39 +119,77 @@ final class InventoryViewModel: ObservableObject {
     }
     
     func deletePet(petId: String) async throws {
-            isLoading = true
-            errorMessage = nil
-            defer { isLoading = false }
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
 
-            let url = deletePetURL.replacingOccurrences(of: ":id", with: petId) // Dinamik :id ile URL oluştur
+        let url = deletePetURL.replacingOccurrences(of: ":id", with: petId)
 
-            do {
-                let response = try await AF.request(url,
-                                                    method: .get,
-                                                    headers: headers)
-                    .validate()
+        do {
+            let response = try await AF.request(url,
+                                                method: .get,
+                                                headers: headers)
+                .validate()
 
-
-                if let httpResponse = response.response, httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
-                    // 200 veya 204 ile başarı kabul edilir
-                    await fetchPets()
-                } else {
-                    throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.response?.statusCode ?? 500))
-                }
-            } catch {
-                errorMessage = "Pet silme başarısız: \(error.localizedDescription)"
-                print("Delete pet hatası: \(error)")
-                throw error
+            if let httpResponse = response.response, httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
+                await fetchPets()
+            } else {
+                throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.response?.statusCode ?? 500))
             }
+        } catch {
+            errorMessage = "Pet silme başarısız: \(error.localizedDescription)"
+            print("Delete pet hatası: \(error)")
+            throw error
         }
+    }
     
-    func groupedPetItems() -> [GroupedPetItem] {
-        // Aynı isimdeki item'ları grupla
-        let groupedItems = Dictionary(grouping: petItems, by: { $0.itemId.name })
+    func usePetItem(petId: String, petItemId: String) async {
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
+
+        let params: [String: Any] = ["petId": petId, "petItemId": petItemId]
         
+        do {
+            let response = try await AF.request(petItemInteractionURL,
+                                               method: .post,
+                                               parameters: params,
+                                               encoding: JSONEncoding.default,
+                                               headers: headers)
+                .validate()
+                .serializingDecodable(PetItemInteractionResponse.self)
+                .value
+
+            // Eğer data varsa güncelle, yoksa manuel fetch yap
+            if let updatedPet = response.data?.pet {
+                if let index = pets.firstIndex(where: { $0.id == updatedPet.id }) {
+                    pets[index] = updatedPet
+                }
+                currentPet = updatedPet
+            }
+            if let updatedInventory = response.data?.inventory {
+                petItems = updatedInventory.items.filter { $0.isPetItem }
+            } else {
+                // Data yoksa, manuel olarak inventory ve pets’i güncelle
+                await fetchInventory()
+                await fetchPets()
+                // fetchPets sonrası currentPet’i güncelle
+                if let updatedPet = pets.first(where: { $0.id == petId }) {
+                    currentPet = updatedPet
+                }
+            }
+            print("Pet item used successfully: \(response.message)")
+        } catch {
+            errorMessage = "Eşya kullanımı başarısız: \(error.localizedDescription)"
+            print("Use pet item error: \(error)")
+        }
+    }
+
+    func groupedPetItems() -> [GroupedPetItem] {
+        let groupedItems = Dictionary(grouping: petItems, by: { $0.itemId.name })
         return groupedItems.map { name, items in
             let totalQuantity = items.reduce(0) { $0 + ($1.properties.quantity ?? 0) }
-            let firstItem = items.first! // En az bir item var
+            let firstItem = items.first!
             return GroupedPetItem(
                 id: firstItem.itemId.id,
                 name: name,
@@ -159,8 +198,8 @@ final class InventoryViewModel: ObservableObject {
                 item: firstItem
             )
         }
-        .filter { $0.totalQuantity > 0 } // quantity 0 olanları gizle
-        .sorted { $0.name < $1.name } // İsim sırasına göre sırala
+        .filter { $0.totalQuantity > 0 }
+        .sorted { $0.name < $1.name }
     }
 
     func filteredPetItems() -> [GroupedPetItem] {
@@ -170,4 +209,15 @@ final class InventoryViewModel: ObservableObject {
         }
         return grouped
     }
+}
+
+struct PetItemInteractionResponse: Codable {
+    let status: String
+    let message: String
+    let data: PetItemInteractionData?
+}
+
+struct PetItemInteractionData: Codable {
+    let pet: Pet?
+    let inventory: Inventory?
 }

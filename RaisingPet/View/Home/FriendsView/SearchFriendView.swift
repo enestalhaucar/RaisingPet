@@ -18,7 +18,7 @@ struct SearchFriendView: View {
         VStack(spacing: 16) {
             // Başlık ve Sağ Üst Butonlar
             HStack {
-                Text("Arkadaş Ara")
+                Text("search_friend_title".localized())
                     .font(.headline)
                     .foregroundColor(.primary)
                 Spacer()
@@ -28,7 +28,7 @@ struct SearchFriendView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundStyle(.gray)
-                        Text("Share")
+                        Text("search_friend_share".localized())
                             .font(.nunito(.medium, .body16))
                             .foregroundStyle(.gray)
                     }
@@ -43,7 +43,7 @@ struct SearchFriendView: View {
             .padding(.top, 16)
             .padding(.horizontal)
 
-            TextField("Kullanıcı tag’ini gir (ör: ÖmerDuman#5368)", text: $searchText)
+            TextField("search_friend_placeholder".localized(), text: $searchText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
                 .frame(height: 40)
@@ -83,11 +83,11 @@ struct SearchFriendView: View {
                 }
                 .padding()
             } else if searchText.isEmpty {
-                Text("Bir tag girerek arkadaş ara.")
+                Text("search_friend_empty_search".localized())
                     .font(.nunito(.medium, .body16))
                     .foregroundColor(.secondary)
             } else {
-                Text("Arkadaş bulunamadı.")
+                Text("search_friend_not_found".localized())
                     .font(.nunito(.medium, .body16))
                     .foregroundColor(.secondary)
             }
@@ -116,7 +116,7 @@ struct SearchFriendView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .foregroundStyle(viewModel.searchedFriend.id.isEmpty ? .yellow.opacity(0.3) : .blue.opacity(0.7))
-                    Text(viewModel.searchedFriend.id.isEmpty ? "Arkadaşı Arat" : "Arkadaşı Ekle")
+                    Text(viewModel.searchedFriend.id.isEmpty ? "search_friend_search_button".localized() : "search_friend_add_button".localized())
                         .font(.nunito(.medium, .body16))
                         .foregroundColor(viewModel.searchedFriend.id.isEmpty ? .black : .white)
                 }
@@ -134,7 +134,11 @@ struct SearchFriendView: View {
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .alert(isPresented: .init(get: { viewModel.errorMessage != nil }, set: { _ in viewModel.errorMessage = nil })) {
-            Alert(title: Text("Hata"), message: Text(viewModel.errorMessage ?? "Bilinmeyen hata"), dismissButton: .default(Text("Tamam")))
+            Alert(
+                title: Text("friends_error_title".localized()),
+                message: Text(viewModel.errorMessage ?? "friends_unknown_error".localized()),
+                dismissButton: .default(Text("friends_alert_ok".localized()))
+            )
         }
     }
 }

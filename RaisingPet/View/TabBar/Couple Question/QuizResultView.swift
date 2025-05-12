@@ -34,7 +34,7 @@ struct QuizResultView: View {
                                     .cornerRadius(10)
                                     .font(.nunito(.light, .body16))
 
-                                Text("VS")
+                                Text("quiz_result_vs".localized())
                                     .font(.nunito(.medium, .title320))
                                     .bold()
                                     .padding(.horizontal, 8)
@@ -50,13 +50,13 @@ struct QuizResultView: View {
                     }
                     .padding()
                 } else {
-                    Text("Sonuçlar yüklenemedi.")
+                    Text("quiz_result_no_data".localized())
                         .font(.nunito(.medium, .body16))
                 }
 
                 // Alt buton (Test Tamamlandı ve Geri Dön)
                 VStack {
-                    Text("Testi başarıyla tamamladın!")
+                    Text("quiz_result_completed".localized())
                         .font(.nunito(.medium, .subheadline15))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.secondary)
@@ -66,7 +66,7 @@ struct QuizResultView: View {
                         dismiss() // Geri dön
                         // fetchQuizzes() artık CoupleQuestionView’da onChange ile yönetiliyor
                     }) {
-                        Text("CoupleQuestion’a Geri Dön")
+                        Text("quiz_result_back_to_couple_question".localized())
                             .padding(.vertical, 8)
                             .padding(.horizontal, 12)
                             .background(Color.blue)
@@ -91,7 +91,7 @@ struct QuizResultView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.counterclockwise")
                             .foregroundStyle(.blue)
-                        Text("Testi Tekrar Çöz")
+                        Text("quiz_result_retake_quiz".localized())
                             .font(.nunito(.medium, .caption12))
                             .foregroundColor(.blue)
                     }
@@ -116,9 +116,9 @@ struct QuizResultView: View {
     private func calculateMatchMessage() -> String {
         let percentage = calculateMatchPercentage()
         if percentage >= 50 {
-            return "Birbirinize harika uyum sağlıyorsunuz! (\(Int(percentage))%)"
+            return String(format: "quiz_result_high_match".localized(), Int(percentage))
         } else {
-            return "Uyumunuz biraz farklı görünüyor, keşfetmeye devam edin! (\(Int(percentage))%)"
+            return String(format: "quiz_result_low_match".localized(), Int(percentage))
         }
     }
 }

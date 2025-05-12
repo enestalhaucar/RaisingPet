@@ -19,11 +19,11 @@ struct CoupleQuestionView: View {
         NavigationStack(path: $navigationPath) {
             VStack(spacing: 20) {
                 HStack(spacing: 20) {
-                    CoupleQuestionHeaderBarIcon(imageName: "harmonyIcon", text: "Harmony", color: .blue.opacity(0.2), isSelected: selectedIcon == 0)
+                    CoupleQuestionHeaderBarIcon(imageName: "harmonyIcon", text: "couple_question_harmony".localized(), color: .blue.opacity(0.2), isSelected: selectedIcon == 0)
                         .onTapGesture {
                             selectedIcon = 0
                         }
-                    CoupleQuestionHeaderBarIcon(imageName: "aiTerapistIcon", text: "AI Terapist", color: .red.opacity(0.05), isSelected: selectedIcon == 1)
+                    CoupleQuestionHeaderBarIcon(imageName: "aiTerapistIcon", text: "couple_question_ai_therapist".localized(), color: .red.opacity(0.05), isSelected: selectedIcon == 1)
                         .onTapGesture {
                             selectedIcon = 1
                         }
@@ -45,7 +45,7 @@ struct CoupleQuestionView: View {
                             .foregroundColor(.red)
                     } else if shouldNavigateToFriends {
                         VStack {
-                            Text("Bu sayfayı sadece arkadaşın olduğunda kullanabilirsin!")
+                            Text("couple_question_no_friends_message".localized())
                                 .font(.nunito(.medium, .subheadline15))
                                 .multilineTextAlignment(.center)
                                 .padding()
@@ -53,7 +53,7 @@ struct CoupleQuestionView: View {
                                 shouldNavigateToFriends = false
                                 navigateToFriends()
                             }) {
-                                Text("Arkadaş Ekle")
+                                Text("couple_question_add_friend".localized())
                                     .frame(width: 200, height: 50)
                                     .background(Color.blue)
                                     .foregroundColor(.white)
@@ -62,7 +62,7 @@ struct CoupleQuestionView: View {
                             }
                         }
                     } else if viewModel.quiz.isEmpty {
-                        Text("Veri Bulunamadı")
+                        Text("couple_question_no_data".localized())
                             .font(.nunito(.medium, .body16))
                     } else {
                         ScrollView {
@@ -106,9 +106,9 @@ struct CoupleQuestionView: View {
                 }
             }
         }
-        .onChange(of: navigationPath) { newPath in
+        .onChange(of: navigationPath) {
             // navigationPath boşaldığında (geri dönüldüğünde) quiz’leri yeniden çek ve cache’i temizle
-            if newPath.isEmpty {
+            if navigationPath.isEmpty {
                 Task {
                     let hasFriend = await viewModel.checkFriendship()
                     if !hasFriend {
@@ -251,11 +251,11 @@ struct AITherapistView: View {
                 .frame(width: 100, height: 100)
                 .foregroundStyle(.gray.opacity(0.4))
             VStack(spacing: 8) {
-                Text("AI Terapist Geliştiriliyor")
+                Text("ai_therapist_development_title".localized())
                     .font(.nunito(.semiBold, .title222))
                     .foregroundStyle(.primary)
 
-                Text("Şu anda AI Terapist özelliğimizi en iyi hale getirmek için çalışıyoruz. Çok yakında size yapay zeka destekli rehberlik sunacağız. Lütfen bizi takip etmeye devam edin!")
+                Text("ai_therapist_development_message".localized())
                     .font(.nunito(.regular, .body16))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)

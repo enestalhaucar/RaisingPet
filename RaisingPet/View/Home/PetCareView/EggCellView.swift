@@ -85,7 +85,7 @@ struct EggCellView: View {
                         onHatch()
                     }
                 }) {
-                    Text("Hatch Pets")
+                    Text("egg_pets_hatch_pets".localized())
                         .font(.subheadline)
                         .padding(.vertical, 6)
                         .padding(.horizontal, 12)

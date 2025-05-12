@@ -41,3 +41,164 @@
 "gold" = "Altın";
 "home" = "Ev";
 "restore" = "Yenile";
+
+// RootView
+"home_tab" = "Ana Sayfa";
+"wallpapers_tab" = "Duvar Kağıtları";
+"couple_questions_tab" = "Çift Soruları";
+"profile_tab" = "Profil";
+
+// SignUpView
+"signup_welcome_title" = "Hoş Geldiniz";
+"signup_welcome_subtitle" = "Hayvanınızla tanışmanıza yardımcı olalım";
+"signup_firstname_placeholder" = "Adınızı Girin";
+"signup_surname_placeholder" = "Soyadınızı Girin";
+"signup_email_placeholder" = "E-postanızı Girin";
+"signup_password_placeholder" = "Şifrenizi Girin";
+"signup_password_confirm_placeholder" = "Şifrenizi Tekrar Girin";
+"signup_button" = "Kayıt Ol";
+"signup_already_account" = "Zaten hesabınız var mı?";
+"signin_button" = "Giriş Yap";
+"signup_error_title" = "Kayıt Hatası";
+"signup_unknown_error" = "Bilinmeyen hata";
+"signup_alert_ok" = "Tamam";
+
+// SignInView
+"signin_welcome_title" = "Tekrar Hoş Geldiniz!";
+"signin_email_placeholder" = "E-postanızı Girin";
+"signin_password_placeholder" = "Şifrenizi Girin";
+"signin_button" = "Giriş Yap";
+"signin_forgot_password" = "Şifremi Unuttum";
+"signin_no_account" = "Hesabınız yok mu?";
+"signin_error_title" = "Giriş Hatası";
+"signin_unknown_error" = "Bilinmeyen hata";
+"signin_alert_ok" = "Tamam";
+
+// WallpaperView
+"wallpaper_development_title" = "Burası geliştirme aşamasında!";
+"wallpaper_development_subtitle" = "Yakında harika wallpaper’lar burada olacak.";
+
+// ProfileEditView
+"profile_edit_upload_photo" = "Fotoğraf Yükle";
+"profile_edit_save_changes" = "Değişiklikleri Kaydet";
+"profile_edit_error_title" = "Hata";
+"profile_edit_unknown_error" = "Bilinmeyen bir hata oluştu";
+"profile_edit_alert_ok" = "Tamam";
+"profile_edit_title" = "Profil Düzenle";
+
+// ProfileView
+"profile_upgrade_premium" = "Premium'a Yükselt";
+"profile_section_title" = "Profil";
+"settings_section_title" = "Ayarlar";
+"profile_screen_title" = "Profil Ekranı";
+"profile_row_title" = "Profil";
+"profile_notification" = "Bildirim";
+"profile_language" = "Dil";
+"profile_gift_card" = "Hediye Kartı";
+"profile_authorize" = "Yetkilendirme";
+"profile_change_password" = "Şifre Değiştir";
+"profile_linked_account" = "Bağlı Hesap";
+"profile_log_out" = "Çıkış Yap";
+
+// CoupleQuestionView
+"couple_question_harmony" = "Uyum";
+"couple_question_ai_therapist" = "AI Terapist";
+"couple_question_no_friends_message" = "Bu sayfayı sadece arkadaşın olduğunda kullanabilirsin!";
+"couple_question_add_friend" = "Arkadaş Ekle";
+"couple_question_no_data" = "Veri Bulunamadı";
+"ai_therapist_development_title" = "AI Terapist Geliştiriliyor";
+"ai_therapist_development_message" = "Şu anda AI Terapist özelliğimizi en iyi hale getirmek için çalışıyoruz. Çok yakında size yapay zeka destekli rehberlik sunacağız. Lütfen bizi takip etmeye devam edin!";
+
+// QuestionView
+"question_vs" = "vs";
+"question_no_data" = "Soru yüklenemedi veya veri bulunamadı.";
+
+// QuizResultView
+"quiz_result_vs" = "VS";
+"quiz_result_no_data" = "Sonuçlar yüklenemedi.";
+"quiz_result_completed" = "Testi başarıyla tamamladın!";
+"quiz_result_back_to_couple_question" = "CoupleQuestion’a Geri Dön";
+"quiz_result_retake_quiz" = "Testi Tekrar Çöz";
+"quiz_result_high_match" = "Birbirinize harika uyum sağlıyorsunuz! (%d%%)";
+"quiz_result_low_match" = "Uyumunuz biraz farklı görünüyor, keşfetmeye devam edin! (%d%%)";
+
+// HomeView
+"home_stacks" = "Yığınlar";
+"home_petiverse" = "Petiverse";
+"widgets_pets_subtitle" = "Evcil hayvanınızla ortak ebeveynlik";
+"widgets_signal" = "Sinyal";
+"widgets_countdown" = "Geri Sayım";
+"widgets_x_panel" = "X-panel";
+"widgets_photo" = "Fotoğraf";
+
+// FriendsView
+"friends_your_friends" = "Arkadaşların";
+"friends_add_friend" = "Arkadaş Ekle";
+"friends_relations" = "Arkadaş İlişkileri";
+"friends_tag_copied" = "Tag Kopyalandı!";
+"friends_delete_friend_title" = "Arkadaş Silme";
+"friends_delete_friend_message" = "Arkadaşını silmek istediğine emin misin?";
+"friends_delete_button" = "Sil";
+"friends_cancel_button" = "İptal";
+"friends_error_title" = "Hata";
+"friends_unknown_error" = "Bilinmeyen hata";
+"friends_alert_ok" = "Tamam";
+
+// SearchFriendView
+"search_friend_title" = "Arkadaş Ara";
+"search_friend_share" = "Paylaş";
+"search_friend_placeholder" = "Kullanıcı tag’ini gir (ör: ÖmerDuman#5368)";
+"search_friend_empty_search" = "Bir tag girerek arkadaş ara.";
+"search_friend_not_found" = "Arkadaş bulunamadı.";
+"search_friend_search_button" = "Arkadaşı Arat";
+"search_friend_add_button" = "Arkadaşı Ekle";
+
+// NoteView
+"note_clear_button" = "Temizle";
+"note_clear_canvas" = "Tuvali Temizle";
+"note_clear_message" = "Tüm çalışmanızı silmek istiyor musunuz? Bu işlem geri alınamaz.";
+"note_cancel_button" = "İptal";
+"note_share_drawing" = "Çizimi Paylaş";
+
+// PetItemGridView
+"pet_item_grid_no_items" = "Ürün yok mu? O zaman buradan alabilirsin! 🛒";
+
+// PetDeleteAlertView
+"pet_delete_message" = "%@’yı ormana bıraktığında sonsuza kadar senden ayrı olacak ve vahşi doğada hayatta kalmaya çalışacak";
+"pet_delete_button" = "Pet'i Sil";
+
+// PetItemView
+"pet_item_use_button" = "Kullan";
+
+// EggAndPetsView
+"egg_pets_error" = "Hata: %@";
+"egg_pets_retry" = "Yeniden Dene";
+"egg_pets_eggs" = "Yumurtalar";
+"egg_pets_adopted" = "Sahiplendiklerin";
+"egg_pets_get_new_egg" = "Yeni Yumurta Al";
+"egg_pets_go_market" = "Markete Git";
+"egg_pets_parenting" = "Ebeveynlik Yap";
+
+// EggCellView
+"egg_pets_hatch_pets" = "Petleri Kır";
+
+// ShopScreenView
+"shop_category_diamonds" = "Elmaslar";
+"shop_category_pets" = "Evcil Hayvanlar";
+"shop_section_egg_packages" = "Yumurta Paketleri";
+"shop_section_pet_item_packages" = "Evcil Hayvan Eşya Paketleri";
+"shop_section_single_eggs" = "Tekli Yumurtalar";
+"shop_section_home_items" = "Ev Eşyaları";
+"shop_group_edible" = "Yenilebilir";
+"shop_group_drinkable" = "İçilebilir";
+"shop_group_cleaning" = "Temizlik";
+"shop_group_fun" = "Eğlence";
+"shop_limit" = "Limit: %d";
+"shop_restore_button" = "Geri Yükle";
+
+// BottomSheetView
+"bottom_sheet_purchase_title" = "%@ Satın Al";
+"bottom_sheet_buy_diamonds" = "Elmas Satın Al";
+"bottom_sheet_item_purchase" = "Eşya satın almak için %d gerekiyor, %d eksiksiniz";
+"bottom_sheet_get_item" = "%@ x%d Al";
+"bottom_sheet_badge_plus_one" = "+1";

@@ -9,8 +9,8 @@ import SwiftUI
 // MARK: - MainCategory
 
 enum MainCategory: String, CaseIterable {
-    case diamonds = "Diamonds"
-    case pets     = "Pets"
+    case diamonds = "shop_category_diamonds"
+    case pets     = "shop_category_pets"
 }
 
 // MARK: - ShopScreenView
@@ -165,7 +165,7 @@ struct ThreeColumnGrid<Item, ID: Hashable, Content: View>: View {
 struct SectionHeader: View {
     let title: String
     var body: some View {
-        Text(title)
+        Text(title.localized())
             .font(.title3).bold()
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -198,7 +198,7 @@ struct EggPackageSection: View {
     let onSelect: (ShopItem) -> Void
 
     var body: some View {
-        SectionHeader(title: "Egg Packages")
+        SectionHeader(title: "shop_section_egg_packages")
         ThreeColumnGrid(items: eggs, id: \.id) { egg in
             ShopItemView(
                 imageName: egg.name ?? "eggPlaceholder",
@@ -233,14 +233,14 @@ struct PetItemPackageSection: View {
     let onSelect: (PetItemPackage) -> Void
 
     var body: some View {
-        SectionHeader(title: "Pet Item Packages")
+        SectionHeader(title: "shop_section_pet_item_packages")
 
         ThreeColumnGrid(items: packages, id: \.id) { pkg in
             ShopItemView(
                 imageName: pkg.name ?? "petPackagePlaceholder",
                 goldCost: nil,                  // paketler ücretsiz olduğu için nil
                 diamondCost: nil,
-                price: "Limit: \(pkg.limit ?? 0)"  // alt metin olarak limiti gösteriyoruz
+                price: String(format: "shop_limit".localized(), pkg.limit ?? 0)  // alt metin olarak limiti gösteriyoruz
             ) {
                 onSelect(pkg)
             }
@@ -253,7 +253,7 @@ struct EggSingleSection: View {
     let onSelect: (ShopItem) -> Void
 
     var body: some View {
-        SectionHeader(title: "Single Eggs")
+        SectionHeader(title: "shop_section_single_eggs")
         ThreeColumnGrid(items: items.filter { $0.category == .eggs },
                         id: \.id) { item in
             ShopItemView(
@@ -273,10 +273,10 @@ struct PetItemGroupsSection: View {
     let onSelect: (ShopItem) -> Void
 
     private let allGroups: [(title: String, key: String)] = [
-        ("Edible",    "edibleMaterial"),
-        ("Drinkable", "drinkableMaterial"),
-        ("Cleaning",  "cleaningMaterial"),
-        ("Fun",       "funMaterial")
+        ("shop_group_edible".localized(),    "edibleMaterial"),
+        ("shop_group_drinkable".localized(), "drinkableMaterial"),
+        ("shop_group_cleaning".localized(),  "cleaningMaterial"),
+        ("shop_group_fun".localized(),       "funMaterial")
     ]
 
     // Sadece içinde veri olan gruplar
@@ -307,13 +307,12 @@ struct PetItemGroupsSection: View {
     }
 }
 
-
 struct HomeSection: View {
     let items: [ShopItem]
     let onSelect: (ShopItem) -> Void
 
     var body: some View {
-        SectionHeader(title: "Home Items")
+        SectionHeader(title: "shop_section_home_items")
         ThreeColumnGrid(items: items.filter { $0.category == .home },
                         id: \.id) { item in
             ShopItemView(
@@ -336,7 +335,7 @@ struct CategoryPicker: View {
     var body: some View {
         HStack(spacing: 16) {
             ForEach(MainCategory.allCases, id: \.self) { cat in
-                Text(cat.rawValue)
+                Text(cat.rawValue.localized())
                     .font(.nunito(.bold, .callout14))
                     .padding(.vertical, 10)
                     .padding(.horizontal, 20)
@@ -495,7 +494,7 @@ struct AssetNumberView: View {
                     .frame(width: 10, height: 10)
             }
             .padding(.horizontal, 5)
-            .frame(width: 60, height: 24)
+            .frame(height: 24)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(lineWidth: 1)
@@ -535,7 +534,7 @@ struct BackButtonView: View {
 struct RestoreButtonView: View {
     var body: some View {
         ZStack {
-            Text("restore".localized())
+            Text("shop_restore_button".localized())
                 .font(.nunito(.medium, .caption12))
                 .frame(height: 20)
                 .padding(5)

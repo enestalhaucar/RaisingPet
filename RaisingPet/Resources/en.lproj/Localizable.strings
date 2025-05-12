@@ -44,3 +44,164 @@
 "gold" = "Gold";
 "home" = "Home";
 "restore" = "Restore";
+
+// RootView
+"home_tab" = "Home";
+"wallpapers_tab" = "Wallpapers";
+"couple_questions_tab" = "Couple Questions";
+"profile_tab" = "Profile";
+
+// SignUpView
+"signup_welcome_title" = "Welcome Onboard";
+"signup_welcome_subtitle" = "Let's help you meet your pet";
+"signup_firstname_placeholder" = "Enter your Firstname";
+"signup_surname_placeholder" = "Enter your Surname";
+"signup_email_placeholder" = "Enter your email";
+"signup_password_placeholder" = "Enter Your Password";
+"signup_password_confirm_placeholder" = "Enter Your Password Again";
+"signup_button" = "Sign Up";
+"signup_already_account" = "Already have an account ?";
+"signin_button" = "Sign In";
+"signup_error_title" = "Registration Error";
+"signup_unknown_error" = "Unknown error";
+"signup_alert_ok" = "OK";
+
+// SignInView
+"signin_welcome_title" = "Welcome Back!";
+"signin_email_placeholder" = "Enter Your Email";
+"signin_password_placeholder" = "Enter Your Password";
+"signin_button" = "Log In";
+"signin_forgot_password" = "Forgot Password";
+"signin_no_account" = "Don't you have an account ?";
+"signin_error_title" = "Login Error";
+"signin_unknown_error" = "Unknown error";
+"signin_alert_ok" = "OK";
+
+// WallpaperView
+"wallpaper_development_title" = "This section is under development!";
+"wallpaper_development_subtitle" = "Amazing wallpapers will be here soon.";
+
+// ProfileEditView
+"profile_edit_upload_photo" = "Upload Photo";
+"profile_edit_save_changes" = "Save Changes";
+"profile_edit_error_title" = "Error";
+"profile_edit_unknown_error" = "An unknown error occurred";
+"profile_edit_alert_ok" = "OK";
+"profile_edit_title" = "Edit Profile";
+
+// ProfileView
+"profile_upgrade_premium" = "Upgrade Premium";
+"profile_section_title" = "Profile";
+"settings_section_title" = "Settings";
+"profile_screen_title" = "Profile Screen";
+"profile_row_title" = "Profile";
+"profile_notification" = "Notification";
+"profile_language" = "Language";
+"profile_gift_card" = "Gift Card";
+"profile_authorize" = "Authorize";
+"profile_change_password" = "Change Password";
+"profile_linked_account" = "Linked Account";
+"profile_log_out" = "Log Out";
+
+// CoupleQuestionView
+"couple_question_harmony" = "Harmony";
+"couple_question_ai_therapist" = "AI Therapist";
+"couple_question_no_friends_message" = "You can only use this page when you have a friend!";
+"couple_question_add_friend" = "Add Friend";
+"couple_question_no_data" = "No Data Found";
+"ai_therapist_development_title" = "AI Therapist Under Development";
+"ai_therapist_development_message" = "We are currently working to perfect our AI Therapist feature. We will soon offer you AI-powered guidance. Please stay tuned!";
+
+// QuestionView
+"question_vs" = "vs";
+"question_no_data" = "Question could not be loaded or no data found.";
+
+// QuizResultView
+"quiz_result_vs" = "VS";
+"quiz_result_no_data" = "Results could not be loaded.";
+"quiz_result_completed" = "You successfully completed the test!";
+"quiz_result_back_to_couple_question" = "Back to CoupleQuestion";
+"quiz_result_retake_quiz" = "Retake the Test";
+"quiz_result_high_match" = "You are a great match! (%d%%)";
+"quiz_result_low_match" = "Your compatibility seems a bit different, keep exploring! (%d%%)";
+
+// HomeView
+"home_stacks" = "Stacks";
+"home_petiverse" = "Petiverse";
+"widgets_pets_subtitle" = "Co-parenting with your pet";
+"widgets_signal" = "Signal";
+"widgets_countdown" = "Countdown";
+"widgets_x_panel" = "X-panel";
+"widgets_photo" = "Photo";
+
+// FriendsView
+"friends_your_friends" = "Your Friends";
+"friends_add_friend" = "Add Friend";
+"friends_relations" = "Friend Relations";
+"friends_tag_copied" = "Tag Copied!";
+"friends_delete_friend_title" = "Delete Friend";
+"friends_delete_friend_message" = "Are you sure you want to delete your friend?";
+"friends_delete_button" = "Delete";
+"friends_cancel_button" = "Cancel";
+"friends_error_title" = "Error";
+"friends_unknown_error" = "Unknown error";
+"friends_alert_ok" = "OK";
+
+// SearchFriendView
+"search_friend_title" = "Search Friend";
+"search_friend_share" = "Share";
+"search_friend_placeholder" = "Enter user tag (e.g., ÖmerDuman#5368)";
+"search_friend_empty_search" = "Enter a tag to search for a friend.";
+"search_friend_not_found" = "Friend not found.";
+"search_friend_search_button" = "Search Friend";
+"search_friend_add_button" = "Add Friend";
+
+// NoteView
+"note_clear_button" = "Clear";
+"note_clear_canvas" = "Clear Canvas";
+"note_clear_message" = "Do you want to delete all of your work? This cannot be undone.";
+"note_cancel_button" = "Cancel";
+"note_share_drawing" = "Share Drawing";
+
+// PetItemGridView
+"pet_item_grid_no_items" = "No items? You can get some here! 🛒";
+
+// PetDeleteAlertView
+"pet_delete_message" = "When you release %@ into the forest, it will be separated from you forever and will try to survive in the wild.";
+"pet_delete_button" = "Delete Pet";
+
+// PetItemView
+"pet_item_use_button" = "Use";
+
+// EggAndPetsView
+"egg_pets_error" = "Error: %@";
+"egg_pets_retry" = "Try Again";
+"egg_pets_eggs" = "Eggs";
+"egg_pets_adopted" = "Adopted";
+"egg_pets_get_new_egg" = "Get New Egg";
+"egg_pets_go_market" = "Go to Market";
+"egg_pets_parenting" = "Parenting";
+
+// EggCellView
+"egg_pets_hatch_pets" = "Hatch Pets";
+
+// ShopScreenView
+"shop_category_diamonds" = "Diamonds";
+"shop_category_pets" = "Pets";
+"shop_section_egg_packages" = "Egg Packages";
+"shop_section_pet_item_packages" = "Pet Item Packages";
+"shop_section_single_eggs" = "Single Eggs";
+"shop_section_home_items" = "Home Items";
+"shop_group_edible" = "Edible";
+"shop_group_drinkable" = "Drinkable";
+"shop_group_cleaning" = "Cleaning";
+"shop_group_fun" = "Fun";
+"shop_limit" = "Limit: %d";
+"shop_restore_button" = "Restore";
+
+// BottomSheetView
+"bottom_sheet_purchase_title" = "Purchase %@";
+"bottom_sheet_buy_diamonds" = "Buy Diamonds";
+"bottom_sheet_item_purchase" = "Item purchase requires %d, you are %d short";
+"bottom_sheet_get_item" = "Get %@ x%d";
+"bottom_sheet_badge_plus_one" = "+1";

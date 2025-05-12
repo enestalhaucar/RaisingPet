@@ -61,7 +61,7 @@ struct QuestionView: View {
                         .onTapGesture {
                             selectAnswer(question.options[0], questionId: question.id)
                         }
-                    Text("vs")
+                    Text("question_vs".localized())
                         .font(.nunito(.medium, .title320))
                     QuestionOptionView(option: question.options[1])
                         .onTapGesture {
@@ -72,7 +72,7 @@ struct QuestionView: View {
                 .animation(.easeInOut, value: currentQuestionIndex)
                 .padding()
             } else {
-                Text("Soru yüklenemedi veya veri bulunamadı.")
+                Text("question_no_data".localized())
                     .font(.nunito(.medium, .body16))
             }
         }

@@ -18,7 +18,7 @@ struct PetItemGridView: View {
                 VStack {
                     if vm.filteredPetItems().isEmpty {
                         NavigationLink(destination: ShopScreenView()) {
-                            Text("Ürün yok mu? O zaman buradan alabilirsin! 🛒")
+                            Text("pet_item_grid_no_items".localized())
                                 .font(.title3)
                                 .foregroundColor(.blue)
                                 .padding()
@@ -38,13 +38,9 @@ struct PetItemGridView: View {
                 }
             }
             .background(Color.white)
-            .cornerRadius(25)
             .shadow(color: Color.black.opacity(0.2), radius: 15, x: 0, y: -5)
         }
-        .frame(height: UIScreen.main.bounds.height * 0.6) // 10'da 6
+        .frame(height: UIScreen.main.bounds.height * 0.6)
+        .environmentObject(vm) // InventoryViewModel’ı alt view’lara geçir
     }
-}
-
-#Preview {
-    PetItemGridView(vm: InventoryViewModel())
 }

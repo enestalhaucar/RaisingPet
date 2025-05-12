@@ -2,7 +2,7 @@
 //  NoteView2.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 21.09.2024.
+//  Created by Enes Talha Uçar on 21.09.2024.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ struct NoteView: View {
     @State private var showingdeleteConfirmation = false
     @State private var showingShareSheet = false
     @Environment(\.undoManager) private var undoManager
-    @State var backgroundColor : UIColor = .white
+    @State var backgroundColor: UIColor = .white
     @State private var path = NavigationPath()
     var body: some View {
         NavigationStack(path: $path) {
@@ -27,13 +27,10 @@ struct NoteView: View {
                                 .stroke(Color.gray.gradient, lineWidth: 3)
                         }
                         
-                    
-                        
-                    
                     HStack {
                         Image(systemName: "pawprint").font(.system(size: 30))
-                        Image(systemName : "photo").font(.system(size: 30))
-                        Image(systemName : "camera").font(.system(size: 30))
+                        Image(systemName: "photo").font(.system(size: 30))
+                        Image(systemName: "camera").font(.system(size: 30))
                         Spacer()
                         Button(action: {
                             if let inkingTool = canvasView.tool as? PKInkingTool {
@@ -41,16 +38,9 @@ struct NoteView: View {
                                 canvasView.backgroundColor = backgroundColor
                             }
                         }, label: {
-                            Image(systemName : "paintbrush").font(.system(size: 30))
-                                
+                            Image(systemName: "paintbrush").font(.system(size: 30))
                         })
                     }
-                    
-                    
-
-                                            
-                        
-                    
                 }.padding()
                     .padding(.horizontal)
                 
@@ -64,22 +54,22 @@ struct NoteView: View {
                     Button(action: {
                         showingdeleteConfirmation = true
                     }, label: {
-                        Label("Clear", systemImage: "trash")
-                    }).confirmationDialog("Clear Canvas", isPresented: $showingdeleteConfirmation) {
-                        Button("Clear", role: .destructive) {
+                        Label("note_clear_button".localized(), systemImage: "trash")
+                    }).confirmationDialog("note_clear_canvas".localized(), isPresented: $showingdeleteConfirmation) {
+                        Button("note_clear_button".localized(), role: .destructive) {
                             canvasView.drawing = PKDrawing()
                         }
-                        Button("Cancel", role: .cancel) {}
+                        Button("note_cancel_button".localized(), role: .cancel) {}
                     } message: {
-                        Text("Do you want to delete all of your work ? This cannot be undone")
+                        Text("note_clear_message".localized())
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                       showingShareSheet = true
+                        showingShareSheet = true
                     } label: {
-                        Label("Share Drawing", systemImage: "square.and.arrow.up")
+                        Label("note_share_drawing".localized(), systemImage: "square.and.arrow.up")
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
@@ -102,16 +92,11 @@ struct NoteView: View {
                         Image(systemName: "arrow.uturn.forward")
                     }
                 }
-
             }
         }
-        
     }
 }
 
 #Preview {
     NoteView()
 }
-
-
-

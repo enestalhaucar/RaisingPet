@@ -20,9 +20,9 @@ struct BottomSheetView: View {
     var body: some View {
         if item.category == .gameCurrencyDiamond {
             VStack(spacing: 20) {
-                Text("Purchase \(item.name ?? "Diamonds")")
+                Text(String(format: "bottom_sheet_purchase_title".localized(), item.name ?? "Diamonds"))
                     .font(.headline)
-                Button("Buy Diamonds") {
+                Button("bottom_sheet_buy_diamonds".localized()) {
                     // mine parametresi burada backend tarafından gözardı edilebilir
                     vm.buyShopItem(itemId: item.id!, mine: .diamond) {
                         currentVM.refresh()
@@ -68,7 +68,7 @@ struct BottomSheetView: View {
                     .background(RoundedRectangle(cornerRadius: 15).fill(.yellow.opacity(0.05)))
                     .padding(.horizontal, 20)
                     
-                    Text("Item purchase requires \(item.goldPrice ?? 0) you are \(item.goldPrice ?? 0) short")
+                    Text(String(format: "bottom_sheet_item_purchase".localized(), item.goldPrice ?? 0, item.goldPrice ?? 0))
                         .font(.nunito(.medium, .callout14))
                         .foregroundStyle(.gray)
                         .padding(.horizontal, 20)
@@ -156,15 +156,6 @@ struct BottomSheetView: View {
         }
       dismiss()
     }
-
-}
-
-#Preview {
-    BottomSheetView(
-        item: .init(id: "", name: "", description: "", category: .eggs, isDeleted: false, v: 0, duration: 0, isPurchasable: false, diamondPrice: 0, goldPrice: 0, quantity: 0, price: 0, isOwned: false),
-        counterNumber: .constant(1),
-        showCounter: .constant(true)
-    )
 }
 
 struct ItemImageView: View {
@@ -240,7 +231,7 @@ struct CounterItemBackgroundView: View {
             if badgeVisible {
                 HStack {
                     Spacer()
-                    Text("+1")
+                    Text("bottom_sheet_badge_plus_one".localized())
                         .font(.nunito(.thin, .caption211))
                         .foregroundColor(.white)
                         .padding(5)
@@ -286,7 +277,7 @@ struct BuyPurchaseView: View {
                     Image(iconName)
                         .resizable()
                         .frame(width: 20, height: 20)
-                    Text("Get \(itemName) x\(counterNumber)")
+                    Text(String(format: "bottom_sheet_get_item".localized(), itemName.capitalized, counterNumber))
                         .font(.nunito(.medium, .callout14))
                 }
             }
