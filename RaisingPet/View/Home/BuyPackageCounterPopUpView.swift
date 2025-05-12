@@ -61,7 +61,7 @@ struct BuyPackageCounterPopUpView: View {
             .padding(.horizontal)
 
             // — Başlık
-            Text("Select exactly \(limit) items")
+            Text(String(format: "buy_package_select_items".localized(), limit))
                 .font(.nunito(.bold, .body16))
 
             // — Grid
@@ -98,7 +98,7 @@ struct BuyPackageCounterPopUpView: View {
                               : Color.gray.opacity(0.3))     // devre dışı hali
                         .frame(height: 50)
                     
-                    Text("Get")
+                    Text("buy_package_get_button".localized())
                         .font(.nunito(.medium, .callout14))
                         .foregroundColor(.black)
                 }
@@ -129,7 +129,7 @@ struct PackageItemCellView: View {
 
     var body: some View {
         ZStack {
-            // Ark plan
+            // Arka plan
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.red.opacity(0.05))
 
@@ -141,7 +141,7 @@ struct PackageItemCellView: View {
                     .frame(height: 80)
 
                 // İsim
-                Text(item.name ?? "Item")
+                Text(item.name ?? "buy_package_default_item".localized())
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
 

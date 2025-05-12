@@ -19,31 +19,56 @@ struct BottomSheetView: View {
     
     var body: some View {
         if item.category == .gameCurrencyDiamond {
-            VStack(spacing: 20) {
-                Text(String(format: "bottom_sheet_purchase_title".localized(), item.name ?? "Diamonds"))
-                    .font(.headline)
-                Button("bottom_sheet_buy_diamonds".localized()) {
-                    // mine parametresi burada backend tarafından gözardı edilebilir
-                    vm.buyShopItem(itemId: item.id!, mine: .diamond) {
-                        currentVM.refresh()
+            ZStack {
+                VStack(spacing:20) {
+                    HStack {
+                        AssetNumberView(iconName: "goldIcon", currencyType: .gold)
+                        AssetNumberView(iconName: "diamondIcon", currencyType: .diamond)
+                        Spacer()
+                        Button {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
                     }
-                    dismiss()
-                }
-                .buttonStyle(.borderedProminent)
-                .padding(.horizontal, 40)
+                    .padding(.horizontal, 20)
+                    
+                    HStack {
+                        ItemImageView(imageName: item.name ?? "egg")
+                        DescriptionOfItemView(item: item)
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 10)
+                    .background(RoundedRectangle(cornerRadius: 15).fill(.yellow.opacity(0.05)))
+                    .padding(.horizontal, 20)
+                    
+                    
+                    Button {
+                        vm.buyShopItem(itemId: item.id!, mine: .diamond) {
+                            currentVM.refresh()
+                        }
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .foregroundStyle(.yellow.opacity(0.3))
+                            Text(String(format: "bottom_sheet_buy_diamonds".localized(), item.name?.capitalized ?? "", counterNumber))
+                                .font(.nunito(.medium, .callout14))
+                        }.padding(.horizontal, 20)
+                    }
+                }.background(Color.white)
+                    .cornerRadius(25)
+                    .padding(.top, 10)
             }
-            .padding()
-            .background(Color.white.cornerRadius(20))
-            .presentationDetents([.fraction(0.25)])
-            .frame(maxWidth: .infinity)
-            .background(Color.black.opacity(0.3).ignoresSafeArea())
-            
         } else {
             ZStack {
                 VStack(spacing: 20) {
                     HStack {
-                        AssetNumberView(iconName: "diamondIcon", number: 50)
-                        AssetNumberView(iconName: "goldIcon", number: 50)
+                        AssetNumberView(iconName: "goldIcon", currencyType: .gold)
+                        AssetNumberView(iconName: "diamondIcon", currencyType: .diamond)
                         Spacer()
                         Button {
                             dismiss()

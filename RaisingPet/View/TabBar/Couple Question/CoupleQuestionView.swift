@@ -13,6 +13,7 @@ struct CoupleQuestionView: View {
     @State private var selectedIcon: Int = 0
     @State private var sentQuizId: String = ""
     @State private var shouldNavigateToFriends = false
+    @State private var isNavigateFriends = false
     @State private var navigationPath = NavigationPath()
 
     var body: some View {
@@ -81,7 +82,7 @@ struct CoupleQuestionView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color(.systemBackground))
-            .navigationDestination(isPresented: $shouldNavigateToFriends) {
+            .navigationDestination(isPresented: $isNavigateFriends) {
                 FriendsView()
             }
             .navigationDestination(for: String.self) { destination in
@@ -124,7 +125,7 @@ struct CoupleQuestionView: View {
     }
 
     private func navigateToFriends() {
-        shouldNavigateToFriends = true
+        isNavigateFriends = true
     }
 }
 

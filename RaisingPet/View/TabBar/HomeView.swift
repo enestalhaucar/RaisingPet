@@ -50,7 +50,7 @@ struct HomeView: View {
                         }
                         ToolbarItem(placement: .topBarLeading) {
                             HStack {
-                                Image("Petiverse")
+                                Image("appIcon")
                                     .resizable()
                                     .frame(width: 32, height: 32)
                                 Text("home_petiverse".localized())

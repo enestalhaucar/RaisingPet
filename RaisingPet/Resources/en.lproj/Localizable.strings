@@ -65,6 +65,7 @@
 "signup_error_title" = "Registration Error";
 "signup_unknown_error" = "Unknown error";
 "signup_alert_ok" = "OK";
+"email_format_error_message" = "Email must be in correct format";
 
 // SignInView
 "signin_welcome_title" = "Welcome Back!";
@@ -181,6 +182,9 @@
 "egg_pets_get_new_egg" = "Get New Egg";
 "egg_pets_go_market" = "Go to Market";
 "egg_pets_parenting" = "Parenting";
+"egg_empty_state_title" = "No Eggs!";
+"egg_empty_state_subtitle" = "Get new eggs from the shop to start raising your pets.";
+"egg_empty_state_shop_button" = "Go to Shop";
 
 // EggCellView
 "egg_pets_hatch_pets" = "Hatch Pets";
@@ -205,3 +209,8 @@
 "bottom_sheet_item_purchase" = "Item purchase requires %d, you are %d short";
 "bottom_sheet_get_item" = "Get %@ x%d";
 "bottom_sheet_badge_plus_one" = "+1";
+
+// BuyPackageCounterPopUpView
+"buy_package_select_items" = "Select exactly %d items";
+"buy_package_get_button" = "Get";
+"buy_package_default_item" = "Item";

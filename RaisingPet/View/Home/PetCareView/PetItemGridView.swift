@@ -27,18 +27,16 @@ struct PetItemGridView: View {
                                 .shadow(radius: 5)
                         }
                     } else {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 3), spacing: 15) {
                             ForEach(vm.filteredPetItems()) { groupedItem in
                                 PetItemView(groupedItem: groupedItem)
                             }
                         }
                         .padding(.horizontal, 15)
-                        .padding(.vertical, 20)
                     }
                 }
             }
             .background(Color.white)
-            .shadow(color: Color.black.opacity(0.2), radius: 15, x: 0, y: -5)
         }
         .frame(height: UIScreen.main.bounds.height * 0.6)
         .environmentObject(vm) // InventoryViewModel’ı alt view’lara geçir

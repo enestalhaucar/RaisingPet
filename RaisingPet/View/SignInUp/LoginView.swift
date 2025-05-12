@@ -30,7 +30,15 @@ struct LoginView: View {
                     Image("signInDog")
                     Spacer()
                     MailTextField(placeholder: "signin_email_placeholder".localized(), text: $email)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            focusNextField($password)
+                        }
                     PasswordTextField(placeholder: "signin_password_placeholder".localized(), text: $password)
+                        .submitLabel(.done)
+                        .onSubmit {
+                            viewModel.login(with: email, password: password)
+                        }
                     
                     Spacer()
                     
@@ -46,10 +54,11 @@ struct LoginView: View {
                                 .background(Color("buttonBackgroundColor"), in: .rect(cornerRadius: 25))
                         }
                         .disabled(email.isEmpty || password.isEmpty)
+                        .opacity((email.isEmpty || password.isEmpty) ? 0.5 : 1.0)
                     }
                     
                     NavigationLink {
-                        
+                        EmptyView()
                     } label: {
                         Text("signin_forgot_password".localized())
                             .foregroundStyle(Color("buttonBackgroundColor"))
@@ -59,40 +68,44 @@ struct LoginView: View {
                     HStack {
                         Text("signin_no_account".localized())
                         NavigationLink {
-                            SignUpView {
-                                print("register successfull")
-                            }
+                            SignUpView(onRegisterSuccess: onLoginSuccess)
                         } label: {
                             Text("signup_button".localized())
                                 .foregroundStyle(Color("buttonBackgroundColor"))
                         }
                     }
-                }.padding()
-                    .onChange(of: viewModel.loginSuccess) { success in
-                        if success {
-                            appState.isLoggedIn = true
-                            onLoginSuccess()
-                        }
+                }
+                .padding()
+                .onChange(of: viewModel.loginSuccess) { _, success in
+                    if success {
+                        appState.isLoggedIn = true
+                        onLoginSuccess()
                     }
-                    .onChange(of: viewModel.errorMessage) { error in
-                        if let error = error {
-                            showError = true
-                        }
+                }
+                .onChange(of: viewModel.errorMessage) { _, error in
+                    if error != nil {
+                        showError = true
                     }
-                    .alert(isPresented: $showError) {
-                        Alert(
-                            title: Text("signin_error_title".localized()),
-                            message: Text(viewModel.errorMessage ?? "signin_unknown_error".localized()),
-                            dismissButton: .default(Text("signin_alert_ok".localized()))
-                        )
-                    }
+                }
+                .alert(isPresented: $showError) {
+                    Alert(
+                        title: Text("signin_error_title".localized()),
+                        message: Text(viewModel.errorMessage ?? "signin_unknown_error".localized()),
+                        dismissButton: .default(Text("signin_alert_ok".localized()))
+                    )
+                }
             }
+            .navigationBarBackButtonHidden(true)
         }
+    }
+    
+    private func focusNextField(_ nextField: Binding<String>) {
+        // Şu an focus otomatik olarak bir sonraki field’a geçiyor
     }
 }
 
 #Preview {
     LoginView {
-        print("login successfull")
+        print("login successful!")
     }
 }

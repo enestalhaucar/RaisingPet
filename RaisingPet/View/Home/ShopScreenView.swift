@@ -372,17 +372,14 @@ struct RoofSideView: View {
                 BackButtonView()
                     .padding(.leading, 16)
                 
-                AssetNumberView(iconName: "goldIcon", number: currentUser.user?.gameCurrencyGold ?? 0)
-                AssetNumberView(iconName: "diamondIcon", number: currentUser.user?.gameCurrencyDiamond ?? 0)
+                AssetNumberView(iconName: "goldIcon", currencyType: .gold)
+                AssetNumberView(iconName: "diamondIcon", currencyType: .diamond)
                 Spacer()
                 RestoreButtonView()
                     .padding(.trailing, 16)
                 
             }.frame(width: Utilities.Constants.width)
             .padding(.top, 50)
-            .onAppear {
-                print(currentUser.user)
-            }
         }
     }
 }
@@ -474,9 +471,25 @@ struct ShopItemView: View {
     }
 }
 
+enum CurrencyGoldDiamondType {
+    case gold
+    case diamond
+}
+
 struct AssetNumberView: View {
-    var iconName: String
-    var number: Int
+    @EnvironmentObject var currentUserVM: CurrentUserViewModel
+    let iconName: String
+    let currencyType: CurrencyGoldDiamondType
+    
+    private var number: Int {
+        switch currencyType {
+        case .gold:
+            return currentUserVM.user?.gameCurrencyGold ?? 0
+        case .diamond:
+            return currentUserVM.user?.gameCurrencyDiamond ?? 0
+        }
+    }
+    
     var body: some View {
         ZStack {
             HStack(spacing: 5) {
@@ -504,6 +517,9 @@ struct AssetNumberView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundStyle(Color("GoldBackgroundColor"))
             )
+        }
+        .onAppear {
+            currentUserVM.refresh() // Her görünümde güncelle
         }
     }
 }

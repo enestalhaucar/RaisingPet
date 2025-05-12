@@ -62,6 +62,7 @@
 "signup_error_title" = "Kayıt Hatası";
 "signup_unknown_error" = "Bilinmeyen hata";
 "signup_alert_ok" = "Tamam";
+"email_format_error_message" = "Email doğru formatta olmalı";
 
 // SignInView
 "signin_welcome_title" = "Tekrar Hoş Geldiniz!";
@@ -178,6 +179,9 @@
 "egg_pets_get_new_egg" = "Yeni Yumurta Al";
 "egg_pets_go_market" = "Markete Git";
 "egg_pets_parenting" = "Ebeveynlik Yap";
+"egg_empty_state_title" = "Yumurtanız Yok!";
+"egg_empty_state_subtitle" = "Mağazadan yeni yumurtalar alarak petlerinizi büyütmeye başlayabilirsiniz.";
+"egg_empty_state_shop_button" = "Mağazaya Git";
 
 // EggCellView
 "egg_pets_hatch_pets" = "Petleri Kır";
@@ -202,3 +206,8 @@
 "bottom_sheet_item_purchase" = "Eşya satın almak için %d gerekiyor, %d eksiksiniz";
 "bottom_sheet_get_item" = "%@ x%d Al";
 "bottom_sheet_badge_plus_one" = "+1";
+
+// BuyPackageCounterPopUpView
+"buy_package_select_items" = "Tam olarak %d eşya seçin";
+"buy_package_get_button" = "Al";
+"buy_package_default_item" = "Eşya";

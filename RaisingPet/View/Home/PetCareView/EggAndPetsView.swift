@@ -42,24 +42,28 @@ struct EggAndPetsView: View {
 
                             // Yumurtalar Bölümü
                             SectionHeaderView(title: "egg_pets_eggs".localized())
-                            LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(vm.eggs, id: \.id) { egg in
-                                    EggCellView(item: egg) {
-                                        guard let id = egg.id else { return }
-                                        Task {
-                                            do {
-                                                _ = try await vm.hatchPets([id])
-                                                await vm.fetchInventory()
-                                                await vm.fetchPets() // Hatch sonrası petleri yenile
-                                            } catch {
-                                                print("Hatch error: \(error)")
-                                                vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
+                            if vm.eggs.isEmpty {
+                                EmptyEggStateView()
+                            } else {
+                                LazyVGrid(columns: columns, spacing: 16) {
+                                    ForEach(vm.eggs, id: \.id) { egg in
+                                        EggCellView(item: egg) {
+                                            guard let id = egg.id else { return }
+                                            Task {
+                                                do {
+                                                    _ = try await vm.hatchPets([id])
+                                                    await vm.fetchInventory()
+                                                    await vm.fetchPets()
+                                                } catch {
+                                                    print("Hatch error: \(error)")
+                                                    vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                .padding(.horizontal, 16)
                             }
-                            .padding(.horizontal, 16)
 
                             // Sahiplendiklerin Bölümü
                             SectionHeaderView(title: "egg_pets_adopted".localized())
@@ -120,6 +124,36 @@ struct EggAndPetsView: View {
     }
 }
 
+struct EmptyEggStateView: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "egg.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+                .foregroundColor(.gray.opacity(0.7))
+            Text("egg_empty_state_title".localized())
+                .font(.title2)
+                .foregroundColor(.gray)
+            Text("egg_empty_state_subtitle".localized())
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.gray)
+                .padding(.horizontal, 40)
+            NavigationLink(destination: ShopScreenView()) {
+                Text("egg_empty_state_shop_button".localized())
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 200)
+                    .background(Color.blue)
+                    .cornerRadius(12)
+            }
+        }
+        .padding(.vertical, 40)
+    }
+}
+
 struct SectionHeaderView: View {
     let title: String
     var body: some View {
@@ -136,4 +170,8 @@ struct SectionHeaderView: View {
         .background(Color.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
+}
+
+#Preview {
+    EggAndPetsView()
 }

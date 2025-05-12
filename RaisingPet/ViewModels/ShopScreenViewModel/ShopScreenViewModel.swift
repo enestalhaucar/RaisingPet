@@ -93,9 +93,8 @@ class ShopScreenViewModel : ObservableObject {
             .response { response in
                 DispatchQueue.main.async {
                     switch response.result {
-                    case .success(let data):
+                    case .success(_):
                         self.isLoading = false
-                        print("Item purchased successfully: \(data)")
                         // Başarılı satın alma sonrası envanteri güncelle veya kullanıcıya bildirim göster
                     case .failure(let error):
                         self.isLoading = false
