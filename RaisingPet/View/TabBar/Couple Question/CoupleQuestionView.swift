@@ -19,14 +19,17 @@ struct CoupleQuestionView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack(spacing: 20) {
+                // Tab Bar
                 HStack(spacing: 20) {
                     CoupleQuestionHeaderBarIcon(imageName: "harmonyIcon", text: "couple_question_harmony".localized(), color: .blue.opacity(0.2), isSelected: selectedIcon == 0)
                         .onTapGesture {
                             selectedIcon = 0
+                            selectedTab = .harmony
                         }
                     CoupleQuestionHeaderBarIcon(imageName: "aiTerapistIcon", text: "couple_question_ai_therapist".localized(), color: .red.opacity(0.05), isSelected: selectedIcon == 1)
                         .onTapGesture {
                             selectedIcon = 1
+                            selectedTab = .aiTherapist
                         }
                 }
                 .frame(height: 75)
@@ -37,6 +40,7 @@ struct CoupleQuestionView: View {
                     .frame(width: Utilities.Constants.width, height: 6)
                     .foregroundStyle(.gray.opacity(0.2))
 
+                // Alt İçerik (Koşullu Gösterim)
                 if selectedTab == .harmony {
                     if viewModel.isLoading {
                         LoadingAnimationView()
@@ -88,10 +92,10 @@ struct CoupleQuestionView: View {
             .navigationDestination(for: String.self) { destination in
                 if destination.starts(with: "question_") {
                     let quizId = destination.replacingOccurrences(of: "question_", with: "")
-                    QuestionView(quizId: quizId)
+                    QuestionView(quizId: quizId, navigationPath: $navigationPath)
                 } else if destination.starts(with: "result_") {
                     let quizId = destination.replacingOccurrences(of: "result_", with: "")
-                    QuizResultView(quizId: quizId)
+                    QuizResultView(quizId: quizId, navigationPath: $navigationPath)
                 } else {
                     EmptyView()
                 }
@@ -108,7 +112,6 @@ struct CoupleQuestionView: View {
             }
         }
         .onChange(of: navigationPath) {
-            // navigationPath boşaldığında (geri dönüldüğünde) quiz’leri yeniden çek ve cache’i temizle
             if navigationPath.isEmpty {
                 Task {
                     let hasFriend = await viewModel.checkFriendship()
@@ -116,7 +119,7 @@ struct CoupleQuestionView: View {
                         shouldNavigateToFriends = true
                     } else {
                         print("navigationPath boşaldı, quiz’ler yeniden çekiliyor ve cache temizleniyor")
-                        viewModel.cachedQuizResults.removeAll() // Cache’i sıfırla
+                        viewModel.cachedQuizResults.removeAll()
                         await viewModel.fetchQuizzes()
                     }
                 }
@@ -182,7 +185,6 @@ struct QuizRowView: View {
                 }
                 isLoading = false
 
-                // Yönlendirme
                 if !isUserDone {
                     print("QuestionView’e yönlendiriliyor: question_\(quiz.id ?? "-")")
                     navigationPath.append("question_\(quiz.id ?? "-")")
@@ -255,8 +257,7 @@ struct AITherapistView: View {
                 Text("ai_therapist_development_title".localized())
                     .font(.nunito(.semiBold, .title222))
                     .foregroundStyle(.primary)
-
-                Text("ai_therapist_development_message".localized())
+                Text("ai_therapist_under_development".localized())
                     .font(.nunito(.regular, .body16))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)

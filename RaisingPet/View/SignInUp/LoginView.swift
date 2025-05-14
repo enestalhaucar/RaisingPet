@@ -10,8 +10,8 @@ import Combine
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
-    @State private var email = "omerdmn1@hotmail.com"
-    @State private var password = "Renekton1"
+    @State private var email = ""
+    @State private var password = ""
     @State private var showError = false
     @EnvironmentObject var appState: AppState
     var onLoginSuccess: () -> Void

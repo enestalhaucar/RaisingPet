@@ -4,6 +4,7 @@
 //
 //  Created by Enes Talha Uçar on 6.08.2024.
 //
+
 import SwiftUI
 
 // MARK: - MainCategory
@@ -18,7 +19,7 @@ enum MainCategory: String, CaseIterable {
 struct ShopScreenView: View {
     @StateObject private var vm = ShopScreenViewModel()
     @EnvironmentObject var currentUserVM: CurrentUserViewModel
-    @State private var selectedMain: MainCategory = .diamonds
+    @State private var selectedMain: MainCategory = .pets // Varsayılan olarak Pets seçili
 
     // — single ShopItem için
     @State private var selectedShopItem: ShopItem?
@@ -80,7 +81,7 @@ struct ShopScreenView: View {
                                 )
                             }
                         }
-                        .padding(.top,20)
+                        .padding(.top, 20)
                         .frame(width: Utilities.Constants.width)
                     }
 
@@ -136,6 +137,38 @@ struct ShopScreenView: View {
         showCounter = isPetItem
         counterNumber = 1
         selectedShopItem = item
+    }
+}
+
+// MARK: - CategoryPicker
+
+struct CategoryPicker: View {
+    @Binding var selected: MainCategory
+    // Production’da Diamonds gizlensin (bu hardcoded, istersen bir environment değişkeni ile kontrol edebilirsin)
+    private let visibleCategories: [MainCategory] = [.pets] // Şu an sadece Pets görünecek
+
+    var body: some View {
+        HStack(spacing: 16) {
+            ForEach(visibleCategories, id: \.self) { cat in
+                Text(cat.rawValue.localized())
+                    .font(.nunito(.bold, .callout14))
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(selected == cat
+                                  ? Color.accentColor.opacity(0.1)
+                                  : .white)
+                            .overlay(
+                              RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 1)
+                            )
+                    )
+                    .opacity(selected == cat ? 1 : 0.5)
+                    .onTapGesture { selected = cat }
+            }
+        }
+        .padding(.horizontal)
     }
 }
 
@@ -206,7 +239,6 @@ struct EggPackageSection: View {
                 diamondCost: egg.diamondPrice,
                 price: nil
             ) {
-                // burayı openSheet’e yönlendiriyoruz
                 let shopItem = ShopItem(
                     id:         egg.id,
                     name:       egg.name,
@@ -238,9 +270,9 @@ struct PetItemPackageSection: View {
         ThreeColumnGrid(items: packages, id: \.id) { pkg in
             ShopItemView(
                 imageName: pkg.name ?? "petPackagePlaceholder",
-                goldCost: nil,                  // paketler ücretsiz olduğu için nil
+                goldCost: nil,
                 diamondCost: nil,
-                price: String(format: "shop_limit".localized(), pkg.limit ?? 0)  // alt metin olarak limiti gösteriyoruz
+                price: String(format: "shop_limit".localized(), pkg.limit ?? 0)
             ) {
                 onSelect(pkg)
             }
@@ -279,7 +311,6 @@ struct PetItemGroupsSection: View {
         ("shop_group_fun".localized(),       "funMaterial")
     ]
 
-    // Sadece içinde veri olan gruplar
     private var nonEmptyGroups: [(title: String, key: String)] {
         allGroups.filter { group in
             petItems.contains { $0.effectType == group.key }
@@ -288,7 +319,6 @@ struct PetItemGroupsSection: View {
 
     var body: some View {
         ForEach(nonEmptyGroups, id: \.key) { section in
-            // bu grup için filtrelenmiş petItems
             let filtered = petItems.filter { $0.effectType == section.key }
 
             SectionHeader(title: section.title)
@@ -327,35 +357,7 @@ struct HomeSection: View {
     }
 }
 
-// MARK: - CategoryPicker
-
-struct CategoryPicker: View {
-    @Binding var selected: MainCategory
-
-    var body: some View {
-        HStack(spacing: 16) {
-            ForEach(MainCategory.allCases, id: \.self) { cat in
-                Text(cat.rawValue.localized())
-                    .font(.nunito(.bold, .callout14))
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 20)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(selected == cat
-                                  ? Color.accentColor.opacity(0.1)
-                                  : .white)
-                            .overlay(
-                              RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1)
-                            )
-                    )
-                    .opacity(selected == cat ? 1 : 0.5)
-                    .onTapGesture { selected = cat }
-            }
-        }
-        .padding(.horizontal)
-    }
-}
+// MARK: - RoofSideView
 
 struct RoofSideView: View {
     @EnvironmentObject var currentUser: CurrentUserViewModel
@@ -377,12 +379,13 @@ struct RoofSideView: View {
                 Spacer()
                 RestoreButtonView()
                     .padding(.trailing, 16)
-                
             }.frame(width: Utilities.Constants.width)
             .padding(.top, 50)
         }
     }
 }
+
+// MARK: - ShopItemView
 
 struct ShopItemView: View {
     let imageName: String
@@ -475,6 +478,7 @@ enum CurrencyGoldDiamondType {
     case gold
     case diamond
 }
+// MARK: - AssetNumberView
 
 struct AssetNumberView: View {
     @EnvironmentObject var currentUserVM: CurrentUserViewModel
@@ -524,6 +528,8 @@ struct AssetNumberView: View {
     }
 }
 
+// MARK: - BackButtonView
+
 struct BackButtonView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -547,6 +553,8 @@ struct BackButtonView: View {
     }
 }
 
+// MARK: - RestoreButtonView
+
 struct RestoreButtonView: View {
     var body: some View {
         ZStack {
@@ -566,6 +574,8 @@ struct RestoreButtonView: View {
         }
     }
 }
+
+// MARK: - Extensions
 
 extension PetItemPackage {
     func toShopItem() -> ShopItem {

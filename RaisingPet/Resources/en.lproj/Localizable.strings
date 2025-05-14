@@ -112,6 +112,7 @@
 "couple_question_no_data" = "No Data Found";
 "ai_therapist_development_title" = "AI Therapist Under Development";
 "ai_therapist_development_message" = "We are currently working to perfect our AI Therapist feature. We will soon offer you AI-powered guidance. Please stay tuned!";
+"ai_therapist_under_development" = "AI Therapist is under development. Stay tuned for exciting updates!";
 
 // QuestionView
 "question_vs" = "vs";

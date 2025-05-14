@@ -76,6 +76,7 @@ struct EggAndPetsView: View {
                         }
                         .padding(.vertical, 16)
                     }
+                    .scrollIndicators(.hidden)
                     .refreshable {
                         await vm.fetchInventory()
                         await vm.fetchPets()

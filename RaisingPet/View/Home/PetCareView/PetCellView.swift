@@ -13,12 +13,13 @@ struct PetCellView: View {
     // Hayvan adına göre systemImage seçimi
     private var petImageName: String {
         switch pet.petType.name.lowercased() {
-        case "dog": return "dog.fill"
-        case "cat": return "cat.fill"
-        case "duck": return "bird.fill"
-        case "frog": return "tortoise.fill"
-        case "fox": return "fox.fill"
-        case "panda": return "panda.fill"
+        case "dog": return "dog"
+        case "dog2": return "dog2"
+        case "cat": return "cat"
+        case "duck": return "duck"
+        case "frog": return "frog"
+        case "fox": return "fox"
+        case "panda": return "panda"
         default: return "pawprint.fill" // Varsayılan
         }
     }
@@ -31,11 +32,10 @@ struct PetCellView: View {
                         .fill(Color.gray.opacity(0.1))
                         .frame(width: 80, height: 90)
                         .shadow(radius: 4)
-                    Image(systemName: petImageName)
+                    Image(petImageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(.blue)
                 }
                 Text(pet.petType.name.capitalized)
                     .font(.caption)

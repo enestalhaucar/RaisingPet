@@ -11,6 +11,7 @@ import Alamofire
 struct QuestionView: View {
     let quizId: String
     @StateObject private var viewModel = CoupleQuestionViewModel()
+    @Binding var navigationPath: NavigationPath
     @State private var currentQuestionIndex = 0
     @State private var isQuizCompleted = false
     @State private var selectedAnswers: [QuizAnswer] = []
@@ -46,8 +47,7 @@ struct QuestionView: View {
     var body: some View {
         Group {
             if isQuizCompleted && viewModel.quizResultLoaded {
-                // Üstteki NavigationStack tarafından yönetilecek
-                QuizResultView(quizId: quizId)
+                QuizResultView(quizId: quizId, navigationPath: $navigationPath)
             } else if viewModel.isLoading {
                 LoadingAnimationView()
             } else if let errorMessage = viewModel.errorMessage {
@@ -77,10 +77,13 @@ struct QuestionView: View {
             }
         }
         .onAppear {
+            currentQuestionIndex = 0
+            isQuizCompleted = false
+            selectedAnswers.removeAll()
+            sendableQuizObject = TakeQuizRequest(quizId: quizId, preAnswers: [])
             if !isInitialized {
                 Task {
                     await viewModel.fetchQuizById(quizId: quizId)
-                    print("Fetch By Quiz Id ile gönderilen QuizID: \(quizId)")
                 }
                 isInitialized = true
             }

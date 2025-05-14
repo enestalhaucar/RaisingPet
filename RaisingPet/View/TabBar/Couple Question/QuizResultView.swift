@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizResultView: View {
     let quizId: String
     @StateObject private var viewModel = CoupleQuestionViewModel()
+    @Binding var navigationPath: NavigationPath
     @State private var percentage: Double = 0.0
     @Environment(\.dismiss) var dismiss
 
@@ -24,31 +25,45 @@ struct QuizResultView: View {
                 if viewModel.isLoading {
                     LoadingAnimationView()
                 } else if let quizResultAnswers = viewModel.quizResult?.answers {
-                    VStack(spacing: 15) {
-                        ForEach(quizResultAnswers, id: \.question) { answer in
-                            HStack {
-                                Text(answer.userAnswer ?? "?")
-                                    .frame(maxWidth: .infinity)
-                                    .padding(10)
-                                    .background(Color.blue.opacity(0.2))
-                                    .cornerRadius(10)
-                                    .font(.nunito(.light, .body16))
+                    // fetchQuizById'den gelen sorularla eşleştirme
+                    if let questions = viewModel.selectedQuiz?.questions {
+                        VStack(spacing: 15) {
+                            ForEach(questions, id: \.id) { question in
+                                if let answer = quizResultAnswers.first(where: { $0.question == question.id }) {
+                                    HStack {
+                                        Text(answer.userAnswer ?? "?")
+                                            .frame(maxWidth: .infinity)
+                                            .padding(10)
+                                            .background(
+                                                (answer.userAnswer == answer.friendAnswer && answer.userAnswer != nil) ?
+                                                Color.green.opacity(0.2) : Color.blue.opacity(0.2)
+                                            )
+                                            .cornerRadius(10)
+                                            .font(.nunito(.light, .body16))
 
-                                Text("quiz_result_vs".localized())
-                                    .font(.nunito(.medium, .title320))
-                                    .bold()
-                                    .padding(.horizontal, 8)
+                                        Text("quiz_result_vs".localized())
+                                            .font(.nunito(.medium, .title320))
+                                            .bold()
+                                            .padding(.horizontal, 8)
 
-                                Text(answer.friendAnswer ?? "?")
-                                    .frame(maxWidth: .infinity)
-                                    .padding(10)
-                                    .background(Color.blue.opacity(0.2))
-                                    .cornerRadius(10)
-                                    .font(.nunito(.light, .body16))
+                                        Text(answer.friendAnswer ?? "?")
+                                            .frame(maxWidth: .infinity)
+                                            .padding(10)
+                                            .background(
+                                                (answer.userAnswer == answer.friendAnswer && answer.friendAnswer != nil) ?
+                                                Color.green.opacity(0.2) : Color.blue.opacity(0.2)
+                                            )
+                                            .cornerRadius(10)
+                                            .font(.nunito(.light, .body16))
+                                    }
+                                }
                             }
                         }
+                        .padding()
+                    } else {
+                        Text("Sorular yüklenemedi")
+                            .font(.nunito(.medium, .body16))
                     }
-                    .padding()
                 } else {
                     Text("quiz_result_no_data".localized())
                         .font(.nunito(.medium, .body16))
@@ -64,7 +79,6 @@ struct QuizResultView: View {
 
                     Button(action: {
                         dismiss() // Geri dön
-                        // fetchQuizzes() artık CoupleQuestionView’da onChange ile yönetiliyor
                     }) {
                         Text("quiz_result_back_to_couple_question".localized())
                             .padding(.vertical, 8)
@@ -83,10 +97,7 @@ struct QuizResultView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    dismiss()
-                    Task {
-                        await viewModel.fetchQuizById(quizId: quizId)
-                    }
+                    navigationPath.append("question_\(quizId)")
                 }) {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.counterclockwise")
@@ -102,7 +113,11 @@ struct QuizResultView: View {
             Task {
                 if viewModel.quizResult == nil {
                     await viewModel.fetchQuizResult(quizId: quizId)
-                    print("Fetch Quiz Result ile gönderilen quizId: \(quizId)")
+                    print("Fetch Quiz Result ile gönderilen quizId: \(quizId), Sonuç: \(String(describing: viewModel.quizResult))")
+                }
+                if viewModel.selectedQuiz == nil {
+                    await viewModel.fetchQuizById(quizId: quizId)
+                    print("Fetch Quiz By Id ile gönderilen QuizID: \(quizId), Sorular: \(String(describing: viewModel.selectedQuiz?.questions))")
                 }
             }
         }

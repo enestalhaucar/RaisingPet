@@ -109,6 +109,7 @@
 "couple_question_no_data" = "Veri Bulunamadı";
 "ai_therapist_development_title" = "AI Terapist Geliştiriliyor";
 "ai_therapist_development_message" = "Şu anda AI Terapist özelliğimizi en iyi hale getirmek için çalışıyoruz. Çok yakında size yapay zeka destekli rehberlik sunacağız. Lütfen bizi takip etmeye devam edin!";
+"ai_therapist_under_development" = "AI Therapist geliştirme aşamasında. Heyecan verici güncellemeler için bizi takip et!";
 
 // QuestionView
 "question_vs" = "vs";

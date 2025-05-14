@@ -15,7 +15,7 @@ final class Utilities {
     struct Constants {
         static let baseURL = "http://3.74.213.54:3000/api/v1"
         
-        // Test için onboarding
+        // Test için onboarding - Production da false olmalı, her defasında açılmasını istiyorsan true yap.
         static let onboarding : Bool = false
         
         // Screen Size
