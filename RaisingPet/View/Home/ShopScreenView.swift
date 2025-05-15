@@ -53,20 +53,20 @@ struct ShopScreenView: View {
                                     onSelect: openSheet
                                 )
                             } else {
-                                EggPackageSection(
-                                  eggs: vm.allItems?.eggPackages ?? [],
-                                  onSelect: openSheet
-                                )
-                                
-                                PetItemPackageSection(
-                                  packages: vm.allItems?.petItemPackages ?? [],
-                                  onSelect: { pkg in
-                                    selectedPetItemPackage = pkg
-                                    packageItems = pkg.petItemTypes ?? []
-                                    packageLimit = pkg.limit ?? 0
-                                    showPackagePopup = true
-                                  }
-                                )
+//                                EggPackageSection(
+//                                  eggs: vm.allItems?.eggPackages ?? [],
+//                                  onSelect: openSheet
+//                                )
+//                                
+//                                PetItemPackageSection(
+//                                  packages: vm.allItems?.petItemPackages ?? [],
+//                                  onSelect: { pkg in
+//                                    selectedPetItemPackage = pkg
+//                                    packageItems = pkg.petItemTypes ?? []
+//                                    packageLimit = pkg.limit ?? 0
+//                                    showPackagePopup = true
+//                                  }
+//                                )
                                 EggSingleSection(
                                     items: vm.allItems?.shopItems ?? [],
                                     onSelect: openSheet
