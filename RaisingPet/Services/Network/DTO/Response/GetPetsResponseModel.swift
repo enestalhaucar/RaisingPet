@@ -2,13 +2,13 @@
 //  GetPetsResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 7.05.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
 
-// MARK: - Top-Level Response
-struct GetPetsResponse: Codable {
+// MARK: - Get Pets Response Model
+struct GetPetsResponseModel: Codable {
     let status: String
     let data: PetsData
 }

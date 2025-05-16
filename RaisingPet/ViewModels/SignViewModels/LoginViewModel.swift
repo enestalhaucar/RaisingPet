@@ -28,7 +28,7 @@ class LoginViewModel: ObservableObject {
                    parameters: requestBody,
                    encoder: JSONParameterEncoder.default)
             .validate()
-            .responseDecodable(of: LoginResponse.self) { [weak self] response in
+            .responseDecodable(of: LoginResponseModel.self) { [weak self] response in
                 DispatchQueue.main.async {
                     self?.isLoading = false
                     switch response.result {
@@ -52,7 +52,7 @@ class LoginViewModel: ObservableObject {
             }
     }
     
-    private func saveUserToUserDefaults(data: LoginResponse) {
+    private func saveUserToUserDefaults(data: LoginResponseModel) {
         let defaults = UserDefaults.standard
         defaults.set(data.token, forKey: "authToken")
         defaults.set(data.data.user.firstname, forKey: "userFirstname")

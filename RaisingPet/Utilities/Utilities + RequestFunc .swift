@@ -20,10 +20,11 @@ extension Utilities {
         
         AF.request(url, method: .get, headers: headers)
             .validate()
-            .responseDecodable(of: GetMeResponse.self) { response in
+            .responseDecodable(of: GetMeResponseModel.self) { response in
                 switch response.result {
                 case .success(let wrapper):
-                    completion(.success(wrapper.data.data))
+                    guard let data = wrapper.data else { return }
+                    completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
                 }

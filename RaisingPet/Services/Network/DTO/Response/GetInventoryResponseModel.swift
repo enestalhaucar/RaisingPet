@@ -2,13 +2,13 @@
 //  GetInventoryResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 5.05.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
 
-// MARK: - Top-Level Response
-struct GetInventoryResponse: Codable {
+// MARK: - Get Inventory Response Model
+struct GetInventoryResponseModel: Codable {
     let status: String
     let data: InventoryData
 }

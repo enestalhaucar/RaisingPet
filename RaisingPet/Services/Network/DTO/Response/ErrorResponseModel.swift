@@ -7,7 +7,7 @@
 import Foundation
 import Alamofire
 
-struct ErrorResponse: Codable {
+struct ErrorResponseModel: Codable {
     let status: String
     let message: String
 }

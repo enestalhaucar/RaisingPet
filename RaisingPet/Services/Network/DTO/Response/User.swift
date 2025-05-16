@@ -1,9 +1,10 @@
 //
-//  JWTService.swift
+//  User.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 5.11.2024.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
+
 
 import Foundation
 
@@ -26,8 +27,3 @@ struct User: Codable {
 struct UserData: Codable {
     let user: User
 }
-
-
-
-
-

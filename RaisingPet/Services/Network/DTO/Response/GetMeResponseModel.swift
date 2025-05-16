@@ -2,18 +2,15 @@
 //  GetMeResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 5.05.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
 
-struct GetMeResponse: Codable {
+// MARK: - GetMe Response Model
+struct GetMeResponseModel: Codable {
     let status: String
-    let data: GetMeResponseDataWrapper
-}
-
-struct GetMeResponseDataWrapper: Codable {
-    let data: GetMeUser
+    let data: GetMeUser?
 }
 
 struct GetMeUser: Codable {
@@ -28,11 +25,12 @@ struct GetMeUser: Codable {
     let isDeleted: Bool
     let friendTag: String
     let version: Int
+    let phoneNumber: String?
 
     enum CodingKeys: String, CodingKey {
         case id                 = "_id"
         case firstname, surname, email, photo, role
-        case gameCurrencyGold, gameCurrencyDiamond, isDeleted, friendTag
+        case gameCurrencyGold, gameCurrencyDiamond, isDeleted, friendTag, phoneNumber
         case version            = "__v"
     }
 }

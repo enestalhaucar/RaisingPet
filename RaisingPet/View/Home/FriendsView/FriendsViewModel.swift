@@ -35,7 +35,7 @@ class FriendsViewModel: ObservableObject {
         do {
             let response = try await AF.request(url, method: .get, headers: headers)
                 .validate()
-                .serializingDecodable(FriendResponse.self)
+                .serializingDecodable(FriendsResponseModel.self)
                 .value
             friends = response.data.friends
         } catch {

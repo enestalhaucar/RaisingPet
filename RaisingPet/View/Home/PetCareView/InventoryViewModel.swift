@@ -54,7 +54,7 @@ final class InventoryViewModel: ObservableObject {
                                             method: .get,
                                             headers: headers)
                 .validate()
-                .serializingDecodable(GetInventoryResponse.self, decoder: decoder)
+                .serializingDecodable(GetInventoryResponseModel.self, decoder: decoder)
                 .value
 
             let items = resp.data.inventory.items
@@ -84,7 +84,7 @@ final class InventoryViewModel: ObservableObject {
                                             method: .get,
                                             headers: headers)
                 .validate()
-                .serializingDecodable(GetPetsResponse.self, decoder: decoder)
+                .serializingDecodable(GetPetsResponseModel.self, decoder: decoder)
                 .value
 
             pets = resp.data.pets.filter { $0.isHatched && !$0.isDeleted }
@@ -94,7 +94,7 @@ final class InventoryViewModel: ObservableObject {
         }
     }
 
-    func hatchPets(_ inventoryItemEggIds: [String]) async throws -> HatchPetsResponse {
+    func hatchPets(_ inventoryItemEggIds: [String]) async throws -> HatchPetsResponseModel {
         isLoading = true
         defer { isLoading = false }
 
@@ -110,7 +110,7 @@ final class InventoryViewModel: ObservableObject {
                                                 encoding: JSONEncoding.default,
                                                 headers: headers)
                 .validate()
-                .serializingDecodable(HatchPetsResponse.self, decoder: decoder)
+                .serializingDecodable(HatchPetsResponseModel.self, decoder: decoder)
                 .value
             return response
         } catch {

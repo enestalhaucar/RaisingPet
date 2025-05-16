@@ -1,8 +1,8 @@
 //
-//  SignupModel.swift
+//  LoginRequestModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 10.12.2024.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
@@ -15,4 +15,3 @@ struct SignUpRequestBody: Codable {
     let password: String
     let passwordConfirm: String
 }
-

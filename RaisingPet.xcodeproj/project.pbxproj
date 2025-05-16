@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC02CA4C2DD64D2900CB53EE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA422DD64D2900CB53EE /* HTTPMethod.swift */; };
+		EC02CA4D2DD64D2900CB53EE /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3F2DD64D2900CB53EE /* ShopRepository.swift */; };
+		EC02CA4E2DD64D2900CB53EE /* RepositoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA4A2DD64D2900CB53EE /* RepositoryProvider.swift */; };
+		EC02CA4F2DD64D2900CB53EE /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA452DD64D2900CB53EE /* ServiceLocator.swift */; };
+		EC02CA502DD64D2900CB53EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA442DD64D2900CB53EE /* NetworkManager.swift */; };
+		EC02CA512DD64D2900CB53EE /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3A2DD64D2900CB53EE /* BaseRepository.swift */; };
+		EC02CA522DD64D2900CB53EE /* QuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3E2DD64D2900CB53EE /* QuizRepository.swift */; };
+		EC02CA532DD64D2900CB53EE /* InventoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3C2DD64D2900CB53EE /* InventoryRepository.swift */; };
+		EC02CA542DD64D2900CB53EE /* PetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3D2DD64D2900CB53EE /* PetRepository.swift */; };
+		EC02CA552DD64D2900CB53EE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA412DD64D2900CB53EE /* Endpoint.swift */; };
+		EC02CA562DD64D2900CB53EE /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA392DD64D2900CB53EE /* AuthRepository.swift */; };
+		EC02CA572DD64D2900CB53EE /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA432DD64D2900CB53EE /* NetworkError.swift */; };
+		EC02CA582DD64D2900CB53EE /* FriendsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02CA3B2DD64D2900CB53EE /* FriendsRepository.swift */; };
 		EC02EBC52DC921F30019668C /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = EC02EBC42DC921F30019668C /* netfox */; };
 		EC02EBC82DC9507E0019668C /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02EBC72DC950790019668C /* InventoryViewModel.swift */; };
-		EC02EBCA2DC951C30019668C /* GetInventoryResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02EBC92DC951BC0019668C /* GetInventoryResponseModel.swift */; };
 		EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */; };
 		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
-		EC15E6392DCEBD1000B885A2 /* QuizResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */; };
 		EC15E63C2DCF985100B885A2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */; };
 		EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
@@ -39,10 +50,10 @@
 		EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EC606F172C5FB44C0015F103 /* GoogleSignIn */; };
 		EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC606F192C5FB44C0015F103 /* GoogleSignInSwift */; };
 		EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC606F212C5FB7F80015F103 /* Utilities.swift */; };
-		EC731E5B2DCB86EC005A064A /* HatchPetsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5A2DCB86E3005A064A /* HatchPetsResponseModel.swift */; };
+		EC6760892DD739C50041C839 /* QuizDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6760882DD739BF0041C839 /* QuizDetailResponseModel.swift */; };
+		EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */; };
+		EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */; };
 		EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5C2DCB87BD005A064A /* EggCellView.swift */; };
-		EC731E5F2DCBCA19005A064A /* GetPetsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5E2DCBCA14005A064A /* GetPetsResponseModel.swift */; };
-		EC731E612DCBCF42005A064A /* PetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E602DCBCF40005A064A /* PetsModel.swift */; };
 		EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E622DCBCFAE005A064A /* PetCellView.swift */; };
 		EC731E652DCBD463005A064A /* PetItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E642DCBD45F005A064A /* PetItemView.swift */; };
 		EC731E672DCBD8C3005A064A /* PetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E662DCBD8BC005A064A /* PetHeaderView.swift */; };
@@ -55,17 +66,12 @@
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
 		EC8D59C12D084DB30050740C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EC8D59C02D084DB30050740C /* Alamofire */; };
 		EC8D59C72D0876300050740C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C62D0876300050740C /* AppState.swift */; };
-		EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */; };
-		EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */; };
-		EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */; };
-		EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */; };
 		EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */; };
 		EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E5A462D7A6C59001B2335 /* PreviewDesignComponent.swift */; };
 		EC8E5A4A2D7AA4E4001B2335 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E5A492D7AA4E4001B2335 /* Localizable.swift */; };
 		EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */; };
 		EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A512D7AA8EA001B2335 /* Localizable.strings */; };
 		EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC8E5A532D7AA94A001B2335 /* Localizable.strings */; };
-		EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */; };
 		EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9111892DAAD5D5007D92B1 /* ShopScreenViewModel.swift */; };
 		EC9111912DAC361E007D92B1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9111902DAC361E007D92B1 /* WidgetKit.framework */; };
 		EC9111922DAC361E007D92B1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */; };
@@ -79,23 +85,33 @@
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
 		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
-		ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */; };
-		ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
-		ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB799B2CDA163D000A1923 /* UserModel.swift */; };
-		ECCDFAF42DC954C50044DAC2 /* GetMeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDFAF32DC954BF0044DAC2 /* GetMeResponseModel.swift */; };
 		ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDFAF52DC954DA0044DAC2 /* Utilities + RequestFunc .swift */; };
 		ECCDFAF92DC956E20044DAC2 /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDFAF82DC956DF0044DAC2 /* CurrentUserViewModel.swift */; };
 		ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ECDFC43F2D6D1C6A00FA450D /* Lottie */; };
 		ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */; };
 		ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = ECDFC4482D6D211400FA450D /* LoadingAnimation.json */; };
-		ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */; };
-		ECDFC44F2D6D380D00FA450D /* TakeQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */; };
-		ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */; };
 		ECF37DC52DD11A2400552613 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF37DC42DD11A1D00552613 /* WallpaperView.swift */; };
 		ECF37DFD2DD24FA800552613 /* ValidationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF37DFC2DD24FA200552613 /* ValidationUtility.swift */; };
+		ECF3A0422DD650A70052990B /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A02F2DD650A70052990B /* ErrorResponseModel.swift */; };
+		ECF3A0462DD651940052990B /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0452DD6518F0052990B /* LoginResponseModel.swift */; };
+		ECF3A0482DD651C00052990B /* SignUpResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0472DD651BF0052990B /* SignUpResponseBody.swift */; };
+		ECF3A04A2DD651EF0052990B /* GetMeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0492DD651EA0052990B /* GetMeResponseModel.swift */; };
+		ECF3A04C2DD6520B0052990B /* GetPetsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A04B2DD652030052990B /* GetPetsResponseModel.swift */; };
+		ECF3A04E2DD6524E0052990B /* PetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A04D2DD6524B0052990B /* PetsModel.swift */; };
+		ECF3A0502DD6527D0052990B /* HatchPetsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A04F2DD6527B0052990B /* HatchPetsResponseModel.swift */; };
+		ECF3A0522DD652920052990B /* FriendsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0512DD652910052990B /* FriendsResponseModel.swift */; };
+		ECF3A0542DD652B20052990B /* GetInventoryResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0532DD652B10052990B /* GetInventoryResponseModel.swift */; };
+		ECF3A0562DD652C30052990B /* GetAllShopItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0552DD652BE0052990B /* GetAllShopItems.swift */; };
+		ECF3A0582DD652F70052990B /* QuizResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0572DD652F00052990B /* QuizResponseModel.swift */; };
+		ECF3A05A2DD6533B0052990B /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0592DD653340052990B /* LoginRequestModel.swift */; };
+		ECF3A05C2DD653450052990B /* SignUpRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A05B2DD653450052990B /* SignUpRequestModel.swift */; };
+		ECF3A0692DD653BB0052990B /* TakeQuizRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0682DD653BB0052990B /* TakeQuizRequestModel.swift */; };
+		ECF3A0712DD655E70052990B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0702DD655E70052990B /* User.swift */; };
+		ECF3A0732DD656130052990B /* QuizResultForQuizRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0722DD656130052990B /* QuizResultForQuizRequest.swift */; };
+		ECF3A0752DD656340052990B /* StartQuizResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3A0742DD656340052990B /* StartQuizResultRequest.swift */; };
 		ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */; };
 		ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
@@ -135,13 +151,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC02CA392DD64D2900CB53EE /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		EC02CA3A2DD64D2900CB53EE /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		EC02CA3B2DD64D2900CB53EE /* FriendsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRepository.swift; sourceTree = "<group>"; };
+		EC02CA3C2DD64D2900CB53EE /* InventoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryRepository.swift; sourceTree = "<group>"; };
+		EC02CA3D2DD64D2900CB53EE /* PetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRepository.swift; sourceTree = "<group>"; };
+		EC02CA3E2DD64D2900CB53EE /* QuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepository.swift; sourceTree = "<group>"; };
+		EC02CA3F2DD64D2900CB53EE /* ShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepository.swift; sourceTree = "<group>"; };
+		EC02CA412DD64D2900CB53EE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EC02CA422DD64D2900CB53EE /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		EC02CA432DD64D2900CB53EE /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		EC02CA442DD64D2900CB53EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EC02CA452DD64D2900CB53EE /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		EC02CA4A2DD64D2900CB53EE /* RepositoryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProvider.swift; sourceTree = "<group>"; };
 		EC02EBC72DC950790019668C /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
-		EC02EBC92DC951BC0019668C /* GetInventoryResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInventoryResponseModel.swift; sourceTree = "<group>"; };
 		EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsView.swift; sourceTree = "<group>"; };
 		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
-		EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResponseModels.swift; sourceTree = "<group>"; };
 		EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPackageCounterPopUpView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -166,10 +193,10 @@
 		EC606F142C58F61F0015F103 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		EC606F1F2C5FB4D80015F103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EC606F212C5FB7F80015F103 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		EC731E5A2DCB86E3005A064A /* HatchPetsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatchPetsResponseModel.swift; sourceTree = "<group>"; };
+		EC6760882DD739BF0041C839 /* QuizDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDetailResponseModel.swift; sourceTree = "<group>"; };
+		EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultResponseModel.swift; sourceTree = "<group>"; };
+		EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuizzesResponseModel.swift; sourceTree = "<group>"; };
 		EC731E5C2DCB87BD005A064A /* EggCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggCellView.swift; sourceTree = "<group>"; };
-		EC731E5E2DCBCA14005A064A /* GetPetsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPetsResponseModel.swift; sourceTree = "<group>"; };
-		EC731E602DCBCF40005A064A /* PetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsModel.swift; sourceTree = "<group>"; };
 		EC731E622DCBCFAE005A064A /* PetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCellView.swift; sourceTree = "<group>"; };
 		EC731E642DCBD45F005A064A /* PetItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemView.swift; sourceTree = "<group>"; };
 		EC731E662DCBD8BC005A064A /* PetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetHeaderView.swift; sourceTree = "<group>"; };
@@ -181,16 +208,11 @@
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
 		EC8D59C62D0876300050740C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
-		EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRequestModel.swift; sourceTree = "<group>"; };
-		EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponseModel.swift; sourceTree = "<group>"; };
-		EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
 		EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		EC8E5A462D7A6C59001B2335 /* PreviewDesignComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDesignComponent.swift; sourceTree = "<group>"; };
 		EC8E5A492D7AA4E4001B2335 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		EC8E5A522D7AA8EA001B2335 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Localizable.strings; sourceTree = "<group>"; };
 		EC8E5A542D7AA94A001B2335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopItems.swift; sourceTree = "<group>"; };
 		EC9111892DAAD5D5007D92B1 /* ShopScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenViewModel.swift; sourceTree = "<group>"; };
 		EC91118F2DAC361E007D92B1 /* PetiverseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetiverseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9111902DAC361E007D92B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -203,24 +225,34 @@
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
-		ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
-		ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestBody.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		ECCB799B2CDA163D000A1923 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
-		ECCDFAF32DC954BF0044DAC2 /* GetMeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeResponseModel.swift; sourceTree = "<group>"; };
 		ECCDFAF52DC954DA0044DAC2 /* Utilities + RequestFunc .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utilities + RequestFunc .swift"; sourceTree = "<group>"; };
 		ECCDFAF82DC956DF0044DAC2 /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
 		ECDFC4442D6D1CC400FA450D /* LoadingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		ECDFC4482D6D211400FA450D /* LoadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
-		ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizResultRequest.swift; sourceTree = "<group>"; };
-		ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizRequest.swift; sourceTree = "<group>"; };
-		ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizRequest.swift; sourceTree = "<group>"; };
 		ECF37DC42DD11A1D00552613 /* WallpaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperView.swift; sourceTree = "<group>"; };
 		ECF37DFC2DD24FA200552613 /* ValidationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationUtility.swift; sourceTree = "<group>"; };
+		ECF3A02F2DD650A70052990B /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0452DD6518F0052990B /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0472DD651BF0052990B /* SignUpResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseBody.swift; sourceTree = "<group>"; };
+		ECF3A0492DD651EA0052990B /* GetMeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A04B2DD652030052990B /* GetPetsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPetsResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A04D2DD6524B0052990B /* PetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsModel.swift; sourceTree = "<group>"; };
+		ECF3A04F2DD6527B0052990B /* HatchPetsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatchPetsResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0512DD652910052990B /* FriendsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0532DD652B10052990B /* GetInventoryResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInventoryResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0552DD652BE0052990B /* GetAllShopItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopItems.swift; sourceTree = "<group>"; };
+		ECF3A0572DD652F00052990B /* QuizResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResponseModel.swift; sourceTree = "<group>"; };
+		ECF3A0592DD653340052990B /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
+		ECF3A05B2DD653450052990B /* SignUpRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestModel.swift; sourceTree = "<group>"; };
+		ECF3A0682DD653BB0052990B /* TakeQuizRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeQuizRequestModel.swift; sourceTree = "<group>"; };
+		ECF3A0702DD655E70052990B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ECF3A0722DD656130052990B /* QuizResultForQuizRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultForQuizRequest.swift; sourceTree = "<group>"; };
+		ECF3A0742DD656340052990B /* StartQuizResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizResultRequest.swift; sourceTree = "<group>"; };
 		ECF3EAC02D63734100EEFBB2 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		ECF3EACC2D6384ED00EEFBB2 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -266,6 +298,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC02CA402DD64D2900CB53EE /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC02CA392DD64D2900CB53EE /* AuthRepository.swift */,
+				EC02CA3A2DD64D2900CB53EE /* BaseRepository.swift */,
+				EC02CA3B2DD64D2900CB53EE /* FriendsRepository.swift */,
+				EC02CA3C2DD64D2900CB53EE /* InventoryRepository.swift */,
+				EC02CA3D2DD64D2900CB53EE /* PetRepository.swift */,
+				EC02CA3E2DD64D2900CB53EE /* QuizRepository.swift */,
+				EC02CA3F2DD64D2900CB53EE /* ShopRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC02CA462DD64D2900CB53EE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EC02CA402DD64D2900CB53EE /* Repository */,
+				EC02CA412DD64D2900CB53EE /* Endpoint.swift */,
+				EC02CA422DD64D2900CB53EE /* HTTPMethod.swift */,
+				EC02CA432DD64D2900CB53EE /* NetworkError.swift */,
+				EC02CA442DD64D2900CB53EE /* NetworkManager.swift */,
+				EC02CA452DD64D2900CB53EE /* ServiceLocator.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EC02CA472DD64D2900CB53EE /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				ECF3A0592DD653340052990B /* LoginRequestModel.swift */,
+				ECF3A05B2DD653450052990B /* SignUpRequestModel.swift */,
+				ECF3A0722DD656130052990B /* QuizResultForQuizRequest.swift */,
+				ECF3A0742DD656340052990B /* StartQuizResultRequest.swift */,
+				ECF3A0682DD653BB0052990B /* TakeQuizRequestModel.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		EC02CA482DD64D2900CB53EE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */,
+				EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */,
+				EC6760882DD739BF0041C839 /* QuizDetailResponseModel.swift */,
+				ECF3A0572DD652F00052990B /* QuizResponseModel.swift */,
+				ECF3A0552DD652BE0052990B /* GetAllShopItems.swift */,
+				ECF3A0532DD652B10052990B /* GetInventoryResponseModel.swift */,
+				ECF3A0512DD652910052990B /* FriendsResponseModel.swift */,
+				ECF3A04F2DD6527B0052990B /* HatchPetsResponseModel.swift */,
+				ECF3A04D2DD6524B0052990B /* PetsModel.swift */,
+				ECF3A04B2DD652030052990B /* GetPetsResponseModel.swift */,
+				ECF3A0702DD655E70052990B /* User.swift */,
+				ECF3A0492DD651EA0052990B /* GetMeResponseModel.swift */,
+				ECF3A0472DD651BF0052990B /* SignUpResponseBody.swift */,
+				ECF3A0452DD6518F0052990B /* LoginResponseModel.swift */,
+				ECF3A02F2DD650A70052990B /* ErrorResponseModel.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		EC02CA492DD64D2900CB53EE /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				EC02CA472DD64D2900CB53EE /* Request */,
+				EC02CA482DD64D2900CB53EE /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		EC02CA4B2DD64D2900CB53EE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EC02CA462DD64D2900CB53EE /* Core */,
+				EC02CA492DD64D2900CB53EE /* DTO */,
+				EC02CA4A2DD64D2900CB53EE /* RepositoryProvider.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		EC02EBC62DC950700019668C /* PetCareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,43 +663,11 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		ECC1D0902D440C44008D2C92 /* RequestModels */ = {
-			isa = PBXGroup;
-			children = (
-				EC8D59CA2D089BAE0050740C /* SignupRequestModel.swift */,
-				ECC1D0942D440C95008D2C92 /* LoginRequestBody.swift */,
-				ECDFC44E2D6D380D00FA450D /* TakeQuizRequest.swift */,
-				ECDFC4522D6D46CD00FA450D /* QuizResultForQuizRequest.swift */,
-				ECCB799B2CDA163D000A1923 /* UserModel.swift */,
-				ECDFC44A2D6D2A7800FA450D /* StartQuizResultRequest.swift */,
-			);
-			path = RequestModels;
-			sourceTree = "<group>";
-		};
-		ECC1D0912D440C4B008D2C92 /* ResponseModels */ = {
-			isa = PBXGroup;
-			children = (
-				EC731E602DCBCF40005A064A /* PetsModel.swift */,
-				EC731E5E2DCBCA14005A064A /* GetPetsResponseModel.swift */,
-				EC731E5A2DCB86E3005A064A /* HatchPetsResponseModel.swift */,
-				EC02EBC92DC951BC0019668C /* GetInventoryResponseModel.swift */,
-				ECCDFAF32DC954BF0044DAC2 /* GetMeResponseModel.swift */,
-				EC9111862DAAC771007D92B1 /* GetAllShopItems.swift */,
-				EC8D59CC2D089BC80050740C /* FriendsResponseModel.swift */,
-				EC8D59CE2D089C0C0050740C /* ErrorResponseModel.swift */,
-				EC15E6382DCEBD0700B885A2 /* QuizResponseModels.swift */,
-				ECC1D0922D440C85008D2C92 /* SignUpResponseBody.swift */,
-				EC8D59C82D089B9F0050740C /* LoginResponseModel.swift */,
-			);
-			path = ResponseModels;
-			sourceTree = "<group>";
-		};
 		ECCB799A2CDA161C000A1923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				ECCDFAF72DC956DA0044DAC2 /* CurrentUser */,
-				ECC1D0902D440C44008D2C92 /* RequestModels */,
-				ECC1D0912D440C4B008D2C92 /* ResponseModels */,
+				EC02CA4B2DD64D2900CB53EE /* Network */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -756,59 +836,73 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC731E5F2DCBCA19005A064A /* GetPetsResponseModel.swift in Sources */,
+				ECF3A0752DD656340052990B /* StartQuizResultRequest.swift in Sources */,
 				ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */,
-				ECDFC44B2D6D2A7800FA450D /* StartQuizResultRequest.swift in Sources */,
-				EC02EBCA2DC951C30019668C /* GetInventoryResponseModel.swift in Sources */,
+				ECF3A0712DD655E70052990B /* User.swift in Sources */,
 				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
-				ECCB799C2CDA163D000A1923 /* UserModel.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
-				EC8D59CB2D089BAE0050740C /* SignupRequestModel.swift in Sources */,
+				ECF3A0422DD650A70052990B /* ErrorResponseModel.swift in Sources */,
 				EC15E63C2DCF985100B885A2 /* ProfileEditViewModel.swift in Sources */,
+				ECF3A04A2DD651EF0052990B /* GetMeResponseModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
+				ECF3A0522DD652920052990B /* FriendsResponseModel.swift in Sources */,
 				EC8E5A4A2D7AA4E4001B2335 /* Localizable.swift in Sources */,
+				ECF3A0582DD652F70052990B /* QuizResponseModel.swift in Sources */,
 				EC731E6D2DCBD8FB005A064A /* PetDeleteAlertView.swift in Sources */,
+				ECF3A0502DD6527D0052990B /* HatchPetsResponseModel.swift in Sources */,
 				ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */,
 				ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
+				ECF3A0462DD651940052990B /* LoginResponseModel.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
-				EC731E612DCBCF42005A064A /* PetsModel.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
-				ECDFC44F2D6D380D00FA450D /* TakeQuizRequest.swift in Sources */,
+				ECF3A0562DD652C30052990B /* GetAllShopItems.swift in Sources */,
 				EC731E672DCBD8C3005A064A /* PetHeaderView.swift in Sources */,
 				EC02EBC82DC9507E0019668C /* InventoryViewModel.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
 				ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */,
-				EC8D59CD2D089BC80050740C /* FriendsResponseModel.swift in Sources */,
+				ECF3A04E2DD6524E0052990B /* PetsModel.swift in Sources */,
+				EC02CA4C2DD64D2900CB53EE /* HTTPMethod.swift in Sources */,
+				EC02CA4D2DD64D2900CB53EE /* ShopRepository.swift in Sources */,
+				ECF3A0482DD651C00052990B /* SignUpResponseBody.swift in Sources */,
+				EC02CA4E2DD64D2900CB53EE /* RepositoryProvider.swift in Sources */,
+				EC02CA4F2DD64D2900CB53EE /* ServiceLocator.swift in Sources */,
+				ECF3A0692DD653BB0052990B /* TakeQuizRequestModel.swift in Sources */,
+				EC02CA502DD64D2900CB53EE /* NetworkManager.swift in Sources */,
+				ECF3A05A2DD6533B0052990B /* LoginRequestModel.swift in Sources */,
+				EC02CA512DD64D2900CB53EE /* BaseRepository.swift in Sources */,
+				EC02CA522DD64D2900CB53EE /* QuizRepository.swift in Sources */,
+				EC02CA532DD64D2900CB53EE /* InventoryRepository.swift in Sources */,
+				EC02CA542DD64D2900CB53EE /* PetRepository.swift in Sources */,
+				EC02CA552DD64D2900CB53EE /* Endpoint.swift in Sources */,
+				EC02CA562DD64D2900CB53EE /* AuthRepository.swift in Sources */,
+				EC02CA572DD64D2900CB53EE /* NetworkError.swift in Sources */,
+				EC02CA582DD64D2900CB53EE /* FriendsRepository.swift in Sources */,
 				EC606F0F2C57E1040015F103 /* LoginView.swift in Sources */,
 				ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */,
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */,
-				EC9111872DAAC775007D92B1 /* GetAllShopItems.swift in Sources */,
-				ECC1D0932D440C85008D2C92 /* SignUpResponseBody.swift in Sources */,
 				EC731E692DCBD8D4005A064A /* PetTabBarView.swift in Sources */,
+				ECF3A0542DD652B20052990B /* GetInventoryResponseModel.swift in Sources */,
 				EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
 				ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */,
+				EC6760892DD739C50041C839 /* QuizDetailResponseModel.swift in Sources */,
 				ECCDFAF92DC956E20044DAC2 /* CurrentUserViewModel.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
-				EC8D59CF2D089C0C0050740C /* ErrorResponseModel.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
 				ECF37DFD2DD24FA800552613 /* ValidationUtility.swift in Sources */,
 				EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */,
-				EC731E5B2DCB86EC005A064A /* HatchPetsResponseModel.swift in Sources */,
 				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
-				EC8D59C92D089B9F0050740C /* LoginResponseModel.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
-				EC15E6392DCEBD1000B885A2 /* QuizResponseModels.swift in Sources */,
-				ECC1D0952D440C95008D2C92 /* LoginRequestBody.swift in Sources */,
-				ECDFC4532D6D46CD00FA450D /* QuizResultForQuizRequest.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
+				EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */,
+				EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */,
 				EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
@@ -817,9 +911,11 @@
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,
+				ECF3A05C2DD653450052990B /* SignUpRequestModel.swift in Sources */,
 				EC731E652DCBD463005A064A /* PetItemView.swift in Sources */,
 				EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */,
 				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
+				ECF3A0732DD656130052990B /* QuizResultForQuizRequest.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
@@ -827,8 +923,8 @@
 				EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */,
 				ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */,
 				EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */,
+				ECF3A04C2DD6520B0052990B /* GetPetsResponseModel.swift in Sources */,
 				EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */,
-				ECCDFAF42DC954C50044DAC2 /* GetMeResponseModel.swift in Sources */,
 				ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);

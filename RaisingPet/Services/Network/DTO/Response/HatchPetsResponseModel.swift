@@ -2,14 +2,12 @@
 //  HatchPetsResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 7.05.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
-
-// HatchPetsResponse.swift
 
 import Foundation
 
-struct HatchPetsResponse: Codable {
+struct HatchPetsResponseModel: Codable {
     let status: String
     let data: HatchPetsData
     let message: String?

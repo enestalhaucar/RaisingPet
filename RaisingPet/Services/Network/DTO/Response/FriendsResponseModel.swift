@@ -1,13 +1,13 @@
 //
-//  FriendsModel.swift
+//  FriendsResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar  on 10.12.2024.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
 
-struct FriendResponse: Codable {
+struct FriendsResponseModel: Codable {
     let status: String
     let data: FriendResponseData
 }

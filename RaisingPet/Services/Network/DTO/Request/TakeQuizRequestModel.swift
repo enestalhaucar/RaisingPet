@@ -1,9 +1,11 @@
 //
-//  TakeQuizRequest.swift
+//  TakeQuizRequestModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 25.02.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
+
+
 
 import Foundation
 
@@ -22,7 +24,7 @@ struct QuizAnswer: Codable {
     let option : String
 }
 struct TakeQuizQuestionID : Codable {
-    let _id : String 
+    let _id : String
     
     
 }

@@ -36,7 +36,7 @@ class CoupleQuestionViewModel: ObservableObject {
         do {
             let response = try await AF.request(url, method: .get, headers: headers)
                 .validate()
-                .serializingDecodable(FriendResponse.self)
+                .serializingDecodable(FriendsResponseModel.self)
                 .value
             return !response.data.friends.isEmpty
         } catch {

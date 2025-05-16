@@ -1,8 +1,8 @@
 //
-//  QuizResponseModels.swift
+//  QuizResponseModel.swift
 //  RaisingPet
 //
-//  Created by Enes Talha Uçar on 10.05.2025.
+//  Created by Enes Talha Uçar on 15.05.2025.
 //
 
 import Foundation
