@@ -4,7 +4,7 @@ import Combine
 // MARK: - Auth Endpoints
 enum AuthEndpoint: Endpoint {
     case login(email: String, password: String)
-    case signup(firstName: String, lastName: String, email: String, password: String, phoneNumber: String)
+    case signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String)
     case me
     case updateMe(firstName: String?, lastName: String?, email: String?, phoneNumber: String?)
     
@@ -36,13 +36,13 @@ enum AuthEndpoint: Endpoint {
         switch self {
         case .login(let email, let password):
             return ["email": email, "password": password]
-        case .signup(let firstName, let lastName, let email, let password, let phoneNumber):
+        case .signup(let firstName, let lastName, let email, let password, let passwordConfirm):
             return [
                 "firstname": firstName,
                 "surname": lastName,
                 "email": email,
                 "password": password,
-                "phoneNumber": phoneNumber
+                "passwordConfirm": passwordConfirm
             ]
         case .me:
             return nil
@@ -69,13 +69,13 @@ enum AuthEndpoint: Endpoint {
 // MARK: - Auth Repository Protocol
 protocol AuthRepository: BaseRepository {
     func login(email: String, password: String) async throws -> LoginResponseModel
-    func signup(firstName: String, lastName: String, email: String, password: String, phoneNumber: String) async throws -> SignUpResponseBody
+    func signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) async throws -> SignUpResponseBody
     func getMe() async throws -> GetMeResponseModel
     func updateMe(firstName: String?, lastName: String?, email: String?, phoneNumber: String?) async throws -> GetMeResponseModel
     
     // Combine variants
     func loginPublisher(email: String, password: String) -> AnyPublisher<LoginResponseModel, NetworkError>
-    func signupPublisher(firstName: String, lastName: String, email: String, password: String, phoneNumber: String) -> AnyPublisher<SignUpResponseBody, NetworkError>
+    func signupPublisher(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) -> AnyPublisher<SignUpResponseBody, NetworkError>
     func getMePublisher() -> AnyPublisher<GetMeResponseModel, NetworkError>
     func updateMePublisher(firstName: String?, lastName: String?, email: String?, phoneNumber: String?) -> AnyPublisher<GetMeResponseModel, NetworkError>
 }
@@ -95,14 +95,14 @@ class AuthRepositoryImpl: AuthRepository {
         )
     }
     
-    func signup(firstName: String, lastName: String, email: String, password: String, phoneNumber: String) async throws -> SignUpResponseBody {
+    func signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) async throws -> SignUpResponseBody {
         return try await networkManager.request(
             endpoint: AuthEndpoint.signup(
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: password,
-                phoneNumber: phoneNumber
+                passwordConfirm: passwordConfirm
             ),
             responseType: SignUpResponseBody.self
         )
@@ -135,14 +135,14 @@ class AuthRepositoryImpl: AuthRepository {
         )
     }
     
-    func signupPublisher(firstName: String, lastName: String, email: String, password: String, phoneNumber: String) -> AnyPublisher<SignUpResponseBody, NetworkError> {
+    func signupPublisher(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) -> AnyPublisher<SignUpResponseBody, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: AuthEndpoint.signup(
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: password,
-                phoneNumber: phoneNumber
+                passwordConfirm: passwordConfirm
             ),
             responseType: SignUpResponseBody.self
         )

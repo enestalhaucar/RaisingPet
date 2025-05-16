@@ -14,12 +14,24 @@ struct LoginView: View {
     @State private var password = ""
     @State private var showError = false
     @EnvironmentObject var appState: AppState
+    
+    // Focus state değişkenleri
+    @FocusState private var emailFocused: Bool
+    @FocusState private var passwordFocused: Bool
+    
     var onLoginSuccess: () -> Void
     
     var body: some View {
         NavigationStack {
             ZStack {
                 SignInUpBackground()
+                
+                // Klavye dışına dokununca klavyeyi gizle
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 
                 VStack(spacing: 25) {
                     Spacer()
@@ -30,13 +42,16 @@ struct LoginView: View {
                     Image("signInDog")
                     Spacer()
                     MailTextField(placeholder: "signin_email_placeholder".localized(), text: $email)
+                        .focused($emailFocused)
                         .submitLabel(.next)
                         .onSubmit {
-                            focusNextField($password)
+                            passwordFocused = true
                         }
                     PasswordTextField(placeholder: "signin_password_placeholder".localized(), text: $password)
+                        .focused($passwordFocused)
                         .submitLabel(.done)
                         .onSubmit {
+                            hideKeyboard()
                             viewModel.login(with: email, password: password)
                         }
                     
@@ -46,6 +61,7 @@ struct LoginView: View {
                         LoadingAnimationView()
                     } else {
                         Button(action: {
+                            hideKeyboard()
                             viewModel.login(with: email, password: password)
                         }) {
                             Text("signin_button".localized())
@@ -99,8 +115,10 @@ struct LoginView: View {
         }
     }
     
-    private func focusNextField(_ nextField: Binding<String>) {
-        // Şu an focus otomatik olarak bir sonraki field’a geçiyor
+    // Klavyeyi gizleme fonksiyonu
+    private func hideKeyboard() {
+        emailFocused = false
+        passwordFocused = false
     }
 }
 

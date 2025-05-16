@@ -7,48 +7,53 @@
 
 import Foundation
 import SwiftUI
-import Alamofire
+import Combine
 
 struct ServerError: Codable {
     let message: String
 }
 
-
 class SignUpViewModel: ObservableObject {
-    @Published var token : String?
     @Published var isRegistered = false
     @Published var errorMessage: String?
-    var isLoading: ((Bool) -> Void)?
+    @Published var isLoading = false
     
+    // Repository
+    private let authRepository: AuthRepository
     
+    // MARK: - Initialization
+    init(authRepository: AuthRepository = RepositoryProvider.shared.authRepository) {
+        self.authRepository = authRepository
+    }
     
-    func register(with body: SignUpRequestBody) {
-        let url = Utilities.Constants.Endpoints.Auth.signup
+    func register(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) {
+        isLoading = true
+        errorMessage = nil
         
-        isLoading?(true)
-        
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default)
-            .validate()
-            .responseDecodable(of: SignUpResponseBody.self) { [weak self] response in
-                DispatchQueue.main.async {
-                    self?.isLoading?(false)
-                    switch response.result {
-                    case .success(let data):
-                        // Kullanıcı Bilgilerini Local'e Kaydetme
-                        self?.saveUserToUserDefaults(data: data)
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        print("Token saved: \(data.token)")
-                        self?.isRegistered = true // Kayıt başarıyla tamamlandı
-                    case .failure(let error):
-                        if let data = response.data,
-                           let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
-                            self?.errorMessage = serverError.message
-                        } else {
-                            self?.errorMessage = error.localizedDescription
-                        }
-                    }
-                }
+        Task { @MainActor in
+            do {
+                let response = try await authRepository.signup(
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    passwordConfirm: passwordConfirm
+                )
+                
+                // Başarılı kayıt
+                saveUserToUserDefaults(data: response)
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                
+                isLoading = false
+                isRegistered = true
+            } catch let error as NetworkError {
+                isLoading = false
+                errorMessage = error.errorMessage
+            } catch {
+                isLoading = false
+                errorMessage = "Bilinmeyen bir hata oluştu"
             }
+        }
     }
     
     private func saveUserToUserDefaults(data: SignUpResponseBody) {
@@ -61,9 +66,8 @@ class SignUpViewModel: ObservableObject {
         defaults.set(data.data.user._id, forKey: "userId")
         defaults.set(true, forKey: "isLoggedIn")
         
-        defaults.synchronize() // << Önemli kısım!
+        defaults.synchronize() 
         
         print("User details saved to UserDefaults")
     }
-    
 }

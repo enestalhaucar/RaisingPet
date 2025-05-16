@@ -7,7 +7,7 @@
 
 
 import Foundation
-import Alamofire
+import Combine
 
 class LoginViewModel: ObservableObject {
     // View'a geri bildirim sağlamak için published değişkenler
@@ -15,41 +15,37 @@ class LoginViewModel: ObservableObject {
     @Published var loginSuccess: Bool = false
     @Published var errorMessage: String?
     
+    // Repository
+    private let authRepository: AuthRepository
+    
+    // MARK: - Initialization
+    init(authRepository: AuthRepository = RepositoryProvider.shared.authRepository) {
+        self.authRepository = authRepository
+    }
+    
     func login(with email: String, password: String) {
-        let url = Utilities.Constants.Endpoints.Auth.login
-        let requestBody = LoginRequestBody(email: email, password: password)
-
         // İstek başlatılmadan önce durumu güncelle
         isLoading = true
-
-        // Alamofire request
-        AF.request(url,
-                   method: .post,
-                   parameters: requestBody,
-                   encoder: JSONParameterEncoder.default)
-            .validate()
-            .responseDecodable(of: LoginResponseModel.self) { [weak self] response in
-                DispatchQueue.main.async {
-                    self?.isLoading = false
-                    switch response.result {
-                    case .success(let data):
-                        // Başarılı giriş
-                        self?.saveUserToUserDefaults(data: data)
-                        
-                        self?.loginSuccess = true
-                        print("user logged in succesfully")
-                    case .failure(let error):
-                        // Hata yönetimi
-                        if let data = response.data,
-                           let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
-                            
-                            self?.errorMessage = serverError.message
-                        } else {
-                            self?.errorMessage = error.localizedDescription
-                        }
-                    }
-                }
+        errorMessage = nil
+        
+        Task { @MainActor in
+            do {
+                let response = try await authRepository.login(email: email, password: password)
+                
+                // Başarılı giriş
+                saveUserToUserDefaults(data: response)
+                
+                isLoading = false
+                loginSuccess = true
+                print("user logged in successfully")
+            } catch let error as NetworkError {
+                isLoading = false
+                errorMessage = error.errorMessage
+            } catch {
+                isLoading = false
+                errorMessage = "Bilinmeyen bir hata oluştu"
             }
+        }
     }
     
     private func saveUserToUserDefaults(data: LoginResponseModel) {

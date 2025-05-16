@@ -21,12 +21,26 @@ struct SignUpView: View {
     @State private var passwordConfirm = ""
     @State private var showError = false
     
+    // Focus state değişkenleri
+    @FocusState private var firstnameFocused: Bool
+    @FocusState private var surnameFocused: Bool
+    @FocusState private var emailFocused: Bool
+    @FocusState private var passwordFocused: Bool
+    @FocusState private var passwordConfirmFocused: Bool
+    
     var onRegisterSuccess: () -> Void
     
     var body: some View {
         NavigationStack {
             ZStack {
                 SignInUpBackground()
+                
+                // Klavye dışına dokununca klavyeyi gizle
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 
                 VStack(spacing: 25) {
                     Spacer()
@@ -39,20 +53,23 @@ struct SignUpView: View {
                     
                     Spacer()
                     MailTextField(placeholder: "signup_firstname_placeholder".localized(), text: $firstname)
+                        .focused($firstnameFocused)
                         .submitLabel(.next)
                         .onSubmit {
-                            focusNextField($surname)
+                            surnameFocused = true
                         }
                     MailTextField(placeholder: "signup_surname_placeholder".localized(), text: $surname)
+                        .focused($surnameFocused)
                         .submitLabel(.next)
                         .onSubmit {
-                            focusNextField($email)
+                            emailFocused = true
                         }
                     VStack(alignment: .leading, spacing: 4) {
                         MailTextField(placeholder: "signup_email_placeholder".localized(), text: $email)
+                            .focused($emailFocused)
                             .submitLabel(.next)
                             .onSubmit {
-                                focusNextField($password)
+                                passwordFocused = true
                             }
                         if !email.isEmpty && !ValidationUtility.isValidEmail(email) {
                             Text("email_format_error_message".localized())
@@ -62,37 +79,39 @@ struct SignUpView: View {
                         }
                     }
                     PasswordTextField(placeholder: "signup_password_placeholder".localized(), text: $password)
+                        .focused($passwordFocused)
                         .submitLabel(.next)
                         .onSubmit {
-                            focusNextField($passwordConfirm)
+                            passwordConfirmFocused = true
                         }
                     PasswordTextField(placeholder: "signup_password_confirm_placeholder".localized(), text: $passwordConfirm)
+                        .focused($passwordConfirmFocused)
                         .submitLabel(.done)
                         .onSubmit {
+                            hideKeyboard()
                             if validateInputs() {
-                                let requestBody = SignUpRequestBody(
-                                    firstname: firstname,
-                                    surname: surname,
+                                viewModel.register(
+                                    firstName: firstname,
+                                    lastName: surname,
                                     email: email,
                                     password: password,
                                     passwordConfirm: passwordConfirm
                                 )
-                                viewModel.register(with: requestBody)
                             }
                         }
                     
                     Spacer()
                     
                     Button(action: {
+                        hideKeyboard()
                         if validateInputs() {
-                            let requestBody = SignUpRequestBody(
-                                firstname: firstname,
-                                surname: surname,
+                            viewModel.register(
+                                firstName: firstname,
+                                lastName: surname,
                                 email: email,
                                 password: password,
                                 passwordConfirm: passwordConfirm
                             )
-                            viewModel.register(with: requestBody)
                         }
                     }) {
                         Text("signup_button".localized())
@@ -136,8 +155,13 @@ struct SignUpView: View {
         }
     }
     
-    private func focusNextField(_ nextField: Binding<String>) {
-        // Şu an focus otomatik olarak bir sonraki field’a geçiyor
+    // Klavyeyi gizleme fonksiyonu
+    private func hideKeyboard() {
+        firstnameFocused = false
+        surnameFocused = false
+        emailFocused = false
+        passwordFocused = false
+        passwordConfirmFocused = false
     }
     
     private func validateInputs() -> Bool {
