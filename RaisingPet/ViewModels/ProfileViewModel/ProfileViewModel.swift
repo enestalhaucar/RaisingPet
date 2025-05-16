@@ -9,19 +9,21 @@ import Foundation
 
 @MainActor
 final class ProfileViewModel : ObservableObject {
+    private let userRepository: UserRepository
+    
+    init(userRepository: UserRepository = UserRepositoryImpl()) {
+        self.userRepository = userRepository
+    }
+    
     func logOut(appState : AppState) {
-        UserDefaults.standard.removeObject(forKey: "authToken")
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        userRepository.logOut()
         appState.isLoggedIn = false
         print("User logged out successfully")
     }
     
     func getUserDetailsForProfileView() -> [String:String] {
-        var userDetails : [String:String] = [:]
-        let tempUserDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-        userDetails = tempUserDetails
-        print("ProfileView UserDetails Fetched :  \(userDetails)")
+        let userDetails = userRepository.getUserDetails()
+        print("ProfileView UserDetails Fetched: \(userDetails)")
         return userDetails
     }
-    
 }

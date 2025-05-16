@@ -53,6 +53,7 @@
 		EC6760892DD739C50041C839 /* QuizDetailResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6760882DD739BF0041C839 /* QuizDetailResponseModel.swift */; };
 		EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */; };
 		EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */; };
+		EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67609D2DD781A10041C839 /* UserRepository.swift */; };
 		EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5C2DCB87BD005A064A /* EggCellView.swift */; };
 		EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E622DCBCFAE005A064A /* PetCellView.swift */; };
 		EC731E652DCBD463005A064A /* PetItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E642DCBD45F005A064A /* PetItemView.swift */; };
@@ -196,6 +197,7 @@
 		EC6760882DD739BF0041C839 /* QuizDetailResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDetailResponseModel.swift; sourceTree = "<group>"; };
 		EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultResponseModel.swift; sourceTree = "<group>"; };
 		EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuizzesResponseModel.swift; sourceTree = "<group>"; };
+		EC67609D2DD781A10041C839 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		EC731E5C2DCB87BD005A064A /* EggCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggCellView.swift; sourceTree = "<group>"; };
 		EC731E622DCBCFAE005A064A /* PetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCellView.swift; sourceTree = "<group>"; };
 		EC731E642DCBD45F005A064A /* PetItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemView.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		EC02CA402DD64D2900CB53EE /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				EC67609D2DD781A10041C839 /* UserRepository.swift */,
 				EC02CA392DD64D2900CB53EE /* AuthRepository.swift */,
 				EC02CA3A2DD64D2900CB53EE /* BaseRepository.swift */,
 				EC02CA3B2DD64D2900CB53EE /* FriendsRepository.swift */,
@@ -906,6 +909,7 @@
 				EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
+				EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */,
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,

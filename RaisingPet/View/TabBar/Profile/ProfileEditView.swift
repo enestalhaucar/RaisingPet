@@ -16,6 +16,18 @@ struct ProfileEditView: View {
     private let placeholderImage = UIImage(named: "placeholder")
     @State private var isPhotoPickerPresented = false
     @State private var showAlert = false
+    
+    // Form fields
+    @State private var firstname: String = ""
+    @State private var surname: String = ""
+    @State private var email: String = ""
+    @State private var phoneNumber: String = ""
+    
+    // Focus states
+    @FocusState private var firstnameFocused: Bool
+    @FocusState private var surnameFocused: Bool
+    @FocusState private var emailFocused: Bool
+    @FocusState private var phoneNumberFocused: Bool
 
     var body: some View {
         ScrollView {
@@ -45,28 +57,81 @@ struct ProfileEditView: View {
                                     .shadow(radius: 10)
                                     .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                             }
+                            
+                            // Upload Photo Button
+                            Button(action: {
+                                isPhotoPickerPresented = true
+                            }) {
+                                Text("profile_edit_upload_photo".localized())
+                                    .font(.headline)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
                         }.padding(.vertical)
                     }
                     .frame(maxHeight: UIScreen.main.bounds.size.height * 0.3)
 
-                    // Fotoğraf Yükle Butonu
-                    Button(action: {
-                        isPhotoPickerPresented = true
-                    }) {
-                        Text("profile_edit_upload_photo".localized())
-                            .font(.headline)
+                    // Form fields
+                    VStack(spacing: 16) {
+                        TextField("First Name", text: $firstname)
                             .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
+                            .background(Color.white)
                             .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .focused($firstnameFocused)
+                            .submitLabel(.next)
+                            .onSubmit {
+                                surnameFocused = true
+                            }
+                        
+                        TextField("Last Name", text: $surname)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .focused($surnameFocused)
+                            .submitLabel(.next)
+                            .onSubmit {
+                                emailFocused = true
+                            }
+                        
+                        TextField("Email", text: $email)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                            .focused($emailFocused)
+                            .submitLabel(.next)
+                            .onSubmit {
+                                phoneNumberFocused = true
+                            }
+                        
+                        TextField("Phone Number", text: $phoneNumber)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .keyboardType(.phonePad)
+                            .focused($phoneNumberFocused)
+                            .submitLabel(.done)
                     }
-                    .padding()
+                    .padding(.horizontal)
 
-                    // Kaydet Butonu
+                    // Save Button
                     Button(action: {
                         Task {
-                            await viewModel.updateProfile(photo: profileImage)
+                            await viewModel.updateProfile(
+                                firstname: firstname.isEmpty ? nil : firstname,
+                                surname: surname.isEmpty ? nil : surname,
+                                phoneNumber: phoneNumber.isEmpty ? nil : phoneNumber,
+                                email: email.isEmpty ? nil : email,
+                                photo: profileImage
+                            )
                             if viewModel.isSuccess {
                                 isSuccess = true
                                 dismiss()
@@ -96,11 +161,25 @@ struct ProfileEditView: View {
                 )
             }
             .onAppear {
-                // UserDefaults’tan fotoğrafı yükle
+                // Load user details from UserDefaults
+                let userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+                firstname = userDetails["firstname"] ?? ""
+                surname = userDetails["surname"] ?? ""
+                email = userDetails["email"] ?? ""
+                phoneNumber = userDetails["phoneNumber"] ?? ""
+                
+                // Load profile photo
                 if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                    let image = UIImage(data: photoData) {
                     profileImage = image
                 }
+            }
+            .onTapGesture {
+                // Dismiss keyboard when tapping outside text fields
+                firstnameFocused = false
+                surnameFocused = false
+                emailFocused = false
+                phoneNumberFocused = false
             }
         }
         .navigationTitle("profile_edit_title".localized())
