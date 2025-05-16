@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Alamofire
+import Combine
 
 @MainActor
 class CoupleQuestionViewModel: ObservableObject {
@@ -18,28 +18,34 @@ class CoupleQuestionViewModel: ObservableObject {
     @Published var quizResultLoaded: Bool = false
     var cachedQuizResults: [String: QuizResultForQuizResponseFormattedQuizResult] = [:]
 
-    private var headers: HTTPHeaders {
-        let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
-        return [
-            "Authorization": "Bearer \(token)",
-            "Content-Type": "application/json"
-        ]
+    // Repository'ler
+    private let friendsRepository: FriendsRepository
+    private let quizRepository: QuizRepository
+    
+    // MARK: - Initialization
+    init(
+        friendsRepository: FriendsRepository = RepositoryProvider.shared.friendsRepository,
+        quizRepository: QuizRepository = RepositoryProvider.shared.quizRepository
+    ) {
+        self.friendsRepository = friendsRepository
+        self.quizRepository = quizRepository
     }
 
     func checkFriendship() async -> Bool {
         isLoading = true
         errorMessage = nil
-        defer { isLoading = false }
-
-        let url = Utilities.Constants.Endpoints.Friends.list
-
+        
         do {
-            let response = try await AF.request(url, method: .get, headers: headers)
-                .validate()
-                .serializingDecodable(FriendsResponseModel.self)
-                .value
+            let response = try await friendsRepository.listFriends()
+            isLoading = false
             return !response.data.friends.isEmpty
+        } catch let error as NetworkError {
+            isLoading = false
+            errorMessage = error.errorMessage
+            print("Check friendship error: \(error)")
+            return false
         } catch {
+            isLoading = false
             errorMessage = "Arkadaş kontrolü başarısız: \(error.localizedDescription)"
             print("Check friendship error: \(error)")
             return false
@@ -49,18 +55,18 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizzes() async {
         isLoading = true
         errorMessage = nil
-        defer { isLoading = false }
-
-        let url = Utilities.Constants.Endpoints.Quiz.getUserQuizes
-
+        
         do {
-            let response = try await AF.request(url, method: .get, headers: headers)
-                .validate()
-                .serializingDecodable(GetUserQuizes.self)
-                .value
+            let response = try await quizRepository.getUserQuizzes()
             self.quiz = response.data
+            isLoading = false
+        } catch let error as NetworkError {
+            isLoading = false
+            errorMessage = error.errorMessage
+            print("Fetch quizzes error: \(error)")
         } catch {
-            errorMessage = "Hata: Quiz’ler yüklenemedi - \(error.localizedDescription)"
+            isLoading = false
+            errorMessage = "Hata: Quiz'ler yüklenemedi - \(error.localizedDescription)"
             print("Fetch quizzes error: \(error)")
         }
     }
@@ -68,17 +74,17 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizById(quizId: String) async {
         isLoading = true
         errorMessage = nil
-        defer { isLoading = false }
-
-        let url = Utilities.Constants.Endpoints.Quiz.getQuizById.replacingOccurrences(of: ":id", with: quizId)
-
+        
         do {
-            let response = try await AF.request(url, method: .get, headers: headers)
-                .validate()
-                .serializingDecodable(GetQuizByIdResponseModel.self)
-                .value
+            let response = try await quizRepository.getQuizById(id: quizId)
             self.selectedQuiz = response.data.data
+            isLoading = false
+        } catch let error as NetworkError {
+            isLoading = false
+            errorMessage = error.errorMessage
+            print("Fetch quiz by id error: \(error)")
         } catch {
+            isLoading = false
             errorMessage = "Hata: Quiz yüklenemedi - \(error.localizedDescription)"
             print("Fetch quiz by id error: \(error)")
         }
@@ -87,36 +93,41 @@ class CoupleQuestionViewModel: ObservableObject {
     func takeQuiz(takeQuizObject: TakeQuizRequest) async {
         isLoading = true
         errorMessage = nil
-        defer { isLoading = false }
-
-        guard let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] else {
-            errorMessage = "Hata: Token bulunamadı."
-            return
-        }
+        
         guard let quizId = takeQuizObject.quizId else {
+            isLoading = false
             errorMessage = "Hata: Quiz ID eksik."
             return
         }
         guard let answers = takeQuizObject.preAnswers, !answers.isEmpty else {
+            isLoading = false
             errorMessage = "Hata: Cevaplar eksik."
             return
         }
-
-        let url = Utilities.Constants.Endpoints.Quiz.takeQuiz
-        let headers = self.headers
+        
+        // TakeQuizRequest formatını Repository'nin istediği formata dönüştür
+        var answersDict: [String: String] = [:]
+        for answer in answers {
+            answersDict[answer.question._id] = answer.option
+        }
 
         do {
-            let response = try await AF.request(url, method: .post, parameters: takeQuizObject, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(TakeQuizResponse.self)
-                .value
-            print("TakeQuiz Başarılı: \(response)")
+            // Repository üzerinden isteği yap
+            let response = try await quizRepository.takeQuiz(quizId: quizId, answers: answersDict)
+            print("TakeQuiz Başarılı")
+            isLoading = false
+            
             await fetchQuizResult(quizId: quizId) {
                 self.quizResultLoaded = true
-                // takeQuiz sonrası cache’i güncelle
+                // takeQuiz sonrası cache'i güncelle
                 self.cachedQuizResults[quizId] = self.quizResult
             }
+        } catch let error as NetworkError {
+            isLoading = false
+            errorMessage = error.errorMessage
+            print("Take quiz error: \(error)")
         } catch {
+            isLoading = false
             errorMessage = "Hata: Quiz gönderilemedi - \(error.localizedDescription)"
             print("Take quiz error: \(error)")
         }
@@ -125,38 +136,40 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizResult(quizId: String, completion: @escaping () -> Void = {}) async {
         isLoading = true
         errorMessage = nil
-        defer { isLoading = false }
-
-        let url = Utilities.Constants.Endpoints.Quiz.quizResultForQuiz
-        let parameters: [String: String] = ["quizId": quizId]
-        let headers = self.headers
-
+        
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(QuizResultForQuizResponse.self)
-                .value
+            let response = try await quizRepository.quizResultForQuiz(quizId: quizId)
             self.quizResult = response.data?.formattedQuizResult
-            self.cachedQuizResults[quizId] = self.quizResult // Cache’i güncelle
+            self.cachedQuizResults[quizId] = self.quizResult // Cache'i güncelle
+            isLoading = false
             completion()
-        } catch let error as AFError where error.responseCode == 500 {
-            print("Fetch quiz result error (500): \(error.localizedDescription)")
-            self.quizResult = nil // İkisi de çözmemiş, QuestionView’e yönlendir
-            self.cachedQuizResults[quizId] = nil // Cache’i temizle
+        } catch let error as NetworkError where error.errorMessage.contains("500") {
+            print("Fetch quiz result error (500): \(error.errorMessage)")
+            self.quizResult = nil // İkisi de çözmemiş, QuestionView'e yönlendir
+            self.cachedQuizResults[quizId] = nil // Cache'i temizle
+            isLoading = false
+            completion()
+        } catch let error as NetworkError {
+            isLoading = false
+            errorMessage = error.errorMessage
+            print("Fetch quiz result error: \(error)")
+            self.quizResult = nil
+            self.cachedQuizResults[quizId] = nil // Cache'i temizle
             completion()
         } catch {
+            isLoading = false
             errorMessage = "Hata: Quiz sonucu yüklenemedi - \(error.localizedDescription)"
             print("Fetch quiz result error: \(error)")
             self.quizResult = nil
-            self.cachedQuizResults[quizId] = nil // Cache’i temizle
+            self.cachedQuizResults[quizId] = nil // Cache'i temizle
             completion()
         }
     }
 
-    // Kullanıcının quiz’i çözüp çözmediğini kontrol et
+    // Kullanıcının quiz'i çözüp çözmediğini kontrol et
     func isUserDoneQuiz(quizId: String) async -> (Bool, Bool)? { // (isDone, hasAnswers)
         if let cachedResult = cachedQuizResults[quizId] {
-            print("isUserDoneQuiz: Cache’ten alındı, quizId: \(quizId)")
+            print("isUserDoneQuiz: Cache'ten alındı, quizId: \(quizId)")
             let hasUserAnswers = cachedResult.answers?.contains(where: { $0.userAnswer != nil }) ?? false
             let hasFriendAnswers = cachedResult.answers?.contains(where: { $0.friendAnswer != nil }) ?? false
             return (hasUserAnswers, hasFriendAnswers)

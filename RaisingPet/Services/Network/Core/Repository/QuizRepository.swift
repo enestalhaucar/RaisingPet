@@ -6,7 +6,7 @@ import Combine
 enum QuizEndpoint: Endpoint {
     case getQuizById(id: String)
     case getUserQuizzes
-    case takeQuiz(quizId: String, answers: [String: String])
+    case takeQuiz(quizId: String, preAnswers: [[String: Any]])
     case quizResultForQuiz(quizId: String)
     
     var path: String {
@@ -24,9 +24,9 @@ enum QuizEndpoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .getQuizById, .getUserQuizzes, .quizResultForQuiz:
+        case .getQuizById, .getUserQuizzes:
             return .get
-        case .takeQuiz:
+        case .takeQuiz, .quizResultForQuiz:
             return .post
         }
     }
@@ -37,8 +37,8 @@ enum QuizEndpoint: Endpoint {
             return nil
         case .getUserQuizzes:
             return nil
-        case .takeQuiz(let quizId, let answers):
-            return ["quizId": quizId, "answers": answers]
+        case .takeQuiz(let quizId, let preAnswers):
+            return ["quizId": quizId, "pre_answers": preAnswers]
         case .quizResultForQuiz(let quizId):
             return ["quizId": quizId]
         }
@@ -46,8 +46,6 @@ enum QuizEndpoint: Endpoint {
     
     var encoding: ParameterEncoding {
         switch self {
-        case .quizResultForQuiz:
-            return URLEncoding.queryString
         default:
             return JSONEncoding.default
         }
@@ -91,8 +89,17 @@ class QuizRepositoryImpl: QuizRepository {
     }
     
     func takeQuiz(quizId: String, answers: [String: String]) async throws -> QuizResultResponseModel {
+        var preAnswers: [[String: Any]] = []
+        for (questionId, option) in answers {
+            let answer: [String: Any] = [
+                "question": ["_id": questionId],
+                "option": option
+            ]
+            preAnswers.append(answer)
+        }
+        
         return try await networkManager.request(
-            endpoint: QuizEndpoint.takeQuiz(quizId: quizId, answers: answers),
+            endpoint: QuizEndpoint.takeQuiz(quizId: quizId, preAnswers: preAnswers),
             responseType: QuizResultResponseModel.self
         )
     }
@@ -120,8 +127,17 @@ class QuizRepositoryImpl: QuizRepository {
     }
     
     func takeQuizPublisher(quizId: String, answers: [String: String]) -> AnyPublisher<QuizResultResponseModel, NetworkError> {
+        var preAnswers: [[String: Any]] = []
+        for (questionId, option) in answers {
+            let answer: [String: Any] = [
+                "question": ["_id": questionId],
+                "option": option
+            ]
+            preAnswers.append(answer)
+        }
+        
         return networkManager.requestWithPublisher(
-            endpoint: QuizEndpoint.takeQuiz(quizId: quizId, answers: answers),
+            endpoint: QuizEndpoint.takeQuiz(quizId: quizId, preAnswers: preAnswers),
             responseType: QuizResultResponseModel.self
         )
     }
