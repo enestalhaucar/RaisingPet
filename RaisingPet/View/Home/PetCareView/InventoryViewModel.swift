@@ -14,6 +14,8 @@ struct GroupedPetItem: Identifiable {
     let effectType: EffectType
     let totalQuantity: Int
     let item: InventoryItem
+    let isInInventory: Bool
+    let effectAmount: Int?
 }
 
 @MainActor
@@ -22,6 +24,7 @@ final class InventoryViewModel: ObservableObject {
     @Published var crackedEggs: [InventoryItem] = []
     @Published var pets: [Pet] = []
     @Published var petItems: [InventoryItem] = []
+    @Published var allShopPetItems: [PetItem] = []
     @Published var selectedCategory: EffectType? = nil
     @Published var isLoading = false
     @Published var errorMessage: String?
@@ -30,14 +33,17 @@ final class InventoryViewModel: ObservableObject {
     // Repositories
     private let inventoryRepository: InventoryRepository
     private let petRepository: PetRepository
+    private let shopRepository: ShopRepository
     
     // MARK: - Initialization
     init(
         inventoryRepository: InventoryRepository = RepositoryProvider.shared.inventoryRepository,
-        petRepository: PetRepository = RepositoryProvider.shared.petRepository
+        petRepository: PetRepository = RepositoryProvider.shared.petRepository,
+        shopRepository: ShopRepository = RepositoryProvider.shared.shopRepository
     ) {
         self.inventoryRepository = inventoryRepository
         self.petRepository = petRepository
+        self.shopRepository = shopRepository
     }
 
     func fetchInventory() async {
@@ -58,11 +64,28 @@ final class InventoryViewModel: ObservableObject {
             }
             
             petItems = items.filter { $0.isPetItem }
+            
+            if allShopPetItems.isEmpty {
+                await fetchAllShopItems()
+            }
         } catch let error as NetworkError {
             handleNetworkError(error)
         } catch {
             errorMessage = "Envanter yüklenemedi: \(error.localizedDescription)"
             print("Fetch inventory hatası: \(error)")
+        }
+    }
+    
+    func fetchAllShopItems() async {
+        do {
+            let response = try await shopRepository.getAllShopItems()
+            allShopPetItems = response.data.petItems
+            print("Fetched \(allShopPetItems.count) pet items from shop")
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+        } catch {
+            errorMessage = "Shop itemleri yüklenemedi: \(error.localizedDescription)"
+            print("Fetch shop items error: \(error)")
         }
     }
 
@@ -120,7 +143,6 @@ final class InventoryViewModel: ObservableObject {
         do {
             let response = try await petRepository.petItemInteractionWithResponse(petId: petId, petItemId: petItemId)
 
-            // Eğer data varsa güncelle, yoksa manuel fetch yap
             if let updatedPet = response.data?.pet {
                 if let index = pets.firstIndex(where: { $0.id == updatedPet.id }) {
                     pets[index] = updatedPet
@@ -131,10 +153,8 @@ final class InventoryViewModel: ObservableObject {
             if let updatedInventory = response.data?.inventory {
                 petItems = updatedInventory.items.filter { $0.isPetItem }
             } else {
-                // Data yoksa, manuel olarak inventory ve pets'i güncelle
                 await fetchInventory()
                 await fetchPets()
-                // fetchPets sonrası currentPet'i güncelle
                 if let updatedPet = pets.first(where: { $0.id == petId }) {
                     currentPet = updatedPet
                 }
@@ -149,29 +169,108 @@ final class InventoryViewModel: ObservableObject {
     }
 
     // MARK: - Helper Methods
-    func groupedPetItems() -> [GroupedPetItem] {
-        let groupedItems = Dictionary(grouping: petItems, by: { $0.itemId.name })
-        return groupedItems.map { name, items in
-            let totalQuantity = items.reduce(0) { $0 + ($1.properties.quantity ?? 0) }
-            let firstItem = items.first!
-            return GroupedPetItem(
-                id: firstItem.itemId.id,
-                name: name,
-                effectType: firstItem.itemId.effectType!,
-                totalQuantity: totalQuantity,
-                item: firstItem
-            )
+    func getAllPetItems() -> [GroupedPetItem] {
+        var inventoryItemsById: [String: InventoryItem] = [:]
+        var inventoryQuantities: [String: Int] = [:]
+        
+        for item in petItems {
+            let id = item.itemId.id
+            inventoryItemsById[id] = item
+            inventoryQuantities[id] = item.properties.quantity ?? 0
         }
-        .filter { $0.totalQuantity > 0 }
-        .sorted { $0.name < $1.name }
+        
+        var result: [GroupedPetItem] = []
+        
+        for shopItem in allShopPetItems {
+            if let id = shopItem.id, 
+               let effectTypeStr = shopItem.effectType, 
+               let effectTypeEnum = EffectType(rawValue: effectTypeStr) {
+                
+                let quantity = inventoryQuantities[id] ?? 0
+                let isInInventory = quantity > 0
+                
+                if let inventoryItem = inventoryItemsById[id] {
+                    result.append(GroupedPetItem(
+                        id: id,
+                        name: shopItem.name ?? "",
+                        effectType: effectTypeEnum,
+                        totalQuantity: quantity,
+                        item: inventoryItem,
+                        isInInventory: true,
+                        effectAmount: shopItem.effectAmount
+                    ))
+                } else {
+                    let syntheticItem = createSyntheticInventoryItem(from: shopItem)
+                    result.append(GroupedPetItem(
+                        id: id,
+                        name: shopItem.name ?? "",
+                        effectType: effectTypeEnum,
+                        totalQuantity: 0,
+                        item: syntheticItem,
+                        isInInventory: false,
+                        effectAmount: shopItem.effectAmount
+                    ))
+                }
+            }
+        }
+        
+        return result.sorted { $0.name < $1.name }
     }
-
-    func filteredPetItems() -> [GroupedPetItem] {
-        let grouped = groupedPetItems()
-        if let category = selectedCategory {
-            return grouped.filter { $0.effectType == category }
+    
+    private func createSyntheticInventoryItem(from shopItem: PetItem) -> InventoryItem {
+        let itemId = shopItem.id ?? ""
+        let itemName = shopItem.name ?? ""
+        let isItemDeleted = shopItem.isDeleted ?? false
+        let itemVersion = shopItem.v ?? 0
+        
+        var effectTypeEnum: EffectType? = nil
+        if let effectTypeStr = shopItem.effectType {
+            effectTypeEnum = EffectType(rawValue: effectTypeStr)
         }
-        return grouped
+        
+        var barAffectedEnum: BarAffected? = nil
+        if let barAffectedStr = shopItem.barAffected {
+            barAffectedEnum = BarAffected(rawValue: barAffectedStr)
+        }
+        
+        var currencyTypeEnum: CurrencyType? = nil
+        if let currencyType = shopItem.currencyType {
+            currencyTypeEnum = CurrencyType(rawValue: currencyType.rawValue)
+        }
+        
+        return InventoryItem(
+            id: nil,
+            itemType: .petItem,
+            itemId: ItemDetail(
+                id: itemId,
+                name: itemName,
+                description: shopItem.description,
+                category: nil,
+                isDeleted: isItemDeleted,
+                version: itemVersion,
+                effectAmount: shopItem.effectAmount,
+                effectType: effectTypeEnum,
+                barAffected: barAffectedEnum,
+                diamondPrice: shopItem.diamondPrice,
+                goldPrice: shopItem.goldPrice,
+                currencyType: currencyTypeEnum,
+                idAlias: nil
+            ),
+            acquiredAt: nil,
+            properties: ItemProperties(
+                egg: nil,
+                quantity: 0,
+                isOwned: false
+            )
+        )
+    }
+    
+    func filteredPetItems() -> [GroupedPetItem] {
+        let allItems = getAllPetItems()
+        if let category = selectedCategory {
+            return allItems.filter { $0.effectType == category }
+        }
+        return allItems
     }
     
     // MARK: - Error Handling

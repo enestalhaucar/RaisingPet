@@ -38,9 +38,16 @@ struct PetCareView: View {
             }
             .navigationTitle(pet.petType.name.capitalized)
             .task {
-                await vm.fetchInventory()
-                await vm.fetchPets() // Pets verisini de çekelim
-                vm.currentPet = pet // Current pet'i ayarla
+                // Fetch inventory and all shop items in parallel
+                async let inventoryTask = vm.fetchInventory()
+                async let petsTask = vm.fetchPets()
+                async let shopItemsTask = vm.fetchAllShopItems()
+                
+                // Wait for all tasks to complete
+                _ = await [inventoryTask, petsTask, shopItemsTask]
+                
+                // Set current pet and initial category
+                vm.currentPet = pet
                 vm.selectedCategory = .funMaterial
                 selectedTab = 0
             }

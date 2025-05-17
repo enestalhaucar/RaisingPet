@@ -26,26 +26,10 @@ struct PetItemGridView: View {
                                 .frame(width: 60, height: 60)
                                 .foregroundColor(.gray.opacity(0.7))
                             
-                            Text("pet_item_grid_no_items".localized())
+                            Text("Bu kategoride herhangi bir eşya bulunamadı.")
                                 .font(.nunito(.medium, .body16))
                                 .foregroundColor(.gray)
                                 .multilineTextAlignment(.center)
-                            
-                            NavigationLink(destination: ShopScreenView()) {
-                                HStack {
-                                    Image(systemName: "cart.fill")
-                                    Text("pet_item_grid_shop_button".localized())
-                                }
-                                .font(.nunito(.semiBold, .body16))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 12)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.blue.opacity(0.8))
-                                        .shadow(color: Color.blue.opacity(0.3), radius: 4, x: 0, y: 2)
-                                )
-                            }
                         }
                         .padding(.vertical, 40)
                     } else {
