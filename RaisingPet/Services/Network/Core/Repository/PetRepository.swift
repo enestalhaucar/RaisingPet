@@ -5,7 +5,7 @@ import Combine
 enum PetEndpoint: Endpoint {
     case getPets
     case buyPetItem(petId: String, itemId: String)
-    case petItemInteraction(petId: String, itemId: String)
+    case petItemInteraction(petId: String, petItemId: String)
     case deletePet(id: String)
     
     var path: String {
@@ -38,25 +38,39 @@ enum PetEndpoint: Endpoint {
             return nil
         case .buyPetItem(let petId, let itemId):
             return ["petId": petId, "itemId": itemId]
-        case .petItemInteraction(let petId, let itemId):
-            return ["petId": petId, "itemId": itemId]
+        case .petItemInteraction(let petId, let petItemId):
+            return ["petId": petId, "petItemId": petItemId]
         case .deletePet:
             return nil
         }
     }
 }
 
+// MARK: - Pet Item Interaction Response
+struct PetItemInteractionResponse: Codable {
+    let status: String
+    let message: String
+    let data: PetItemInteractionData?
+}
+
+struct PetItemInteractionData: Codable {
+    let pet: Pet?
+    let inventory: Inventory?
+}
+
 // MARK: - Pet Repository Protocol
 protocol PetRepository: BaseRepository {
     func getPets() async throws -> GetPetsResponseModel
     func buyPetItem(petId: String, itemId: String) async throws -> Void
-    func petItemInteraction(petId: String, itemId: String) async throws -> Void
+    func petItemInteraction(petId: String, petItemId: String) async throws -> Void
+    func petItemInteractionWithResponse(petId: String, petItemId: String) async throws -> PetItemInteractionResponse
     func deletePet(id: String) async throws -> Void
     
     // Combine variants
     func getPetsPublisher() -> AnyPublisher<GetPetsResponseModel, NetworkError>
     func buyPetItemPublisher(petId: String, itemId: String) -> AnyPublisher<Void, NetworkError>
-    func petItemInteractionPublisher(petId: String, itemId: String) -> AnyPublisher<Void, NetworkError>
+    func petItemInteractionPublisher(petId: String, petItemId: String) -> AnyPublisher<Void, NetworkError>
+    func petItemInteractionWithResponsePublisher(petId: String, petItemId: String) -> AnyPublisher<PetItemInteractionResponse, NetworkError>
     func deletePetPublisher(id: String) -> AnyPublisher<Void, NetworkError>
 }
 
@@ -84,11 +98,18 @@ class PetRepositoryImpl: PetRepository {
         )
     }
     
-    func petItemInteraction(petId: String, itemId: String) async throws {
+    func petItemInteraction(petId: String, petItemId: String) async throws {
         struct EmptyResponse: Decodable {}
         _ = try await networkManager.request(
-            endpoint: PetEndpoint.petItemInteraction(petId: petId, itemId: itemId),
+            endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
             responseType: EmptyResponse.self
+        )
+    }
+    
+    func petItemInteractionWithResponse(petId: String, petItemId: String) async throws -> PetItemInteractionResponse {
+        return try await networkManager.request(
+            endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
+            responseType: PetItemInteractionResponse.self
         )
     }
     
@@ -118,14 +139,21 @@ class PetRepositoryImpl: PetRepository {
         .eraseToAnyPublisher()
     }
     
-    func petItemInteractionPublisher(petId: String, itemId: String) -> AnyPublisher<Void, NetworkError> {
+    func petItemInteractionPublisher(petId: String, petItemId: String) -> AnyPublisher<Void, NetworkError> {
         struct EmptyResponse: Decodable {}
         return networkManager.requestWithPublisher(
-            endpoint: PetEndpoint.petItemInteraction(petId: petId, itemId: itemId),
+            endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
             responseType: EmptyResponse.self
         )
         .map { _ in () }
         .eraseToAnyPublisher()
+    }
+    
+    func petItemInteractionWithResponsePublisher(petId: String, petItemId: String) -> AnyPublisher<PetItemInteractionResponse, NetworkError> {
+        return networkManager.requestWithPublisher(
+            endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
+            responseType: PetItemInteractionResponse.self
+        )
     }
     
     func deletePetPublisher(id: String) -> AnyPublisher<Void, NetworkError> {

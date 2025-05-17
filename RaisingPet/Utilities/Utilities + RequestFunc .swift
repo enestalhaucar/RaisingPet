@@ -1,14 +1,16 @@
-//
-//  Utilities + RequestFunc .swift
-//  RaisingPet
-//
-//  Created by Enes Talha Uçar on 5.05.2025.
-//
+// This file is now deprecated and should be removed
+// All functionality has been migrated to repository pattern implementations.
+// 
+// Mark this file for deletion in future refactoring.
 
+/*
 import Alamofire
 import Foundation
 
 extension Utilities {
+    // This method has been replaced by UserProfileRepositoryImpl.getCurrentUser()
+    // Keep temporarily for backward compatibility
+    @available(*, deprecated, message: "Use UserProfileRepository.getCurrentUser() instead")
     func fetchCurrentUser(completion: @escaping (Result<GetMeUser, AFError>) -> Void) {
         let url = Constants.Endpoints.Auth.me
         let token = getUserDetailsFromUserDefaults()["token"] ?? ""
@@ -31,3 +33,4 @@ extension Utilities {
             }
     }
 }
+*/

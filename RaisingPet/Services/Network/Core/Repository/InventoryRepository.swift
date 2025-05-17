@@ -4,7 +4,7 @@ import Combine
 // MARK: - Inventory Endpoints
 enum InventoryEndpoint: Endpoint {
     case getInventory
-    case hatchPets(itemId: String)
+    case hatchPets(inventoryItemEggIds: [String])
     
     var path: String {
         switch self {
@@ -28,8 +28,8 @@ enum InventoryEndpoint: Endpoint {
         switch self {
         case .getInventory:
             return nil
-        case .hatchPets(let itemId):
-            return ["itemId": itemId]
+        case .hatchPets(let inventoryItemEggIds):
+            return ["inventoryItemEggIds": inventoryItemEggIds]
         }
     }
 }
@@ -37,11 +37,11 @@ enum InventoryEndpoint: Endpoint {
 // MARK: - Inventory Repository Protocol
 protocol InventoryRepository: BaseRepository {
     func getInventory() async throws -> GetInventoryResponseModel
-    func hatchPets(itemId: String) async throws -> HatchPetsResponseModel
+    func hatchPets(inventoryItemEggIds: [String]) async throws -> HatchPetsResponseModel
     
     // Combine variants
     func getInventoryPublisher() -> AnyPublisher<GetInventoryResponseModel, NetworkError>
-    func hatchPetsPublisher(itemId: String) -> AnyPublisher<HatchPetsResponseModel, NetworkError>
+    func hatchPetsPublisher(inventoryItemEggIds: [String]) -> AnyPublisher<HatchPetsResponseModel, NetworkError>
 }
 
 // MARK: - Inventory Repository Implementation
@@ -59,9 +59,9 @@ class InventoryRepositoryImpl: InventoryRepository {
         )
     }
     
-    func hatchPets(itemId: String) async throws -> HatchPetsResponseModel {
+    func hatchPets(inventoryItemEggIds: [String]) async throws -> HatchPetsResponseModel {
         return try await networkManager.request(
-            endpoint: InventoryEndpoint.hatchPets(itemId: itemId),
+            endpoint: InventoryEndpoint.hatchPets(inventoryItemEggIds: inventoryItemEggIds),
             responseType: HatchPetsResponseModel.self
         )
     }
@@ -74,9 +74,9 @@ class InventoryRepositoryImpl: InventoryRepository {
         )
     }
     
-    func hatchPetsPublisher(itemId: String) -> AnyPublisher<HatchPetsResponseModel, NetworkError> {
+    func hatchPetsPublisher(inventoryItemEggIds: [String]) -> AnyPublisher<HatchPetsResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
-            endpoint: InventoryEndpoint.hatchPets(itemId: itemId),
+            endpoint: InventoryEndpoint.hatchPets(inventoryItemEggIds: inventoryItemEggIds),
             responseType: HatchPetsResponseModel.self
         )
     }

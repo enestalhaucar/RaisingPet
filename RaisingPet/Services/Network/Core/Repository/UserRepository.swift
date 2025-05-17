@@ -113,12 +113,18 @@ class UserRepositoryImpl: UserRepository {
         )
         
         // Update local storage with new user data
-        if let userData = response.data {
+        if let userData = response.data?.data {
             UserDefaults.standard.set(userData.firstname, forKey: "userFirstname")
             UserDefaults.standard.set(userData.surname, forKey: "userSurname")
             UserDefaults.standard.set(userData.email, forKey: "userEmail")
             if let phoneNumber = userData.phoneNumber {
                 UserDefaults.standard.set(phoneNumber, forKey: "userPhoneNumber")
+            }
+            if let photo = userData.photo {
+                UserDefaults.standard.set(photo, forKey: "userPhoto")
+            }
+            if let photoURL = userData.photoURL {
+                UserDefaults.standard.set(photoURL, forKey: "userPhotoURL")
             }
         }
         
@@ -248,12 +254,18 @@ class UserRepositoryImpl: UserRepository {
         let responseModel = try decoder.decode(GetMeResponseModel.self, from: data)
         
         // Update UserDefaults with the new data
-        if let userData = responseModel.data {
+        if let userData = responseModel.data?.data {
             UserDefaults.standard.set(userData.firstname, forKey: "userFirstname")
             UserDefaults.standard.set(userData.surname, forKey: "userSurname")
             UserDefaults.standard.set(userData.email, forKey: "userEmail")
             if let phoneNumber = userData.phoneNumber {
                 UserDefaults.standard.set(phoneNumber, forKey: "userPhoneNumber")
+            }
+            if let photoValue = userData.photo {
+                UserDefaults.standard.set(photoValue, forKey: "userPhoto")
+            }
+            if let photoURL = userData.photoURL {
+                UserDefaults.standard.set(photoURL, forKey: "userPhotoURL")
             }
             
             // Save the photo to UserDefaults
@@ -275,6 +287,8 @@ class UserRepositoryImpl: UserRepository {
         UserDefaults.standard.removeObject(forKey: "userFriendTag")
         UserDefaults.standard.removeObject(forKey: "userId")
         UserDefaults.standard.removeObject(forKey: "userProfilePhoto")
+        UserDefaults.standard.removeObject(forKey: "userPhoto")
+        UserDefaults.standard.removeObject(forKey: "userPhotoURL")
     }
     
     func getUserDetails() -> [String: String] {
@@ -299,12 +313,18 @@ class UserRepositoryImpl: UserRepository {
         )
         .handleEvents(receiveOutput: { response in
             // Update local storage with new user data
-            if let userData = response.data {
+            if let userData = response.data?.data {
                 UserDefaults.standard.set(userData.firstname, forKey: "userFirstname")
                 UserDefaults.standard.set(userData.surname, forKey: "userSurname")
                 UserDefaults.standard.set(userData.email, forKey: "userEmail")
                 if let phoneNumber = userData.phoneNumber {
                     UserDefaults.standard.set(phoneNumber, forKey: "userPhoneNumber")
+                }
+                if let photo = userData.photo {
+                    UserDefaults.standard.set(photo, forKey: "userPhoto")
+                }
+                if let photoURL = userData.photoURL {
+                    UserDefaults.standard.set(photoURL, forKey: "userPhotoURL")
                 }
             }
         })

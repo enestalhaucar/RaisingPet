@@ -54,6 +54,8 @@
 		EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */; };
 		EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */; };
 		EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67609D2DD781A10041C839 /* UserRepository.swift */; };
+		EC6760A02DD787430041C839 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67609F2DD787430041C839 /* UserProfileRepository.swift */; };
+		EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6760A12DD787860041C839 /* ShopEnums.swift */; };
 		EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5C2DCB87BD005A064A /* EggCellView.swift */; };
 		EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E622DCBCFAE005A064A /* PetCellView.swift */; };
 		EC731E652DCBD463005A064A /* PetItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E642DCBD45F005A064A /* PetItemView.swift */; };
@@ -198,6 +200,8 @@
 		EC67608C2DD73AA60041C839 /* QuizResultResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultResponseModel.swift; sourceTree = "<group>"; };
 		EC67608D2DD73AA60041C839 /* UserQuizzesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuizzesResponseModel.swift; sourceTree = "<group>"; };
 		EC67609D2DD781A10041C839 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		EC67609F2DD787430041C839 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		EC6760A12DD787860041C839 /* ShopEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopEnums.swift; sourceTree = "<group>"; };
 		EC731E5C2DCB87BD005A064A /* EggCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggCellView.swift; sourceTree = "<group>"; };
 		EC731E622DCBCFAE005A064A /* PetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCellView.swift; sourceTree = "<group>"; };
 		EC731E642DCBD45F005A064A /* PetItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemView.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				EC67609D2DD781A10041C839 /* UserRepository.swift */,
+				EC67609F2DD787430041C839 /* UserProfileRepository.swift */,
 				EC02CA392DD64D2900CB53EE /* AuthRepository.swift */,
 				EC02CA3A2DD64D2900CB53EE /* BaseRepository.swift */,
 				EC02CA3B2DD64D2900CB53EE /* FriendsRepository.swift */,
@@ -365,6 +370,7 @@
 		EC02CA492DD64D2900CB53EE /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				EC6760A12DD787860041C839 /* ShopEnums.swift */,
 				EC02CA472DD64D2900CB53EE /* Request */,
 				EC02CA482DD64D2900CB53EE /* Response */,
 			);
@@ -872,6 +878,7 @@
 				EC02CA4F2DD64D2900CB53EE /* ServiceLocator.swift in Sources */,
 				ECF3A0692DD653BB0052990B /* TakeQuizRequestModel.swift in Sources */,
 				EC02CA502DD64D2900CB53EE /* NetworkManager.swift in Sources */,
+				EC6760A02DD787430041C839 /* UserProfileRepository.swift in Sources */,
 				ECF3A05A2DD6533B0052990B /* LoginRequestModel.swift in Sources */,
 				EC02CA512DD64D2900CB53EE /* BaseRepository.swift in Sources */,
 				EC02CA522DD64D2900CB53EE /* QuizRepository.swift in Sources */,
@@ -912,6 +919,7 @@
 				EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */,
+				EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */,
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,

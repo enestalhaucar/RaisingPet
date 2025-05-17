@@ -37,4 +37,9 @@ class RepositoryProvider {
     var friendsRepository: FriendsRepository {
         return serviceLocator.resolve { FriendsRepositoryImpl() }
     }
+    
+    // User Profile
+    var userProfileRepository: UserProfileRepository {
+        return serviceLocator.resolve { UserProfileRepositoryImpl() }
+    }
 } 

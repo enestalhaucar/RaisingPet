@@ -93,6 +93,8 @@ final class Utilities {
         let friendTag = UserDefaults.standard.string(forKey: "userFriendTag") ?? "N/A"
         let userId = UserDefaults.standard.string(forKey: "userId") ?? "N/A"
         let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") ?? "N/A"
+        let photo = UserDefaults.standard.string(forKey: "userPhoto") ?? "N/A"
+        let photoURL = UserDefaults.standard.string(forKey: "userPhotoURL") ?? "N/A"
         
         return [
             "token": token,
@@ -101,7 +103,9 @@ final class Utilities {
             "email": email,
             "friendTag": friendTag,
             "userId": userId,
-            "phoneNumber": phoneNumber
+            "phoneNumber": phoneNumber,
+            "photo": photo,
+            "photoURL": photoURL
         ]
     }
 

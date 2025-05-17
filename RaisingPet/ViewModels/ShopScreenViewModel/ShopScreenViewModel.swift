@@ -6,166 +6,124 @@
 //
 
 import Foundation
-import Alamofire
+import Combine
 import SwiftUI
 
-
-class ShopScreenViewModel : ObservableObject {
+@MainActor
+class ShopScreenViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var allItems: AllItems?
     
+    private let shopRepository: ShopRepository
+    private var cancellables = Set<AnyCancellable>()
     
-    func fetchAllShopItem(completion: @escaping () -> Void = {}) {
-        let url = Utilities.Constants.Endpoints.Shop.getAllShopItems
-        isLoading = true
-        errorMessage = nil
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .get, headers: headers)
-            .validate()
-            .responseDecodable(of: GetAllShopItems.self) { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(let data):
-                        self.allItems = data.data
-                        self.isLoading = false
-                    case .failure(let error):
-                        self.errorMessage = "Hata:1 \(error.localizedDescription)"
-                        self.isLoading = false
-                    }
-                }
-            }
+    init(shopRepository: ShopRepository = ShopRepositoryImpl()) {
+        self.shopRepository = shopRepository
     }
     
-    func buyShopItem(itemId: String, mine : MineEnum, completion: (() -> Void)? = nil) {
-        let url = Utilities.Constants.Endpoints.Shop.buyItem
+    func fetchAllShopItem(completion: @escaping () -> Void = {}) {
         isLoading = true
         errorMessage = nil
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        
-        let parameters: [String: Any] = [
-            "itemId": itemId,
-            "mine" : mine.rawValue
-        ]
-        
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .validate()
-            .response { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success:
-                        self.isLoading = false
-                        print("Item purchased successfully!")
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.errorMessage = "Hata: \(error.localizedDescription)"
-                        print("Purchase failed: \(error.localizedDescription)")
-                    }
-                }
+        Task {
+            do {
+                let response = try await shopRepository.getAllShopItems()
+                self.allItems = response.data
+                self.isLoading = false
+                completion()
+            } catch let error as NetworkError {
+                handleNetworkError(error)
+                completion()
+            } catch {
+                self.errorMessage = "Error: \(error.localizedDescription)"
+                self.isLoading = false
+                completion()
             }
+        }
+    }
+    
+    func buyShopItem(itemId: String, mine: MineEnum, completion: (() -> Void)? = nil) {
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                try await shopRepository.buyShopItem(itemId: itemId, mine: mine)
+                self.isLoading = false
+                print("Item purchased successfully!")
+                completion?()
+            } catch let error as NetworkError {
+                handleNetworkError(error)
+                completion?()
+            } catch {
+                self.errorMessage = "Error: \(error.localizedDescription)"
+                self.isLoading = false
+                print("Purchase failed: \(error.localizedDescription)")
+                completion?()
+            }
+        }
     }
     
     func buyPetItem(itemId: String, amount: Int, mine: MineEnum, completion: (() -> Void)? = nil) {
-        let url = Utilities.Constants.Endpoints.Pets.buyPetItem
-        isLoading = true
-        errorMessage = nil
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        let parameters: [String: Any] = [
-            "petItemId": itemId,
-            "amount": amount,
-            "mine": mine.rawValue
-        ]
-        
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .validate()
-            .response { response in
-                DispatchQueue.main.async {
-                    switch response.result {
-                    case .success(_):
-                        self.isLoading = false
-                        // Başarılı satın alma sonrası envanteri güncelle veya kullanıcıya bildirim göster
-                    case .failure(let error):
-                        self.isLoading = false
-                        self.errorMessage = "Hata: \(error.localizedDescription), Detay: \(error)"
-                        print("Hata Detayı: \(error), Response: \(String(data: response.data ?? Data(), encoding: .utf8) ?? "Yok")")
-                    }
-                }
-            }
-    }
-    
-    func buyPackageItem(packageType : PackageType, packageId : String, mine : MineEnum? = nil, petItemsWithAmounts : [PetItemWithAmount]? = nil, completion: (() -> Void)? = nil) {
-        let url = Utilities.Constants.Endpoints.Package.buyPackageItems
         isLoading = true
         errorMessage = nil
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? "")",
-            "Content-Type": "application/json"
-        ]
-        
-        var parameters: [String: Any] = [
-            "packageType": packageType.rawValue,
-            "packageId": packageId
-        ]
-        
-        switch packageType {
-        case .eggPackage, .petPackage:
-            if let m = mine {
-                parameters["mine"] = m.rawValue
-            }
-        case .petItemPackage:
-            guard let items = petItemsWithAmounts else {
-                self.errorMessage = "Pet-item-package için petItemsWithAmounts gerekli"
-                return
-            }
-            parameters["petItemsWithAmounts"] = items.map {
-                ["petItemId": $0.petItemId, "amount": $0.amount]
+        Task {
+            do {
+                try await shopRepository.buyPetItem(itemId: itemId, amount: amount, mine: mine)
+                self.isLoading = false
+                completion?()
+            } catch let error as NetworkError {
+                handleNetworkError(error)
+                completion?()
+            } catch {
+                self.errorMessage = "Error: \(error.localizedDescription)"
+                self.isLoading = false
+                print("Error detail: \(error)")
+                completion?()
             }
         }
-        
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .validate()
-            .response { response in
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    switch response.result {
-                    case .success:
-                        print("Package purchased successfully!")
-                    case .failure(let error):
-                        self.errorMessage = "Hata: \(error.localizedDescription)"
-                        print("Package purchase failed: \(error.localizedDescription)")
-                    }
-                }
-            }
     }
     
+    func buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum? = nil, petItemsWithAmounts: [PetItemWithAmount]? = nil, completion: (() -> Void)? = nil) {
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                try await shopRepository.buyPackageItem(
+                    packageType: packageType,
+                    packageId: packageId,
+                    mine: mine,
+                    petItemsWithAmounts: petItemsWithAmounts
+                )
+                self.isLoading = false
+                print("Package purchased successfully!")
+                completion?()
+            } catch let error as NetworkError {
+                handleNetworkError(error)
+                completion?()
+            } catch {
+                self.errorMessage = "Error: \(error.localizedDescription)"
+                self.isLoading = false
+                print("Package purchase failed: \(error.localizedDescription)")
+                completion?()
+            }
+        }
+    }
     
-}
-
-enum MineEnum : String {
-    case diamond
-    case gold
-}
-
-enum PackageType: String {
-    case eggPackage
-    case petPackage
-    case petItemPackage
-}
-
-struct PetItemWithAmount: Encodable {
-    let petItemId: String
-    let amount: Int
+    private func handleNetworkError(_ error: NetworkError) {
+        switch error {
+        case .serverError(let statusCode, let message):
+            errorMessage = "Server error (\(statusCode)): \(message ?? "Unknown error")"
+        case .unauthorized:
+            errorMessage = "Unauthorized access. Please log in again."
+        case .timeOut:
+            errorMessage = "Request timed out. Please try again."
+        default:
+            errorMessage = "Network error: \(error.localizedDescription)"
+        }
+        isLoading = false
+    }
 }

@@ -7,7 +7,7 @@
 
 
 import Foundation
-import Alamofire
+import Combine
 
 @MainActor
 class FriendsViewModel: ObservableObject {
@@ -16,12 +16,12 @@ class FriendsViewModel: ObservableObject {
     @Published var searchedFriend: SearchFriendWithTagDataUser = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
     @Published var errorMessage: String?
 
-    private var headers: HTTPHeaders {
-        let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
-        return [
-            "Authorization": "Bearer \(token)",
-            "Content-Type": "application/json"
-        ]
+    // Repository
+    private let friendsRepository: FriendsRepository
+    
+    // MARK: - Initialization
+    init(friendsRepository: FriendsRepository = RepositoryProvider.shared.friendsRepository) {
+        self.friendsRepository = friendsRepository
     }
 
     // GET: Friends List
@@ -30,14 +30,11 @@ class FriendsViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.list
-
         do {
-            let response = try await AF.request(url, method: .get, headers: headers)
-                .validate()
-                .serializingDecodable(FriendsResponseModel.self)
-                .value
+            let response = try await friendsRepository.listFriends()
             friends = response.data.friends
+        } catch let error as NetworkError {
+            handleNetworkError(error)
         } catch {
             errorMessage = "Arkadaş listesi yüklenemedi: \(error.localizedDescription)"
             print("Fetch friends error: \(error)")
@@ -50,15 +47,16 @@ class FriendsViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.searchFriendWithTag
-        let parameters = ["friendTag": friendTag]
-
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(SearchFriendWithTagResponse.self)
-                .value
-            searchedFriend = response.data.user ?? .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+            let response = try await friendsRepository.searchFriendWithTag(tag: friendTag)
+            if let user = response.data as? SearchFriendWithTagData {
+                searchedFriend = user.user ?? .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+            } else {
+                searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+            }
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
         } catch {
             errorMessage = "Arkadaş arama başarısız: \(friendTag) için kullanıcı bulunamadı. \(error.localizedDescription)"
             print("Search friend error: \(error)")
@@ -72,15 +70,12 @@ class FriendsViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.sendRequest
-        let parameters = ["friendId": friendId]
-
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(FriendRequestResponse.self)
-                .value
+            try await friendsRepository.sendRequest(friendId: friendId)
             await fetchFriendsList() // İstek sonrası listeyi güncelle
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            throw error
         } catch {
             errorMessage = "Arkadaşlık isteği gönderilemedi: \(error.localizedDescription)"
             print("Send friend request error: \(error)")
@@ -89,20 +84,17 @@ class FriendsViewModel: ObservableObject {
     }
 
     // POST: Accept Friend Request
-    func acceptFriendRequest(friendId: String) async throws {
+    func acceptFriendRequest(requestId: String) async throws {
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.acceptRequest
-        let parameters = ["friendId": friendId]
-
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(FriendRequestResponse.self)
-                .value
+            try await friendsRepository.acceptRequest(requestId: requestId)
             await fetchFriendsList() // Kabul sonrası listeyi güncelle
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            throw error
         } catch {
             errorMessage = "Arkadaşlık isteği kabul edilemedi: \(error.localizedDescription)"
             print("Accept friend request error: \(error)")
@@ -111,22 +103,17 @@ class FriendsViewModel: ObservableObject {
     }
 
     // POST: Reject Friend Request
-    func rejectFriendRequest(friendId: String) async throws {
+    func rejectFriendRequest(requestId: String) async throws {
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.rejectRequest
-        let parameters = ["friendId": friendId]
-
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-            if let httpResponse = response.response, httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
-                await fetchFriendsList() // Reddetme sonrası listeyi güncelle
-            } else {
-                throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.response?.statusCode ?? 500))
-            }
+            try await friendsRepository.rejectRequest(requestId: requestId)
+            await fetchFriendsList() // Reddetme sonrası listeyi güncelle
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            throw error
         } catch {
             errorMessage = "Arkadaşlık isteği reddedilemedi: \(error.localizedDescription)"
             print("Reject friend request error: \(error)")
@@ -140,19 +127,12 @@ class FriendsViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = Utilities.Constants.Endpoints.Friends.removeFriend
-        let parameters = ["friendId": friendId]
-
         do {
-            let response = try await AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-                .validate()
-                .serializingDecodable(FriendRequestResponse.self)
-                .value
-            if response.data.friendRequest.status == "removed" && response.data.friendRequest.isDeleted {
-                await fetchFriendsList() // Silme sonrası listeyi güncelle
-            } else {
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Arkadaş silme işlemi başarısız: Beklenmeyen response"])
-            }
+            try await friendsRepository.removeFriend(friendId: friendId)
+            await fetchFriendsList() // Silme sonrası listeyi güncelle
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            throw error
         } catch {
             errorMessage = "Arkadaş silme başarısız: \(error.localizedDescription)"
             print("Remove friend error: \(error)")
@@ -160,6 +140,8 @@ class FriendsViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Helper Methods
+    
     // Yardımcı Fonksiyonlar
     var pendingFriends: [Friend] {
         friends.filter { $0.status == "pending" }
@@ -167,5 +149,19 @@ class FriendsViewModel: ObservableObject {
 
     var acceptedFriends: [Friend] {
         friends.filter { $0.status == "accepted" }
+    }
+    
+    // MARK: - Error Handling
+    private func handleNetworkError(_ error: NetworkError) {
+        switch error {
+        case .serverError(let statusCode, let message):
+            errorMessage = "Server error (\(statusCode)): \(message ?? "Unknown error")"
+        case .unauthorized:
+            errorMessage = "Unauthorized access. Please log in again."
+        case .timeOut:
+            errorMessage = "Request timed out. Please try again."
+        default:
+            errorMessage = "Network error: \(error.localizedDescription)"
+        }
     }
 }

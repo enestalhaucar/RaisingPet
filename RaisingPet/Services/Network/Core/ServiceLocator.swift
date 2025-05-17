@@ -17,6 +17,7 @@ class ServiceLocator {
         register(QuizRepositoryImpl(networkManager: NetworkManager.shared) as QuizRepository)
         register(InventoryRepositoryImpl(networkManager: NetworkManager.shared) as InventoryRepository)
         register(FriendsRepositoryImpl(networkManager: NetworkManager.shared) as FriendsRepository)
+        register(UserProfileRepositoryImpl(networkManager: NetworkManager.shared) as UserProfileRepository)
     }
     
     /// Register a service with its type

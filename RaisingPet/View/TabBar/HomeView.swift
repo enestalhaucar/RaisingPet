@@ -225,5 +225,10 @@ struct WidgetsNavigationSection: View {
             }.padding(12)
         }.background(RoundedRectangle(cornerRadius: 10).stroke(Color("navigationHomeViewBorderColor"), lineWidth: 1))
             .padding(.horizontal)
+            .onAppear {
+                Task {
+                    currentVM.refresh()
+                }
+            }
     }
 }

@@ -29,6 +29,38 @@ struct ProfileView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 10)
                                 .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                        } else if let photoURLString = userDetails["photoURL"], !photoURLString.isEmpty, photoURLString != "N/A" {
+                            AsyncImage(url: URL(string: "http://" + photoURLString)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                        .frame(width: 120, height: 120)
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 10)
+                                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                                case .failure:
+                                    Image(uiImage: placeholderImage ?? UIImage())
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 10)
+                                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                                @unknown default:
+                                    Image(uiImage: placeholderImage ?? UIImage())
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 10)
+                                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                                }
+                            }
                         } else {
                             Image(uiImage: placeholderImage ?? UIImage())
                                 .resizable()
@@ -139,7 +171,7 @@ struct ProfileView: View {
             .scrollIndicators(.hidden)
             .onAppear {
                 userDetails = viewModel.getUserDetailsForProfileView()
-                // UserDefaults’tan fotoğrafı yükle
+                // UserDefaults'tan fotoğrafı yükle
                 if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                    let image = UIImage(data: photoData) {
                     profileImage = image
@@ -147,7 +179,7 @@ struct ProfileView: View {
             }
             .onChange(of: isShowPremiumView) {
                 if !isShowPremiumView {
-                    // PremiumView’dan geri dönüldüğünde profil resmini güncelle
+                    // PremiumView'dan geri dönüldüğünde profil resmini güncelle
                     if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                        let image = UIImage(data: photoData) {
                         profileImage = image

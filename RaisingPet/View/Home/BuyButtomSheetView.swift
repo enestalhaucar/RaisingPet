@@ -45,10 +45,12 @@ struct BottomSheetView: View {
                     
                     
                     Button {
-                        vm.buyShopItem(itemId: item.id!, mine: .diamond) {
-                            currentVM.refresh()
+                        Task {
+                            await vm.buyShopItem(itemId: item.id!, mine: .diamond) {
+                                currentVM.refresh()
+                            }
+                            dismiss()
                         }
-                        dismiss()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 25)
@@ -157,29 +159,35 @@ struct BottomSheetView: View {
 
       // 1) Eğer bu bir EggPackage ise:
       if let qty = item.quantity, item.category == .eggs {
-        vm.buyPackageItem(
-          packageType: .eggPackage,
-          packageId: id,
-          mine: mine
-        ) { currentVM.refresh() }
-        dismiss()
+        Task {
+            await vm.buyPackageItem(
+              packageType: .eggPackage,
+              packageId: id,
+              mine: mine
+            ) { currentVM.refresh() }
+            dismiss()
+        }
         return
       }
 
       // 2) Eğer petItem ise (home+petItems)
       if item.category == .home && (vm.allItems?.petItems.contains { $0.id == id } ?? false) {
-          vm.buyPetItem(itemId: id, amount: counterNumber, mine: mine) {
-              currentVM.refresh()
+          Task {
+              await vm.buyPetItem(itemId: id, amount: counterNumber, mine: mine) {
+                  currentVM.refresh()
+              }
+              dismiss()
           }
-        dismiss()
         return
       }
 
       // 3) Aksi hâlde basit shopItem
-        vm.buyShopItem(itemId: id, mine: mine) {
-            currentVM.refresh()
+        Task {
+            await vm.buyShopItem(itemId: id, mine: mine) {
+                currentVM.refresh()
+            }
+            dismiss()
         }
-      dismiss()
     }
 }
 

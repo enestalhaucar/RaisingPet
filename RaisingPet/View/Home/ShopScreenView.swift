@@ -75,10 +75,10 @@ struct ShopScreenView: View {
                                     petItems: vm.allItems?.petItems ?? [],
                                     onSelect: openSheet
                                 )
-                                HomeSection(
-                                    items: vm.allItems?.shopItems ?? [],
-                                    onSelect: openSheet
-                                )
+//                                HomeSection(
+//                                    items: vm.allItems?.shopItems ?? [],
+//                                    onSelect: openSheet
+//                                )
                             }
                         }
                         .padding(.top, 20)
@@ -98,11 +98,15 @@ struct ShopScreenView: View {
                           guard let pkg = selectedPetItemPackage,
                                 !selections.isEmpty else { return }
 
-                          vm.buyPackageItem(
-                            packageType: .petItemPackage,
-                            packageId: pkg.id ?? "",
-                            petItemsWithAmounts: selections
-                          )
+                          Task {
+                              await vm.buyPackageItem(
+                                packageType: .petItemPackage,
+                                packageId: pkg.id ?? "",
+                                petItemsWithAmounts: selections
+                              ) {
+                                  currentUserVM.refresh()
+                              }
+                          }
                         }
                         .frame(
                             width: UIScreen.main.bounds.width * 0.9,
@@ -127,6 +131,7 @@ struct ShopScreenView: View {
                     showCounter: $showCounter
                 )
                 .environmentObject(vm)
+                .environmentObject(currentUserVM)
                 .presentationDetents([.fraction(0.5)])
             }
         }
@@ -144,7 +149,7 @@ struct ShopScreenView: View {
 
 struct CategoryPicker: View {
     @Binding var selected: MainCategory
-    // Production’da Diamonds gizlensin (bu hardcoded, istersen bir environment değişkeni ile kontrol edebilirsin)
+    // Production'da Diamonds gizlensin (bu hardcoded, istersen bir environment değişkeni ile kontrol edebilirsin)
     private let visibleCategories: [MainCategory] = [.pets] // Şu an sadece Pets görünecek
 
     var body: some View {
@@ -382,6 +387,11 @@ struct RoofSideView: View {
             }.frame(width: Utilities.Constants.width)
             .padding(.top, 50)
         }
+        .onAppear {
+            Task {
+                currentUser.refresh()
+            }
+        }
     }
 }
 
@@ -523,7 +533,9 @@ struct AssetNumberView: View {
             )
         }
         .onAppear {
-            currentUserVM.refresh() // Her görünümde güncelle
+            Task {
+                currentUserVM.refresh() // Her görünümde güncelle
+            }
         }
     }
 }

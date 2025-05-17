@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Alamofire
+import Combine
 
 struct GroupedPetItem: Identifiable {
     let id: String
@@ -27,18 +27,17 @@ final class InventoryViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var currentPet: Pet?
 
-    private let inventoryURL = Utilities.Constants.Endpoints.Inventory.myInventory
-    private let hatchURL = Utilities.Constants.Endpoints.Inventory.hatchPets
-    private let petsURL = Utilities.Constants.Endpoints.Pets.getPets
-    private let deletePetURL = Utilities.Constants.Endpoints.Pets.deletePet
-    private let petItemInteractionURL = Utilities.Constants.Endpoints.Pets.petItemInteraction
-
-    private var headers: HTTPHeaders {
-        let token = Utilities.shared.getUserDetailsFromUserDefaults()["token"] ?? ""
-        return [
-            "Authorization": "Bearer \(token)",
-            "Content-Type": "application/json"
-        ]
+    // Repositories
+    private let inventoryRepository: InventoryRepository
+    private let petRepository: PetRepository
+    
+    // MARK: - Initialization
+    init(
+        inventoryRepository: InventoryRepository = RepositoryProvider.shared.inventoryRepository,
+        petRepository: PetRepository = RepositoryProvider.shared.petRepository
+    ) {
+        self.inventoryRepository = inventoryRepository
+        self.petRepository = petRepository
     }
 
     func fetchInventory() async {
@@ -46,25 +45,21 @@ final class InventoryViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .useDefaultKeys
-
         do {
-            let resp = try await AF.request(inventoryURL,
-                                            method: .get,
-                                            headers: headers)
-                .validate()
-                .serializingDecodable(GetInventoryResponseModel.self, decoder: decoder)
-                .value
-
-            let items = resp.data.inventory.items
+            let response = try await inventoryRepository.getInventory()
+            let items = response.data.inventory.items
+            
             eggs = items.filter {
                 $0.itemType == .shopItem && $0.itemId.category == "eggs" && !($0.properties.egg?.isCrackedByUser ?? false)
             }
+            
             crackedEggs = items.filter {
                 $0.itemType == .shopItem && $0.itemId.category == "eggs" && ($0.properties.egg?.isCrackedByUser ?? false)
             }
+            
             petItems = items.filter { $0.isPetItem }
+        } catch let error as NetworkError {
+            handleNetworkError(error)
         } catch {
             errorMessage = "Envanter yüklenemedi: \(error.localizedDescription)"
             print("Fetch inventory hatası: \(error)")
@@ -76,18 +71,11 @@ final class InventoryViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .useDefaultKeys
-
         do {
-            let resp = try await AF.request(petsURL,
-                                            method: .get,
-                                            headers: headers)
-                .validate()
-                .serializingDecodable(GetPetsResponseModel.self, decoder: decoder)
-                .value
-
-            pets = resp.data.pets.filter { $0.isHatched && !$0.isDeleted }
+            let response = try await petRepository.getPets()
+            pets = response.data.pets.filter { $0.isHatched && !$0.isDeleted }
+        } catch let error as NetworkError {
+            handleNetworkError(error)
         } catch {
             errorMessage = "Hayvanlar yüklenemedi: \(error.localizedDescription)"
             print("Fetch pets hatası: \(error)")
@@ -98,20 +86,8 @@ final class InventoryViewModel: ObservableObject {
         isLoading = true
         defer { isLoading = false }
 
-        let params: [String: Any] = ["inventoryItemEggIds": inventoryItemEggIds]
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .useDefaultKeys
-
         do {
-            let response = try await AF.request(hatchURL,
-                                                method: .post,
-                                                parameters: params,
-                                                encoding: JSONEncoding.default,
-                                                headers: headers)
-                .validate()
-                .serializingDecodable(HatchPetsResponseModel.self, decoder: decoder)
-                .value
+            let response = try await inventoryRepository.hatchPets(inventoryItemEggIds: inventoryItemEggIds)
             return response
         } catch {
             throw error
@@ -123,19 +99,12 @@ final class InventoryViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let url = deletePetURL.replacingOccurrences(of: ":id", with: petId)
-
         do {
-            let response = try await AF.request(url,
-                                                method: .get,
-                                                headers: headers)
-                .validate()
-
-            if let httpResponse = response.response, httpResponse.statusCode == 200 || httpResponse.statusCode == 204 {
-                await fetchPets()
-            } else {
-                throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.response?.statusCode ?? 500))
-            }
+            try await petRepository.deletePet(id: petId)
+            await fetchPets()
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            throw error
         } catch {
             errorMessage = "Pet silme başarısız: \(error.localizedDescription)"
             print("Delete pet hatası: \(error)")
@@ -148,17 +117,8 @@ final class InventoryViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
-        let params: [String: Any] = ["petId": petId, "petItemId": petItemId]
-        
         do {
-            let response = try await AF.request(petItemInteractionURL,
-                                               method: .post,
-                                               parameters: params,
-                                               encoding: JSONEncoding.default,
-                                               headers: headers)
-                .validate()
-                .serializingDecodable(PetItemInteractionResponse.self)
-                .value
+            let response = try await petRepository.petItemInteractionWithResponse(petId: petId, petItemId: petItemId)
 
             // Eğer data varsa güncelle, yoksa manuel fetch yap
             if let updatedPet = response.data?.pet {
@@ -167,24 +127,28 @@ final class InventoryViewModel: ObservableObject {
                 }
                 currentPet = updatedPet
             }
+            
             if let updatedInventory = response.data?.inventory {
                 petItems = updatedInventory.items.filter { $0.isPetItem }
             } else {
-                // Data yoksa, manuel olarak inventory ve pets’i güncelle
+                // Data yoksa, manuel olarak inventory ve pets'i güncelle
                 await fetchInventory()
                 await fetchPets()
-                // fetchPets sonrası currentPet’i güncelle
+                // fetchPets sonrası currentPet'i güncelle
                 if let updatedPet = pets.first(where: { $0.id == petId }) {
                     currentPet = updatedPet
                 }
             }
             print("Pet item used successfully: \(response.message)")
+        } catch let error as NetworkError {
+            handleNetworkError(error)
         } catch {
             errorMessage = "Eşya kullanımı başarısız: \(error.localizedDescription)"
             print("Use pet item error: \(error)")
         }
     }
 
+    // MARK: - Helper Methods
     func groupedPetItems() -> [GroupedPetItem] {
         let groupedItems = Dictionary(grouping: petItems, by: { $0.itemId.name })
         return groupedItems.map { name, items in
@@ -209,15 +173,18 @@ final class InventoryViewModel: ObservableObject {
         }
         return grouped
     }
-}
-
-struct PetItemInteractionResponse: Codable {
-    let status: String
-    let message: String
-    let data: PetItemInteractionData?
-}
-
-struct PetItemInteractionData: Codable {
-    let pet: Pet?
-    let inventory: Inventory?
+    
+    // MARK: - Error Handling
+    private func handleNetworkError(_ error: NetworkError) {
+        switch error {
+        case .serverError(let statusCode, let message):
+            errorMessage = "Server error (\(statusCode)): \(message ?? "Unknown error")"
+        case .unauthorized:
+            errorMessage = "Unauthorized access. Please log in again."
+        case .timeOut:
+            errorMessage = "Request timed out. Please try again."
+        default:
+            errorMessage = "Network error: \(error.localizedDescription)"
+        }
+    }
 }
