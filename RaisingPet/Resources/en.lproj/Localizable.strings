@@ -48,7 +48,7 @@
 // RootView
 "home_tab" = "Home";
 "wallpapers_tab" = "Wallpapers";
-"couple_questions_tab" = "Couple Questions";
+"couple_questions_tab" = "Activity";
 "profile_tab" = "Profile";
 
 // SignUpView

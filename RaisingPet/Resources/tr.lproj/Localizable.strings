@@ -45,7 +45,7 @@
 // RootView
 "home_tab" = "Ana Sayfa";
 "wallpapers_tab" = "Duvar Kağıtları";
-"couple_questions_tab" = "Çift Soruları";
+"couple_questions_tab" = "Aktivite";
 "profile_tab" = "Profil";
 
 // SignUpView

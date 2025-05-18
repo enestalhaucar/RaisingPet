@@ -35,31 +35,19 @@ struct RootView: View {
                     TabView {
                         HomeView()
                             .tabItem {
-                                VStack {
-                                    Image(systemName: "house")
-                                    Text("home_tab".localized())
-                                }
-                            }
-                        WallpaperView()
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "photo")
-                                    Text("wallpapers_tab".localized())
-                                }
+                                TabBarIcon(image: Image("home_tab_icon"), text: "home_tab".localized())
                             }
                         CoupleQuestionView()
                             .tabItem {
-                                VStack {
-                                    Image(systemName: "person.fill.questionmark")
-                                    Text("couple_questions_tab".localized())
-                                }
+                                TabBarIcon(image: Image("couple_questions_tab_icon"), text: "couple_questions_tab".localized())
+                            }
+                        WallpaperView()
+                            .tabItem {
+                                TabBarIcon(image: Image("wallpaper_tab_icon"), text: "wallpapers_tab".localized())
                             }
                         ProfileView()
                             .tabItem {
-                                VStack {
-                                    Image(systemName: "person")
-                                    Text("profile_tab".localized())
-                                }
+                                TabBarIcon(image: Image("profile_tab_icon"), text: "profile_tab".localized())
                             }
                             .environmentObject(appState)
                     }
@@ -85,6 +73,22 @@ struct RootView: View {
     
     private func handleLogout() {
         appState.isLoggedIn = false
+    }
+}
+
+// TabBar ikonları için tutarlı görünüm sağlayan yardımcı bir görünüm
+struct TabBarIcon: View {
+    let image: Image
+    let text: String
+    
+    var body: some View {
+        VStack {
+            image
+                .resizable()
+                .frame(width: 25, height: 25)
+            Text(text)
+                .font(.nunito(.medium, .caption211))
+        }
     }
 }
 

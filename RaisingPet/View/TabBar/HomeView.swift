@@ -22,7 +22,7 @@ struct HomeView: View {
                 Color("mainbgColor").ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 30) {
+                    VStack(spacing: 20) {
                         
                         HomePetSection()
                         
@@ -83,7 +83,7 @@ struct CustomNavigationLink<Destination: View>: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 65, height: 65)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color("homeNavigationSectionBackgroundColor"))
                         .overlay {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.gray.opacity(0.3))
@@ -106,56 +106,32 @@ struct HomePetSection: View {
     var body: some View {
         NavigationLink(destination: EggAndPetsView()) {
             ZStack {
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.white)
+                    .stroke(.gray.opacity(0.3), lineWidth: 2)
+                    .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+                
                 Image("petBackgroundImage")
                     .resizable()
-                    .foregroundStyle(.white)
-                
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(.gray.opacity(0.3), lineWidth: 2)
-                    }
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
                 
                 Image("pet")
                     .resizable()
                     .frame(width: 120, height: 120)
                     .padding(.vertical, 25)
-            }.frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+            }
         }
-        
     }
 }
-
 struct HomeNavigationButtons: View {
     var body: some View {
         HStack(spacing: 25) {
             CustomNavigationLink(view: ShopScreenView(), imageName: "shopIcon", text: "shop".localized())
             CustomNavigationLink(view: FriendsView(), imageName: "friendsIcon", text: "friends".localized())
             CustomNavigationLink(view: EggAndPetsView(), imageName: "petIcon", text: "pet".localized())
-            VStack {
-                NavigationLink {
-                    NoteView()
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 65, height: 65)
-                            .foregroundStyle(.white)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.gray.opacity(0.3))
-                            }
-                        VStack(spacing: 1) {
-                            Image("notesIcon")
-                                .resizable()
-                                .frame(width: 44, height: 44)
-                                .scaleEffect(0.8)
-                            Text("notes".localized())
-                                .font(.nunito(.semiBold, .callout14))
-                                .bold()
-                        }
-                    }
-                }
-                
-            }
+            CustomNavigationLink(view: NoteView(), imageName: "noteIcon", text: "notes".localized())
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "shopIcon.png",
+      "filename" : "shopIcon.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },

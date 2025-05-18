@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "petIcon.png",
+      "filename" : "petIcon.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
