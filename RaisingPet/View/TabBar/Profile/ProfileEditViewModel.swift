@@ -22,28 +22,34 @@ class ProfileEditViewModel: ObservableObject {
         self.userRepository = userRepository
     }
     
-    func updateProfile(firstname: String? = nil, surname: String? = nil, phoneNumber: String? = nil, email: String? = nil, photo: UIImage? = nil) async {
+    // Simplified method that only updates the photo
+    func updateProfile(photo: UIImage) async {
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
         
         do {
-            // Use comprehensive method that handles both text fields and photo
-            let response = try await userRepository.updateProfileWithPhoto(
-                firstName: firstname,
-                lastName: surname,
-                email: email,
-                phoneNumber: phoneNumber,
-                photo: photo
-            )
+            // Use uploadProfilePhoto to just update the photo
+            let response = try await userRepository.uploadProfilePhoto(photo: photo)
             
             isSuccess = true
-            print("Profile updated successfully: \(response)")
+            print("Profile photo updated successfully: \(response)")
         } catch let error as NetworkError {
             handleNetworkError(error)
         } catch {
             errorMessage = "Error: \(error.localizedDescription)"
-            print("Update profile error: \(error)")
+            print("Update profile photo error: \(error)")
+        }
+    }
+    
+    // Method to get the user's profile image from URL
+    func getUserProfileImage(photoURL: String) async throws -> Data {
+        do {
+            let imageData = try await userRepository.getUserImage(imageURL: photoURL)
+            return imageData
+        } catch {
+            print("Error getting profile image: \(error)")
+            throw error
         }
     }
     

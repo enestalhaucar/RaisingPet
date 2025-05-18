@@ -15,13 +15,17 @@ struct ProfileView: View {
     @State private var showCopiedMessage = false
     @State private var profileImage: UIImage? = nil
     private let placeholderImage = UIImage(named: "placeholder")
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: ProfileViewModel())
+    }
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 25) {
                     VStack(spacing: 10) {
-                        if let image = profileImage {
+                        if let image = viewModel.profileImage ?? profileImage {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFill()
@@ -30,20 +34,15 @@ struct ProfileView: View {
                                 .shadow(radius: 10)
                                 .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                         } else if let photoURLString = userDetails["photoURL"], !photoURLString.isEmpty, photoURLString != "N/A" {
-                            AsyncImage(url: URL(string: "http://" + photoURLString)) { phase in
-                                switch phase {
-                                case .empty:
+                            ZStack {
+                                Circle()
+                                    .fill(Color.gray.opacity(0.2))
+                                    .frame(width: 120, height: 120)
+                                
+                                if viewModel.isLoadingImage {
                                     ProgressView()
                                         .frame(width: 120, height: 120)
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 120, height: 120)
-                                        .clipShape(Circle())
-                                        .shadow(radius: 10)
-                                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                                case .failure:
+                                } else {
                                     Image(uiImage: placeholderImage ?? UIImage())
                                         .resizable()
                                         .scaledToFill()
@@ -51,14 +50,11 @@ struct ProfileView: View {
                                         .clipShape(Circle())
                                         .shadow(radius: 10)
                                         .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                                @unknown default:
-                                    Image(uiImage: placeholderImage ?? UIImage())
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 120, height: 120)
-                                        .clipShape(Circle())
-                                        .shadow(radius: 10)
-                                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                                }
+                            }
+                            .onAppear {
+                                Task {
+                                    await viewModel.loadProfileImage(from: photoURLString)
                                 }
                             }
                         } else {
@@ -171,7 +167,8 @@ struct ProfileView: View {
             .scrollIndicators(.hidden)
             .onAppear {
                 userDetails = viewModel.getUserDetailsForProfileView()
-                // UserDefaults'tan fotoğrafı yükle
+                viewModel.loadProfileImageFromCache()
+                
                 if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                    let image = UIImage(data: photoData) {
                     profileImage = image
@@ -179,11 +176,11 @@ struct ProfileView: View {
             }
             .onChange(of: isShowPremiumView) {
                 if !isShowPremiumView {
-                    // PremiumView'dan geri dönüldüğünde profil resmini güncelle
                     if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                        let image = UIImage(data: photoData) {
                         profileImage = image
                     }
+                    viewModel.loadProfileImageFromCache()
                 }
             }
         }

@@ -17,7 +17,7 @@ struct GetMeResponseModel: Codable {
     }
 }
 
-struct GetMeUser: Codable {
+struct GetMeUser: Codable, Identifiable {
     let id: String
     let firstname: String
     let surname: String
@@ -35,14 +35,14 @@ struct GetMeUser: Codable {
     enum CodingKeys: String, CodingKey {
         case id, firstname, surname, email, photo, role, photoURL
         case gameCurrencyGold, gameCurrencyDiamond, isDeleted, friendTag, phoneNumber
-        case version            = "__v"
+        case version = "__v"
         case _id
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        // id ve _id alanlarından birini kullan
+        // Try to decode id from multiple possible fields
         if let mainId = try? container.decode(String.self, forKey: .id) {
             id = mainId
         } else if let backupId = try? container.decode(String.self, forKey: ._id) {
@@ -51,17 +51,20 @@ struct GetMeUser: Codable {
             throw DecodingError.dataCorruptedError(forKey: .id, in: container, debugDescription: "Neither 'id' nor '_id' found")
         }
         
+        // Required fields
         firstname = try container.decode(String.self, forKey: .firstname)
         surname = try container.decode(String.self, forKey: .surname)
         email = try container.decode(String.self, forKey: .email)
+        
+        // Optional fields with safe fallbacks
         photo = try container.decodeIfPresent(String.self, forKey: .photo)
         photoURL = try container.decodeIfPresent(String.self, forKey: .photoURL)
-        role = try container.decode(String.self, forKey: .role)
-        gameCurrencyGold = try container.decode(Int.self, forKey: .gameCurrencyGold)
-        gameCurrencyDiamond = try container.decode(Int.self, forKey: .gameCurrencyDiamond)
-        isDeleted = try container.decode(Bool.self, forKey: .isDeleted)
-        friendTag = try container.decode(String.self, forKey: .friendTag)
-        version = try container.decode(Int.self, forKey: .version)
+        role = try container.decodeIfPresent(String.self, forKey: .role) ?? "user"
+        gameCurrencyGold = try container.decodeIfPresent(Int.self, forKey: .gameCurrencyGold) ?? 0
+        gameCurrencyDiamond = try container.decodeIfPresent(Int.self, forKey: .gameCurrencyDiamond) ?? 0
+        isDeleted = try container.decodeIfPresent(Bool.self, forKey: .isDeleted) ?? false
+        friendTag = try container.decodeIfPresent(String.self, forKey: .friendTag) ?? ""
+        version = try container.decodeIfPresent(Int.self, forKey: .version) ?? 0
         phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber)
     }
     

@@ -42,4 +42,9 @@ class RepositoryProvider {
     var userProfileRepository: UserProfileRepository {
         return serviceLocator.resolve { UserProfileRepositoryImpl() }
     }
+    
+    // User Repository
+    var userRepository: UserRepository {
+        return serviceLocator.resolve { UserRepositoryImpl() }
+    }
 } 

@@ -46,15 +46,28 @@ struct EggCellView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("EggBackgroundColor"))
-                    .frame(width: 80, height: 90)
-                    .shadow(radius: 4) // Gölge eklendi
-                Image(item.itemId.name)
-                    .resizable()
-                    .frame(width: 40, height: 40)
+            Button(action: {
+                if remaining <= 0 {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isPressed = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        isPressed = false
+                        onHatch()
+                    }
+                }
+            }) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("EggBackgroundColor"))
+                        .frame(width: 80, height: 90)
+                        .shadow(radius: 4) // Gölge eklendi
+                    Image(item.itemId.name)
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                }
             }
+            .scaleEffect(isPressed ? 0.95 : 1.0) // Basıldığında küçülme efekti
 
             if remaining > 0 {
                 ZStack(alignment: .leading) {
@@ -75,26 +88,13 @@ struct EggCellView: View {
                 Text(timeString(from: remaining))
                     .font(.caption2)
                     .foregroundColor(.gray)
-            } else {
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        isPressed = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        isPressed = false
-                        onHatch()
-                    }
-                }) {
-                    Text("egg_pets_hatch_pets".localized())
-                        .font(.subheadline)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 12)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
-                }
-                .scaleEffect(isPressed ? 0.95 : 1.0) // Basıldığında küçülme efekti
             }
+            
+            // Display egg name
+            Text(item.itemId.name.capitalized)
+                .font(.nunito(.medium, .caption12))
+                .foregroundColor(.primary)
+                .lineLimit(1)
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common)
                     .autoconnect()) { self.now = $0 }

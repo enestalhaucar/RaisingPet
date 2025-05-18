@@ -9,10 +9,12 @@ import SwiftUI
 
 struct SignInUpBackground: View {
     var body: some View {
-        Color("backgroundColor").ignoresSafeArea()
-        
-        Image("shapeEclipse")
-            .offset(x: -UIScreen.main.bounds.width / 2 + 70, y: -UIScreen.main.bounds.height / 2 + 50)
+        ZStack {
+            Color("backgroundColor").ignoresSafeArea()
+            
+            Image("shapeEclipse")
+                .offset(x: -UIScreen.main.bounds.width / 2 + 70, y: -UIScreen.main.bounds.height / 2 + 50)
+        }
     }
 }
 

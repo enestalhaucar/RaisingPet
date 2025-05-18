@@ -39,9 +39,9 @@ struct PetCareView: View {
             .navigationTitle(pet.petType.name.capitalized)
             .task {
                 // Fetch inventory and all shop items in parallel
-                async let inventoryTask = vm.fetchInventory()
-                async let petsTask = vm.fetchPets()
-                async let shopItemsTask = vm.fetchAllShopItems()
+                async let inventoryTask: () = vm.fetchInventory()
+                async let petsTask: () = vm.fetchPets()
+                async let shopItemsTask: () = vm.fetchAllShopItems()
                 
                 // Wait for all tasks to complete
                 _ = await [inventoryTask, petsTask, shopItemsTask]

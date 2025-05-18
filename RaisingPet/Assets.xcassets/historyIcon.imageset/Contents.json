@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "historyIcon.png",
+      "filename" : "historyIcon.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },

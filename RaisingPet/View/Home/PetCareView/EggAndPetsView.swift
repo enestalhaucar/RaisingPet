@@ -10,6 +10,9 @@ import SwiftUI
 struct EggAndPetsView: View {
     @StateObject private var vm = InventoryViewModel()
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
+    @State private var showEggsSection = true
+    @State private var showingEggModal = false
+    @State private var selectedEggData: InventoryItem?
 
     var body: some View {
         NavigationStack {
@@ -36,51 +39,64 @@ struct EggAndPetsView: View {
                         .buttonStyle(.borderedProminent)
                     }
                 } else {
-                    ScrollView {
-                        VStack(spacing: 24) {
-                            headerButtons
-
-                            // Yumurtalar Bölümü
-                            SectionHeaderView(title: "egg_pets_eggs".localized())
+                    VStack(spacing: 0) {
+                        // Fixed header buttons at the top
+                        headerButtons
+                            .padding(.top, 24)
+                        
+                        // Yumurtalar Bölümü - Açılıp Kapanabilen (Fixed, not in ScrollView)
+                        SectionHeaderView(
+                            title: "egg_pets_eggs".localized(),
+                            isCollapsible: true,
+                            isExpanded: $showEggsSection
+                        )
+                        .padding(.top, 32)
+                        
+                        if showEggsSection {
                             if vm.eggs.isEmpty {
                                 EmptyEggStateView()
                             } else {
-                                LazyVGrid(columns: columns, spacing: 16) {
-                                    ForEach(vm.eggs, id: \.id) { egg in
-                                        EggCellView(item: egg) {
-                                            guard let id = egg.id else { return }
-                                            Task {
-                                                do {
-                                                    _ = try await vm.hatchPets([id])
-                                                    await vm.fetchInventory()
-                                                    await vm.fetchPets()
-                                                } catch {
-                                                    print("Hatch error: \(error)")
-                                                    vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
-                                                }
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
+                                        ForEach(vm.eggs, id: \.itemId.id) { egg in
+                                            EggCellView(item: egg) {
+                                                selectedEggData = egg
+                                                showingEggModal = true
                                             }
+                                            .padding(.horizontal, 4)
                                         }
                                     }
+                                    .padding(.horizontal, 20)
                                 }
-                                .padding(.horizontal, 16)
+                                .padding(.horizontal, 8)
+                                .frame(height: 160)
                             }
-
-                            // Sahiplendiklerin Bölümü
-                            SectionHeaderView(title: "egg_pets_adopted".localized())
+                        }
+                        
+                        // Sahiplendiklerin Bölümü (Header is fixed)
+                        SectionHeaderView(
+                            title: "egg_pets_adopted".localized(),
+                            isCollapsible: false
+                        )
+                        .padding(.top, 16)
+                        
+                        // Only this part is scrollable
+                        ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(vm.pets) { pet in
                                     PetCellView(pet: pet)
                                 }
                             }
                             .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
                         }
-                        .padding(.vertical, 16)
+                        .refreshable {
+                            await vm.fetchInventory()
+                            await vm.fetchPets()
+                        }
                     }
-                    .scrollIndicators(.hidden)
-                    .refreshable {
-                        await vm.fetchInventory()
-                        await vm.fetchPets()
-                    }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 16)
                 }
             }
             .toolbar(.hidden, for: .tabBar)
@@ -95,11 +111,36 @@ struct EggAndPetsView: View {
                     dismissButton: .default(Text("friends_alert_ok".localized()))
                 )
             }
+            .fullScreenCover(isPresented: $showingEggModal) {
+                if let egg = selectedEggData {
+                    HatchEggView(
+                        item: egg,
+                        onClose: {
+                            showingEggModal = false
+                            selectedEggData = nil
+                        },
+                        onHatch: { eggId in
+                            Task {
+                                do {
+                                    _ = try await vm.hatchPets([eggId])
+                                    await vm.fetchInventory()
+                                    await vm.fetchPets()
+                                    showingEggModal = false
+                                    selectedEggData = nil
+                                } catch {
+                                    print("Hatch error: \(error)")
+                                    vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
+                                }
+                            }
+                        }
+                    )
+                }
+            }
         }
     }
 
     private var headerButtons: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 8) {
             Button { /* Yeni yumurta al */ } label: {
                 VStack(spacing: 8) {
                     Image("getNewEgg").resizable().frame(width: 32, height: 32)
@@ -121,18 +162,73 @@ struct EggAndPetsView: View {
                 }
             }
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 32)
+    }
+}
+
+struct SectionHeaderView: View {
+    let title: String
+    var isCollapsible: Bool = false
+    @Binding var isExpanded: Bool
+    
+    // Add an initializer to handle the optional binding
+    init(title: String, isCollapsible: Bool = false, isExpanded: Binding<Bool>? = nil) {
+        self.title = title
+        self.isCollapsible = isCollapsible
+        self._isExpanded = isExpanded ?? .constant(true)
+    }
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.primary)
+            Spacer()
+            
+            if isCollapsible {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        isExpanded.toggle()
+                    }
+                }) {
+                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 14, weight: .bold))
+                        .padding(8)
+                        .background(Color.gray.opacity(0.1))
+                        .clipShape(Circle())
+                }
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 8)
+        .background(Color.gray.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.horizontal, 8)
     }
 }
 
 struct EmptyEggStateView: View {
     var body: some View {
         VStack(spacing: 20) {
-            Image(systemName: "egg.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80)
-                .foregroundColor(.gray.opacity(0.7))
+            // Option 1: Use a custom image if it exists in your assets
+            // Image("emptyEgg")
+            
+            // Option 2: Use a more appropriate SF Symbol
+            ZStack {
+                Image(systemName: "circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.gray.opacity(0.3))
+                
+                Image(systemName: "sparkles")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.gray.opacity(0.7))
+            }
+            
             Text("egg_empty_state_title".localized())
                 .font(.title2)
                 .foregroundColor(.gray)
@@ -152,24 +248,6 @@ struct EmptyEggStateView: View {
             }
         }
         .padding(.vertical, 40)
-    }
-}
-
-struct SectionHeaderView: View {
-    let title: String
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.primary)
-            Spacer()
-            Image(systemName: "ellipsis")
-                .foregroundColor(.gray)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        .background(Color.gray.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 

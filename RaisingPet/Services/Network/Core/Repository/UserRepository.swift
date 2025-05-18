@@ -76,6 +76,8 @@ protocol UserRepository: BaseRepository {
         photo: UIImage?
     ) async throws -> GetMeResponseModel
     
+    func getUserImage(imageURL: String) async throws -> Data
+    
     func logOut()
     func getUserDetails() -> [String: String]
     
@@ -277,6 +279,76 @@ class UserRepositoryImpl: UserRepository {
         return responseModel
     }
     
+    func getUserImage(imageURL: String) async throws -> Data {
+        // Check if the URL is empty or "N/A"
+        if imageURL.isEmpty || imageURL == "N/A" {
+            throw NetworkError.invalidURL
+        }
+        
+        // Normalize the URL to ensure it's properly formed
+        let normalizedURL: String
+        
+        // Case 1: If the URL already has a protocol (http:// or https://)
+        if imageURL.hasPrefix("http://") || imageURL.hasPrefix("https://") {
+            normalizedURL = imageURL
+        }
+        // Case 2: If the URL starts with our server address but without protocol
+        else if imageURL.contains("3.74.213.54") {
+            normalizedURL = "http://" + imageURL
+        }
+        // Case 3: If it's a relative path that should be appended to the base URL
+        else {
+            // Ensure we don't duplicate path components
+            if imageURL.hasPrefix("/") {
+                normalizedURL = Utilities.Constants.baseURL + imageURL
+            } else {
+                normalizedURL = Utilities.Constants.baseURL + "/" + imageURL
+            }
+        }
+        
+        print("Requesting image from normalized URL: \(normalizedURL)")
+        
+        guard let url = URL(string: normalizedURL) else {
+            print("Invalid URL string: \(normalizedURL)")
+            throw NetworkError.invalidURL
+        }
+        
+        let token = UserDefaults.standard.string(forKey: "authToken") ?? ""
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            // Check if the response is valid
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw NetworkError.invalidResponse
+            }
+            
+            if !(200...299).contains(httpResponse.statusCode) {
+                print("Image download failed with status code: \(httpResponse.statusCode)")
+                
+                // For 404 errors on profile images, you might want to return a placeholder image
+                if httpResponse.statusCode == 404 {
+                    // If we have a placeholder image in the assets, return its data
+                    if let placeholderImage = UIImage(named: "placeholder"),
+                       let placeholderData = placeholderImage.pngData() {
+                        return placeholderData
+                    }
+                }
+                
+                throw NetworkError.serverError(statusCode: httpResponse.statusCode, message: "Failed to load image")
+            }
+            
+            return data
+        } catch {
+            print("Error downloading image: \(error.localizedDescription)")
+            throw NetworkError.unknown(error)
+        }
+    }
+    
     func logOut() {
         UserDefaults.standard.removeObject(forKey: "authToken")
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
@@ -289,6 +361,20 @@ class UserRepositoryImpl: UserRepository {
         UserDefaults.standard.removeObject(forKey: "userProfilePhoto")
         UserDefaults.standard.removeObject(forKey: "userPhoto")
         UserDefaults.standard.removeObject(forKey: "userPhotoURL")
+        
+        // Clear any cached images
+        UserDefaults.standard.removeObject(forKey: "userProfilePhoto")
+        
+        // Clear all data that might be associated with this user
+        let userRelatedKeys = UserDefaults.standard.dictionaryRepresentation().keys.filter { key in
+            key.hasPrefix("user") || key.contains("profile") || key.contains("Photo")
+        }
+        
+        for key in userRelatedKeys {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        
+        print("User has been fully logged out and all data cleared")
     }
     
     func getUserDetails() -> [String: String] {

@@ -14,7 +14,7 @@ struct PetHeaderView: View {
     private var petImageName: String {
         switch pet.petType.name.lowercased() {
         case "dog": return "dog"
-        case "dog2": return "dog2"
+        case "dalmacian": return "dalmacian"
         case "cat": return "cat"
         case "duck": return "duck"
         case "frog": return "frog"
@@ -34,12 +34,15 @@ struct PetHeaderView: View {
             VStack(spacing: 0) {
                 Spacer()
                 Spacer()
+                Spacer()
                 HStack {
                     VStack(spacing: 20) {
-                        Image("historyIcon")
-                        NavigationLink(destination: ShopScreenView()) {
-                            Image("shopIcon")
+                        VStack(spacing: 8) {
+                            Image("historyIcon")
+                            Text("pet_header_view_history".localized())
+                                .font(.nunito(.semiBold, .caption211))
                         }
+                        Image("LuckyDraw").hidden()
                     }
                     Spacer()
                     Image(petImageName)
@@ -48,8 +51,18 @@ struct PetHeaderView: View {
                         .frame(width: 100, height: 100)
                     Spacer()
                     VStack(spacing: 20) {
-                        Image("LuckyDraw")
-                        Image("DormIcon")
+                        NavigationLink(destination: ShopScreenView()) {
+                            VStack(spacing: 8) {
+                                Image("furnitureIcon")
+                                Text("pet_header_view_furniture".localized())
+                                    .font(.nunito(.semiBold, .caption211))
+                            }
+                        }
+                        VStack(spacing: 8) {
+                            Image("dormIcon")
+                            Text("pet_header_view_dorm".localized())
+                                .font(.nunito(.semiBold, .caption211))
+                        }
                     }
                 }
                 .padding(.horizontal, 20)

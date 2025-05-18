@@ -16,6 +16,8 @@ struct FriendsView: View {
     @State private var showDeleteConfirmation: Bool = false
     @State private var friendToDelete: Friend? // Silinecek arkadaşı tutmak için
     @State private var showCopyConfirmation: Bool = false // Kopyalama onayı için
+    @State private var profileImage: UIImage? = nil
+    private let placeholderImage = UIImage(named: "placeholder")
 
     var body: some View {
         NavigationStack {
@@ -61,6 +63,15 @@ struct FriendsView: View {
             .task {
                 await viewModel.fetchFriendsList()
                 userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+                
+                // Load profile image from cache
+                if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
+                   let image = UIImage(data: photoData) {
+                    profileImage = image
+                } else if let photoURL = userDetails["photoURL"], !photoURL.isEmpty {
+                    // If we have a URL but no cached image, load it
+                    await loadProfileImage(from: photoURL)
+                }
             }
             .alert(isPresented: $showDeleteConfirmation) {
                 deleteConfirmationAlert
@@ -78,16 +89,26 @@ struct FriendsView: View {
     
     private var profileHeader: some View {
         HStack {
-            Circle()
-                .frame(width: 60, height: 60)
-                .foregroundStyle(.gray.opacity(0.3))
-                .overlay(
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundStyle(.gray)
-                )
+            // Use the loaded profile image if available
+            if let image = profileImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray.opacity(0.3), lineWidth: 1))
+            } else {
+                Circle()
+                    .frame(width: 60, height: 60)
+                    .foregroundStyle(.gray.opacity(0.3))
+                    .overlay(
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .foregroundStyle(.gray)
+                    )
+            }
             VStack(alignment: .leading) {
                 Text(userDetails["firstname"] ?? "N/A")
                     .font(.nunito(.medium, .title320))
@@ -264,6 +285,22 @@ struct FriendsView: View {
                     print("Remove friend error: \(error)")
                 }
             }
+        }
+    }
+    
+    private func loadProfileImage(from urlString: String) async {
+        guard !urlString.isEmpty, urlString != "N/A" else { return }
+        
+        do {
+            // Get a reference to the user repository
+            let userRepository = RepositoryProvider.shared.userRepository
+            let imageData = try await userRepository.getUserImage(imageURL: urlString)
+            
+            if let image = UIImage(data: imageData) {
+                self.profileImage = image
+            }
+        } catch {
+            print("Failed to load profile image in FriendsView: \(error)")
         }
     }
 }

@@ -7,18 +7,25 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 @MainActor
 final class CurrentUserViewModel: ObservableObject {
     @Published var user: GetMeUser?
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var profileImage: UIImage?
 
     private var cancellables = Set<AnyCancellable>()
     private let userProfileRepository: UserProfileRepository
+    private let userRepository: UserRepository
     
-    init(userProfileRepository: UserProfileRepository = UserProfileRepositoryImpl()) {
+    init(
+        userProfileRepository: UserProfileRepository = RepositoryProvider.shared.userProfileRepository,
+        userRepository: UserRepository = RepositoryProvider.shared.userRepository
+    ) {
         self.userProfileRepository = userProfileRepository
+        self.userRepository = userRepository
     }
 
     func refresh() {
@@ -29,6 +36,12 @@ final class CurrentUserViewModel: ObservableObject {
             do {
                 let response = try await userProfileRepository.getCurrentUser()
                 self.user = response.data?.data
+                
+                // Load profile image if available
+                if let photoURL = self.user?.photoURL, !photoURL.isEmpty {
+                    try await loadProfileImage(from: photoURL)
+                }
+                
                 self.isLoading = false
             } catch let error as NetworkError {
                 handleNetworkError(error)
@@ -36,6 +49,20 @@ final class CurrentUserViewModel: ObservableObject {
                 self.errorMessage = error.localizedDescription
                 self.isLoading = false
             }
+        }
+    }
+    
+    private func loadProfileImage(from urlString: String) async throws {
+        do {
+            let imageData = try await userRepository.getUserImage(imageURL: urlString)
+            if let image = UIImage(data: imageData) {
+                self.profileImage = image
+                // Cache the image
+                UserDefaults.standard.set(imageData, forKey: "userProfilePhoto")
+            }
+        } catch {
+            print("Failed to load profile image: \(error)")
+            // This is not a critical error, so we don't set errorMessage
         }
     }
     

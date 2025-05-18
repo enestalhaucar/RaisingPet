@@ -89,6 +89,10 @@
 "profile_edit_unknown_error" = "An unknown error occurred";
 "profile_edit_alert_ok" = "OK";
 "profile_edit_title" = "Edit Profile";
+"profile_edit_photo_title" = "Edit Profile Photo";
+"profile_edit_change_photo" = "Change Photo";
+"profile_edit_save_photo" = "Save Photo";
+"profile_edit_cancel" = "Cancel";
 
 // ProfileView
 "profile_upgrade_premium" = "Upgrade Premium";
@@ -186,6 +190,10 @@
 "egg_empty_state_title" = "No Eggs!";
 "egg_empty_state_subtitle" = "Get new eggs from the shop to start raising your pets.";
 "egg_empty_state_shop_button" = "Go to Shop";
+"pet_header_view_history" = "History";
+"pet_header_view_dorm" = "Dorm";
+"pet_header_view_furniture" = "Furniture";
+
 
 // EggCellView
 "egg_pets_hatch_pets" = "Hatch Pets";

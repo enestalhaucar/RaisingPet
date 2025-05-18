@@ -9,15 +9,14 @@ import SwiftUI
 import Lottie
 
 struct LoadingAnimationView: View {
-    var fileName : String = "LoadingAnimation"
-    var playbackMode : LottiePlaybackMode = .playing(.fromProgress(0, toProgress: 1, loopMode: .loop))
+    var fileName: String = "LoadingAnimation"
+    
     var body: some View {
         LottieView(animation: .named(fileName))
-            .playbackMode(playbackMode)
+            .playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .loop)))
+            .frame(width: 100, height: 100)
     }
 }
-
-
 
 #Preview {
     LoadingAnimationView()

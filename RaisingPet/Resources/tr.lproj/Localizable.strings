@@ -77,7 +77,7 @@
 
 // WallpaperView
 "wallpaper_development_title" = "Burası geliştirme aşamasında!";
-"wallpaper_development_subtitle" = "Yakında harika wallpaper’lar burada olacak.";
+"wallpaper_development_subtitle" = "Yakında harika wallpaper'lar burada olacak.";
 
 // ProfileEditView
 "profile_edit_upload_photo" = "Fotoğraf Yükle";
@@ -86,6 +86,10 @@
 "profile_edit_unknown_error" = "Bilinmeyen bir hata oluştu";
 "profile_edit_alert_ok" = "Tamam";
 "profile_edit_title" = "Profil Düzenle";
+"profile_edit_photo_title" = "Profil Fotoğrafını Düzenle";
+"profile_edit_change_photo" = "Fotoğrafı Değiştir";
+"profile_edit_save_photo" = "Fotoğrafı Kaydet";
+"profile_edit_cancel" = "İptal";
 
 // ProfileView
 "profile_upgrade_premium" = "Premium'a Yükselt";
@@ -119,7 +123,7 @@
 "quiz_result_vs" = "VS";
 "quiz_result_no_data" = "Sonuçlar yüklenemedi.";
 "quiz_result_completed" = "Testi başarıyla tamamladın!";
-"quiz_result_back_to_couple_question" = "CoupleQuestion’a Geri Dön";
+"quiz_result_back_to_couple_question" = "CoupleQuestion'a Geri Dön";
 "quiz_result_retake_quiz" = "Testi Tekrar Çöz";
 "quiz_result_high_match" = "Birbirinize harika uyum sağlıyorsunuz! (%d%%)";
 "quiz_result_low_match" = "Uyumunuz biraz farklı görünüyor, keşfetmeye devam edin! (%d%%)";
@@ -149,7 +153,7 @@
 // SearchFriendView
 "search_friend_title" = "Arkadaş Ara";
 "search_friend_share" = "Paylaş";
-"search_friend_placeholder" = "Kullanıcı tag’ini gir (ör: ÖmerDuman#5368)";
+"search_friend_placeholder" = "Kullanıcı tag'ini gir (ör: ÖmerDuman#5368)";
 "search_friend_empty_search" = "Bir tag girerek arkadaş ara.";
 "search_friend_not_found" = "Arkadaş bulunamadı.";
 "search_friend_search_button" = "Arkadaşı Arat";
@@ -166,7 +170,7 @@
 "pet_item_grid_no_items" = "Ürün yok mu? O zaman buradan alabilirsin! 🛒";
 
 // PetDeleteAlertView
-"pet_delete_message" = "%@’yı ormana bıraktığında sonsuza kadar senden ayrı olacak ve vahşi doğada hayatta kalmaya çalışacak";
+"pet_delete_message" = "%@'yı ormana bıraktığında sonsuza kadar senden ayrı olacak ve vahşi doğada hayatta kalmaya çalışacak";
 "pet_delete_button" = "Pet'i Sil";
 
 // PetItemView
@@ -183,6 +187,9 @@
 "egg_empty_state_title" = "Yumurtanız Yok!";
 "egg_empty_state_subtitle" = "Mağazadan yeni yumurtalar alarak petlerinizi büyütmeye başlayabilirsiniz.";
 "egg_empty_state_shop_button" = "Mağazaya Git";
+"pet_header_view_history" = "Tarihçe";
+"pet_header_view_dorm" = "Yurt";
+"pet_header_view_furniture" = "Mağaza";
 
 // EggCellView
 "egg_pets_hatch_pets" = "Petleri Kır";

@@ -13,21 +13,14 @@ struct ProfileEditView: View {
     @Binding var isSuccess: Bool
     @Environment(\.dismiss) var dismiss
     @State private var profileImage: UIImage? = nil
+    @State private var profileImageData: Data? = nil
     private let placeholderImage = UIImage(named: "placeholder")
     @State private var isPhotoPickerPresented = false
     @State private var showAlert = false
+    @State private var isLoading = false
     
-    // Form fields
-    @State private var firstname: String = ""
-    @State private var surname: String = ""
-    @State private var email: String = ""
-    @State private var phoneNumber: String = ""
-    
-    // Focus states
-    @FocusState private var firstnameFocused: Bool
-    @FocusState private var surnameFocused: Bool
-    @FocusState private var emailFocused: Bool
-    @FocusState private var phoneNumberFocused: Bool
+    // User details for display only
+    @State private var userDetails: [String: String] = [:]
 
     var body: some View {
         ScrollView {
@@ -35,121 +28,92 @@ struct ProfileEditView: View {
                 Color("mainbgColor").ignoresSafeArea()
 
                 VStack(spacing: 16) {
+                    // User profile section
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
                             .foregroundStyle(.white)
 
                         VStack(spacing: 30) {
-                            if let image = profileImage {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
+                            // Profile image display
+                            ZStack {
+                                // Background circle
+                                Circle()
+                                    .stroke(Color.gray.opacity(0.3), lineWidth: 2)
                                     .frame(width: 120, height: 120)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                            } else {
-                                Image(uiImage: placeholderImage ?? UIImage())
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 120, height: 120)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                                    .shadow(radius: 5)
+                                
+                                // Profile image
+                                if let image = profileImage {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                } else if isLoading {
+                                    // Show loading spinner when fetching image
+                                    ProgressView()
+                                        .frame(width: 120, height: 120)
+                                } else {
+                                    // Default placeholder
+                                    Image(systemName: "person.crop.circle.fill")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .foregroundColor(.blue.opacity(0.7))
+                                        .clipShape(Circle())
+                                }
+                                
+                                // Edit button overlay
+                                VStack {
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            isPhotoPickerPresented = true
+                                        }) {
+                                            Image(systemName: "pencil.circle.fill")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.blue)
+                                                .background(Circle().fill(Color.white))
+                                        }
+                                    }
+                                }
+                                .frame(width: 110, height: 110)
                             }
                             
-                            // Upload Photo Button
-                            Button(action: {
-                                isPhotoPickerPresented = true
-                            }) {
-                                Text("profile_edit_upload_photo".localized())
-                                    .font(.headline)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                        }.padding(.vertical)
+                            // User name display
+                            Text("\(userDetails["firstname"] ?? "User") \(userDetails["surname"] ?? "")")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                        }
+                        .padding(.vertical, 30)
                     }
-                    .frame(maxHeight: UIScreen.main.bounds.size.height * 0.3)
+                    .frame(maxHeight: UIScreen.main.bounds.size.height * 0.45)
 
-                    // Form fields
-                    VStack(spacing: 16) {
-                        TextField("First Name", text: $firstname)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .focused($firstnameFocused)
-                            .submitLabel(.next)
-                            .onSubmit {
-                                surnameFocused = true
-                            }
-                        
-                        TextField("Last Name", text: $surname)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .focused($surnameFocused)
-                            .submitLabel(.next)
-                            .onSubmit {
-                                emailFocused = true
-                            }
-                        
-                        TextField("Email", text: $email)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                            .focused($emailFocused)
-                            .submitLabel(.next)
-                            .onSubmit {
-                                phoneNumberFocused = true
-                            }
-                        
-                        TextField("Phone Number", text: $phoneNumber)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .keyboardType(.phonePad)
-                            .focused($phoneNumberFocused)
-                            .submitLabel(.done)
-                    }
-                    .padding(.horizontal)
-
-                    // Save Button
+                    // Save button
                     Button(action: {
                         Task {
-                            await viewModel.updateProfile(
-                                firstname: firstname.isEmpty ? nil : firstname,
-                                surname: surname.isEmpty ? nil : surname,
-                                phoneNumber: phoneNumber.isEmpty ? nil : phoneNumber,
-                                email: email.isEmpty ? nil : email,
-                                photo: profileImage
-                            )
-                            if viewModel.isSuccess {
-                                isSuccess = true
-                                dismiss()
-                            } else if viewModel.errorMessage != nil {
-                                showAlert = true
-                            }
+                            await saveProfilePhoto()
                         }
                     }) {
-                        Text("profile_edit_save_changes".localized())
-                            .font(.headline)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(viewModel.isLoading ? Color.gray : Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                        HStack {
+                            Text("profile_edit_save_changes".localized())
+                                .font(.headline)
+                            
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .padding(.leading, 5)
+                            }
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(viewModel.isLoading ? Color.gray : Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                     }
-                    .padding()
-                    .disabled(viewModel.isLoading)
+                    .padding(.horizontal)
+                    .disabled(viewModel.isLoading || profileImage == nil)
                 }
                 .padding()
             }
@@ -161,30 +125,76 @@ struct ProfileEditView: View {
                 )
             }
             .onAppear {
-                // Load user details from UserDefaults
-                let userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-                firstname = userDetails["firstname"] ?? ""
-                surname = userDetails["surname"] ?? ""
-                email = userDetails["email"] ?? ""
-                phoneNumber = userDetails["phoneNumber"] ?? ""
-                
-                // Load profile photo
-                if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
-                   let image = UIImage(data: photoData) {
-                    profileImage = image
-                }
-            }
-            .onTapGesture {
-                // Dismiss keyboard when tapping outside text fields
-                firstnameFocused = false
-                surnameFocused = false
-                emailFocused = false
-                phoneNumberFocused = false
+                loadUserData()
             }
         }
-        .navigationTitle("profile_edit_title".localized())
+        .navigationTitle("profile_edit_photo_title".localized())
         .sheet(isPresented: $isPhotoPickerPresented) {
             PhotoPicker(selectedImage: $profileImage)
+        }
+    }
+    
+    private func loadUserData() {
+        // Load user details from UserDefaults
+        userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+        
+        // Try to load existing profile photo
+        if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
+           let image = UIImage(data: photoData) {
+            profileImage = image
+        } else if let photoURL = userDetails["photoURL"], !photoURL.isEmpty {
+            // If we have a URL but no cached image, fetch it
+            loadProfilePhotoFromURL(photoURL)
+        }
+    }
+    
+    private func loadProfilePhotoFromURL(_ photoURL: String) {
+        isLoading = true
+        
+        Task {
+            do {
+                let imageData = try await viewModel.getUserProfileImage(photoURL: photoURL)
+                if let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        profileImage = image
+                        // Cache the downloaded image
+                        UserDefaults.standard.set(imageData, forKey: "userProfilePhoto")
+                        isLoading = false
+                    }
+                }
+            } catch {
+                print("Failed to load profile image: \(error)")
+                DispatchQueue.main.async {
+                    isLoading = false
+                }
+            }
+        }
+    }
+    
+    private func saveProfilePhoto() async {
+        guard let profileImage = profileImage else { return }
+        
+        await viewModel.updateProfile(photo: profileImage)
+        
+        if viewModel.isSuccess {
+            // Save the image to UserDefaults so it's immediately available elsewhere
+            if let imageData = profileImage.jpegData(compressionQuality: 0.8) {
+                UserDefaults.standard.set(imageData, forKey: "userProfilePhoto")
+            }
+            
+            // Set success status for the parent view
+            isSuccess = true
+            
+            // Post a notification that the profile has been updated
+            // This allows other views to refresh their state
+            NotificationCenter.default.post(name: .profileImageUpdated, object: nil)
+            
+            // Dismiss this view to return to profile
+            DispatchQueue.main.async {
+                dismiss()
+            }
+        } else if viewModel.errorMessage != nil {
+            showAlert = true
         }
     }
 }

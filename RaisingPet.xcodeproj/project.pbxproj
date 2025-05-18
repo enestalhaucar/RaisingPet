@@ -24,6 +24,8 @@
 		EC02EBC82DC9507E0019668C /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02EBC72DC950790019668C /* InventoryViewModel.swift */; };
 		EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */; };
 		EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F0D42C9C641000F6574D /* PasswordTextField.swift */; };
+		EC0F1D032DDA298600060614 /* HatchEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F1D022DDA298600060614 /* HatchEggView.swift */; };
+		EC0F1D052DDA598C00060614 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F1D042DDA598C00060614 /* Extensions.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
 		EC15E63C2DCF985100B885A2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */; };
@@ -170,6 +172,8 @@
 		EC02EBC72DC950790019668C /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 		EC071D132C7C7C0C00D269A6 /* EmotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsView.swift; sourceTree = "<group>"; };
 		EC08F0D42C9C641000F6574D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		EC0F1D022DDA298600060614 /* HatchEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatchEggView.swift; sourceTree = "<group>"; };
+		EC0F1D042DDA598C00060614 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = RaisingPet/Helpers/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 		EC02EBC62DC950700019668C /* PetCareView */ = {
 			isa = PBXGroup;
 			children = (
+				EC0F1D022DDA298600060614 /* HatchEggView.swift */,
 				EC731E662DCBD8BC005A064A /* PetHeaderView.swift */,
 				EC731E682DCBD8D0005A064A /* PetTabBarView.swift */,
 				EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */,
@@ -562,6 +567,7 @@
 		EC8E5A482D7AA4D3001B2335 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EC0F1D042DDA598C00060614 /* Extensions.swift */,
 				EC8E5A492D7AA4E4001B2335 /* Localizable.swift */,
 			);
 			path = Helpers;
@@ -852,6 +858,7 @@
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
 				ECF3A0422DD650A70052990B /* ErrorResponseModel.swift in Sources */,
 				EC15E63C2DCF985100B885A2 /* ProfileEditViewModel.swift in Sources */,
+				EC0F1D052DDA598C00060614 /* Extensions.swift in Sources */,
 				ECF3A04A2DD651EF0052990B /* GetMeResponseModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				ECF3A0522DD652920052990B /* FriendsResponseModel.swift in Sources */,
@@ -938,6 +945,7 @@
 				ECF3A04C2DD6520B0052990B /* GetPetsResponseModel.swift in Sources */,
 				EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */,
 				ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */,
+				EC0F1D032DDA298600060614 /* HatchEggView.swift in Sources */,
 				EC606F022C57D1320015F103 /* button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1106,7 +1114,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaisingPet/RaisingPet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"RaisingPet/Preview Content\"";
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				ENABLE_PREVIEWS = YES;
@@ -1147,7 +1155,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaisingPet/RaisingPet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"RaisingPet/Preview Content\"";
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				ENABLE_PREVIEWS = YES;

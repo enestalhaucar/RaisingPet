@@ -14,7 +14,7 @@ struct PetCellView: View {
     private var petImageName: String {
         switch pet.petType.name.lowercased() {
         case "dog": return "dog"
-        case "dog2": return "dog2"
+        case "dalmacian": return "dalmacian"
         case "cat": return "cat"
         case "duck": return "duck"
         case "frog": return "frog"

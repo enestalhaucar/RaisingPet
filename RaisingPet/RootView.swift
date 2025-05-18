@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var currentUserVM: CurrentUserViewModel
     @State private var showSplash = true
     @State private var showOnboarding = false
     
@@ -49,19 +50,20 @@ struct RootView: View {
                             .tabItem {
                                 TabBarIcon(image: Image("profile_tab_icon"), text: "profile_tab".localized())
                             }
-                            .environmentObject(appState)
                     }
                     .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                 }
+                .onAppear {
+                    if appState.isLoggedIn && currentUserVM.user == nil {
+                        Task {
+                            await currentUserVM.refresh()
+                        }
+                    }
+                }
             } else {
                 NavigationStack {
                     LoginView(onLoginSuccess: handleLoginSuccess)
-                        .navigationDestination(for: String.self) { destination in
-                            if destination == "SignUpView" {
-                                SignUpView(onRegisterSuccess: handleLoginSuccess)
-                            }
-                        }
                 }
             }
         }
@@ -69,10 +71,9 @@ struct RootView: View {
     
     private func handleLoginSuccess() {
         appState.isLoggedIn = true
-    }
-    
-    private func handleLogout() {
-        appState.isLoggedIn = false
+        Task {
+            await currentUserVM.refresh()
+        }
     }
 }
 
@@ -95,4 +96,5 @@ struct TabBarIcon: View {
 #Preview {
     RootView()
         .environmentObject(AppState())
+        .environmentObject(CurrentUserViewModel())
 }
