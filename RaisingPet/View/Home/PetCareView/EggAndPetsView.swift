@@ -11,7 +11,6 @@ struct EggAndPetsView: View {
     @StateObject private var vm = InventoryViewModel()
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
     @State private var showEggsSection = true
-    @State private var showingEggModal = false
     @State private var selectedEggData: InventoryItem?
 
     var body: some View {
@@ -58,10 +57,9 @@ struct EggAndPetsView: View {
                             } else {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
-                                        ForEach(vm.eggs, id: \.itemId.id) { egg in
+                                        ForEach(Array(vm.eggs.enumerated()), id: \.offset) { index, egg in
                                             EggCellView(item: egg) {
                                                 selectedEggData = egg
-                                                showingEggModal = true
                                             }
                                             .padding(.horizontal, 4)
                                         }
@@ -111,30 +109,26 @@ struct EggAndPetsView: View {
                     dismissButton: .default(Text("friends_alert_ok".localized()))
                 )
             }
-            .fullScreenCover(isPresented: $showingEggModal) {
-                if let egg = selectedEggData {
-                    HatchEggView(
-                        item: egg,
-                        onClose: {
-                            showingEggModal = false
-                            selectedEggData = nil
-                        },
-                        onHatch: { eggId in
-                            Task {
-                                do {
-                                    _ = try await vm.hatchPets([eggId])
-                                    await vm.fetchInventory()
-                                    await vm.fetchPets()
-                                    showingEggModal = false
-                                    selectedEggData = nil
-                                } catch {
-                                    print("Hatch error: \(error)")
-                                    vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
-                                }
+            .fullScreenCover(item: $selectedEggData) { eggData in
+                HatchEggView(
+                    item: eggData,
+                    onClose: {
+                        selectedEggData = nil
+                    },
+                    onHatch: { eggId in
+                        Task {
+                            do {
+                                _ = try await vm.hatchPets([eggId])
+                                await vm.fetchInventory()
+                                await vm.fetchPets()
+                                selectedEggData = nil
+                            } catch {
+                                print("Hatch error: \(error)")
+                                vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
                             }
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }

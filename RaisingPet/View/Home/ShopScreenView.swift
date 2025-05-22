@@ -413,7 +413,8 @@ struct ShopItemView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 65, height: 65)
+                    .frame(alignment: .top)
                 
                 Rectangle()
                     .fill(Color.black)

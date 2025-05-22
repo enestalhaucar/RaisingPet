@@ -25,11 +25,14 @@ struct RaisingPetApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var appState = AppState()
     @StateObject var currentUserVM = CurrentUserViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
+
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(appState)
                 .environmentObject(currentUserVM)
+                .environmentObject(networkMonitor)
                 .onAppear {
                     if UserDefaults.standard.bool(forKey: "isLoggedIn") {
                         Task {

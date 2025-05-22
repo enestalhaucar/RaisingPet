@@ -223,3 +223,8 @@
 "buy_package_select_items" = "Select exactly %d items";
 "buy_package_get_button" = "Get";
 "buy_package_default_item" = "Item";
+
+// NoInternetView.swift
+"no_internet_title" = "No Internet Connection";
+"no_internet_message" = "Oops! It seems you're not connected to the internet. Please check your connection and try again.";
+"retry_button_text" = "Try Again";

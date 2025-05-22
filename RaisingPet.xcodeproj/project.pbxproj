@@ -58,6 +58,8 @@
 		EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67609D2DD781A10041C839 /* UserRepository.swift */; };
 		EC6760A02DD787430041C839 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67609F2DD787430041C839 /* UserProfileRepository.swift */; };
 		EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6760A12DD787860041C839 /* ShopEnums.swift */; };
+		EC7282BA2DDF719600F67ACF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7282B92DDF719600F67ACF /* NetworkMonitor.swift */; };
+		EC7282BC2DDF71FD00F67ACF /* NoInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7282BB2DDF71FD00F67ACF /* NoInternetView.swift */; };
 		EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E5C2DCB87BD005A064A /* EggCellView.swift */; };
 		EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E622DCBCFAE005A064A /* PetCellView.swift */; };
 		EC731E652DCBD463005A064A /* PetItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E642DCBD45F005A064A /* PetItemView.swift */; };
@@ -206,6 +208,8 @@
 		EC67609D2DD781A10041C839 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		EC67609F2DD787430041C839 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		EC6760A12DD787860041C839 /* ShopEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopEnums.swift; sourceTree = "<group>"; };
+		EC7282B92DDF719600F67ACF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		EC7282BB2DDF71FD00F67ACF /* NoInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetView.swift; sourceTree = "<group>"; };
 		EC731E5C2DCB87BD005A064A /* EggCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggCellView.swift; sourceTree = "<group>"; };
 		EC731E622DCBCFAE005A064A /* PetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCellView.swift; sourceTree = "<group>"; };
 		EC731E642DCBD45F005A064A /* PetItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemView.swift; sourceTree = "<group>"; };
@@ -412,6 +416,7 @@
 		EC1108302C622BDA00E91D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC7282BB2DDF71FD00F67ACF /* NoInternetView.swift */,
 				ECF3EACB2D6384E100EEFBB2 /* Paywall */,
 				EC1CE96E2D4D3C130082FD4F /* OnBoarding */,
 				EC989DB92CE8DA2900E3FA82 /* Widgets */,
@@ -545,6 +550,7 @@
 		EC606F202C5FB7E40015F103 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EC7282B92DDF719600F67ACF /* NetworkMonitor.swift */,
 				ECDFC4412D6D1C8300FA450D /* Animation */,
 				ECB5F5972D563792001AC419 /* Extensions */,
 				EC606F212C5FB7F80015F103 /* Utilities.swift */,
@@ -873,6 +879,7 @@
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
 				ECF3A0562DD652C30052990B /* GetAllShopItems.swift in Sources */,
+				EC7282BA2DDF719600F67ACF /* NetworkMonitor.swift in Sources */,
 				EC731E672DCBD8C3005A064A /* PetHeaderView.swift in Sources */,
 				EC02EBC82DC9507E0019668C /* InventoryViewModel.swift in Sources */,
 				EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */,
@@ -926,6 +933,7 @@
 				EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */,
+				EC7282BC2DDF71FD00F67ACF /* NoInternetView.swift in Sources */,
 				EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */,
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,

@@ -219,3 +219,8 @@
 "buy_package_select_items" = "Tam olarak %d eşya seçin";
 "buy_package_get_button" = "Al";
 "buy_package_default_item" = "Eşya";
+
+// NoInternetView.swift
+"no_internet_title" = "İnternet Bağlantısı Yok";
+"no_internet_message" = "Eyvah! Görünüşe göre internete bağlı değilsiniz. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.";
+"retry_button_text" = "Tekrar Dene";
