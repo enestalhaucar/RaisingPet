@@ -13,7 +13,7 @@ import Combine
 class FriendsViewModel: ObservableObject {
     @Published private(set) var friends: [Friend] = []
     @Published var isLoading = false
-    @Published var searchedFriend: SearchFriendWithTagDataUser = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+    @Published var searchedFriend: SearchFriendWithTagDataUser?
     @Published var errorMessage: String?
 
     // Repository
@@ -47,20 +47,34 @@ class FriendsViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
+        guard !friendTag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            self.searchedFriend = nil
+            return
+        }
+
         do {
             let response = try await friendsRepository.searchFriendWithTag(tag: friendTag)
-            if let user = response.data as? SearchFriendWithTagData {
-                searchedFriend = user.user ?? .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
-            } else {
-                searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
-            }
+            self.searchedFriend = response.data.user
         } catch let error as NetworkError {
-            handleNetworkError(error)
-            searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+            switch error {
+            case .serverError(let statusCode, _):
+                if statusCode == 404 {
+                    self.searchedFriend = nil
+                    print("Kullanıcı bulunamadı (404), alert gösterilmeyecek.")
+                } else {
+                    self.handleNetworkError(error)
+                    self.searchedFriend = nil
+                }
+            case .timeOut, .noInternetConnection, .unauthorized:
+                self.handleNetworkError(error)
+                self.searchedFriend = nil
+            default:
+                print("searchFriendWithTag NetworkError (alert gösterilmeyecek): \(error.localizedDescription)")
+                self.searchedFriend = nil
+            }
         } catch {
-            errorMessage = "Arkadaş arama başarısız: \(friendTag) için kullanıcı bulunamadı. \(error.localizedDescription)"
-            print("Search friend error: \(error)")
-            searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+            print("Search friend error (diğer): \(error.localizedDescription)")
+            self.searchedFriend = nil
         }
     }
 

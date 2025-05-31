@@ -10,17 +10,19 @@ import Combine
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-    @State private var email = ""
-    @State private var password = ""
-    @State private var showError = false
+    @EnvironmentObject private var currentUserVM: CurrentUserViewModel
     @EnvironmentObject private var appState: AppState
     
     // Focus state değişkenleri
     @FocusState private var emailFocused: Bool
     @FocusState private var passwordFocused: Bool
     
-    var onLoginSuccess: () -> Void
+    @State private var email = ""
+    @State private var password = ""
+    @State private var showError = false
     
+    var onLoginSuccess: () -> Void
+
     var body: some View {
         ZStack {
             SignInUpBackground()
@@ -97,6 +99,18 @@ struct LoginView: View {
                     onLoginSuccess()
                 }
             }
+            .onChange(of: currentUserVM.isAuthenticated) { _, authenticated in
+                if authenticated {
+                    appState.isLoggedIn = true
+                    onLoginSuccess()
+                }
+            }
+            .onChange(of: currentUserVM.errorMessage) { _, error in
+                if error != nil {
+                    self.viewModel.errorMessage = currentUserVM.errorMessage
+                    self.showError = true
+                }
+            }
             .onChange(of: viewModel.errorMessage) { _, error in
                 if error != nil {
                     showError = true
@@ -124,4 +138,5 @@ struct LoginView: View {
         print("login successful!")
     }
     .environmentObject(AppState())
+    .environmentObject(CurrentUserViewModel())
 }

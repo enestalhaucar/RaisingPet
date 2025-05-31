@@ -17,58 +17,58 @@ struct RootView: View {
     
     var body: some View {
         if networkMonitor.isConnected {
-            ZStack {
-                SignInUpBackground()
-                
-                if showSplash {
-                    SplashScreenView(onSplashComplete: {
-                        showSplash = false
-                        // İlk açılışta onboarding gösterilecek mi kontrol et
-                        let hasSeenOnboarding = UserDefaults.hasSeenOnboarding
-                        if Utilities.Constants.onboarding || !hasSeenOnboarding {
-                            showOnboarding = true
-                        }
-                    })
-                } else if showOnboarding {
-                    OnboardingView(onOnboardingComplete: {
-                        showOnboarding = false
-                        UserDefaults.hasSeenOnboarding = true // Onboarding tamamlandı
-                    })
-                } else if appState.isLoggedIn {
-                    VStack {
-                        TabView {
-                            HomeView()
-                                .tabItem {
-                                    TabBarIcon(image: Image("home_tab_icon"), text: "home_tab".localized())
-                                }
-                            CoupleQuestionView()
-                                .tabItem {
-                                    TabBarIcon(image: Image("couple_questions_tab_icon"), text: "couple_questions_tab".localized())
-                                }
-                            WallpaperView()
-                                .tabItem {
-                                    TabBarIcon(image: Image("wallpaper_tab_icon"), text: "wallpapers_tab".localized())
-                                }
-                            ProfileView()
-                                .tabItem {
-                                    TabBarIcon(image: Image("profile_tab_icon"), text: "profile_tab".localized())
-                                }
-                        }
-                        .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
-                        .toolbarBackground(.visible, for: .tabBar)
+        ZStack {
+            SignInUpBackground()
+            
+            if showSplash {
+                SplashScreenView(onSplashComplete: {
+                    showSplash = false
+                    // İlk açılışta onboarding gösterilecek mi kontrol et
+                    let hasSeenOnboarding = UserDefaults.hasSeenOnboarding
+                    if Utilities.Constants.onboarding || !hasSeenOnboarding {
+                        showOnboarding = true
                     }
-                    .onAppear {
-                        if appState.isLoggedIn && currentUserVM.user == nil {
-                            Task {
-                                await currentUserVM.refresh()
+                })
+            } else if showOnboarding {
+                OnboardingView(onOnboardingComplete: {
+                    showOnboarding = false
+                    UserDefaults.hasSeenOnboarding = true // Onboarding tamamlandı
+                })
+            } else if appState.isLoggedIn {
+                VStack {
+                    TabView {
+                        HomeView()
+                            .tabItem {
+                                TabBarIcon(image: Image("home_tab_icon"), text: "home_tab".localized())
                             }
-                        }
+                        CoupleQuestionView()
+                            .tabItem {
+                                TabBarIcon(image: Image("couple_questions_tab_icon"), text: "couple_questions_tab".localized())
+                            }
+                        WallpaperView()
+                            .tabItem {
+                                TabBarIcon(image: Image("wallpaper_tab_icon"), text: "wallpapers_tab".localized())
+                            }
+                        ProfileView()
+                            .tabItem {
+                                TabBarIcon(image: Image("profile_tab_icon"), text: "profile_tab".localized())
+                            }
                     }
-                } else {
-                    NavigationStack {
-                        LoginView(onLoginSuccess: handleLoginSuccess)
+                    .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
+                    .toolbarBackground(.visible, for: .tabBar)
+                }
+                .onAppear {
+                    if appState.isLoggedIn && currentUserVM.user == nil {
+                        Task {
+                            await currentUserVM.refresh()
+                        }
                     }
                 }
+            } else {
+                NavigationStack {
+                    LoginView(onLoginSuccess: handleLoginSuccess)
+                }
+            }
             }
         } else {
             NoInternetView()

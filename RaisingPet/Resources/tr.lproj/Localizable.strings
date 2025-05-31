@@ -65,7 +65,7 @@
 "email_format_error_message" = "Email doğru formatta olmalı";
 
 // SignInView
-"signin_welcome_title" = "Tekrar Hoş Geldiniz!";
+"signin_welcome_title" = "Hoş Geldiniz!";
 "signin_email_placeholder" = "E-postanızı Girin";
 "signin_password_placeholder" = "Şifrenizi Girin";
 "signin_button" = "Giriş Yap";

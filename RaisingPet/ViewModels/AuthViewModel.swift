@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+
 class AuthViewModel: ObservableObject {
     // Published properties
     @Published var isLoading = false

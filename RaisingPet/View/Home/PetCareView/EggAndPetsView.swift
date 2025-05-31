@@ -110,25 +110,25 @@ struct EggAndPetsView: View {
                 )
             }
             .fullScreenCover(item: $selectedEggData) { eggData in
-                HatchEggView(
+                    HatchEggView(
                     item: eggData,
-                    onClose: {
-                        selectedEggData = nil
-                    },
-                    onHatch: { eggId in
-                        Task {
-                            do {
-                                _ = try await vm.hatchPets([eggId])
-                                await vm.fetchInventory()
-                                await vm.fetchPets()
-                                selectedEggData = nil
-                            } catch {
-                                print("Hatch error: \(error)")
-                                vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
+                        onClose: {
+                            selectedEggData = nil
+                        },
+                        onHatch: { eggId in
+                            Task {
+                                do {
+                                    _ = try await vm.hatchPets([eggId])
+                                    await vm.fetchInventory()
+                                    await vm.fetchPets()
+                                    selectedEggData = nil
+                                } catch {
+                                    print("Hatch error: \(error)")
+                                    vm.errorMessage = "Yumurta kırma başarısız: \(error.localizedDescription)"
+                                }
                             }
                         }
-                    }
-                )
+                    )
             }
         }
     }

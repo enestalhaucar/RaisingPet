@@ -30,8 +30,10 @@ enum FriendsEndpoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .searchFriendWithTag, .listFriends:
+        case .listFriends:
             return .get
+        case .searchFriendWithTag:
+            return .post
         case .sendRequest, .acceptRequest, .rejectRequest, .removeFriend:
             return .post
         }
@@ -40,7 +42,7 @@ enum FriendsEndpoint: Endpoint {
     var parameters: [String: Any]? {
         switch self {
         case .searchFriendWithTag(let tag):
-            return ["tag": tag]
+            return ["friendTag": tag]
         case .sendRequest(let friendId):
             return ["friendId": friendId]
         case .acceptRequest(let requestId):
@@ -57,7 +59,7 @@ enum FriendsEndpoint: Endpoint {
     var encoding: ParameterEncoding {
         switch self {
         case .searchFriendWithTag:
-            return URLEncoding.queryString
+            return JSONEncoding.default
         default:
             return JSONEncoding.default
         }
@@ -66,7 +68,7 @@ enum FriendsEndpoint: Endpoint {
 
 // MARK: - Friends Repository Protocol
 protocol FriendsRepository: BaseRepository {
-    func searchFriendWithTag(tag: String) async throws -> FriendsResponseModel
+    func searchFriendWithTag(tag: String) async throws -> SearchFriendWithTagResponse
     func sendRequest(friendId: String) async throws -> Void
     func acceptRequest(requestId: String) async throws -> Void
     func rejectRequest(requestId: String) async throws -> Void
@@ -74,7 +76,7 @@ protocol FriendsRepository: BaseRepository {
     func removeFriend(friendId: String) async throws -> Void
     
     // Combine variants
-    func searchFriendWithTagPublisher(tag: String) -> AnyPublisher<FriendsResponseModel, NetworkError>
+    func searchFriendWithTagPublisher(tag: String) -> AnyPublisher<SearchFriendWithTagResponse, NetworkError>
     func sendRequestPublisher(friendId: String) -> AnyPublisher<Void, NetworkError>
     func acceptRequestPublisher(requestId: String) -> AnyPublisher<Void, NetworkError>
     func rejectRequestPublisher(requestId: String) -> AnyPublisher<Void, NetworkError>
@@ -90,10 +92,10 @@ class FriendsRepositoryImpl: FriendsRepository {
         self.networkManager = networkManager
     }
     
-    func searchFriendWithTag(tag: String) async throws -> FriendsResponseModel {
+    func searchFriendWithTag(tag: String) async throws -> SearchFriendWithTagResponse {
         return try await networkManager.request(
             endpoint: FriendsEndpoint.searchFriendWithTag(tag: tag),
-            responseType: FriendsResponseModel.self
+            responseType: SearchFriendWithTagResponse.self
         )
     }
     
@@ -137,10 +139,10 @@ class FriendsRepositoryImpl: FriendsRepository {
     }
     
     // MARK: - Combine API
-    func searchFriendWithTagPublisher(tag: String) -> AnyPublisher<FriendsResponseModel, NetworkError> {
+    func searchFriendWithTagPublisher(tag: String) -> AnyPublisher<SearchFriendWithTagResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: FriendsEndpoint.searchFriendWithTag(tag: tag),
-            responseType: FriendsResponseModel.self
+            responseType: SearchFriendWithTagResponse.self
         )
     }
     

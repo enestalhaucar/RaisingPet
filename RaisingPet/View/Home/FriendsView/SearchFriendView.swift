@@ -47,6 +47,8 @@ struct SearchFriendView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
                 .frame(height: 40)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 .onChange(of: searchText) { newValue in
                     // Debounce ekleyerek her harf değişikliğinde istek atmayı optimize edelim
                     Task {
@@ -54,13 +56,13 @@ struct SearchFriendView: View {
                         if !newValue.isEmpty {
                             await viewModel.searchFriendWithTag(newValue)
                         } else {
-                            viewModel.searchedFriend = .init(id: "", firstname: "", surname: "", email: "", photo: "", role: "", gameCurrencyGold: 0, gameCurrencyDiamond: 0, friendTag: "", v: 0)
+                            viewModel.searchedFriend = nil // Boş string girilince sonucu temizle
                         }
                     }
                 }
 
             // Arama Sonucu
-            if !viewModel.searchedFriend.id.isEmpty {
+            if let searchedUser = viewModel.searchedFriend {
                 HStack {
                     Circle()
                         .frame(width: 60, height: 60)
@@ -73,9 +75,9 @@ struct SearchFriendView: View {
                                 .foregroundStyle(.gray)
                         )
                     VStack(alignment: .leading) {
-                        Text("\(viewModel.searchedFriend.firstname) \(viewModel.searchedFriend.surname)")
+                        Text("\(searchedUser.firstname) \(searchedUser.surname)")
                             .font(.nunito(.medium, .title320))
-                        Text(viewModel.searchedFriend.friendTag)
+                        Text(searchedUser.friendTag)
                             .font(.nunito(.regular, .body16))
                             .foregroundColor(.gray)
                     }
@@ -94,12 +96,12 @@ struct SearchFriendView: View {
 
             // Arkadaşı Arat / Arkadaşı Ekle Butonu
             Button(action: {
-                if !viewModel.searchedFriend.id.isEmpty {
+                if let userToAdd = viewModel.searchedFriend {
                     // Kullanıcı bulunduysa, arkadaşlık isteği gönder
                     Task {
                         do {
-                            try await viewModel.sendFriendRequest(friendId: viewModel.searchedFriend.id)
-                            dismiss() // İstek gönderildikten sonra sheet’i kapat
+                            try await viewModel.sendFriendRequest(friendId: userToAdd.id)
+                            dismiss() // İstek gönderildikten sonra sheet'i kapat
                         } catch {
                             print("Send friend request error: \(error)")
                         }
@@ -115,19 +117,19 @@ struct SearchFriendView: View {
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .foregroundStyle(viewModel.searchedFriend.id.isEmpty ? .yellow.opacity(0.3) : .blue.opacity(0.7))
-                    Text(viewModel.searchedFriend.id.isEmpty ? "search_friend_search_button".localized() : "search_friend_add_button".localized())
+                        .foregroundStyle(viewModel.searchedFriend == nil ? .yellow.opacity(0.3) : .blue.opacity(0.7))
+                    Text(viewModel.searchedFriend == nil ? "search_friend_search_button".localized() : "search_friend_add_button".localized())
                         .font(.nunito(.medium, .body16))
-                        .foregroundColor(viewModel.searchedFriend.id.isEmpty ? .black : .white)
+                        .foregroundColor(viewModel.searchedFriend == nil ? .black : .white)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 16)
                 .frame(height: 55)
             }
 
-            // Paylaşım Sheet’i
+            // Paylaşım Sheet'i
             .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(activityItems: ["Benimle arkadaş olur musun? İşte tag’im: \(userFriendTag) - Bu linke tıklayarak arkadaşlık isteğimi kabul edebilirsin: raisingpet://friends?tag=\(userFriendTag)"])
+                ShareSheet(activityItems: ["Benimle arkadaş olur musun? İşte tag'im: \(userFriendTag) - Bu linke tıklayarak arkadaşlık isteğimi kabul edebilirsin: raisingpet://friends?tag=\(userFriendTag)"])
             }
         }
         .frame(maxWidth: .infinity)

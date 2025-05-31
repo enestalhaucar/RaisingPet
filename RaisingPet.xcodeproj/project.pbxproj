@@ -94,6 +94,10 @@
 		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
+		ECC432412DE23E5600E5C766 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ECC432402DE23E5600E5C766 /* FirebaseAuth */; };
+		ECC432432DE23E5600E5C766 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = ECC432422DE23E5600E5C766 /* FirebaseAuthCombine-Community */; };
+		ECC432452DE23E5600E5C766 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = ECC432442DE23E5600E5C766 /* FirebaseCore */; };
+		ECC432472DE2456D00E5C766 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECC432462DE2456D00E5C766 /* GoogleService-Info.plist */; };
 		ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */; };
 		ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDFAF52DC954DA0044DAC2 /* Utilities + RequestFunc .swift */; };
 		ECCDFAF92DC956E20044DAC2 /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDFAF82DC956DF0044DAC2 /* CurrentUserViewModel.swift */; };
@@ -241,6 +245,7 @@
 		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		ECC432462DE2456D00E5C766 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECC4FCD02C6CB61900E78F7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ECCC7B332CAAB3FB00B16C91 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		ECCC7B492CAAB41F00B16C91 /* RaisingPet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingPet.entitlements; sourceTree = "<group>"; };
@@ -296,7 +301,10 @@
 				EC02EBC52DC921F30019668C /* netfox in Frameworks */,
 				EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
+				ECC432412DE23E5600E5C766 /* FirebaseAuth in Frameworks */,
 				ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */,
+				ECC432452DE23E5600E5C766 /* FirebaseCore in Frameworks */,
+				ECC432432DE23E5600E5C766 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +517,7 @@
 				EC1108302C622BDA00E91D93 /* View */,
 				EC606EDC2C57B7060015F103 /* Preview Content */,
 				EC606EDA2C57B7060015F103 /* Assets.xcassets */,
+				ECC432462DE2456D00E5C766 /* GoogleService-Info.plist */,
 			);
 			path = RaisingPet;
 			sourceTree = "<group>";
@@ -756,6 +765,9 @@
 				ECDFC43F2D6D1C6A00FA450D /* Lottie */,
 				EC8E5A4C2D7AA5C5001B2335 /* Localize_Swift */,
 				EC02EBC42DC921F30019668C /* netfox */,
+				ECC432402DE23E5600E5C766 /* FirebaseAuth */,
+				ECC432422DE23E5600E5C766 /* FirebaseAuthCombine-Community */,
+				ECC432442DE23E5600E5C766 /* FirebaseCore */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -817,6 +829,7 @@
 				ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */,
 				EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */,
+				ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -840,6 +853,7 @@
 				EC606EDE2C57B7060015F103 /* Preview Assets.xcassets in Resources */,
 				EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */,
 				ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */,
+				ECC432472DE2456D00E5C766 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,7 +1136,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaisingPet/RaisingPet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"RaisingPet/Preview Content\"";
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				ENABLE_PREVIEWS = YES;
@@ -1163,7 +1177,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RaisingPet/RaisingPet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"RaisingPet/Preview Content\"";
 				DEVELOPMENT_TEAM = S7VDAK3AXN;
 				ENABLE_PREVIEWS = YES;
@@ -1218,9 +1232,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1246,9 +1264,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.enestalhaucar.RaisingPet.PetiverseWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1317,6 +1339,14 @@
 				minimumVersion = 3.2.0;
 			};
 		};
+		ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.13.0;
+			};
+		};
 		ECDFC43E2D6D1C6A00FA450D /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -1352,6 +1382,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */;
 			productName = Localize_Swift;
+		};
+		ECC432402DE23E5600E5C766 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		ECC432422DE23E5600E5C766 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		ECC432442DE23E5600E5C766 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 		ECDFC43F2D6D1C6A00FA450D /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

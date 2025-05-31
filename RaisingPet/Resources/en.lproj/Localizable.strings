@@ -68,7 +68,7 @@
 "email_format_error_message" = "Email must be in correct format";
 
 // SignInView
-"signin_welcome_title" = "Welcome Back!";
+"signin_welcome_title" = "Welcome !";
 "signin_email_placeholder" = "Enter Your Email";
 "signin_password_placeholder" = "Enter Your Password";
 "signin_button" = "Log In";

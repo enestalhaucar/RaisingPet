@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import GoogleSignIn
-import GoogleSignInSwift
 import Combine
 
 struct SignUpView: View {
     @StateObject var viewModel = SignUpViewModel()
+    @EnvironmentObject var currentUserVM: CurrentUserViewModel
     @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) var dismiss
     @State private var firstname = ""
@@ -29,7 +28,7 @@ struct SignUpView: View {
     @FocusState private var passwordConfirmFocused: Bool
     
     var onRegisterSuccess: () -> Void
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -58,11 +57,23 @@ struct SignUpView: View {
                         .onSubmit {
                             surnameFocused = true
                         }
+                        .onChange(of: firstname) { newValue in
+                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".contains($0) }
+                            if filtered != newValue {
+                                self.firstname = filtered
+                            }
+                        }
                     MailTextField(placeholder: "signup_surname_placeholder".localized(), text: $surname)
                         .focused($surnameFocused)
                         .submitLabel(.next)
                         .onSubmit {
                             emailFocused = true
+                        }
+                        .onChange(of: surname) { newValue in
+                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".contains($0) }
+                            if filtered != newValue {
+                                self.surname = filtered
+                            }
                         }
                     VStack(alignment: .leading, spacing: 4) {
                         MailTextField(placeholder: "signup_email_placeholder".localized(), text: $email)
@@ -121,7 +132,7 @@ struct SignUpView: View {
                     }
                     .disabled(!validateInputs())
                     .opacity(validateInputs() ? 1.0 : 0.5)
-                    
+
                     HStack {
                         Button(action: {
                             dismiss()
@@ -136,6 +147,18 @@ struct SignUpView: View {
                     if registered {
                         appState.isLoggedIn = true
                         onRegisterSuccess()
+                    }
+                }
+                .onChange(of: currentUserVM.isAuthenticated) { _, authenticated in
+                    if authenticated {
+                        appState.isLoggedIn = true
+                        onRegisterSuccess()
+                    }
+                }
+                .onChange(of: currentUserVM.errorMessage) { _, error in
+                    if error != nil {
+                        viewModel.errorMessage = currentUserVM.errorMessage
+                        showError = true
                     }
                 }
                 .onChange(of: viewModel.errorMessage) { _, error in
@@ -176,4 +199,6 @@ struct SignUpView: View {
     SignUpView {
         print("Registration successful!")
     }
+    .environmentObject(CurrentUserViewModel())
+    .environmentObject(AppState())
 }

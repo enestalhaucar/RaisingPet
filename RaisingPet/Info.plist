@@ -5,13 +5,9 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>GoogleSignIn</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.526182637332-p2cdc2149et3p1h2j94djg7ic6lrstoe</string>
+				<string>com.googleusercontent.apps.48623084684-sfjnfsjpdrshlu0l98i3ulldjdg2294v</string>
 			</array>
 		</dict>
 	</array>
