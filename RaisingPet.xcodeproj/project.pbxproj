@@ -28,6 +28,8 @@
 		EC0F1D052DDA598C00060614 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F1D042DDA598C00060614 /* Extensions.swift */; };
 		EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108312C622C3700E91D93 /* ShopScreenView.swift */; };
 		EC1108342C622F1300E91D93 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1108332C622F1200E91D93 /* FriendsView.swift */; };
+		EC137CC42DEF921B0093B53E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC137CC32DEF921B0093B53E /* SDWebImageSwiftUI */; };
+		EC137CC62DEF939F0093B53E /* AnimatedPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC137CC52DEF93950093B53E /* AnimatedPetView.swift */; };
 		EC15E63C2DCF985100B885A2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */; };
 		EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */; };
 		EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1B965D2C9EF6E7001C5773 /* NoteView.swift */; };
@@ -87,6 +89,9 @@
 		EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */; };
 		EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */; };
 		EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */; };
+		ECA0D38C2DEFBACC000528CD /* cat_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38B2DEFBACC000528CD /* cat_idle.json */; };
+		ECA0D38F2DEFBBE4000528CD /* dalmacian_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38D2DEFBBE4000528CD /* dalmacian_idle.json */; };
+		ECA0D3902DEFBBE4000528CD /* fox_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38E2DEFBBE4000528CD /* fox_idle.json */; };
 		ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
@@ -182,6 +187,7 @@
 		EC0F1D042DDA598C00060614 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = RaisingPet/Helpers/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		EC1108312C622C3700E91D93 /* ShopScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreenView.swift; sourceTree = "<group>"; };
 		EC1108332C622F1200E91D93 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		EC137CC52DEF93950093B53E /* AnimatedPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPetView.swift; sourceTree = "<group>"; };
 		EC15E63B2DCF984A00B885A2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPackageCounterPopUpView.swift; sourceTree = "<group>"; };
 		EC1B965D2C9EF6E7001C5773 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 		EC989DB22CE8B14900E3FA82 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EC989DB42CE8B19000E3FA82 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetsView.swift; sourceTree = "<group>"; };
+		ECA0D38B2DEFBACC000528CD /* cat_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cat_idle.json; sourceTree = "<group>"; };
+		ECA0D38D2DEFBBE4000528CD /* dalmacian_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dalmacian_idle.json; sourceTree = "<group>"; };
+		ECA0D38E2DEFBBE4000528CD /* fox_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fox_idle.json; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggAndPetsView.swift; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
@@ -296,6 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC137CC42DEF921B0093B53E /* SDWebImageSwiftUI in Frameworks */,
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC02EBC52DC921F30019668C /* netfox in Frameworks */,
@@ -408,6 +418,7 @@
 			children = (
 				EC0F1D022DDA298600060614 /* HatchEggView.swift */,
 				EC731E662DCBD8BC005A064A /* PetHeaderView.swift */,
+				EC137CC52DEF93950093B53E /* AnimatedPetView.swift */,
 				EC731E682DCBD8D0005A064A /* PetTabBarView.swift */,
 				EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */,
 				EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */,
@@ -517,6 +528,7 @@
 				EC1108302C622BDA00E91D93 /* View */,
 				EC606EDC2C57B7060015F103 /* Preview Content */,
 				EC606EDA2C57B7060015F103 /* Assets.xcassets */,
+				ECA0D3812DEFB3DF000528CD /* Animation */,
 				ECC432462DE2456D00E5C766 /* GoogleService-Info.plist */,
 			);
 			path = RaisingPet;
@@ -676,6 +688,24 @@
 			path = Premium;
 			sourceTree = "<group>";
 		};
+		ECA0D3812DEFB3DF000528CD /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				ECA0D3842DEFB5DD000528CD /* IDLE */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		ECA0D3842DEFB5DD000528CD /* IDLE */ = {
+			isa = PBXGroup;
+			children = (
+				ECA0D38B2DEFBACC000528CD /* cat_idle.json */,
+				ECA0D38D2DEFBBE4000528CD /* dalmacian_idle.json */,
+				ECA0D38E2DEFBBE4000528CD /* fox_idle.json */,
+			);
+			path = IDLE;
+			sourceTree = "<group>";
+		};
 		ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,6 +798,7 @@
 				ECC432402DE23E5600E5C766 /* FirebaseAuth */,
 				ECC432422DE23E5600E5C766 /* FirebaseAuthCombine-Community */,
 				ECC432442DE23E5600E5C766 /* FirebaseCore */,
+				EC137CC32DEF921B0093B53E /* SDWebImageSwiftUI */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -830,6 +861,7 @@
 				EC8E5A4B2D7AA5C5001B2335 /* XCRemoteSwiftPackageReference "Localize-Swift" */,
 				EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */,
 				ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -851,6 +883,9 @@
 				EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */,
 				EC8E5A562D7AB2EC001B2335 /* Localizable.strings in Resources */,
 				EC606EDE2C57B7060015F103 /* Preview Assets.xcassets in Resources */,
+				ECA0D38F2DEFBBE4000528CD /* dalmacian_idle.json in Resources */,
+				ECA0D3902DEFBBE4000528CD /* fox_idle.json in Resources */,
+				ECA0D38C2DEFBACC000528CD /* cat_idle.json in Resources */,
 				EC606EDB2C57B7060015F103 /* Assets.xcassets in Resources */,
 				ECDFC4492D6D211400FA450D /* LoadingAnimation.json in Resources */,
 				ECC432472DE2456D00E5C766 /* GoogleService-Info.plist in Resources */,
@@ -942,6 +977,7 @@
 				EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */,
 				EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */,
 				EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */,
+				EC137CC62DEF939F0093B53E /* AnimatedPetView.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
 				EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */,
@@ -1315,6 +1351,14 @@
 				minimumVersion = 1.21.0;
 			};
 		};
+		EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
 		EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -1362,6 +1406,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */;
 			productName = netfox;
+		};
+		EC137CC32DEF921B0093B53E /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		EC606F172C5FB44C0015F103 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

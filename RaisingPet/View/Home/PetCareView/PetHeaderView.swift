@@ -46,10 +46,7 @@ struct PetHeaderView: View {
                         Image("LuckyDraw").hidden()
                     }
                     Spacer()
-                    Image(petImageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
+                    AnimatedPetView(petTypeName: pet.petType.name)
                     Spacer()
                     VStack(spacing: 20) {
                         NavigationLink(destination: ShopScreenView()) {
@@ -75,7 +72,7 @@ struct PetHeaderView: View {
         .frame(height: UIScreen.main.bounds.height * 0.4)
         .ignoresSafeArea(.all)
         .onAppear {
-            vm.currentPet = pet // Pet’i ayarla
+            vm.currentPet = pet // Pet'i ayarla
         }
     }
 }
