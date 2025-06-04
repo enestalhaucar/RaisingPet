@@ -167,6 +167,30 @@ final class InventoryViewModel: ObservableObject {
             print("Use pet item error: \(error)")
         }
     }
+    
+    func changePetName(petId: String, petName: String, petCalling: String) async throws {
+        do {
+            let response = try await petRepository.changePetName(petId: petId, petName: petName, petCalling: petCalling)
+            
+            // Güncellenmiş pet verilerini al
+            let updatedPet = response.data.pet
+            // pets listesinde güncelle
+            if let index = pets.firstIndex(where: { $0.id == updatedPet.id }) {
+                pets[index] = updatedPet
+            }
+            // current pet'i güncelle
+            currentPet = updatedPet
+            print("🐾 Pet name changed successfully: \(updatedPet.petName ?? ""), calling: \(updatedPet.petCalling ?? "")")
+        } catch let error as NetworkError {
+            handleNetworkError(error)
+            print("❌ Change pet name network error: \(error)")
+            throw error
+        } catch {
+            errorMessage = "Pet ismi değiştirme başarısız: \(error.localizedDescription)"
+            print("❌ Change pet name error: \(error)")
+            throw error
+        }
+    }
 
     // MARK: - Helper Methods
     func getAllPetItems() -> [GroupedPetItem] {

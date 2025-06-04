@@ -92,6 +92,7 @@
 		ECA0D38C2DEFBACC000528CD /* cat_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38B2DEFBACC000528CD /* cat_idle.json */; };
 		ECA0D38F2DEFBBE4000528CD /* dalmacian_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38D2DEFBBE4000528CD /* dalmacian_idle.json */; };
 		ECA0D3902DEFBBE4000528CD /* fox_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38E2DEFBBE4000528CD /* fox_idle.json */; };
+		ECA0D3922DEFBECA000528CD /* PetNameEditPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0D3912DEFBECA000528CD /* PetNameEditPopupView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
@@ -247,6 +248,7 @@
 		ECA0D38B2DEFBACC000528CD /* cat_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cat_idle.json; sourceTree = "<group>"; };
 		ECA0D38D2DEFBBE4000528CD /* dalmacian_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dalmacian_idle.json; sourceTree = "<group>"; };
 		ECA0D38E2DEFBBE4000528CD /* fox_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fox_idle.json; sourceTree = "<group>"; };
+		ECA0D3912DEFBECA000528CD /* PetNameEditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameEditPopupView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggAndPetsView.swift; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		EC02EBC62DC950700019668C /* PetCareView */ = {
 			isa = PBXGroup;
 			children = (
+				ECA0D3912DEFBECA000528CD /* PetNameEditPopupView.swift */,
 				EC0F1D022DDA298600060614 /* HatchEggView.swift */,
 				EC731E662DCBD8BC005A064A /* PetHeaderView.swift */,
 				EC137CC52DEF93950093B53E /* AnimatedPetView.swift */,
@@ -1000,6 +1003,7 @@
 				EC731E632DCBCFB2005A064A /* PetCellView.swift in Sources */,
 				ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */,
 				EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */,
+				ECA0D3922DEFBECA000528CD /* PetNameEditPopupView.swift in Sources */,
 				ECF3A04C2DD6520B0052990B /* GetPetsResponseModel.swift in Sources */,
 				EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */,
 				ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */,

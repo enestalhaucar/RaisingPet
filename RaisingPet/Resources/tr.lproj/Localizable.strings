@@ -224,3 +224,15 @@
 "no_internet_title" = "İnternet Bağlantısı Yok";
 "no_internet_message" = "Eyvah! Görünüşe göre internete bağlı değilsiniz. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.";
 "retry_button_text" = "Tekrar Dene";
+
+// PetNameEditPopupView
+"pet_name_edit_title" = "İsmini ve Hitabı Değiştir";
+"pet_name_label" = "Ad";
+"pet_name_placeholder" = "Karabaş";
+"pet_name_limit_info" = "İsim en fazla 12 karakter olabilir.";
+"pet_calling_label" = "Hitap";
+"pet_calling_placeholder" = "Babacık";
+"pet_calling_limit_info" = "Hitap en fazla 12 karakter olabilir.";
+"pet_name_edit_cancel" = "İptal";
+"pet_name_edit_save" = "Kaydet";
+"pet_calling_default" = "ebeveynlerim";

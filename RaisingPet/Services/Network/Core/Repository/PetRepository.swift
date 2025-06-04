@@ -7,6 +7,7 @@ enum PetEndpoint: Endpoint {
     case buyPetItem(petId: String, itemId: String)
     case petItemInteraction(petId: String, petItemId: String)
     case deletePet(id: String)
+    case changePetName(petId: String, petName: String, petCalling: String)
     
     var path: String {
         switch self {
@@ -18,6 +19,8 @@ enum PetEndpoint: Endpoint {
             return "/pets/pet-item-interaction"
         case .deletePet(let id):
             return "/pets/\(id)"
+        case .changePetName:
+            return "/pets/change-pet-name"
         }
     }
     
@@ -29,6 +32,8 @@ enum PetEndpoint: Endpoint {
             return .post
         case .deletePet:
             return .delete
+        case .changePetName:
+            return .patch
         }
     }
     
@@ -42,6 +47,8 @@ enum PetEndpoint: Endpoint {
             return ["petId": petId, "petItemId": petItemId]
         case .deletePet:
             return nil
+        case .changePetName(let petId, let petName, let petCalling):
+            return ["petId": petId, "petName": petName, "petCalling": petCalling]
         }
     }
 }
@@ -58,6 +65,22 @@ struct PetItemInteractionData: Codable {
     let inventory: Inventory?
 }
 
+// MARK: - Change Pet Name Models
+struct ChangePetNameRequest: Codable {
+    let petId: String
+    let petName: String
+    let petCalling: String
+}
+
+struct ChangePetNameResponse: Codable {
+    let status: String
+    let data: ChangePetNameData
+}
+
+struct ChangePetNameData: Codable {
+    let pet: Pet
+}
+
 // MARK: - Pet Repository Protocol
 protocol PetRepository: BaseRepository {
     func getPets() async throws -> GetPetsResponseModel
@@ -65,6 +88,7 @@ protocol PetRepository: BaseRepository {
     func petItemInteraction(petId: String, petItemId: String) async throws -> Void
     func petItemInteractionWithResponse(petId: String, petItemId: String) async throws -> PetItemInteractionResponse
     func deletePet(id: String) async throws -> Void
+    func changePetName(petId: String, petName: String, petCalling: String) async throws -> ChangePetNameResponse
     
     // Combine variants
     func getPetsPublisher() -> AnyPublisher<GetPetsResponseModel, NetworkError>
@@ -72,6 +96,7 @@ protocol PetRepository: BaseRepository {
     func petItemInteractionPublisher(petId: String, petItemId: String) -> AnyPublisher<Void, NetworkError>
     func petItemInteractionWithResponsePublisher(petId: String, petItemId: String) -> AnyPublisher<PetItemInteractionResponse, NetworkError>
     func deletePetPublisher(id: String) -> AnyPublisher<Void, NetworkError>
+    func changePetNamePublisher(petId: String, petName: String, petCalling: String) -> AnyPublisher<ChangePetNameResponse, NetworkError>
 }
 
 // MARK: - Pet Repository Implementation
@@ -121,6 +146,13 @@ class PetRepositoryImpl: PetRepository {
         )
     }
     
+    func changePetName(petId: String, petName: String, petCalling: String) async throws -> ChangePetNameResponse {
+        return try await networkManager.request(
+            endpoint: PetEndpoint.changePetName(petId: petId, petName: petName, petCalling: petCalling),
+            responseType: ChangePetNameResponse.self
+        )
+    }
+    
     // MARK: - Combine API
     func getPetsPublisher() -> AnyPublisher<GetPetsResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
@@ -164,5 +196,12 @@ class PetRepositoryImpl: PetRepository {
         )
         .map { _ in () }
         .eraseToAnyPublisher()
+    }
+    
+    func changePetNamePublisher(petId: String, petName: String, petCalling: String) -> AnyPublisher<ChangePetNameResponse, NetworkError> {
+        return networkManager.requestWithPublisher(
+            endpoint: PetEndpoint.changePetName(petId: petId, petName: petName, petCalling: petCalling),
+            responseType: ChangePetNameResponse.self
+        )
     }
 } 

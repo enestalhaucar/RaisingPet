@@ -19,6 +19,8 @@ struct Pet: Codable, Identifiable {
     let isHatched: Bool
     let isDeleted: Bool
     let petHistory: PetHistory
+    let petCalling : String?
+    let petName : String?
     let version: Int
     let hatchedAt: String
     let nextBarUpdate: String
@@ -26,7 +28,7 @@ struct Pet: Codable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case ownerId, petType, hunger, thirst, hygiene, fun
+        case ownerId, petType, hunger, thirst, hygiene, fun, petCalling, petName
         case isHatched, isDeleted, petHistory
         case version = "__v"
         case hatchedAt, nextBarUpdate, isHatchedByThisEgg

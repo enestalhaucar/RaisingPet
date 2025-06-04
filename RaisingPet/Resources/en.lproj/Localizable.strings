@@ -228,3 +228,15 @@
 "no_internet_title" = "No Internet Connection";
 "no_internet_message" = "Oops! It seems you're not connected to the internet. Please check your connection and try again.";
 "retry_button_text" = "Try Again";
+
+// PetNameEditPopupView
+"pet_name_edit_title" = "Change Name and Address";
+"pet_name_label" = "Name";
+"pet_name_placeholder" = "Jhonny";
+"pet_name_limit_info" = "Name can be maximum 12 characters.";
+"pet_calling_label" = "Address";
+"pet_calling_placeholder" = "Daddy";
+"pet_calling_limit_info" = "Address can be maximum 12 characters.";
+"pet_name_edit_cancel" = "Cancel";
+"pet_name_edit_save" = "Save";
+"pet_calling_default" = "my parents";

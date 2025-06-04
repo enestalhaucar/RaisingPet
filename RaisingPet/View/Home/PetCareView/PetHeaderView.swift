@@ -11,6 +11,7 @@ struct PetHeaderView: View {
     let pet: Pet
     @Binding var selectedTab: Int
     @ObservedObject var vm: InventoryViewModel
+    @Binding var showEditPopup: Bool
     private var petImageName: String {
         switch pet.petType.name.lowercased() {
         case "dog": return "dog"
@@ -95,9 +96,11 @@ struct PetHeaderView: View {
         isHatched: true,
         isDeleted: false,
         petHistory: PetHistory(id: "681b90cdbd5d08c71c6c685a", petId: "681b90cdbd5d08c71c6c6859", actions: [], isDeleted: false, version: 0),
+        petCalling: "myparent",
+        petName: "Fluffy Duck",
         version: 0,
         hatchedAt: "2025-05-07T16:56:58.777Z",
         nextBarUpdate: "2025-05-08T16:56:58.777Z",
         isHatchedByThisEgg: nil
-    ), selectedTab: .constant(0), vm: InventoryViewModel())
+    ), selectedTab: .constant(0), vm: InventoryViewModel(), showEditPopup: .constant(false))
 }
