@@ -20,7 +20,7 @@ struct Pet: Codable, Identifiable {
     let isDeleted: Bool
     let petHistory: PetHistory
     let petCalling : String?
-    let petName : String?
+    let petName : String
     let version: Int
     let hatchedAt: String
     let nextBarUpdate: String

@@ -17,7 +17,7 @@ struct PetCareView: View {
     
     // Pet name göster - eğer petName varsa onu, yoksa petType.name'i göster
     private var displayPetName: String {
-        return pet.petName?.isEmpty == false ? pet.petName! : pet.petType.name.capitalized
+        return pet.petName.isEmpty == false ? pet.petName : pet.petType.name.capitalized
     }
 
     var body: some View {

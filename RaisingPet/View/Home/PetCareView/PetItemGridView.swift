@@ -49,7 +49,7 @@ struct PetItemGridView: View {
             }
             .background(Color.white)
         }
-        .frame(height: UIScreen.main.bounds.height * 0.6)
+        .frame(height: Utilities.Constants.heightHalf)
         .environmentObject(vm)
         .refreshable {
             isRefreshing = true

@@ -37,7 +37,7 @@ struct PetCellView: View {
                         .scaledToFit()
                         .frame(width: 40, height: 40)
                 }
-                Text(pet.petType.name.capitalized)
+                Text(pet.petName.capitalized)
                     .font(.caption)
                     .foregroundColor(.primary)
                     .lineLimit(1)
