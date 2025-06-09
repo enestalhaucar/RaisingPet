@@ -42,13 +42,13 @@ struct AnimatedPetView: View {
                 // JSON animasyon varsa göster
                 LottieView(animation: .named(jsonFileName))
                     .playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .loop)))
-                    .frame(width: 100, height: 100)
+                    .frame(width: 120, height: 120)
             } else {
                 // JSON yoksa static resim göster
                 Image(staticImageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 120, height: 120)
             }
         }
     }

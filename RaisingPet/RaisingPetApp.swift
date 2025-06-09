@@ -7,6 +7,7 @@
 
 import SwiftUI
 import netfox
+import GoogleMobileAds
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -15,13 +16,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Netfox'u çalıştır
         NFX.sharedInstance().start()
 #endif
+        
+        MobileAds.shared.start(completionHandler: nil)
+        
         return true
     }
 }
 
 @main
 struct RaisingPetApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var appState = AppState()
     @StateObject var currentUserVM = CurrentUserViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()

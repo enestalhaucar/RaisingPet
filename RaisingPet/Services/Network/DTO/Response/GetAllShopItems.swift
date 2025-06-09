@@ -193,6 +193,48 @@ struct PetItemPackage: Codable, Identifiable {
     }
 }
 
+// MARK: - Extensions
+
+extension PetItemPackage {
+    func toShopItem() -> ShopItem {
+        ShopItem(
+            id: id,
+            name: name,
+            description: description,
+            category: .home,
+            isDeleted: isDeleted,
+            v: v,
+            duration: nil,
+            isPurchasable: true,
+            diamondPrice: nil,
+            goldPrice: nil,
+            quantity: limit,
+            price: nil,
+            isOwned: false
+        )
+    }
+}
+
+extension PetItem {
+    func toShopItem() -> ShopItem {
+        ShopItem(
+            id: id,
+            name: name,
+            description: description,
+            category: .home,
+            isDeleted: isDeleted,
+            v: v,
+            duration: nil,
+            isPurchasable: true,
+            diamondPrice: diamondPrice,
+            goldPrice: goldPrice,
+            quantity: nil,
+            price: nil,
+            isOwned: false
+        )
+    }
+}
+
 // MARK: - PetItemType
 struct PetItemType: Codable {
     let id: String?

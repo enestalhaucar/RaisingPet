@@ -15,20 +15,24 @@ struct PetCareView: View {
     @State private var showEditPopup = false
     @Environment(\.dismiss) var dismiss
     
+    private var petForView: Pet {
+        vm.currentPet ?? pet
+    }
+    
     // Pet name göster - eğer petName varsa onu, yoksa petType.name'i göster
     private var displayPetName: String {
-        return pet.petName.isEmpty == false ? pet.petName : pet.petType.name.capitalized
+        return petForView.petName.isEmpty == false ? petForView.petName : petForView.petType.name.capitalized
     }
 
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 0) {
-                    PetHeaderView(pet: pet, selectedTab: $selectedTab, vm: vm, showEditPopup: $showEditPopup)
+                    PetHeaderView(pet: petForView, selectedTab: $selectedTab, vm: vm, showEditPopup: $showEditPopup)
                     PetItemGridView(vm: vm)
                 }
                 if deletePetShow {
-                    PetDeleteAlertView(pet: pet, isPresented: $deletePetShow)
+                    PetDeleteAlertView(pet: petForView, isPresented: $deletePetShow)
                         .environmentObject(vm) // ViewModel'ı PetDeleteAlertView'a aktar
                 }
                 
@@ -36,7 +40,7 @@ struct PetCareView: View {
                 if showEditPopup {
                     PetNameEditPopupView(
                         isPresented: $showEditPopup,
-                        pet: pet,
+                        pet: petForView,
                         onSave: { newName, newCalling in
                             handlePetNameUpdate(name: newName, calling: newCalling)
                         }
@@ -96,7 +100,6 @@ struct PetCareView: View {
                 print("🐾 Pet name updated successfully")
             } catch {
                 print("❌ Failed to update pet name: \(error)")
-                // TODO: Kullanıcıya hata mesajı göster
             }
         }
     }

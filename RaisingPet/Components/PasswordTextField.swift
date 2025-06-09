@@ -41,6 +41,7 @@ struct PasswordTextField: View {
                     Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.gray)
                         .animation(.bouncy, value: isPasswordVisible) // Animasyon
+                        .frame(width: 20, height: 20)
                 }
                 .padding(.trailing, 10)
             }

@@ -31,12 +31,14 @@ struct GetMeUser: Codable, Identifiable {
     let friendTag: String
     let version: Int
     let phoneNumber: String?
+    let pets: [String]?
+    let packageClaimDates: [String: Date]?
 
     enum CodingKeys: String, CodingKey {
         case id, firstname, surname, email, photo, role, photoURL
         case gameCurrencyGold, gameCurrencyDiamond, isDeleted, friendTag, phoneNumber
         case version = "__v"
-        case _id
+        case pets, packageClaimDates
     }
     
     init(from decoder: Decoder) throws {
@@ -45,7 +47,7 @@ struct GetMeUser: Codable, Identifiable {
         // Try to decode id from multiple possible fields
         if let mainId = try? container.decode(String.self, forKey: .id) {
             id = mainId
-        } else if let backupId = try? container.decode(String.self, forKey: ._id) {
+        } else if let backupId = try? container.decode(String.self, forKey: .id) {
             id = backupId
         } else {
             throw DecodingError.dataCorruptedError(forKey: .id, in: container, debugDescription: "Neither 'id' nor '_id' found")
@@ -66,6 +68,8 @@ struct GetMeUser: Codable, Identifiable {
         friendTag = try container.decodeIfPresent(String.self, forKey: .friendTag) ?? ""
         version = try container.decodeIfPresent(Int.self, forKey: .version) ?? 0
         phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber)
+        pets = try container.decodeIfPresent([String].self, forKey: .pets)
+        packageClaimDates = try container.decodeIfPresent([String: Date].self, forKey: .packageClaimDates)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -84,5 +88,7 @@ struct GetMeUser: Codable, Identifiable {
         try container.encode(friendTag, forKey: .friendTag)
         try container.encode(version, forKey: .version)
         try container.encodeIfPresent(phoneNumber, forKey: .phoneNumber)
+        try container.encodeIfPresent(pets, forKey: .pets)
+        try container.encodeIfPresent(packageClaimDates, forKey: .packageClaimDates)
     }
 }

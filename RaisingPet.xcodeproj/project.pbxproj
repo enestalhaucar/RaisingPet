@@ -38,6 +38,22 @@
 		EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */; };
 		EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */; };
 		EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */; };
+		EC413FEE2DF446E100B8D45B /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = EC413FED2DF446E100B8D45B /* GoogleMobileAds */; };
+		EC413FF32DF5C91E00B8D45B /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FF22DF5C90A00B8D45B /* InterstitialAdManager.swift */; };
+		EC413FF62DF5D98800B8D45B /* ShopCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FF52DF5D98400B8D45B /* ShopCategoryPicker.swift */; };
+		EC413FF82DF5D9C400B8D45B /* ThreeColumnGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FF72DF5D9C000B8D45B /* ThreeColumnGrid.swift */; };
+		EC413FFA2DF5D9D400B8D45B /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FF92DF5D9D200B8D45B /* SectionHeader.swift */; };
+		EC413FFC2DF5D9E900B8D45B /* DiamondSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FFB2DF5D9E700B8D45B /* DiamondSection.swift */; };
+		EC413FFE2DF5D9FF00B8D45B /* EggPackageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FFD2DF5D9F700B8D45B /* EggPackageSection.swift */; };
+		EC4140002DF5DA1C00B8D45B /* PetItemPackageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC413FFF2DF5DA1C00B8D45B /* PetItemPackageSection.swift */; };
+		EC4140022DF5DA2F00B8D45B /* EggSingleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140012DF5DA2F00B8D45B /* EggSingleSection.swift */; };
+		EC4140042DF5DA3C00B8D45B /* PetItemGroupsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140032DF5DA3C00B8D45B /* PetItemGroupsSection.swift */; };
+		EC4140062DF5DA4C00B8D45B /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140052DF5DA4C00B8D45B /* HomeSection.swift */; };
+		EC4140082DF5DA5B00B8D45B /* RoofSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140072DF5DA5B00B8D45B /* RoofSideView.swift */; };
+		EC41400A2DF5DA7200B8D45B /* ShopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140092DF5DA7200B8D45B /* ShopItemView.swift */; };
+		EC41400C2DF5DA8A00B8D45B /* AssetNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400B2DF5DA8A00B8D45B /* AssetNumberView.swift */; };
+		EC41400E2DF5DA9400B8D45B /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400D2DF5DA9400B8D45B /* BackButtonView.swift */; };
+		EC4140102DF5DA9F00B8D45B /* RestoreButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400F2DF5DA9F00B8D45B /* RestoreButtonView.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
 		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
@@ -197,6 +213,21 @@
 		EC1CE9722D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		EC1CE9732D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		EC1CE99F2D5238150082FD4F /* CoupleQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionViewModel.swift; sourceTree = "<group>"; };
+		EC413FF22DF5C90A00B8D45B /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
+		EC413FF52DF5D98400B8D45B /* ShopCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryPicker.swift; sourceTree = "<group>"; };
+		EC413FF72DF5D9C000B8D45B /* ThreeColumnGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnGrid.swift; sourceTree = "<group>"; };
+		EC413FF92DF5D9D200B8D45B /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		EC413FFB2DF5D9E700B8D45B /* DiamondSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondSection.swift; sourceTree = "<group>"; };
+		EC413FFD2DF5D9F700B8D45B /* EggPackageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggPackageSection.swift; sourceTree = "<group>"; };
+		EC413FFF2DF5DA1C00B8D45B /* PetItemPackageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemPackageSection.swift; sourceTree = "<group>"; };
+		EC4140012DF5DA2F00B8D45B /* EggSingleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggSingleSection.swift; sourceTree = "<group>"; };
+		EC4140032DF5DA3C00B8D45B /* PetItemGroupsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemGroupsSection.swift; sourceTree = "<group>"; };
+		EC4140052DF5DA4C00B8D45B /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		EC4140072DF5DA5B00B8D45B /* RoofSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoofSideView.swift; sourceTree = "<group>"; };
+		EC4140092DF5DA7200B8D45B /* ShopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemView.swift; sourceTree = "<group>"; };
+		EC41400B2DF5DA8A00B8D45B /* AssetNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetNumberView.swift; sourceTree = "<group>"; };
+		EC41400D2DF5DA9400B8D45B /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		EC41400F2DF5DA9F00B8D45B /* RestoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreButtonView.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -312,6 +343,7 @@
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC02EBC52DC921F30019668C /* netfox in Frameworks */,
 				EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */,
+				EC413FEE2DF446E100B8D45B /* GoogleMobileAds in Frameworks */,
 				EC606F1A2C5FB44C0015F103 /* GoogleSignInSwift in Frameworks */,
 				ECC432412DE23E5600E5C766 /* FirebaseAuth in Frameworks */,
 				ECDFC4402D6D1C6A00FA450D /* Lottie in Frameworks */,
@@ -495,6 +527,36 @@
 			path = CoupleQuestionViewModel;
 			sourceTree = "<group>";
 		};
+		EC413FF12DF5C90400B8D45B /* AdManagers */ = {
+			isa = PBXGroup;
+			children = (
+				EC413FF22DF5C90A00B8D45B /* InterstitialAdManager.swift */,
+			);
+			path = AdManagers;
+			sourceTree = "<group>";
+		};
+		EC413FF42DF5D88F00B8D45B /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
+				EC41400D2DF5DA9400B8D45B /* BackButtonView.swift */,
+				EC4140092DF5DA7200B8D45B /* ShopItemView.swift */,
+				EC41400F2DF5DA9F00B8D45B /* RestoreButtonView.swift */,
+				EC4140072DF5DA5B00B8D45B /* RoofSideView.swift */,
+				EC41400B2DF5DA8A00B8D45B /* AssetNumberView.swift */,
+				EC4140012DF5DA2F00B8D45B /* EggSingleSection.swift */,
+				EC413FFF2DF5DA1C00B8D45B /* PetItemPackageSection.swift */,
+				EC4140052DF5DA4C00B8D45B /* HomeSection.swift */,
+				EC4140032DF5DA3C00B8D45B /* PetItemGroupsSection.swift */,
+				EC413FF52DF5D98400B8D45B /* ShopCategoryPicker.swift */,
+				EC413FF72DF5D9C000B8D45B /* ThreeColumnGrid.swift */,
+				EC413FF92DF5D9D200B8D45B /* SectionHeader.swift */,
+				EC413FFB2DF5D9E700B8D45B /* DiamondSection.swift */,
+				EC413FFD2DF5D9F700B8D45B /* EggPackageSection.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		EC606ECA2C57B7040015F103 = {
 			isa = PBXGroup;
 			children = (
@@ -672,10 +734,10 @@
 		EC989DD72CE8DB8C00E3FA82 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EC413FF42DF5D88F00B8D45B /* Shop */,
 				EC7A55D02DCD6261006619EB /* FriendsView */,
 				EC1B965D2C9EF6E7001C5773 /* NoteView.swift */,
 				EC02EBC62DC950700019668C /* PetCareView */,
-				EC1108312C622C3700E91D93 /* ShopScreenView.swift */,
 				ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */,
 				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
 				EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */,
@@ -729,6 +791,7 @@
 		ECCB799A2CDA161C000A1923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EC413FF12DF5C90400B8D45B /* AdManagers */,
 				ECCDFAF72DC956DA0044DAC2 /* CurrentUser */,
 				EC02CA4B2DD64D2900CB53EE /* Network */,
 			);
@@ -802,6 +865,7 @@
 				ECC432422DE23E5600E5C766 /* FirebaseAuthCombine-Community */,
 				ECC432442DE23E5600E5C766 /* FirebaseCore */,
 				EC137CC32DEF921B0093B53E /* SDWebImageSwiftUI */,
+				EC413FED2DF446E100B8D45B /* GoogleMobileAds */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -865,6 +929,7 @@
 				EC02EBC32DC921F30019668C /* XCRemoteSwiftPackageReference "netfox" */,
 				ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				EC413FEC2DF446E100B8D45B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -910,6 +975,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECF3A0752DD656340052990B /* StartQuizResultRequest.swift in Sources */,
+				EC4140022DF5DA2F00B8D45B /* EggSingleSection.swift in Sources */,
 				ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */,
 				ECF3A0712DD655E70052990B /* User.swift in Sources */,
 				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
@@ -942,6 +1008,7 @@
 				ECF3A0482DD651C00052990B /* SignUpResponseBody.swift in Sources */,
 				EC02CA4E2DD64D2900CB53EE /* RepositoryProvider.swift in Sources */,
 				EC02CA4F2DD64D2900CB53EE /* ServiceLocator.swift in Sources */,
+				EC4140042DF5DA3C00B8D45B /* PetItemGroupsSection.swift in Sources */,
 				ECF3A0692DD653BB0052990B /* TakeQuizRequestModel.swift in Sources */,
 				EC02CA502DD64D2900CB53EE /* NetworkManager.swift in Sources */,
 				EC6760A02DD787430041C839 /* UserProfileRepository.swift in Sources */,
@@ -964,32 +1031,45 @@
 				EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */,
 				EC606F0B2C57D2DE0015F103 /* SignUpView.swift in Sources */,
 				EC08F0D52C9C641000F6574D /* PasswordTextField.swift in Sources */,
+				EC41400C2DF5DA8A00B8D45B /* AssetNumberView.swift in Sources */,
 				EC606ED92C57B7040015F103 /* SplashView.swift in Sources */,
 				EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */,
+				EC413FF62DF5D98800B8D45B /* ShopCategoryPicker.swift in Sources */,
 				ECF3EACD2D6384ED00EEFBB2 /* PaywallView.swift in Sources */,
 				EC6760892DD739C50041C839 /* QuizDetailResponseModel.swift in Sources */,
 				ECCDFAF92DC956E20044DAC2 /* CurrentUserViewModel.swift in Sources */,
 				ECC4FCD12C6CB61900E78F7F /* ProfileView.swift in Sources */,
 				ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */,
 				EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */,
+				EC413FFC2DF5D9E900B8D45B /* DiamondSection.swift in Sources */,
+				EC413FFA2DF5D9D400B8D45B /* SectionHeader.swift in Sources */,
 				ECF37DFD2DD24FA800552613 /* ValidationUtility.swift in Sources */,
 				EC98CD742D0B404600801BD1 /* MyWidgetsView.swift in Sources */,
 				EC8D59D22D089C8E0050740C /* FriendsViewModel.swift in Sources */,
+				EC41400A2DF5DA7200B8D45B /* ShopItemView.swift in Sources */,
 				EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */,
 				EC606F0D2C57D46D0015F103 /* MailTextField.swift in Sources */,
 				EC67608E2DD73AA60041C839 /* QuizResultResponseModel.swift in Sources */,
+				EC4140062DF5DA4C00B8D45B /* HomeSection.swift in Sources */,
 				EC67608F2DD73AA60041C839 /* UserQuizzesResponseModel.swift in Sources */,
 				EC8E5A472D7A6C59001B2335 /* PreviewDesignComponent.swift in Sources */,
+				EC413FFE2DF5D9FF00B8D45B /* EggPackageSection.swift in Sources */,
 				EC137CC62DEF939F0093B53E /* AnimatedPetView.swift in Sources */,
 				EC989DB52CE8B19000E3FA82 /* SignUpViewModel.swift in Sources */,
 				ECF3EAC12D63734100EEFBB2 /* QuizResultView.swift in Sources */,
 				EC67609E2DD781A10041C839 /* UserRepository.swift in Sources */,
 				EC071D142C7C7C0C00D269A6 /* EmotionsView.swift in Sources */,
 				EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */,
+				EC4140082DF5DA5B00B8D45B /* RoofSideView.swift in Sources */,
+				EC413FF82DF5D9C400B8D45B /* ThreeColumnGrid.swift in Sources */,
+				EC4140002DF5DA1C00B8D45B /* PetItemPackageSection.swift in Sources */,
+				EC41400E2DF5DA9400B8D45B /* BackButtonView.swift in Sources */,
 				EC7282BC2DDF71FD00F67ACF /* NoInternetView.swift in Sources */,
 				EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */,
 				EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */,
+				EC4140102DF5DA9F00B8D45B /* RestoreButtonView.swift in Sources */,
 				EC1108322C622C3700E91D93 /* ShopScreenView.swift in Sources */,
+				EC413FF32DF5C91E00B8D45B /* InterstitialAdManager.swift in Sources */,
 				EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */,
 				ECF3A05C2DD653450052990B /* SignUpRequestModel.swift in Sources */,
 				EC731E652DCBD463005A064A /* PetItemView.swift in Sources */,
@@ -1363,6 +1443,14 @@
 				minimumVersion = 3.1.3;
 			};
 		};
+		EC413FEC2DF446E100B8D45B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.5.0;
+			};
+		};
 		EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -1415,6 +1503,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		EC413FED2DF446E100B8D45B /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC413FEC2DF446E100B8D45B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		EC606F172C5FB44C0015F103 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
