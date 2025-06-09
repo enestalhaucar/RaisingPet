@@ -32,7 +32,16 @@ class FriendsViewModel: ObservableObject {
 
         do {
             let response = try await friendsRepository.listFriends()
-            friends = response.data.friends
+            self.friends = response.data.friends
+            
+            // Eğer arkadaş listesi boş değilse ve ilk arkadaş varsa, bilgilerini kaydet.
+            if let friend = self.friends.first {
+                Utilities.shared.saveFriendDetailsToUserDefaults(firstname: friend.friend.firstname, id: friend.friend._id)
+            } else {
+                // Eğer arkadaş listesi boşsa, UserDefaults'tan bilgileri temizle.
+                Utilities.shared.clearFriendDetailsFromUserDefaults()
+            }
+            
         } catch let error as NetworkError {
             handleNetworkError(error)
         } catch {

@@ -87,7 +87,7 @@ struct ShopScreenView: View {
                             }
                         }
                         .padding(.top, 20)
-                        .frame(width: Utilities.Constants.width)
+                        .frame(width: ConstantManager.Layout.screenWidth)
                     }
 
                     // Pet-item-package pop-up

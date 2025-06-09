@@ -134,50 +134,51 @@ class UserRepositoryImpl: UserRepository {
     }
     
     func uploadProfilePhoto(photo: UIImage) async throws -> GetMeResponseModel {
-        // This function would need a custom implementation for multipart form data upload
-        // This is a temporary implementation that would need to be replaced with proper multipart handling
+        let endpoint = UserEndpoint.uploadProfilePhoto(photo: photo)
+        var request: URLRequest
         
-        let url = URL(string: Utilities.Constants.baseURL + UserEndpoint.uploadProfilePhoto(photo: photo).path)!
-        let token = UserDefaults.standard.string(forKey: "authToken") ?? ""
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "PATCH"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
-        // Create multipart form data
-        let boundary = UUID().uuidString
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-        var body = Data()
-        
-        // Add the photo
-        if let imageData = photo.jpegData(compressionQuality: 0.8) {
-            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
-            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-            body.append(imageData)
-            body.append("\r\n".data(using: .utf8)!)
+        do {
+            let url = URL(string: APIManager.baseURL + UserEndpoint.uploadProfilePhoto(photo: photo).path)!
+            request = URLRequest(url: url)
+            request.httpMethod = "PATCH"
+            
+            let boundary = "Boundary-\(UUID().uuidString)"
+            
+            // Create multipart form data
+            var body = Data()
+            
+            // Add the photo
+            if let imageData = photo.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+            
+            // Close the boundary
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            
+            request.httpBody = body
+            
+            // Perform the request manually
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            // Verify the response
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                throw NetworkError.serverError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, message: nil)
+            }
+            
+            // Decode the response
+            let decoder = JSONDecoder()
+            let responseModel = try decoder.decode(GetMeResponseModel.self, from: data)
+            
+            return responseModel
+        } catch {
+            print("Error uploading profile photo: \(error.localizedDescription)")
+            throw NetworkError.unknown(error)
         }
-        
-        // Close the boundary
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        request.httpBody = body
-        
-        // Perform the request manually
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        // Verify the response
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw NetworkError.serverError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, message: nil)
-        }
-        
-        // Decode the response
-        let decoder = JSONDecoder()
-        let responseModel = try decoder.decode(GetMeResponseModel.self, from: data)
-        
-        return responseModel
     }
     
     func updateProfileWithPhoto(
@@ -190,7 +191,7 @@ class UserRepositoryImpl: UserRepository {
         // This function would need a custom implementation for multipart form data upload
         // that includes both text fields and photo
         
-        let url = URL(string: Utilities.Constants.baseURL + UserEndpoint.uploadProfilePhoto(photo: UIImage()).path)!
+        let url = URL(string: APIManager.baseURL + UserEndpoint.uploadProfilePhoto(photo: UIImage()).path)!
         let token = UserDefaults.standard.string(forKey: "authToken") ?? ""
         
         var request = URLRequest(url: url)
@@ -300,9 +301,9 @@ class UserRepositoryImpl: UserRepository {
         else {
             // Ensure we don't duplicate path components
             if imageURL.hasPrefix("/") {
-                normalizedURL = Utilities.Constants.baseURL + imageURL
+                normalizedURL = APIManager.baseURL + imageURL
             } else {
-                normalizedURL = Utilities.Constants.baseURL + "/" + imageURL
+                normalizedURL = APIManager.baseURL + "/" + imageURL
             }
         }
         

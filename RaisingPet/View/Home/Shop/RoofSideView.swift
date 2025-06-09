@@ -29,7 +29,7 @@ struct RoofSideView: View {
                 Spacer()
                 RestoreButtonView()
                     .padding(.trailing, 16)
-            }.frame(width: Utilities.Constants.width)
+            }.frame(width: ConstantManager.Layout.screenWidth)
             .padding(.top, 50)
         }
         .onAppear {

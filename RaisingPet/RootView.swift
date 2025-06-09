@@ -14,6 +14,7 @@ struct RootView: View {
 
     @State private var showSplash = true
     @State private var showOnboarding = false
+    @State private var hasSeenOnboarding: Bool = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
     
     var body: some View {
         if networkMonitor.isConnected {
@@ -24,8 +25,7 @@ struct RootView: View {
                 SplashScreenView(onSplashComplete: {
                     showSplash = false
                     // İlk açılışta onboarding gösterilecek mi kontrol et
-                    let hasSeenOnboarding = UserDefaults.hasSeenOnboarding
-                    if Utilities.Constants.onboarding || !hasSeenOnboarding {
+                    if ConstantManager.AppConfig.showOnboardingEveryTime || !hasSeenOnboarding {
                         showOnboarding = true
                     }
                 })

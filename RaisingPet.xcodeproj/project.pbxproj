@@ -54,6 +54,10 @@
 		EC41400C2DF5DA8A00B8D45B /* AssetNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400B2DF5DA8A00B8D45B /* AssetNumberView.swift */; };
 		EC41400E2DF5DA9400B8D45B /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400D2DF5DA9400B8D45B /* BackButtonView.swift */; };
 		EC4140102DF5DA9F00B8D45B /* RestoreButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC41400F2DF5DA9F00B8D45B /* RestoreButtonView.swift */; };
+		EC4140122DF73F6300B8D45B /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140112DF73F6300B8D45B /* SectionHeaderView.swift */; };
+		EC4140142DF73F7C00B8D45B /* EmptyEggStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140132DF73F7C00B8D45B /* EmptyEggStateView.swift */; };
+		EC4140162DF7498100B8D45B /* ConstantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140152DF7497E00B8D45B /* ConstantManager.swift */; };
+		EC4140182DF7540D00B8D45B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140172DF7540A00B8D45B /* APIManager.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
 		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
@@ -228,6 +232,10 @@
 		EC41400B2DF5DA8A00B8D45B /* AssetNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetNumberView.swift; sourceTree = "<group>"; };
 		EC41400D2DF5DA9400B8D45B /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		EC41400F2DF5DA9F00B8D45B /* RestoreButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreButtonView.swift; sourceTree = "<group>"; };
+		EC4140112DF73F6300B8D45B /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		EC4140132DF73F7C00B8D45B /* EmptyEggStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyEggStateView.swift; sourceTree = "<group>"; };
+		EC4140152DF7497E00B8D45B /* ConstantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantManager.swift; sourceTree = "<group>"; };
+		EC4140172DF7540A00B8D45B /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -460,6 +468,8 @@
 				EC731E642DCBD45F005A064A /* PetItemView.swift */,
 				EC02EBC72DC950790019668C /* InventoryViewModel.swift */,
 				ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */,
+				EC4140132DF73F7C00B8D45B /* EmptyEggStateView.swift */,
+				EC4140112DF73F6300B8D45B /* SectionHeaderView.swift */,
 				EC731E5C2DCB87BD005A064A /* EggCellView.swift */,
 				EC731E622DCBCFAE005A064A /* PetCellView.swift */,
 				EC561BFA2C88A31900D90B4A /* PetCareView.swift */,
@@ -640,6 +650,7 @@
 				ECDFC4412D6D1C8300FA450D /* Animation */,
 				ECB5F5972D563792001AC419 /* Extensions */,
 				EC606F212C5FB7F80015F103 /* Utilities.swift */,
+				EC4140152DF7497E00B8D45B /* ConstantManager.swift */,
 				ECCDFAF52DC954DA0044DAC2 /* Utilities + RequestFunc .swift */,
 				ECF37DFC2DD24FA200552613 /* ValidationUtility.swift */,
 			);
@@ -791,6 +802,7 @@
 		ECCB799A2CDA161C000A1923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EC4140172DF7540A00B8D45B /* APIManager.swift */,
 				EC413FF12DF5C90400B8D45B /* AdManagers */,
 				ECCDFAF72DC956DA0044DAC2 /* CurrentUser */,
 				EC02CA4B2DD64D2900CB53EE /* Network */,
@@ -1007,6 +1019,7 @@
 				EC02CA4D2DD64D2900CB53EE /* ShopRepository.swift in Sources */,
 				ECF3A0482DD651C00052990B /* SignUpResponseBody.swift in Sources */,
 				EC02CA4E2DD64D2900CB53EE /* RepositoryProvider.swift in Sources */,
+				EC4140122DF73F6300B8D45B /* SectionHeaderView.swift in Sources */,
 				EC02CA4F2DD64D2900CB53EE /* ServiceLocator.swift in Sources */,
 				EC4140042DF5DA3C00B8D45B /* PetItemGroupsSection.swift in Sources */,
 				ECF3A0692DD653BB0052990B /* TakeQuizRequestModel.swift in Sources */,
@@ -1026,6 +1039,7 @@
 				EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */,
 				EC606F152C58F61F0015F103 /* RootView.swift in Sources */,
 				EC91118A2DAAD5D9007D92B1 /* ShopScreenViewModel.swift in Sources */,
+				EC4140162DF7498100B8D45B /* ConstantManager.swift in Sources */,
 				EC731E692DCBD8D4005A064A /* PetTabBarView.swift in Sources */,
 				ECF3A0542DD652B20052990B /* GetInventoryResponseModel.swift in Sources */,
 				EC17F7062DC166A700956696 /* BuyPackageCounterPopUpView.swift in Sources */,
@@ -1063,6 +1077,7 @@
 				EC4140082DF5DA5B00B8D45B /* RoofSideView.swift in Sources */,
 				EC413FF82DF5D9C400B8D45B /* ThreeColumnGrid.swift in Sources */,
 				EC4140002DF5DA1C00B8D45B /* PetItemPackageSection.swift in Sources */,
+				EC4140182DF7540D00B8D45B /* APIManager.swift in Sources */,
 				EC41400E2DF5DA9400B8D45B /* BackButtonView.swift in Sources */,
 				EC7282BC2DDF71FD00F67ACF /* NoInternetView.swift in Sources */,
 				EC6760A22DD787860041C839 /* ShopEnums.swift in Sources */,
@@ -1077,6 +1092,7 @@
 				EC8D59C72D0876300050740C /* AppState.swift in Sources */,
 				ECF3A0732DD656130052990B /* QuizResultForQuizRequest.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
+				EC4140142DF73F7C00B8D45B /* EmptyEggStateView.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
 				ECF37DC52DD11A2400552613 /* WallpaperView.swift in Sources */,

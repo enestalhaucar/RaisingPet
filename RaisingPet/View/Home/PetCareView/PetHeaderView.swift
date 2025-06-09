@@ -31,7 +31,7 @@ struct PetHeaderView: View {
             Image("petCareViewBg")
                 .resizable()
                 .scaledToFill()
-                .frame(height: Utilities.Constants.heightHalf)
+                .frame(height: ConstantManager.Layout.heightHalf)
                 .clipped()
             VStack(spacing: 0) {
                 Spacer()
@@ -70,7 +70,7 @@ struct PetHeaderView: View {
                     .padding(.bottom, 10)
             }
         }
-        .frame(height: Utilities.Constants.heightHalf)
+        .frame(height: ConstantManager.Layout.heightHalf)
         .ignoresSafeArea(.all)
         .onAppear {
             vm.currentPet = pet // Pet'i ayarla

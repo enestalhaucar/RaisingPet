@@ -17,7 +17,7 @@ struct HatchEggView: View {
     @State private var now = Date()
     @State private var isPressed = false
     @State private var userDetails: [String: String] = [:]
-    @State private var friendName: String = ""
+    @State private var friendName: String?
     
     private let iso: ISO8601DateFormatter = {
         let f = ISO8601DateFormatter()
@@ -60,44 +60,12 @@ struct HatchEggView: View {
         }.joined(separator: " ")
     }
     
-    // Function to get friend name
-    private func updateFriendName() {
-        // İlk olarak, kullanıcının kendi adını UserDefaults'tan al
-        let currentUserName = userDetails["firstname"] ?? "User"
-        
-        // Eşleşen arkadaşı bul
-        if let petId = item.properties.egg?.whichPetDidItComeFrom {
-            // Başlangıçta arkadaş adını boş bırak ya da varsayılan değer ver
-            friendName = "Friend"
-            
-            // Kabul edilen arkadaşlar listesinde ara
-            for friend in friendsViewModel.acceptedFriends {
-                // İsteğe göre ayarlanabilir - id kontrolü
-                if friend.friend._id == petId || friend.id == petId {
-                    friendName = friend.friend.firstname
-                    return
-                }
-            }
-        } else {
-            // Eğer eşleşme yoksa varsayılan değer
-            friendName = "Friend"
-        }
-        
-        // Eğer friend hala boşsa, varsayılan "Friend" değerini kullan
-        if friendName.isEmpty {
-            friendName = "Friend"
-        }
-    }
-    
     var body: some View {
         ZStack {
-            // Background gradient
-            LinearGradient(
-                gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.green.opacity(0.2)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+//            Background
+            Image("hatchScreenBackgroundImage")
+                .resizable()
+                .ignoresSafeArea(edges: .all)
             
             VStack(spacing: 20) {
                 // Top navigation bar
@@ -151,26 +119,29 @@ struct HatchEggView: View {
                                 .font(.nunito(.medium, .body16))
                         }
                         
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(.pink)
-                            .font(.system(size: 20))
-                        
-                        VStack {
-                            // Arkadaş profil resmi - farklı bir sistem ikonu
-                            Image(systemName: "person.crop.circle.badge.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.green)
-                                .background(Color.white)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.yellow, lineWidth: 2)
-                                )
-                            // Arkadaş adı
-                            Text(friendName)
-                                .font(.nunito(.medium, .body16))
+                        // Sadece arkadaş varsa kalp ve arkadaş profilini göster
+                        if let friendName = friendName {
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(.pink)
+                                .font(.system(size: 20))
+                            
+                            VStack {
+                                // Arkadaş profil resmi - farklı bir sistem ikonu
+                                Image(systemName: "person.crop.circle.badge.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 50, height: 50)
+                                    .foregroundColor(.green)
+                                    .background(Color.white)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.yellow, lineWidth: 2)
+                                    )
+                                // Arkadaş adı
+                                Text(friendName)
+                                    .font(.nunito(.medium, .body16))
+                            }
                         }
                     }
                     .padding(.bottom, 20)
@@ -213,7 +184,7 @@ struct HatchEggView: View {
                 // Timer display
                 Text(timeString(from: remaining))
                     .font(.nunito(.bold, .title222))
-                    .foregroundColor(isReadyToHatch ? .green : .primary)
+                    .foregroundColor(isReadyToHatch ? .white : .primary)
                 
                 // Progress bar with blue gradient
                 ZStack(alignment: .leading) {
@@ -235,30 +206,30 @@ struct HatchEggView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.8)
                 
                 Spacer()
-                
-                // Bottom action buttons
-                HStack(spacing: 20) {
-                    actionButton(
-                        imageName: "stopwatch.fill",
-                        text: "-6 hour",
-                        action: { /* Swift action to reduce time by 6 hours */ },
-                        hasBadge: true
-                    )
-                    
-                    actionButton(
-                        imageName: "flame.fill",
-                        text: "-24 hour",
-                        action: { /* Swift action to reduce time by 24 hours */ }
-                    )
-                    
-                    actionButton(
-                        imageName: "video.fill",
-                        text: "-1 hour",
-                        action: { /* Swift action to reduce time by 1 hour */ },
-                        badgeText: "AD"
-                    )
-                }
-                .padding(.bottom, 40)
+                Spacer()
+//                // Bottom action buttons
+//                HStack(spacing: 20) {
+//                    actionButton(
+//                        imageName: "stopwatch.fill",
+//                        text: "-6 hour",
+//                        action: { /* Swift action to reduce time by 6 hours */ },
+//                        hasBadge: true
+//                    )
+//                    
+//                    actionButton(
+//                        imageName: "flame.fill",
+//                        text: "-24 hour",
+//                        action: { /* Swift action to reduce time by 24 hours */ }
+//                    )
+//                    
+//                    actionButton(
+//                        imageName: "video.fill",
+//                        text: "-1 hour",
+//                        action: { /* Swift action to reduce time by 1 hour */ },
+//                        badgeText: "AD"
+//                    )
+//                }
+//                .padding(.bottom, 40)
                 
             }
             .padding()
@@ -275,10 +246,11 @@ struct HatchEggView: View {
             // Get user details from UserDefaults
             userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
             
-            // Fetch friends list and update friend name
             Task {
+                // Her zaman listeyi çekerek UserDefaults'un güncel olmasını sağla
                 await friendsViewModel.fetchFriendsList()
-                updateFriendName()
+                // UserDefaults'tan güncel arkadaş ismini oku
+                self.friendName = Utilities.shared.getFriendDetailsFromUserDefaults()?["firstname"]
             }
         }
         .navigationBarHidden(true)

@@ -24,7 +24,7 @@ extension Endpoint {
     }
     
     var baseURL: String {
-        return Utilities.Constants.baseURL
+        return APIManager.baseURL
     }
     
     var headers: [String: String]? {
@@ -46,5 +46,35 @@ extension Endpoint {
     
     var requiresAuthentication: Bool {
         return true
+    }
+
+    func asURLRequest() throws -> URLRequest {
+        guard let url = self.url else {
+            throw AFError.invalidURL(url: baseURL + path)
+        }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+
+        // Set default headers
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // Set endpoint-specific headers
+        if let headers = headers {
+            for (key, value) in headers {
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            }
+        }
+
+        // Set Authorization header if required
+        if requiresAuthentication {
+            if let token = UserDefaults.standard.string(forKey: "authToken") {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+        }
+
+        // Encode parameters
+        return try encoding.encode(urlRequest, with: parameters)
     }
 } 

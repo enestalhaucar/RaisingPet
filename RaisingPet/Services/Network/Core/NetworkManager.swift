@@ -22,69 +22,54 @@ class NetworkManager: NetworkManaging {
     
     // MARK: - Async/Await API
     func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async throws -> T {
-        guard let url = endpoint.url else {
-            throw NetworkError.invalidURL
-        }
-        
-        var headers: HTTPHeaders = [:]
-        
-        // Add auth token if required
-        if endpoint.requiresAuthentication {
-            if let token = UserDefaults.standard.string(forKey: "authToken") {
-                headers["Authorization"] = "Bearer \(token)"
-            } else {
-                throw NetworkError.unauthorized
-            }
-        }
-        
-        // Add any custom headers from endpoint
-        if let customHeaders = endpoint.headers {
-            for (key, value) in customHeaders {
-                headers[key] = value
-            }
-        }
-        
         do {
-            let request = AF.request(
-                url,
-                method: endpoint.method.alamofireMethod,
-                parameters: endpoint.parameters,
-                encoding: endpoint.encoding,
-                headers: headers
-            )
-            
-            let response = await request.serializingDecodable(T.self).response
-            
-            // Check for error cases
-            if let error = response.error {
-                if let afError = error.asAFError {
-                    if afError.isResponseValidationError {
-                        if response.response?.statusCode == 401 {
-                            throw NetworkError.unauthorized
-                        }
-                        
-                        // Server error with message if available
-                        if let data = response.data, let serverError = try? JSONDecoder().decode(ErrorResponseModel.self, from: data) {
-                            throw NetworkError.serverError(statusCode: response.response?.statusCode ?? 0, message: serverError.message)
-                        } else {
-                            throw NetworkError.serverError(statusCode: response.response?.statusCode ?? 0, message: nil)
-                        }
-                    } else if afError.isSessionTaskError {
-                        throw NetworkError.timeOut
-                    }
+            // URLRequest'i merkezi fonksiyondan alıyoruz.
+            let urlRequest = try endpoint.asURLRequest()
+
+            // Alamofire isteğini çalıştırıp, cevabın tamamını (DataResponse) alıyoruz.
+            let response = await AF.request(urlRequest).validate().serializingData().response
+
+            // Dönen cevabın sonucunu (başarılı/başarısız) kontrol ediyoruz.
+            switch response.result {
+            case .success(let data):
+                // Başarılıysa, gelen veriyi decode edip geri dönüyoruz.
+                do {
+                    return try JSONDecoder().decode(T.self, from: data)
+                } catch let decodingError {
+                    throw NetworkError.decodingError(decodingError)
                 }
-                throw NetworkError.unknown(error)
+
+            case .failure(let afError):
+                // Başarısızsa, Alamofire hatasını kendi NetworkError tipimize çeviriyoruz.
+                if let underlyingError = afError.underlyingError as? URLError, underlyingError.code == .timedOut {
+                    throw NetworkError.timeOut
+                }
+                if let statusCode = afError.responseCode {
+                    if statusCode == 401 {
+                        throw NetworkError.unauthorized
+                    }
+
+                    // Sunucudan gelen hata mesajını decode etmeye çalışıyoruz.
+                    // Artık 'response.data' ya erişimimiz var.
+                    if let data = response.data {
+                        do {
+                            let serverError = try JSONDecoder().decode(ErrorResponseModel.self, from: data)
+                            throw NetworkError.serverError(statusCode: statusCode, message: serverError.message)
+                        } catch {
+                            let errorString = String(data: data, encoding: .utf8) ?? afError.localizedDescription
+                            throw NetworkError.serverError(statusCode: statusCode, message: errorString)
+                        }
+                    }
+                    throw NetworkError.serverError(statusCode: statusCode, message: afError.localizedDescription)
+                }
+                throw NetworkError.unknown(afError)
             }
-            
-            guard let data = response.data else {
-                throw NetworkError.invalidData
+        } catch {
+            // Bu blok, asURLRequest'ten veya yukarıdaki switch'ten kaynaklanan diğer hataları yakalar.
+            if let networkError = error as? NetworkError {
+                throw networkError
             }
-            
-            do {
-                return try JSONDecoder().decode(T.self, from: data)
-            } catch {
-                throw NetworkError.decodingError(error)
-            }
+            throw NetworkError.unknown(error)
         }
     }
     

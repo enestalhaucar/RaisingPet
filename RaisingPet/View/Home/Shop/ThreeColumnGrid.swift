@@ -24,6 +24,6 @@ struct ThreeColumnGrid<Item, ID: Hashable, Content: View>: View {
             }
         }
         .padding(.horizontal)
-        .frame(width: Utilities.Constants.width)
+        .frame(width: ConstantManager.Layout.screenWidth)
     }
 }

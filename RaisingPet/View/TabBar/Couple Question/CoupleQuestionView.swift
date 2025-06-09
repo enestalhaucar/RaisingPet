@@ -37,8 +37,8 @@ struct CoupleQuestionView: View {
                 .font(.nunito(.medium, .body16))
 
                 Rectangle()
-                    .frame(width: Utilities.Constants.width, height: 6)
                     .foregroundStyle(.gray.opacity(0.2))
+                    .frame(width: ConstantManager.Layout.screenWidth, height: 6)
 
                 // Alt İçerik (Koşullu Gösterim)
                 if selectedTab == .harmony {
@@ -118,7 +118,7 @@ struct CoupleQuestionView: View {
                     if !hasFriend {
                         shouldNavigateToFriends = true
                     } else {
-                        print("navigationPath boşaldı, quiz’ler yeniden çekiliyor ve cache temizleniyor")
+                        print("navigationPath boşaldı, quiz'ler yeniden çekiliyor ve cache temizleniyor")
                         viewModel.cachedQuizResults.removeAll()
                         await viewModel.fetchQuizzes()
                     }
@@ -169,11 +169,11 @@ struct QuizRowView: View {
             }
             .padding(.horizontal, 20)
         }
-        .frame(width: Utilities.Constants.widthWithoutEdge, alignment: .leading)
+        .frame(width: ConstantManager.Layout.widthWithoutEdge, alignment: .leading)
         .onTapGesture {
             Task {
                 isLoading = true
-                print("Quiz’e tıklandı: \(quiz.id ?? "-")")
+                print("Quiz'e tıklandı: \(quiz.id ?? "-")")
                 if let (userDone, friendDone) = await viewModel.isUserDoneQuiz(quizId: quiz.id ?? "") {
                     isUserDone = userDone
                     hasFriendDone = friendDone
@@ -186,10 +186,10 @@ struct QuizRowView: View {
                 isLoading = false
 
                 if !isUserDone {
-                    print("QuestionView’e yönlendiriliyor: question_\(quiz.id ?? "-")")
+                    print("QuestionView'e yönlendiriliyor: question_\(quiz.id ?? "-")")
                     navigationPath.append("question_\(quiz.id ?? "-")")
                 } else {
-                    print("QuizResultView’e yönlendiriliyor: result_\(quiz.id ?? "-")")
+                    print("QuizResultView'e yönlendiriliyor: result_\(quiz.id ?? "-")")
                     navigationPath.append("result_\(quiz.id ?? "-")")
                 }
             }

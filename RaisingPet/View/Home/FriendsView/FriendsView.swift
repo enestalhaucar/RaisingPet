@@ -25,7 +25,7 @@ struct FriendsView: View {
                 Color("mainbgColor").ignoresSafeArea()
 
                 if viewModel.isLoading {
-                    ProgressView("friends_loading".localized())
+                    ProgressView()
                         .scaleEffect(1.5)
                         .progressViewStyle(CircularProgressViewStyle(tint: Color("AccentColor")))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

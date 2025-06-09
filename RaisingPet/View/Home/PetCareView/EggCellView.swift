@@ -47,14 +47,12 @@ struct EggCellView: View {
     var body: some View {
         VStack(spacing: 8) {
             Button(action: {
-                if remaining <= 0 {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        isPressed = true
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        isPressed = false
-                        onHatch()
-                    }
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isPressed = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    isPressed = false
+                    onHatch()
                 }
             }) {
                 ZStack {

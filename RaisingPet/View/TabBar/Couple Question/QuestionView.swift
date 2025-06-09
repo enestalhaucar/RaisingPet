@@ -96,7 +96,7 @@ struct QuestionOptionView: View {
     var body: some View {
         Text(option)
             .font(.nunito(.light, .headline17))
-            .frame(width: Utilities.Constants.widthEight, height: 65)
+            .frame(width: ConstantManager.Layout.widthEight, height: 65)
             .background(Color.blue.opacity(0.2))
             .cornerRadius(20)
     }

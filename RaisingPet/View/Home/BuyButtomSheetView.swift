@@ -243,7 +243,7 @@ struct BuyCounterView: View {
                     Spacer()
                     CounterItemBackgroundView(counterNumber: 10, badgeVisible: true, onTap: { counterNumber = 10})
                 }
-            }.frame(width: Utilities.Constants.widthHalf)
+            }.frame(width: ConstantManager.Layout.widthHalf)
         }
     }
 }
