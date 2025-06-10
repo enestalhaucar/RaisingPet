@@ -134,51 +134,18 @@ class UserRepositoryImpl: UserRepository {
     }
     
     func uploadProfilePhoto(photo: UIImage) async throws -> GetMeResponseModel {
-        let endpoint = UserEndpoint.uploadProfilePhoto(photo: photo)
-        var request: URLRequest
-        
-        do {
-            let url = URL(string: APIManager.baseURL + UserEndpoint.uploadProfilePhoto(photo: photo).path)!
-            request = URLRequest(url: url)
-            request.httpMethod = "PATCH"
-            
-            let boundary = "Boundary-\(UUID().uuidString)"
-            
-            // Create multipart form data
-            var body = Data()
-            
-            // Add the photo
-            if let imageData = photo.jpegData(compressionQuality: 0.8) {
-                body.append("--\(boundary)\r\n".data(using: .utf8)!)
-                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
-                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-                body.append(imageData)
-                body.append("\r\n".data(using: .utf8)!)
-            }
-            
-            // Close the boundary
-            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-            
-            request.httpBody = body
-            
-            // Perform the request manually
-            let (data, response) = try await URLSession.shared.data(for: request)
-            
-            // Verify the response
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                throw NetworkError.serverError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, message: nil)
-            }
-            
-            // Decode the response
-            let decoder = JSONDecoder()
-            let responseModel = try decoder.decode(GetMeResponseModel.self, from: data)
-            
-            return responseModel
-        } catch {
-            print("Error uploading profile photo: \(error.localizedDescription)")
-            throw NetworkError.unknown(error)
+        guard let imageData = photo.jpegData(compressionQuality: 0.8) else {
+            throw NetworkError.invalidData // Veya başka uygun bir hata
         }
+        
+        return try await networkManager.upload(
+            endpoint: UserEndpoint.uploadProfilePhoto(photo: photo),
+            fileData: imageData,
+            fileName: "profile.jpg",
+            mimeType: "image/jpeg",
+            withName: "photo",
+            responseType: GetMeResponseModel.self
+        )
     }
     
     func updateProfileWithPhoto(

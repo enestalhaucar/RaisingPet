@@ -13,6 +13,7 @@ protocol NetworkManaging {
     func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async throws -> T
     func requestWithPublisher<T: Decodable>(endpoint: Endpoint, responseType: T.Type) -> AnyPublisher<T, NetworkError>
     func requestWithCompletion<T: Decodable>(endpoint: Endpoint, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void)
+    func upload<T: Decodable>(endpoint: Endpoint,fileData: Data,fileName: String,mimeType: String,withName: String,responseType: T.Type) async throws -> T
 }
 
 class NetworkManager: NetworkManaging {
@@ -212,6 +213,53 @@ class NetworkManager: NetworkManaging {
             } catch {
                 completion(.failure(NetworkError.decodingError(error)))
             }
+        }
+    }
+
+    // MARK: - Multipart Upload
+    func upload<T: Decodable>(
+        endpoint: Endpoint,
+        fileData: Data,
+        fileName: String,
+        mimeType: String,
+        withName: String,
+        responseType: T.Type
+    ) async throws -> T {
+        
+        let urlRequest = try endpoint.asURLRequest()
+        
+        let dataTask = AF.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(fileData, withName: withName, fileName: fileName, mimeType: mimeType)
+                
+                // Eğer endpoint'in ek parametreleri varsa, onları da ekle
+                if let parameters = endpoint.parameters {
+                    for (key, value) in parameters {
+                        if let data = "\(value)".data(using: .utf8) {
+                            multipartFormData.append(data, withName: key)
+                        }
+                    }
+                }
+            },
+            with: urlRequest
+        ).validate()
+
+        let response = await dataTask.serializingData().response
+
+        switch response.result {
+        case .success(let data):
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch let decodingError {
+                throw NetworkError.decodingError(decodingError)
+            }
+        case .failure(let afError):
+            // Convert AFError to your custom NetworkError
+            // (Error handling logic from previous request function can be reused here)
+            if let statusCode = afError.responseCode {
+                throw NetworkError.serverError(statusCode: statusCode, message: afError.localizedDescription)
+            }
+            throw NetworkError.unknown(afError)
         }
     }
 } 

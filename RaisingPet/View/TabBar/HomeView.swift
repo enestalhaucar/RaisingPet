@@ -15,6 +15,7 @@ struct NavigationItem {
 }
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -22,9 +23,9 @@ struct HomeView: View {
                 Color("mainbgColor").ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 20) {
+                    VStack {
                         
-                        HomePetSection()
+                        HomePetSection(viewModel: viewModel)
                         
                         HomeNavigationButtons()
                         
@@ -62,6 +63,11 @@ struct HomeView: View {
                     
                 }.scrollIndicators(.hidden)
             }.navigationBarBackButtonHidden()
+        }
+        .onAppear {
+            Task {
+                await viewModel.fetchInitialData()
+            }
         }
     }
 }
@@ -103,28 +109,65 @@ struct CustomNavigationLink<Destination: View>: View {
 }
 
 struct HomePetSection: View {
+    @ObservedObject var viewModel: HomeViewModel
+    
     var body: some View {
-        NavigationLink(destination: EggAndPetsView()) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(.white)
-                    .stroke(.gray.opacity(0.3), lineWidth: 2)
-                    .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
-                
-                Image("petBackgroundImage")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                
-                Image("pet")
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .padding(.vertical, 25)
+        Group {
+            if viewModel.isLoading {
+                // Yükleniyor durumu
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color.secondary.opacity(0.1))
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 2)
+                        .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+                    ProgressView()
+                }
+            } else if let pet = viewModel.petToDisplay {
+                // Hayvan var durumu
+                NavigationLink(destination: PetCareView(pet: pet)) {
+                    PetDisplayView(imageName: pet.petType.name.lowercased())
+                }
+            } else if let egg = viewModel.eggToDisplay {
+                // Yumurta var durumu
+                NavigationLink(destination: EggAndPetsView()) {
+                    PetDisplayView(imageName: egg.itemId.name)
+                }
+            } else {
+                // Hiçbir şey yok durumu
+                NavigationLink(destination: ShopScreenView()) {
+                    PetDisplayView(imageName: "Egg") // Varsayılan yumurta görseli
+                }
             }
         }
     }
 }
+
+// Tekrarlanan ZStack yapısını önlemek için yardımcı View
+struct PetDisplayView: View {
+    let imageName: String
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 25)
+                .fill(.white)
+                .stroke(.gray.opacity(0.3), lineWidth: 2)
+                .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+            
+            Image("petBackgroundImage")
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
+            
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .padding(.vertical, 25)
+        }
+    }
+}
+
 struct HomeNavigationButtons: View {
     var body: some View {
         HStack(spacing: 25) {
