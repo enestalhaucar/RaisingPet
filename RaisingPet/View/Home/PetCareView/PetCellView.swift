@@ -16,11 +16,12 @@ struct PetCellView: View {
         case "dog": return "dog"
         case "dalmatian": return "dalmacian"
         case "cat": return "cat"
+        case "shiba": return "shiba"
         case "duck": return "duck"
         case "frog": return "frog"
         case "fox": return "fox"
         case "panda": return "panda"
-        default: return "pawprint.fill" // Varsayılan
+        default: return "pawprint.fill"
         }
     }
 

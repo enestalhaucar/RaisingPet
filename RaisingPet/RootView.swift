@@ -15,7 +15,8 @@ struct RootView: View {
     @State private var showSplash = true
     @State private var showOnboarding = false
     @State private var hasSeenOnboarding: Bool = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-    
+    @State private var selectedTab: Int = 0
+
     var body: some View {
         if networkMonitor.isConnected {
         ZStack {
@@ -36,24 +37,52 @@ struct RootView: View {
                 })
             } else if appState.isLoggedIn {
                 VStack {
-                    TabView {
+                    TabView(selection: $selectedTab) {
                         HomeView()
                             .tabItem {
-                                TabBarIcon(image: Image("home_tab_icon"), text: "home_tab".localized())
+                                TabBarIcon(
+                                    selectedImage: "homeTabIconSelected",
+                                    unselectedImage: "homeTabIconUnselected",
+                                    text: "home_tab".localized(),
+                                    isSelected: selectedTab == 0
+                                )
                             }
+                            .tag(0)
+                        
                         CoupleQuestionView()
                             .tabItem {
-                                TabBarIcon(image: Image("couple_questions_tab_icon"), text: "couple_questions_tab".localized())
+                                TabBarIcon(
+                                    selectedImage: "activityTabIconSelected",
+                                    unselectedImage: "activityTabIconUnselected",
+                                    text: "couple_questions_tab".localized(),
+                                    isSelected: selectedTab == 1
+                                )
                             }
+                            .tag(1)
+                        
                         WallpaperView()
                             .tabItem {
-                                TabBarIcon(image: Image("wallpaper_tab_icon"), text: "wallpapers_tab".localized())
+                                TabBarIcon(
+                                    selectedImage: "wallpaperTabIconSelected",
+                                    unselectedImage: "wallpaperTabIconUnselected",
+                                    text: "wallpapers_tab".localized(),
+                                    isSelected: selectedTab == 2
+                                )
                             }
+                            .tag(2)
+                        
                         ProfileView()
                             .tabItem {
-                                TabBarIcon(image: Image("profile_tab_icon"), text: "profile_tab".localized())
+                                TabBarIcon(
+                                    selectedImage: "profileTabIconSelected",
+                                    unselectedImage: "profileTabIconUnselected",
+                                    text: "profile_tab".localized(),
+                                    isSelected: selectedTab == 3
+                                )
                             }
+                            .tag(3)
                     }
+                    // .accentColor(Color("accentColor")) // Renkleri artık TabBarIcon içinde manuel ayarlıyoruz
                     .toolbarBackground(.gray.opacity(0.1), for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                 }
@@ -85,16 +114,23 @@ struct RootView: View {
 
 // TabBar ikonları için tutarlı görünüm sağlayan yardımcı bir görünüm
 struct TabBarIcon: View {
-    let image: Image
+    let selectedImage: String
+    let unselectedImage: String
     let text: String
+    let isSelected: Bool
     
     var body: some View {
         VStack {
-            image
+            Image(isSelected ? selectedImage : unselectedImage)
+                .renderingMode(.original) // Görsellerin orijinal renklerini koru
                 .resizable()
+                .scaledToFit() // Görseli çerçeveye sığdır, orantıyı koru
                 .frame(width: 25, height: 25)
+                .clipped()
+                
             Text(text)
                 .font(.nunito(.medium, .caption211))
+                .foregroundColor(isSelected ? Color("accentColor") : .gray) // Renkleri manuel olarak ayarlıyoruz
         }
     }
 }
