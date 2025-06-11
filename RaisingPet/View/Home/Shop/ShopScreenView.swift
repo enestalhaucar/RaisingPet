@@ -20,7 +20,7 @@ struct ShopScreenView: View {
     @StateObject private var vm = ShopScreenViewModel()
     @EnvironmentObject var currentUserVM: CurrentUserViewModel
     @State private var selectedMain: MainCategory = .pets // Varsayılan olarak Pets seçili
-    private var interstitialManager = InterstitialAdManager()
+    @EnvironmentObject var interstitialManager: InterstitialAdsManager
 
     // — single ShopItem için
     @State private var selectedShopItem: ShopItem?
@@ -66,12 +66,12 @@ struct ShopScreenView: View {
 //                                  onSelect: openSheet
 //                                )
 //                                
-//                                PetItemPackageSection(
-//                                  packages: vm.allItems?.petItemPackages ?? [],
-//                                  onSelect: { pkg in
-//                                    handlePackageTap(pkg)
-//                                  }
-//                                )
+                                PetItemPackageSection(
+                                  packages: vm.allItems?.petItemPackages ?? [],
+                                  onSelect: { pkg in
+                                    handlePackageTap(pkg)
+                                  }
+                                )
                                 EggSingleSection(
                                     items: vm.allItems?.shopItems ?? [],
                                     onSelect: openSheet
@@ -140,7 +140,7 @@ struct ShopScreenView: View {
                     vm.fetchAllShopItem() {
                         currentUserVM.refresh()
                     }
-                    await interstitialManager.loadAd()
+                    interstitialManager.loadInterstitialAd()
                 }
             }
             .ignoresSafeArea(edges: .top)
@@ -173,8 +173,13 @@ struct ShopScreenView: View {
         let name = pkg.name ?? ""
 
         if name.contains("Ad") {
-//            isShowingAd = true
-            interstitialManager.showAd()
+            isShowingAd = true
+            interstitialManager.displayInterstitialAd {
+                // Reklam kapandıktan sonra bu blok çalışır.
+                isShowingAd = false
+                // Reklam sonrası paketin açılması için:
+                openPackagePopup(pkg)
+            }
             
         } else if name.contains("Premium") {
             guard user.role == "premium" else {

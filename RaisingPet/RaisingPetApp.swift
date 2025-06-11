@@ -29,6 +29,7 @@ struct RaisingPetApp: App {
     @StateObject var appState = AppState()
     @StateObject var currentUserVM = CurrentUserViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
+    @StateObject private var interstitialManager = InterstitialAdsManager()
 
     var body: some Scene {
         WindowGroup {
@@ -36,12 +37,14 @@ struct RaisingPetApp: App {
                 .environmentObject(appState)
                 .environmentObject(currentUserVM)
                 .environmentObject(networkMonitor)
+                .environmentObject(interstitialManager)
                 .onAppear {
                     if UserDefaults.standard.bool(forKey: "isLoggedIn") {
                         Task {
                             currentUserVM.refresh()
                         }
-                    }
+                    } 
+                    interstitialManager.loadInterstitialAd()
                 }
         }
     }
