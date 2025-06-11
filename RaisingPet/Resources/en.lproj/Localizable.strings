@@ -225,6 +225,7 @@
 // BuyPackageCounterPopUpView
 "buy_package_select_items" = "Select exactly %d items";
 "buy_package_get_button" = "Get";
+"buy_package_get_with_ad_button" = "Watch Ad & Get";    
 "buy_package_default_item" = "Item";
 
 // NoInternetView.swift

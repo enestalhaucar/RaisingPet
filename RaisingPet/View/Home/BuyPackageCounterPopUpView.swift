@@ -19,9 +19,12 @@ struct BuyPackageCounterPopUpView: View {
     let petItems: [PetItemType]
     let limit: Int
     @Binding var isPresented: Bool
+    let isAdPackage: Bool
     var onApply: ([PetItemWithAmount]) -> Void
 
     @State private var counts: [String: Int]
+    @EnvironmentObject var interstitialManager: InterstitialAdsManager
+    @State private var isShowingAd = false
 
     private var totalSelected: Int { counts.values.reduce(0, +) }
     private let columns = [
@@ -33,11 +36,13 @@ struct BuyPackageCounterPopUpView: View {
         petItems: [PetItemType],
         limit: Int,
         isPresented: Binding<Bool>,
+        isAdPackage: Bool,
         onApply: @escaping ([PetItemWithAmount]) -> Void
     ) {
         self.petItems = petItems
         self.limit = limit
         self._isPresented = isPresented
+        self.isAdPackage = isAdPackage
         self.onApply = onApply
 
         var initial: [String: Int] = [:]
@@ -88,8 +93,20 @@ struct BuyPackageCounterPopUpView: View {
                 let selections = counts.compactMap { id, amt in
                     amt > 0 ? PetItemWithAmount(petItemId: id, amount: amt) : nil
                 }
-                onApply(selections)
-                isPresented = false
+                
+                if isAdPackage {
+                    // Reklam paketi ise, reklam göster
+                    isShowingAd = true
+                    interstitialManager.displayInterstitialAd {
+                        isShowingAd = false // Reklam kapandı
+                        onApply(selections) // Ürünleri ver
+                        isPresented = false // Pop-up'ı kapat
+                    }
+                } else {
+                    // Normal paket ise, direkt ürünleri ver
+                    onApply(selections)
+                    isPresented = false
+                }
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
@@ -98,7 +115,7 @@ struct BuyPackageCounterPopUpView: View {
                               : Color.gray.opacity(0.3))     // devre dışı hali
                         .frame(height: 50)
                     
-                    Text("buy_package_get_button".localized())
+                    Text(isAdPackage ? "buy_package_get_with_ad_button".localized() : "buy_package_get_button".localized())
                         .font(.nunito(.medium, .callout14))
                         .foregroundColor(.black)
                 }
@@ -106,6 +123,20 @@ struct BuyPackageCounterPopUpView: View {
             }
             .disabled(totalSelected != limit)
             .padding(.horizontal, 20)
+            
+            // Reklam yüklenirken gösterilecek overlay
+            if isShowingAd {
+                Color.black.opacity(0.6).ignoresSafeArea()
+                VStack {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .scaleEffect(2)
+                    Text("Reklam Yükleniyor...")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .padding(.top, 20)
+                }
+            }
         }
         .padding(.vertical)
         .background(

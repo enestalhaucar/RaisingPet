@@ -222,6 +222,7 @@
 // BuyPackageCounterPopUpView
 "buy_package_select_items" = "Tam olarak %d eşya seçin";
 "buy_package_get_button" = "Al";
+"buy_package_get_with_ad_button" = "Reklam İzle ve Al";
 "buy_package_default_item" = "Eşya";
 
 // NoInternetView.swift

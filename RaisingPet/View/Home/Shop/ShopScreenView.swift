@@ -39,6 +39,7 @@ struct ShopScreenView: View {
     @State private var alertMessage = ""
     
     @State private var isShowingAd = false
+    @State private var isAdPackage: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -98,7 +99,8 @@ struct ShopScreenView: View {
                         BuyPackageCounterPopUpView(
                           petItems: packageItems,
                           limit: packageLimit,
-                          isPresented: $showPackagePopup
+                          isPresented: $showPackagePopup,
+                          isAdPackage: isAdPackage
                         ) { selections in
                           guard let pkg = selectedPetItemPackage,
                                 !selections.isEmpty else { return }
@@ -173,15 +175,11 @@ struct ShopScreenView: View {
         let name = pkg.name ?? ""
 
         if name.contains("Ad") {
-            isShowingAd = true
-            interstitialManager.displayInterstitialAd {
-                // Reklam kapandıktan sonra bu blok çalışır.
-                isShowingAd = false
-                // Reklam sonrası paketin açılması için:
-                openPackagePopup(pkg)
-            }
+            isAdPackage = true
+            openPackagePopup(pkg)
             
         } else if name.contains("Premium") {
+            isAdPackage = false
             guard user.role == "premium" else {
                 alertTitle = "Premium'a Özel"
                 alertMessage = "Bu paket sadece premium üyelere özeldir."
@@ -195,6 +193,7 @@ struct ShopScreenView: View {
             openPackagePopup(pkg)
             
         } else { // "Free" paket olduğunu varsayıyoruz
+            isAdPackage = false
             if let _ = packageState(for: pkg).remainingTime { return }
 
             openPackagePopup(pkg)
