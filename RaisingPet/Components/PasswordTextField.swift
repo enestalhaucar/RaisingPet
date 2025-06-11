@@ -34,22 +34,23 @@ struct PasswordTextField: View {
                 
                 // Göz ikonu ile şifre görünürlüğünü açıp kapama butonu
                 Button(action: {
-                    withAnimation {
-                        isPasswordVisible.toggle() // Şifre görünürlüğünü değiştirme
-                    }
+                    isPasswordVisible.toggle() // Şifre görünürlüğünü değiştirme
                 }) {
                     Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.gray)
-                        .animation(.bouncy, value: isPasswordVisible) // Animasyon
-                        .frame(width: 20, height: 20)
+                        .animation(.bouncy, value: isPasswordVisible)
                 }
-                .padding(.trailing, 10)
+                .frame(width: 44, height: 44, alignment: .center)
+                .contentShape(Rectangle())
+                .padding(.trailing, 5)
             }
             .overlay {
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.black, lineWidth: 1)
             }
-        }.frame(width: 300, height: 50)
+        }
+        .frame(width: ConstantManager.Layout.widthEight)
+        .frame(height: 50)
     }
 }
 

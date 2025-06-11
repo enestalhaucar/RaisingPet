@@ -15,7 +15,7 @@ struct MailTextField: View {
         TextField(placeholder, text: $text)
             .padding()
             .padding(.leading,10)
-            .frame(width: 300, height: 50)
+            .frame(width: ConstantManager.Layout.widthEight, height: 50)
             .background(Color.white, in: .rect(cornerRadius: 25))
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
