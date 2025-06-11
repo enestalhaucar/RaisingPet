@@ -258,6 +258,8 @@ struct LanguageRow: View {
 
 struct LanguageSelectionView: View {
     @State private var selectedLanguage: Languages = Localizable.currentLanguage
+    @EnvironmentObject var appState: AppState
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationStack {
@@ -267,6 +269,8 @@ struct LanguageSelectionView: View {
                         Button(action: {
                             Localizable.setCurrentLanguage(language)
                             selectedLanguage = language
+                            appState.objectWillChange.send()
+                            dismiss()
                         }) {
                             HStack {
                                 Text(language.stringValue)
