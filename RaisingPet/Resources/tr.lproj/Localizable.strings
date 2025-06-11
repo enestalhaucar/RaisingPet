@@ -125,8 +125,12 @@
 "quiz_result_completed" = "Testi başarıyla tamamladın!";
 "quiz_result_back_to_couple_question" = "CoupleQuestion'a Geri Dön";
 "quiz_result_retake_quiz" = "Testi Tekrar Çöz";
-"quiz_result_high_match" = "Birbirinize harika uyum sağlıyorsunuz! (%d%%)";
-"quiz_result_low_match" = "Uyumunuz biraz farklı görünüyor, keşfetmeye devam edin! (%d%%)";
+"quiz_result_waiting_friend" = "Arkadaşının cevaplarını bekliyorsun! Testi tamamladığında sonuçları burada görebileceksin.";
+"quiz_result_match_perfect" = "Ruh ikizi gibisiniz! Uyumunuz mükemmel: %%%d";
+"quiz_result_match_great" = "Harika bir uyum yakalamışsınız! Uyumunuz: %%%d";
+"quiz_result_match_good" = "Birbirinizi güzel anlıyorsunuz. Uyumunuz: %%%d";
+"quiz_result_match_okay" = "Bazı ortak noktalarınız var, keşfetmeye devam! Uyumunuz: %%%d";
+"quiz_result_match_low" = "Zıt kutuplar birbirini çeker derler! Uyumunuz: %%%d";
 
 // HomeView
 "home_stacks" = "Yığınlar";

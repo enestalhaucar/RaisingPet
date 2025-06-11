@@ -128,9 +128,12 @@
 "quiz_result_completed" = "You successfully completed the test!";
 "quiz_result_back_to_couple_question" = "Back to CoupleQuestion";
 "quiz_result_retake_quiz" = "Retake the Test";
-"quiz_result_high_match" = "You are a great match! (%d%%)";
-"quiz_result_low_match" = "Your compatibility seems a bit different, keep exploring! (%d%%)";
-
+"quiz_result_waiting_friend" = "Waiting for your friend's answers! You'll see the results here once they complete the quiz.";
+"quiz_result_match_perfect" = "You're like soulmates! Your match is perfect: %d%%";
+"quiz_result_match_great" = "You've got a great connection! Your match: %d%%";
+"quiz_result_match_good" = "You understand each other well. Your match: %d%%";
+"quiz_result_match_okay" = "You have some common ground, keep exploring! Your match: %d%%";
+"quiz_result_match_low" = "They say opposites attract! Your match: %d%%";
 // HomeView
 "home_stacks" = "Stacks";
 "home_petiverse" = "Petiverse";

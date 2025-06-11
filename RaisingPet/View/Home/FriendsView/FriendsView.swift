@@ -21,103 +21,103 @@ struct FriendsView: View {
     private let placeholderImage = UIImage(named: "placeholder")
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color("mainbgColor").ignoresSafeArea()
+        ZStack {
+            NavigationStack {
+                ZStack {
+                    Color("mainbgColor").ignoresSafeArea()
 
-                if viewModel.isLoading {
-                    ProgressView()
-                        .scaleEffect(1.5)
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("AccentColor")))
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color("AccentColor")))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color("mainbgColor").opacity(0.8).ignoresSafeArea())
+                    } else if let errorMessage = viewModel.errorMessage {
+                        VStack(spacing: 20) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 50))
+                                .foregroundColor(.red)
+                            Text("friends_error_title".localized())
+                                .font(.nunito(.bold, .title222))
+                            Text(errorMessage)
+                                .font(.nunito(.regular, .body16))
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                            Button("friends_retry_button".localized()) {
+                                Task {
+                                    await viewModel.fetchFriendsList()
+                                }
+                            }
+                            .font(.nunito(.semiBold, .headline17))
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 10)
+                            .background(Color("AccentColor"))
+                            .foregroundColor(.white)
+                            .clipShape(Capsule())
+                        }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color("mainbgColor").opacity(0.8).ignoresSafeArea())
-                } else if let errorMessage = viewModel.errorMessage {
-                    VStack(spacing: 20) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(.red)
-                        Text("friends_error_title".localized())
-                            .font(.nunito(.bold, .title222))
-                        Text(errorMessage)
-                            .font(.nunito(.regular, .body16))
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                        Button("friends_retry_button".localized()) {
+                        .background(Color("mainbgColor").ignoresSafeArea())
+                    } else {
+                        VStack(spacing: 25) {
+                            profileHeader
+                            friendsTitle
+                            if viewModel.acceptedFriends.isEmpty && viewModel.pendingFriends.isEmpty {
+                                emptyFriendsView
+                            } else {
+                                friendsListView
+                            }
+                            Spacer()
+                            if viewModel.acceptedFriends.isEmpty {
+                                addFriendButton
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+                .autoResizingSheet(isPresented: $showSearchFriend) {
+                    SearchFriendView(
+                        onFriendRequestSent: {
                             Task {
                                 await viewModel.fetchFriendsList()
                             }
-                        }
-                        .font(.nunito(.semiBold, .headline17))
-                        .padding(.horizontal, 30)
-                        .padding(.vertical, 10)
-                        .background(Color("AccentColor"))
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
+                        },
+                        userFriendTag: userDetails["friendTag"] ?? "N/A"
+                    )
+                }
+                .toolbar(.hidden, for: .tabBar)
+                .navigationTitle("friends_relations".localized())
+                .navigationBarTitleDisplayMode(.inline)
+                .task {
+                    await viewModel.fetchFriendsList()
+                    userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+                    
+                    // Load profile image from cache
+                    if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
+                       let image = UIImage(data: photoData) {
+                        profileImage = image
+                    } else if let photoURL = userDetails["photoURL"], !photoURL.isEmpty {
+                        // If we have a URL but no cached image, load it
+                        await loadProfileImage(from: photoURL)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color("mainbgColor").ignoresSafeArea())
-                } else {
-                    VStack(spacing: 25) {
-                        profileHeader
-                        friendsTitle
-                        if viewModel.acceptedFriends.isEmpty && viewModel.pendingFriends.isEmpty {
-                            emptyFriendsView
-                        } else {
-                            friendsListView
-                        }
-                        Spacer()
-                        if viewModel.acceptedFriends.isEmpty {
-                            addFriendButton
-                        }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("UserDataUpdated"))) { _ in
+                    // Google ile giriş sonrası kullanıcı verilerini yeniden yükle
+                    print("FriendsView: UserDataUpdated notification alındı, veriler yenileniyor...")
+                    userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
+                    
+                    // Profil fotoğrafını da yeniden yükle
+                    if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
+                       let image = UIImage(data: photoData) {
+                        profileImage = image
+                        print("FriendsView: Profil fotoğrafı cache'den yüklendi")
                     }
-                    .padding(.horizontal)
+                }
+                .alert(isPresented: $showDeleteConfirmation) {
+                    deleteConfirmationAlert
                 }
             }
-            .autoResizingSheet(isPresented: $showSearchFriend) {
-                SearchFriendView(
-                    onFriendRequestSent: {
-                        Task {
-                            await viewModel.fetchFriendsList()
-                        }
-                    },
-                    userFriendTag: userDetails["friendTag"] ?? "N/A"
-                )
-            }
-            .toolbar(.hidden, for: .tabBar)
-            .navigationTitle("friends_relations".localized())
-            .navigationBarTitleDisplayMode(.inline)
-            .task {
-                await viewModel.fetchFriendsList()
-                userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-                
-                // Load profile image from cache
-                if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
-                   let image = UIImage(data: photoData) {
-                    profileImage = image
-                } else if let photoURL = userDetails["photoURL"], !photoURL.isEmpty {
-                    // If we have a URL but no cached image, load it
-                    await loadProfileImage(from: photoURL)
-                }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("UserDataUpdated"))) { _ in
-                // Google ile giriş sonrası kullanıcı verilerini yeniden yükle
-                print("FriendsView: UserDataUpdated notification alındı, veriler yenileniyor...")
-                userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-                
-                // Profil fotoğrafını da yeniden yükle
-                if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
-                   let image = UIImage(data: photoData) {
-                    profileImage = image
-                    print("FriendsView: Profil fotoğrafı cache'den yüklendi")
-                }
-            }
-            .alert(isPresented: $showDeleteConfirmation) {
-                deleteConfirmationAlert
-            }
-            .alert("friends_tag_copied".localized(), isPresented: $showCopyConfirmation) {
-                Button("friends_alert_ok".localized(), role: .cancel) {}
-            }
+            ToastView(message: "friends_tag_copied".localized(), isShowing: $showCopyConfirmation)
         }
     }
     

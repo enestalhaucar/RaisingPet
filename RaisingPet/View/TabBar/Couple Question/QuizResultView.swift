@@ -123,17 +123,39 @@ struct QuizResultView: View {
         }
     }
 
+    /// Arkadaşın testi çözüp çözmediğini kontrol eder.
+    private var friendHasAnswered: Bool {
+        // Cevap listesinde, arkadaşın cevabının nil olduğu bir tane bile varsa, testi tamamlamamış demektir.
+        guard let answers = viewModel.quizResult?.answers else { return false }
+        return !answers.contains { $0.friendAnswer == nil }
+    }
+
     private func calculateMatchPercentage() -> Double {
-        guard let accuracy = viewModel.quizResult?.accuracy, let totalQuestions = viewModel.quizResult?.answers?.count, totalQuestions > 0 else { return 0.0 }
-        return Double(accuracy)
+        guard let result = viewModel.quizResult, let answers = result.answers, !answers.isEmpty else { return 0.0 }
+        // Gerçek yüzdeyi hesapla: (Eşleşen Cevap Sayısı / Toplam Soru Sayısı) * 100
+        return (Double(result.accuracy) / Double(answers.count)) * 100.0
     }
 
     private func calculateMatchMessage() -> String {
+        // Önce arkadaşın cevap verip vermediğini kontrol et.
+        guard friendHasAnswered else {
+            return "quiz_result_waiting_friend".localized()
+        }
+        
         let percentage = calculateMatchPercentage()
-        if percentage >= 50 {
-            return String(format: "quiz_result_high_match".localized(), Int(percentage))
-        } else {
-            return String(format: "quiz_result_low_match".localized(), Int(percentage))
+        
+        // Yüzdeye göre farklı mesajlar göster.
+        switch percentage {
+        case 81...100:
+            return String(format: "quiz_result_match_perfect".localized(), Int(percentage))
+        case 61...80:
+            return String(format: "quiz_result_match_great".localized(), Int(percentage))
+        case 41...60:
+            return String(format: "quiz_result_match_good".localized(), Int(percentage))
+        case 21...40:
+            return String(format: "quiz_result_match_okay".localized(), Int(percentage))
+        default: // 0-20
+            return String(format: "quiz_result_match_low".localized(), Int(percentage))
         }
     }
 }

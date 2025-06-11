@@ -181,7 +181,7 @@ struct QuizResultForQuizResponseFormattedQuizResult: Codable {
     let answers: [QuizResultForQuizAnswer]?
     let status: QuizStatus?
     let createdAt: String?
-    let accuracy: Double?
+    let accuracy: Double
 }
 
 struct QuizResultForQuizAnswer: Codable, Identifiable, Hashable {

@@ -93,6 +93,7 @@
 		EC731E6D2DCBD8FB005A064A /* PetDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */; };
 		EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */; };
 		EC7F18D62DF98B2100BDB717 /* AutoResizingSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F18D52DF98B2100BDB717 /* AutoResizingSheet */; };
+		EC7F18D82DF98F1E00BDB717 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F18D72DF98F1E00BDB717 /* ToastView.swift */; };
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
@@ -273,6 +274,7 @@
 		EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemGridView.swift; sourceTree = "<group>"; };
 		EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDeleteAlertView.swift; sourceTree = "<group>"; };
 		EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendView.swift; sourceTree = "<group>"; };
+		EC7F18D72DF98F1E00BDB717 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonComp.swift; sourceTree = "<group>"; };
 		EC8AA8FD2C610142000C2478 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleQuestionView.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 		EC606F002C57D10D0015F103 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EC7F18D72DF98F1E00BDB717 /* ToastView.swift */,
 				EC606F012C57D1320015F103 /* button.swift */,
 				EC606F062C57D1F20015F103 /* SignInUpBackground.swift */,
 				EC8E5A462D7A6C59001B2335 /* PreviewDesignComponent.swift */,
@@ -1042,6 +1045,7 @@
 				EC02CA532DD64D2900CB53EE /* InventoryRepository.swift in Sources */,
 				EC02CA542DD64D2900CB53EE /* PetRepository.swift in Sources */,
 				EC02CA552DD64D2900CB53EE /* Endpoint.swift in Sources */,
+				EC7F18D82DF98F1E00BDB717 /* ToastView.swift in Sources */,
 				EC02CA562DD64D2900CB53EE /* AuthRepository.swift in Sources */,
 				EC02CA572DD64D2900CB53EE /* NetworkError.swift in Sources */,
 				EC02CA582DD64D2900CB53EE /* FriendsRepository.swift in Sources */,
