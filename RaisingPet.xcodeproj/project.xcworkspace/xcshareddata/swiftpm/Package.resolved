@@ -1,5 +1,5 @@
 {
-  "originHash" : "da1253ccb905468cee2d46ad61ea53a9cb2cf37d90aeaf983a9406937a43504a",
+  "originHash" : "25ad0230fce6a9753e8879be2ddaf83399f847b906a90a61f150443a255dcc55",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "c89ed571ae140f8eb1142735e6e23d7bb8c34cb2",
         "version" : "1.7.5"
+      }
+    },
+    {
+      "identity" : "autoresizingsheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/benedom/AutoResizingSheet.git",
+      "state" : {
+        "revision" : "131c20853019f6a7be710f04d666bcc416512672",
+        "version" : "1.0.5"
       }
     },
     {

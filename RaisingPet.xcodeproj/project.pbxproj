@@ -92,6 +92,7 @@
 		EC731E6B2DCBD8E9005A064A /* PetItemGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E6A2DCBD8E2005A064A /* PetItemGridView.swift */; };
 		EC731E6D2DCBD8FB005A064A /* PetDeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC731E6C2DCBD8F7005A064A /* PetDeleteAlertView.swift */; };
 		EC7A55D22DCD62BE006619EB /* SearchFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */; };
+		EC7F18D62DF98B2100BDB717 /* AutoResizingSheet in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F18D52DF98B2100BDB717 /* AutoResizingSheet */; };
 		EC8AA8FC2C60FB96000C2478 /* SettingsButtonComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FB2C60FB96000C2478 /* SettingsButtonComp.swift */; };
 		EC8AA8FE2C610142000C2478 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA8FD2C610142000C2478 /* HomeView.swift */; };
 		EC8AA9022C610205000C2478 /* CoupleQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AA9012C610205000C2478 /* CoupleQuestionView.swift */; };
@@ -352,6 +353,7 @@
 			files = (
 				EC137CC42DEF921B0093B53E /* SDWebImageSwiftUI in Frameworks */,
 				EC8D59C12D084DB30050740C /* Alamofire in Frameworks */,
+				EC7F18D62DF98B2100BDB717 /* AutoResizingSheet in Frameworks */,
 				EC606F182C5FB44C0015F103 /* GoogleSignIn in Frameworks */,
 				EC02EBC52DC921F30019668C /* netfox in Frameworks */,
 				EC8E5A4D2D7AA5C5001B2335 /* Localize_Swift in Frameworks */,
@@ -884,6 +886,7 @@
 				ECC432442DE23E5600E5C766 /* FirebaseCore */,
 				EC137CC32DEF921B0093B53E /* SDWebImageSwiftUI */,
 				EC413FED2DF446E100B8D45B /* GoogleMobileAds */,
+				EC7F18D52DF98B2100BDB717 /* AutoResizingSheet */,
 			);
 			productName = RaisingPet;
 			productReference = EC606ED32C57B7040015F103 /* RaisingPet.app */;
@@ -948,6 +951,7 @@
 				ECC4323F2DE23E5600E5C766 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EC137CC22DEF921B0093B53E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				EC413FEC2DF446E100B8D45B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				EC7F18D42DF98B2100BDB717 /* XCRemoteSwiftPackageReference "AutoResizingSheet" */,
 			);
 			productRefGroup = EC606ED42C57B7040015F103 /* Products */;
 			projectDirPath = "";
@@ -1483,6 +1487,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		EC7F18D42DF98B2100BDB717 /* XCRemoteSwiftPackageReference "AutoResizingSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/benedom/AutoResizingSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
 		EC8D59BF2D0843850050740C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1542,6 +1554,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC606F162C5FB44B0015F103 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		EC7F18D52DF98B2100BDB717 /* AutoResizingSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC7F18D42DF98B2100BDB717 /* XCRemoteSwiftPackageReference "AutoResizingSheet" */;
+			productName = AutoResizingSheet;
 		};
 		EC8D59C02D084DB30050740C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

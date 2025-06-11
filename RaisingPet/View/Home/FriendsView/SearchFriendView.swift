@@ -11,7 +11,7 @@ struct SearchFriendView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = SearchFriendViewModel()
     @State private var showingShareSheet = false
-    
+
     var onFriendRequestSent: () -> Void
     let userFriendTag: String
 
@@ -86,6 +86,7 @@ struct SearchFriendView: View {
                     .foregroundColor(.secondary)
             }
 
+            Spacer() // İçeriği yukarıya itmek için
 
             // Arkadaşı Ekle Butonu
             Button(action: {
@@ -100,8 +101,8 @@ struct SearchFriendView: View {
                 }
             }) {
                 ZStack {
-                     RoundedRectangle(cornerRadius: 12)
-                        .foregroundStyle(viewModel.searchedFriend == nil ? Color(.systemGray4) : Color("AccentColor"))
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(viewModel.searchedFriend == nil ? Color(.systemGray4) : Color.green.opacity(0.6))
                     Text("search_friend_add_button".localized())
                         .font(.nunito(.medium, .body16))
                         .foregroundColor(viewModel.searchedFriend == nil ? .gray : .white)
@@ -112,7 +113,8 @@ struct SearchFriendView: View {
             }
             .disabled(viewModel.searchedFriend == nil)
         }
-        .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height * 0.4)
+        .padding()
+        .frame(maxWidth: .infinity)
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .alert(isPresented: .init(get: { viewModel.errorMessage != nil && viewModel.searchedFriend == nil }, set: { _ in viewModel.errorMessage = nil })) {

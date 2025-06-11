@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import Alamofire
+import AutoResizingSheet
 
 struct FriendsView: View {
     @StateObject var viewModel = FriendsViewModel()
@@ -73,7 +74,7 @@ struct FriendsView: View {
                     .padding(.horizontal)
                 }
             }
-            .sheet(isPresented: $showSearchFriend) {
+            .autoResizingSheet(isPresented: $showSearchFriend) {
                 SearchFriendView(
                     onFriendRequestSent: {
                         Task {
@@ -82,7 +83,6 @@ struct FriendsView: View {
                     },
                     userFriendTag: userDetails["friendTag"] ?? "N/A"
                 )
-                .presentationDetents([.height(UIScreen.main.bounds.height * 0.4)])
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationTitle("friends_relations".localized())
