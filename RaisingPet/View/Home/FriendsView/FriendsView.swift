@@ -74,8 +74,15 @@ struct FriendsView: View {
                 }
             }
             .sheet(isPresented: $showSearchFriend) {
-                SearchFriendView(viewModel: viewModel, userFriendTag: userDetails["friendTag"] ?? "N/A")
-                    .presentationDetents([.height(UIScreen.main.bounds.height * 0.3)])
+                SearchFriendView(
+                    onFriendRequestSent: {
+                        Task {
+                            await viewModel.fetchFriendsList()
+                        }
+                    },
+                    userFriendTag: userDetails["friendTag"] ?? "N/A"
+                )
+                .presentationDetents([.height(UIScreen.main.bounds.height * 0.4)])
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationTitle("friends_relations".localized())

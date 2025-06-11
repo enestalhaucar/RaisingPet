@@ -14,7 +14,7 @@ struct AnimatedPetView: View {
     // JSON dosya adını petTypeName'e göre belirle (Bundle için)
     private var jsonFileName: String? {
         switch petTypeName.lowercased() {
-        case "dalmatian": return "dalmacian_idle"
+        case "dalmatian": return "dalmatian_idle"
         case "cat": return "cat_idle"
         case "fox": return "fox_idle"
         default: return nil
@@ -24,7 +24,7 @@ struct AnimatedPetView: View {
     // Static image adını belirle (PetsImage klasöründeki isimler)
     private var staticImageName: String {
         switch petTypeName.lowercased() {
-        case "dalmatian": return "dalmacian"
+        case "dalmatian": return "dalmatian"
         case "cat": return "cat"
         case "fox": return "fox"
         case "dog": return "dog"

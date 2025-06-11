@@ -59,6 +59,7 @@
 		EC4140162DF7498100B8D45B /* ConstantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140152DF7497E00B8D45B /* ConstantManager.swift */; };
 		EC4140182DF7540D00B8D45B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140172DF7540A00B8D45B /* APIManager.swift */; };
 		EC41401A2DF781E900B8D45B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4140192DF781E900B8D45B /* HomeViewModel.swift */; };
+		EC55210C2DF967770031BF37 /* SearchFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC55210B2DF967770031BF37 /* SearchFriendViewModel.swift */; };
 		EC561BFB2C88A31900D90B4A /* PetCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFA2C88A31900D90B4A /* PetCareView.swift */; };
 		EC561BFD2C8B41AC00D90B4A /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */; };
 		EC561BFF2C8B4CB500D90B4A /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */; };
@@ -238,6 +239,7 @@
 		EC4140152DF7497E00B8D45B /* ConstantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantManager.swift; sourceTree = "<group>"; };
 		EC4140172DF7540A00B8D45B /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		EC4140192DF781E900B8D45B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		EC55210B2DF967770031BF37 /* SearchFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendViewModel.swift; sourceTree = "<group>"; };
 		EC561BFA2C88A31900D90B4A /* PetCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCareView.swift; sourceTree = "<group>"; };
 		EC561BFC2C8B41AC00D90B4A /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		EC561BFE2C8B4CB500D90B4A /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 		EC7A55D02DCD6261006619EB /* FriendsView */ = {
 			isa = PBXGroup;
 			children = (
+				EC55210B2DF967770031BF37 /* SearchFriendViewModel.swift */,
 				EC8D59D12D089C8A0050740C /* FriendsViewModel.swift */,
 				EC1108332C622F1200E91D93 /* FriendsView.swift */,
 				EC7A55D12DCD62B7006619EB /* SearchFriendView.swift */,
@@ -1011,6 +1014,7 @@
 				ECF3A0462DD651940052990B /* LoginResponseModel.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
+				EC55210C2DF967770031BF37 /* SearchFriendViewModel.swift in Sources */,
 				ECF3A0562DD652C30052990B /* GetAllShopItems.swift in Sources */,
 				EC7282BA2DDF719600F67ACF /* NetworkMonitor.swift in Sources */,
 				EC731E672DCBD8C3005A064A /* PetHeaderView.swift in Sources */,

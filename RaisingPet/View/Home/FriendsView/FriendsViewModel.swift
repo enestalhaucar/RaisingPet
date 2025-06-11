@@ -13,7 +13,6 @@ import Combine
 class FriendsViewModel: ObservableObject {
     @Published private(set) var friends: [Friend] = []
     @Published var isLoading = false
-    @Published var searchedFriend: SearchFriendWithTagDataUser?
     @Published var errorMessage: String?
 
     // Repository
@@ -47,62 +46,6 @@ class FriendsViewModel: ObservableObject {
         } catch {
             errorMessage = "Arkadaş listesi yüklenemedi: \(error.localizedDescription)"
             print("Fetch friends error: \(error)")
-        }
-    }
-
-    // POST: Search Friend by Tag
-    func searchFriendWithTag(_ friendTag: String) async {
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
-
-        guard !friendTag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            self.searchedFriend = nil
-            return
-        }
-
-        do {
-            let response = try await friendsRepository.searchFriendWithTag(tag: friendTag)
-            self.searchedFriend = response.data.user
-        } catch let error as NetworkError {
-            switch error {
-            case .serverError(let statusCode, _):
-                if statusCode == 404 {
-                    self.searchedFriend = nil
-                    print("Kullanıcı bulunamadı (404), alert gösterilmeyecek.")
-                } else {
-                    self.handleNetworkError(error)
-                    self.searchedFriend = nil
-                }
-            case .timeOut, .noInternetConnection, .unauthorized:
-                self.handleNetworkError(error)
-                self.searchedFriend = nil
-            default:
-                print("searchFriendWithTag NetworkError (alert gösterilmeyecek): \(error.localizedDescription)")
-                self.searchedFriend = nil
-            }
-        } catch {
-            print("Search friend error (diğer): \(error.localizedDescription)")
-            self.searchedFriend = nil
-        }
-    }
-
-    // POST: Send Friend Request
-    func sendFriendRequest(friendId: String) async throws {
-        isLoading = true
-        errorMessage = nil
-        defer { isLoading = false }
-
-        do {
-            try await friendsRepository.sendRequest(friendId: friendId)
-            await fetchFriendsList() // İstek sonrası listeyi güncelle
-        } catch let error as NetworkError {
-            handleNetworkError(error)
-            throw error
-        } catch {
-            errorMessage = "Arkadaşlık isteği gönderilemedi: \(error.localizedDescription)"
-            print("Send friend request error: \(error)")
-            throw error
         }
     }
 
