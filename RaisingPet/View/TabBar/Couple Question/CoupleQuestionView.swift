@@ -73,7 +73,7 @@ struct CoupleQuestionView: View {
                         ScrollView {
                             VStack(spacing: 15) {
                                 ForEach(viewModel.quiz.sorted(by: { ($0.title ?? "-") < ($1.title ?? "-") }), id: \.id) { quiz in
-                                    QuizRowView(quiz: quiz, viewModel: viewModel, navigationPath: $navigationPath)
+                                    QuizRowView(quiz: quiz, navigationPath: $navigationPath)
                                 }
                             }
                         }
@@ -134,11 +134,7 @@ struct CoupleQuestionView: View {
 
 struct QuizRowView: View {
     let quiz: QuizModel
-    @ObservedObject var viewModel: CoupleQuestionViewModel
     @Binding var navigationPath: NavigationPath
-    @State private var isUserDone: Bool = false
-    @State private var hasFriendDone: Bool = false
-    @State private var isLoading: Bool = false
 
     var body: some View {
         ZStack {
@@ -171,32 +167,14 @@ struct QuizRowView: View {
         }
         .frame(width: ConstantManager.Layout.widthWithoutEdge, alignment: .leading)
         .onTapGesture {
-            Task {
-                isLoading = true
-                print("Quiz'e tıklandı: \(quiz.id ?? "-")")
-                if let (userDone, friendDone) = await viewModel.isUserDoneQuiz(quizId: quiz.id ?? "") {
-                    isUserDone = userDone
-                    hasFriendDone = friendDone
-                    print("isUserDone: \(isUserDone), hasFriendDone: \(hasFriendDone)")
-                } else {
-                    isUserDone = false
-                    hasFriendDone = false
-                    print("Hata durumu: isUserDone ve hasFriendDone false")
-                }
-                isLoading = false
-
-                if !isUserDone {
-                    print("QuestionView'e yönlendiriliyor: question_\(quiz.id ?? "-")")
-                    navigationPath.append("question_\(quiz.id ?? "-")")
-                } else {
-                    print("QuizResultView'e yönlendiriliyor: result_\(quiz.id ?? "-")")
-                    navigationPath.append("result_\(quiz.id ?? "-")")
-                }
-            }
-        }
-        .overlay {
-            if isLoading {
-                ProgressView()
+            let userHasAnswered = quiz.quizStatus == .continued || quiz.quizStatus == .finished
+            
+            if userHasAnswered {
+                print("QuizResultView'e yönlendiriliyor: result_\(quiz.id ?? "-")")
+                navigationPath.append("result_\(quiz.id ?? "-")")
+            } else {
+                print("QuestionView'e yönlendiriliyor: question_\(quiz.id ?? "-")")
+                navigationPath.append("question_\(quiz.id ?? "-")")
             }
         }
     }

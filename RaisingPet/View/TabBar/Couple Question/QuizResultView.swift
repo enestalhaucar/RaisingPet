@@ -24,46 +24,38 @@ struct QuizResultView: View {
 
                 if viewModel.isLoading {
                     LoadingAnimationView()
-                } else if let quizResultAnswers = viewModel.quizResult?.answers {
-                    // fetchQuizById'den gelen sorularla eşleştirme
-                    if let questions = viewModel.selectedQuiz?.questions {
-                        VStack(spacing: 15) {
-                            ForEach(questions, id: \.id) { question in
-                                if let answer = quizResultAnswers.first(where: { $0.question == question.id }) {
-                                    HStack {
-                                        Text(answer.userAnswer ?? "?")
-                                            .frame(maxWidth: .infinity)
-                                            .padding(10)
-                                            .background(
-                                                (answer.userAnswer == answer.friendAnswer && answer.userAnswer != nil) ?
-                                                Color.green.opacity(0.2) : Color.blue.opacity(0.2)
-                                            )
-                                            .cornerRadius(10)
-                                            .font(.nunito(.light, .body16))
-
-                                        Text("quiz_result_vs".localized())
-                                            .font(.nunito(.medium, .title320))
-                                            .bold()
-                                            .padding(.horizontal, 8)
-
-                                        Text(answer.friendAnswer ?? "?")
-                                            .frame(maxWidth: .infinity)
-                                            .padding(10)
-                                            .background(
-                                                (answer.userAnswer == answer.friendAnswer && answer.friendAnswer != nil) ?
-                                                Color.green.opacity(0.2) : Color.blue.opacity(0.2)
-                                            )
-                                            .cornerRadius(10)
-                                            .font(.nunito(.light, .body16))
-                                    }
-                                }
+                } else if let quizResultAnswers = viewModel.quizResult?.answers, !quizResultAnswers.isEmpty {
+                    VStack(spacing: 15) {
+                        ForEach(quizResultAnswers, id: \.question) { answer in
+                            HStack {
+                                Text(answer.userAnswer ?? "?")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(10)
+                                    .background(
+                                        (answer.userAnswer != nil && answer.userAnswer == answer.friendAnswer) ?
+                                        Color.green.opacity(0.2) : Color.blue.opacity(0.2)
+                                    )
+                                    .cornerRadius(10)
+                                    .font(.nunito(.light, .body16))
+                                
+                                Text("quiz_result_vs".localized())
+                                    .font(.nunito(.medium, .title320))
+                                    .bold()
+                                    .padding(.horizontal, 8)
+                                
+                                Text(answer.friendAnswer ?? "?")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(10)
+                                    .background(
+                                        (answer.friendAnswer != nil && answer.userAnswer == answer.friendAnswer) ?
+                                        Color.green.opacity(0.2) : Color.blue.opacity(0.2)
+                                    )
+                                    .cornerRadius(10)
+                                    .font(.nunito(.light, .body16))
                             }
                         }
-                        .padding()
-                    } else {
-                        Text("Sorular yüklenemedi")
-                            .font(.nunito(.medium, .body16))
                     }
+                    .padding()
                 } else {
                     Text("quiz_result_no_data".localized())
                         .font(.nunito(.medium, .body16))
@@ -111,13 +103,9 @@ struct QuizResultView: View {
         }
         .onAppear {
             Task {
-                if viewModel.quizResult == nil {
+                // Sadece quizId değiştiyse veya sonuçlar henüz yüklenmediyse veri çek.
+                if viewModel.quizResult == nil || viewModel.quizResult?.quizId != quizId {
                     await viewModel.fetchQuizResult(quizId: quizId)
-                    print("Fetch Quiz Result ile gönderilen quizId: \(quizId), Sonuç: \(String(describing: viewModel.quizResult))")
-                }
-                if viewModel.selectedQuiz == nil {
-                    await viewModel.fetchQuizById(quizId: quizId)
-                    print("Fetch Quiz By Id ile gönderilen QuizID: \(quizId), Sorular: \(String(describing: viewModel.selectedQuiz?.questions))")
                 }
             }
         }
@@ -133,7 +121,7 @@ struct QuizResultView: View {
     private func calculateMatchPercentage() -> Double {
         guard let result = viewModel.quizResult, let answers = result.answers, !answers.isEmpty else { return 0.0 }
         // Gerçek yüzdeyi hesapla: (Eşleşen Cevap Sayısı / Toplam Soru Sayısı) * 100
-        return (Double(result.accuracy) / Double(answers.count)) * 100.0
+        return (Double(result.accuracy ?? 0) / Double(answers.count)) * 10.0
     }
 
     private func calculateMatchMessage() -> String {
