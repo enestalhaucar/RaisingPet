@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AutoResizingSheet
 
 // MARK: - MainCategory
 
@@ -24,6 +25,7 @@ struct ShopScreenView: View {
 
     // — single ShopItem için
     @State private var selectedShopItem: ShopItem?
+    @State private var showShopSheet = false
     @State private var counterNumber = 1
     @State private var showCounter = false
 
@@ -146,15 +148,21 @@ struct ShopScreenView: View {
                 }
             }
             .ignoresSafeArea(edges: .top)
-            .sheet(item: $selectedShopItem) { item in
-                BottomSheetView(
-                    item: item,
-                    counterNumber: $counterNumber,
-                    showCounter: $showCounter
-                )
-                .environmentObject(vm)
-                .environmentObject(currentUserVM)
-                .presentationDetents([.fraction(0.5)])
+            .autoResizingSheet(isPresented: $showShopSheet) {
+                if let item = selectedShopItem {
+                    BottomSheetView(
+                        item: item,
+                        counterNumber: $counterNumber,
+                        showCounter: $showCounter
+                    )
+                    .environmentObject(vm)
+                    .environmentObject(currentUserVM)
+                }
+            }
+            .onChange(of: showShopSheet) { newValue in
+                if !newValue {
+                    selectedShopItem = nil
+                }
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Tamam")))
@@ -167,6 +175,7 @@ struct ShopScreenView: View {
         showCounter = isPetItem
         counterNumber = 1
         selectedShopItem = item
+        showShopSheet = true
     }
     
     // MARK: - Paket Tıklama Yönetimi

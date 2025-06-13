@@ -121,7 +121,7 @@
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
-		ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */; };
+		ECBA63B02DBBC54500A3F6C9 /* BuyBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA63AF2DBBC53E00A3F6C9 /* BuyBottomSheetView.swift */; };
 		ECC2BE542CA0486C00790C92 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE532CA0486C00790C92 /* CanvasView.swift */; };
 		ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC2BE552CA0491200790C92 /* ShareSheet.swift */; };
 		ECC432412DE23E5600E5C766 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ECC432402DE23E5600E5C766 /* FirebaseAuth */; };
@@ -299,7 +299,7 @@
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
-		ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtomSheetView.swift; sourceTree = "<group>"; };
+		ECBA63AF2DBBC53E00A3F6C9 /* BuyBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyBottomSheetView.swift; sourceTree = "<group>"; };
 		ECC2BE532CA0486C00790C92 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		ECC2BE552CA0491200790C92 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		ECC432462DE2456D00E5C766 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -760,7 +760,7 @@
 				EC7A55D02DCD6261006619EB /* FriendsView */,
 				EC1B965D2C9EF6E7001C5773 /* NoteView.swift */,
 				EC02EBC62DC950700019668C /* PetCareView */,
-				ECBA63AF2DBBC53E00A3F6C9 /* BuyButtomSheetView.swift */,
+				ECBA63AF2DBBC53E00A3F6C9 /* BuyBottomSheetView.swift */,
 				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
 				EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */,
 			);
@@ -1001,7 +1001,7 @@
 			files = (
 				ECF3A0752DD656340052990B /* StartQuizResultRequest.swift in Sources */,
 				EC4140022DF5DA2F00B8D45B /* EggSingleSection.swift in Sources */,
-				ECBA63B02DBBC54500A3F6C9 /* BuyButtomSheetView.swift in Sources */,
+				ECBA63B02DBBC54500A3F6C9 /* BuyBottomSheetView.swift in Sources */,
 				ECF3A0712DD655E70052990B /* User.swift in Sources */,
 				EC1CE9A02D5238150082FD4F /* CoupleQuestionViewModel.swift in Sources */,
 				EC606F072C57D1F20015F103 /* SignInUpBackground.swift in Sources */,
