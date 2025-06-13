@@ -126,6 +126,8 @@
 		ECB107A62DFC510000E2692A /* DiamondPurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A52DFC510000E2692A /* DiamondPurchaseOptionsView.swift */; };
 		ECB107A82DFC510C00E2692A /* PurchaseButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A72DFC510C00E2692A /* PurchaseButtonsView.swift */; };
 		ECB107AA2DFC513500E2692A /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A92DFC513500E2692A /* ItemImageView.swift */; };
+		ECB107AD2DFC7DBE00E2692A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ECB107AC2DFC7DBE00E2692A /* .swiftlint.yml */; };
+		ECB107AE2DFC7DBE00E2692A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ECB107AC2DFC7DBE00E2692A /* .swiftlint.yml */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
@@ -312,6 +314,7 @@
 		ECB107A52DFC510000E2692A /* DiamondPurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondPurchaseOptionsView.swift; sourceTree = "<group>"; };
 		ECB107A72DFC510C00E2692A /* PurchaseButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButtonsView.swift; sourceTree = "<group>"; };
 		ECB107A92DFC513500E2692A /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
+		ECB107AC2DFC7DBE00E2692A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
@@ -595,6 +598,7 @@
 		EC606ECA2C57B7040015F103 = {
 			isa = PBXGroup;
 			children = (
+				ECB107AC2DFC7DBE00E2692A /* .swiftlint.yml */,
 				EC606ED52C57B7040015F103 /* RaisingPet */,
 				EC9111932DAC361E007D92B1 /* PetiverseWidget */,
 				ECCC7B302CAAB3FB00B16C91 /* Frameworks */,
@@ -902,6 +906,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC606EE12C57B7060015F103 /* Build configuration list for PBXNativeTarget "RaisingPet" */;
 			buildPhases = (
+				ECB107AB2DFC7D1100E2692A /* Run Swiftlint */,
 				EC606ECF2C57B7040015F103 /* Sources */,
 				EC606ED02C57B7040015F103 /* Frameworks */,
 				EC606ED12C57B7040015F103 /* Resources */,
@@ -1011,6 +1016,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB107AE2DFC7DBE00E2692A /* .swiftlint.yml in Resources */,
 				EC1CE9742D4D412F0082FD4F /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
 				EC8E5A552D7AB2E7001B2335 /* Localizable.strings in Resources */,
 				EC1CE9752D4D412F0082FD4F /* Nunito-VariableFont_wght.ttf in Resources */,
@@ -1029,10 +1035,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB107AD2DFC7DBE00E2692A /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECB107AB2DFC7D1100E2692A /* Run Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n    if which swiftlint >/dev/null; then\n      swiftlint\n    else\n      echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC606ECF2C57B7040015F103 /* Sources */ = {

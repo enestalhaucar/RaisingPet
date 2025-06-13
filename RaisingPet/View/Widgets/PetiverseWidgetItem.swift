@@ -5,7 +5,6 @@
 //  Created by Enes Talha Uçar on 19.03.2025.
 //
 
-
 import SwiftUI
 
 // Widget türleri
@@ -47,7 +46,7 @@ struct PetiverseWidgetItem: Identifiable, Codable {
     let frameColor: String? // Çerçeve rengi
     let lineWidth: CGFloat? // Çerçeve kalınlığı
     let changeFrequency: String? // Değişim sıklığı
-    
+
     init(
         id: UUID = UUID(),
         type: WidgetType,

@@ -5,9 +5,9 @@
 ////  Created by Enes Talha Uçar  on 16.10.2024.
 ////
 //
-//import SwiftUI
+// import SwiftUI
 //
-//struct DistanceWidget : Identifiable, Equatable {
+// struct DistanceWidget : Identifiable, Equatable {
 //    var id = UUID()
 //    var bgSelected : Bool
 //    var backgroundImage : Image?
@@ -15,9 +15,9 @@
 //    var textColor : Color
 //    var size : widgetSizeOne
 //    var title : String
-//}
+// }
 //
-//struct DistanceWidgetPreviewDesignOne: View {
+// struct DistanceWidgetPreviewDesignOne: View {
 //    let item : DistanceWidget
 //    @Binding var title : String
 //    var body: some View {
@@ -213,8 +213,8 @@
 //        }.frame(width: item.size == .small ? 170 : 350, height: item.size == .large ? 350 : 170)
 //        
 //    }
-//}
+// }
 //
-//#Preview {
+// #Preview {
 //    DistanceSettingsView()
-//}
+// }

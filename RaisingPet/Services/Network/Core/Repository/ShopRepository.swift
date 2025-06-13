@@ -7,7 +7,7 @@ enum ShopEndpoint: Endpoint {
     case buyShopItem(itemId: String, mine: MineEnum)
     case buyPetItem(itemId: String, amount: Int, mine: MineEnum)
     case buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum?, petItemsWithAmounts: [PetItemWithAmount]?)
-    
+
     var path: String {
         switch self {
         case .getAllShopItems:
@@ -20,7 +20,7 @@ enum ShopEndpoint: Endpoint {
             return "/package/buy-package-item"
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .getAllShopItems:
@@ -29,7 +29,7 @@ enum ShopEndpoint: Endpoint {
             return .post
         }
     }
-    
+
     var parameters: [String: Any]? {
         switch self {
         case .getAllShopItems:
@@ -50,7 +50,7 @@ enum ShopEndpoint: Endpoint {
                 "packageType": packageType.rawValue,
                 "packageId": packageId
             ]
-            
+
             switch packageType {
             case .eggPackage, .petPackage:
                 if let mine = mine {
@@ -63,11 +63,11 @@ enum ShopEndpoint: Endpoint {
                     }
                 }
             }
-            
+
             return params
         }
     }
-    
+
     var requiresAuthentication: Bool {
         return true
     }
@@ -76,10 +76,10 @@ enum ShopEndpoint: Endpoint {
 // MARK: - Shop Repository Protocol
 protocol ShopRepository: BaseRepository {
     func getAllShopItems() async throws -> GetAllShopItems
-    func buyShopItem(itemId: String, mine: MineEnum) async throws -> Void
-    func buyPetItem(itemId: String, amount: Int, mine: MineEnum) async throws -> Void
-    func buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum?, petItemsWithAmounts: [PetItemWithAmount]?) async throws -> Void
-    
+    func buyShopItem(itemId: String, mine: MineEnum) async throws
+    func buyPetItem(itemId: String, amount: Int, mine: MineEnum) async throws
+    func buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum?, petItemsWithAmounts: [PetItemWithAmount]?) async throws
+
     // Combine variants
     func getAllShopItemsPublisher() -> AnyPublisher<GetAllShopItems, NetworkError>
     func buyShopItemPublisher(itemId: String, mine: MineEnum) -> AnyPublisher<EmptyResponse, NetworkError>
@@ -90,32 +90,32 @@ protocol ShopRepository: BaseRepository {
 // MARK: - Shop Repository Implementation
 class ShopRepositoryImpl: ShopRepository {
     let networkManager: NetworkManaging
-    
+
     required init(networkManager: NetworkManaging) {
         self.networkManager = networkManager
     }
-    
+
     func getAllShopItems() async throws -> GetAllShopItems {
         return try await networkManager.request(
             endpoint: ShopEndpoint.getAllShopItems,
             responseType: GetAllShopItems.self
         )
     }
-    
+
     func buyShopItem(itemId: String, mine: MineEnum) async throws {
         let _: EmptyResponse = try await networkManager.request(
             endpoint: ShopEndpoint.buyShopItem(itemId: itemId, mine: mine),
             responseType: EmptyResponse.self
         )
     }
-    
+
     func buyPetItem(itemId: String, amount: Int, mine: MineEnum) async throws {
         let _: EmptyResponse = try await networkManager.request(
             endpoint: ShopEndpoint.buyPetItem(itemId: itemId, amount: amount, mine: mine),
             responseType: EmptyResponse.self
         )
     }
-    
+
     func buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum? = nil, petItemsWithAmounts: [PetItemWithAmount]? = nil) async throws {
         let _: EmptyResponse = try await networkManager.request(
             endpoint: ShopEndpoint.buyPackageItem(
@@ -127,7 +127,7 @@ class ShopRepositoryImpl: ShopRepository {
             responseType: EmptyResponse.self
         )
     }
-    
+
     // MARK: - Combine API
     func getAllShopItemsPublisher() -> AnyPublisher<GetAllShopItems, NetworkError> {
         return networkManager.requestWithPublisher(
@@ -135,21 +135,21 @@ class ShopRepositoryImpl: ShopRepository {
             responseType: GetAllShopItems.self
         )
     }
-    
+
     func buyShopItemPublisher(itemId: String, mine: MineEnum) -> AnyPublisher<EmptyResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: ShopEndpoint.buyShopItem(itemId: itemId, mine: mine),
             responseType: EmptyResponse.self
         )
     }
-    
+
     func buyPetItemPublisher(itemId: String, amount: Int, mine: MineEnum) -> AnyPublisher<EmptyResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: ShopEndpoint.buyPetItem(itemId: itemId, amount: amount, mine: mine),
             responseType: EmptyResponse.self
         )
     }
-    
+
     func buyPackageItemPublisher(packageType: PackageType, packageId: String, mine: MineEnum? = nil, petItemsWithAmounts: [PetItemWithAmount]? = nil) -> AnyPublisher<EmptyResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: ShopEndpoint.buyPackageItem(

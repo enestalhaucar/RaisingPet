@@ -17,7 +17,7 @@ struct PetItemPackageSection: View {
 
         ThreeColumnGrid(items: packages, id: \.id) { pkg in
             let state = packageState(for: pkg)
-            
+
             ShopItemView(
                 imageName: pkg.name ?? "petPackagePlaceholder",
                 goldCost: nil,
@@ -45,19 +45,19 @@ struct PetItemPackageSection: View {
         guard let user = currentUserVM.user, let packageId = pkg.id else {
             return (false, "...")
         }
-        
+
         let name = pkg.name ?? ""
 
         if name.contains("Ad") {
             return (true, "Reklam İzle")
         }
-        
+
         if name.contains("Premium") {
             if user.role != "premium" {
                 return (false, "Premium")
             }
         }
-        
+
         // Free ve Premium paketler için bekleme süresi kontrolü
         if let lastClaimDate = user.packageClaimDates?[packageId] {
             let cooldown: TimeInterval = 24 * 60 * 60
@@ -67,7 +67,7 @@ struct PetItemPackageSection: View {
                 return (false, format(duration: remaining))
             }
         }
-        
+
         let price = name.contains("Free") ? "Ücretsiz" : "Al"
         return (true, price)
     }

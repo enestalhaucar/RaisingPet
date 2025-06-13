@@ -66,7 +66,7 @@ extension PetiverseWidgetAttributes.ContentState {
     fileprivate static var smiley: PetiverseWidgetAttributes.ContentState {
         PetiverseWidgetAttributes.ContentState(emoji: "😀")
      }
-     
+
      fileprivate static var starEyes: PetiverseWidgetAttributes.ContentState {
          PetiverseWidgetAttributes.ContentState(emoji: "🤩")
      }

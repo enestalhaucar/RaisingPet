@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ThreeColumnGrid<Item, ID: Hashable, Content: View>: View {
     let items: [Item]
-    let id: KeyPath<Item,ID>
+    let id: KeyPath<Item, ID>
     @ViewBuilder let content: (Item) -> Content
 
     var body: some View {

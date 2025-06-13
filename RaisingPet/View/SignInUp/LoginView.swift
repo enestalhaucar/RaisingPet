@@ -12,28 +12,28 @@ struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject private var currentUserVM: CurrentUserViewModel
     @EnvironmentObject private var appState: AppState
-    
+
     // Focus state değişkenleri
     @FocusState private var emailFocused: Bool
     @FocusState private var passwordFocused: Bool
-    
+
     @State private var email = ""
     @State private var password = ""
     @State private var showError = false
-    
+
     var onLoginSuccess: () -> Void
 
     var body: some View {
         ZStack {
             SignInUpBackground()
-            
+
             // Klavye dışına dokununca klavyeyi gizle
             Color.clear
                 .contentShape(Rectangle())
                 .onTapGesture {
                     hideKeyboard()
                 }
-            
+
             VStack(spacing: 25) {
                 Spacer()
                 Spacer()
@@ -55,9 +55,9 @@ struct LoginView: View {
                         hideKeyboard()
                         viewModel.login(with: email, password: password)
                     }
-                
+
                 Spacer()
-                
+
                 if viewModel.isLoading {
                     LoadingAnimationView()
                 } else {
@@ -73,7 +73,7 @@ struct LoginView: View {
                     .disabled(email.isEmpty || password.isEmpty)
                     .opacity((email.isEmpty || password.isEmpty) ? 0.5 : 1.0)
                 }
-                
+
                 NavigationLink {
                     Text("Coming Soon")
                 } label: {
@@ -81,7 +81,7 @@ struct LoginView: View {
                         .foregroundStyle(Color("buttonBackgroundColor"))
                         .font(.headline)
                 }
-                
+
                 HStack {
                     Text("signin_no_account".localized())
                     NavigationLink {
@@ -125,7 +125,7 @@ struct LoginView: View {
             }
         }
     }
-    
+
     // Klavyeyi gizleme fonksiyonu
     private func hideKeyboard() {
         emailFocused = false

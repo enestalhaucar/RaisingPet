@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - Quiz Result Response Model
-typealias QuizResultResponseModel = QuizResultForQuizResponse 
+typealias QuizResultResponseModel = QuizResultForQuizResponse

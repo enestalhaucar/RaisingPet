@@ -11,11 +11,11 @@ import Foundation
 struct GetQuizByIdResponseModel: Codable {
     let status: String
     let data: QuizDataContainer
-    
+
     struct QuizDataContainer: Codable {
         let data: QuizDetailModel
     }
-    
+
     struct QuizDetailModel: Codable {
         let id: String?
         let category: QuizCategoryModel?
@@ -78,7 +78,7 @@ struct QuestionModel: Codable, Identifiable {
     let options: [String]
     let quizId: String
     let v: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case order
@@ -188,7 +188,7 @@ struct QuizResultForQuizAnswer: Codable, Identifiable, Hashable {
     let question: String?
     let userAnswer: String?
     let friendAnswer: String?
-    let isMatched : Bool?
-    
+    let isMatched: Bool?
+
     var id: String { question ?? UUID().uuidString }
 }

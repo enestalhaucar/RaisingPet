@@ -17,7 +17,7 @@ enum NetworkError: Error {
     case timeOut
     case noInternetConnection
     case unknown(Error?)
-    
+
     var errorMessage: String {
         switch self {
         case .invalidURL:

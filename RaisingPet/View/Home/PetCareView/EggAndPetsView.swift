@@ -42,7 +42,7 @@ struct EggAndPetsView: View {
                         // Fixed header buttons at the top
                         headerButtons
                             .padding(.top, 24)
-                        
+
                         // Yumurtalar Bölümü - Açılıp Kapanabilen (Fixed, not in ScrollView)
                         SectionHeaderView(
                             title: "egg_pets_eggs".localized(),
@@ -50,14 +50,14 @@ struct EggAndPetsView: View {
                             isExpanded: $showEggsSection
                         )
                         .padding(.top, 32)
-                        
+
                         if showEggsSection {
                             if vm.eggs.isEmpty {
                                 EmptyEggStateView()
                             } else {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
-                                        ForEach(Array(vm.eggs.enumerated()), id: \.offset) { index, egg in
+                                        ForEach(Array(vm.eggs.enumerated()), id: \.offset) { _, egg in
                                             EggCellView(item: egg) {
                                                 selectedEggData = egg
                                             }
@@ -70,14 +70,14 @@ struct EggAndPetsView: View {
                                 .frame(height: 160)
                             }
                         }
-                        
+
                         // Sahiplendiklerin Bölümü (Header is fixed)
                         SectionHeaderView(
                             title: "egg_pets_adopted".localized(),
                             isCollapsible: false
                         )
                         .padding(.top, 16)
-                        
+
                         // Only this part is scrollable
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: columns, spacing: 16) {

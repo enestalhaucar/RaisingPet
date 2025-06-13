@@ -16,7 +16,7 @@ struct PetItemGridView: View {
             ZStack {
                 Color.white.opacity(0.95)
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 20) {
                     if vm.filteredPetItems().isEmpty {
                         VStack(spacing: 16) {
@@ -25,7 +25,7 @@ struct PetItemGridView: View {
                                 .scaledToFit()
                                 .frame(width: 60, height: 60)
                                 .foregroundColor(.gray.opacity(0.7))
-                            
+
                             Text("Bu kategoride herhangi bir eşya bulunamadı.")
                                 .font(.nunito(.medium, .body16))
                                 .foregroundColor(.gray)

@@ -9,9 +9,9 @@ import SwiftUI
 import PencilKit
 
 struct CanvasView {
-    @Binding var canvasView : PKCanvasView
+    @Binding var canvasView: PKCanvasView
     @State private var toolPicker = PKToolPicker()
-    @Binding var backgroundColor : UIColor
+    @Binding var backgroundColor: UIColor
     func makeUIView(context: Context) -> PKCanvasView {
         // Varsayılan çizim aracını ayarlıyoruz:
         canvasView.tool = PKInkingTool(.pen, color: .purple, width: 10)
@@ -21,7 +21,7 @@ struct CanvasView {
         showToolPicker()
         return canvasView
     }
-    
+
 }
 extension CanvasView: UIViewRepresentable {
     func updateUIView(_ uiView: PKCanvasView, context: Context) { }

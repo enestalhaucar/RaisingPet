@@ -19,4 +19,4 @@ enum PackageType: String, Codable {
 struct PetItemWithAmount: Codable {
     let petItemId: String
     let amount: Int
-} 
+}

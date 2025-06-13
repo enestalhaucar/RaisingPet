@@ -10,7 +10,7 @@ import Combine
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    
+
     // MARK: - Published Properties
     @Published private(set) var petToDisplay: Pet?
     @Published private(set) var eggToDisplay: InventoryItem?
@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
     func fetchInitialData() async {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             // 1. Önce kullanıcının hayvanlarını çekmeyi dene.
             let petsResponse = try await petsRepository.getPets()
@@ -44,11 +44,11 @@ class HomeViewModel: ObservableObject {
                 self.isLoading = false
                 return
             }
-            
+
             // 2. Eğer hayvan yoksa, envanteri (yumurtaları) kontrol et.
             let inventoryResponse = try await inventoryRepository.getInventory()
             let eggs = inventoryResponse.data.inventory.items.filter { $0.itemType == .petItem && $0.properties.egg != nil }
-            
+
             if let firstEgg = eggs.first {
                 // Eğer yumurta varsa, onu göster.
                 self.eggToDisplay = firstEgg
@@ -56,7 +56,7 @@ class HomeViewModel: ObservableObject {
                 // Yumurta da yoksa, her iki gösterilecek öğe de nil olacak.
                 self.eggToDisplay = nil
             }
-            
+
         } catch let error as NetworkError {
             self.errorMessage = "Veri alınamadı: \(error.localizedDescription)"
             print("HomeViewModel fetch error: \(error)")
@@ -64,7 +64,7 @@ class HomeViewModel: ObservableObject {
             self.errorMessage = "Beklenmedik bir hata oluştu: \(error.localizedDescription)"
             print("HomeViewModel generic error: \(error)")
         }
-        
+
         isLoading = false
     }
-} 
+}

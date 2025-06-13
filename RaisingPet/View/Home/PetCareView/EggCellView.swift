@@ -87,7 +87,7 @@ struct EggCellView: View {
                     .font(.caption2)
                     .foregroundColor(.gray)
             }
-            
+
             // Display egg name
             Text(item.itemId.name.capitalized)
                 .font(.nunito(.medium, .caption12))

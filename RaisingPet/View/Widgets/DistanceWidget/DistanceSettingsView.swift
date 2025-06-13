@@ -5,10 +5,10 @@
 ////  Created by Enes Talha Uçar  on 16.10.2024.
 ////
 //
-//import SwiftUI
-//import PhotosUI
+// import SwiftUI
+// import PhotosUI
 //
-//struct DistanceSettingsView: View {
+// struct DistanceSettingsView: View {
 //    
 //    
 //    @State private var backgroundColor: Color = .green.opacity(0.3)
@@ -155,13 +155,13 @@
 //                .toolbar(.hidden, for: .tabBar)
 //        }
 //    }
-//}
+// }
 //
-//#Preview {
+// #Preview {
 //    DistanceSettingsView()
-//}
+// }
 //
-//struct WidgetBackgroundColorPicker : View {
+// struct WidgetBackgroundColorPicker : View {
 //    @State var colorSet : [Color] = [.black, .blue, .brown, .white, .cyan, .gray, .green, .indigo, .mint, .orange, .pink, .teal, .yellow]
 //    @State private var showColorPicker: Bool = false
 //    @State private var selectedColor: Color = .clear
@@ -258,8 +258,8 @@
 //            }
 //        
 //    }
-//}
-//struct WidgetTextColorPicker : View {
+// }
+// struct WidgetTextColorPicker : View {
 //    @State var colorSet : [Color] = [.black, .blue, .brown, .white, .cyan, .gray, .green, .indigo, .mint, .orange, .pink, .teal, .yellow]
 //    @State private var showColorPicker: Bool = false
 //    @State private var selectedColor: Color = .clear
@@ -309,9 +309,9 @@
 //            }
 //        
 //    }
-//}
+// }
 //
-//struct AddFriendListToWidget: View {
+// struct AddFriendListToWidget: View {
 //    var body: some View {
 //        ZStack {
 //            VStack(alignment: .center) {
@@ -339,11 +339,11 @@
 //            }.presentationDetents([.medium])
 //        }
 //    }
-//}
+// }
 //
 //
 //
-//class ColorPickerDelegate: NSObject, UIColorPickerViewControllerDelegate {
+// class ColorPickerDelegate: NSObject, UIColorPickerViewControllerDelegate {
 //    var didSelectColor: ((Color) -> Void)
 //    
 //    init(_ didSelectColor: @escaping ((Color) -> Void)) {
@@ -360,9 +360,9 @@
 //        print("dismiss colorPicker")
 //    }
 //    
-//}
+// }
 //
-//struct ColorPickerView: UIViewControllerRepresentable {
+// struct ColorPickerView: UIViewControllerRepresentable {
 //    private let delegate: ColorPickerDelegate
 //    private let pickerTitle: String
 //    private let selectedColor: UIColor
@@ -383,4 +383,4 @@
 //    
 //    
 //    func updateUIViewController(_ uiViewController: UIColorPickerViewController, context: Context) {}
-//}
+// }

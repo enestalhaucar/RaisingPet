@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PasswordTextField: View {
-    var placeholder : String
-    @Binding var text : String
+    var placeholder: String
+    @Binding var text: String
     @State private var isPasswordVisible: Bool = false // Şifre görünürlüğünü kontrol eden değişken
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct PasswordTextField: View {
                     TextField(placeholder, text: $text)
                         .padding()
                         .padding(.leading, 10)
-                    
+
                         .background(Color.white, in: RoundedRectangle(cornerRadius: 25))
                         .foregroundColor(.black)
                 } else {
@@ -27,11 +27,11 @@ struct PasswordTextField: View {
                     SecureField(placeholder, text: $text)
                         .padding()
                         .padding(.leading, 10)
-                    
+
                         .background(Color.white, in: RoundedRectangle(cornerRadius: 25))
                         .foregroundColor(.black)
                 }
-                
+
                 // Göz ikonu ile şifre görünürlüğünü açıp kapama butonu
                 Button(action: {
                     isPasswordVisible.toggle() // Şifre görünürlüğünü değiştirme

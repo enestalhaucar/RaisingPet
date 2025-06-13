@@ -11,27 +11,27 @@ struct HatchEggView: View {
     let item: InventoryItem
     let onClose: () -> Void
     let onHatch: (String) -> Void
-    
+
     @Environment(\.dismiss) private var dismiss
     @StateObject private var friendsViewModel = FriendsViewModel()
     @State private var now = Date()
     @State private var isPressed = false
     @State private var userDetails: [String: String] = [:]
     @State private var friendName: String?
-    
+
     private let iso: ISO8601DateFormatter = {
         let f = ISO8601DateFormatter()
         f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return f
     }()
-    
+
     private var acquiredAt: Date? {
         iso.date(from: item.acquiredAt ?? "")
     }
     private var crackedAt: Date? {
         iso.date(from: item.properties.egg?.crackedAt ?? "")
     }
-    
+
     private var totalInterval: TimeInterval {
         guard let a = acquiredAt, let c = crackedAt else { return 1 }
         return c.timeIntervalSince(a)
@@ -48,25 +48,25 @@ struct HatchEggView: View {
         guard let c = crackedAt else { return 0 }
         return max(c.timeIntervalSince(now), 0)
     }
-    
+
     private var isReadyToHatch: Bool {
         remaining <= 0
     }
-    
+
     private var eggNameCapitalized: String {
         // Convert eggName to proper capitalized form
-        return item.itemId.name.split(separator: " ").map { 
-            $0.prefix(1).uppercased() + $0.dropFirst().lowercased() 
+        return item.itemId.name.split(separator: " ").map {
+            $0.prefix(1).uppercased() + $0.dropFirst().lowercased()
         }.joined(separator: " ")
     }
-    
+
     var body: some View {
         ZStack {
 //            Background
             Image("hatchScreenBackgroundImage")
                 .resizable()
                 .ignoresSafeArea(edges: .all)
-            
+
             VStack(spacing: 20) {
                 // Top navigation bar
                 HStack {
@@ -78,16 +78,16 @@ struct HatchEggView: View {
                             .font(.title2)
                             .foregroundColor(.primary)
                     }
-                    
+
                     Spacer()
-                    
+
                     // Display only the egg name with capitalized first letters
                     Text(eggNameCapitalized)
                         .font(.nunito(.semiBold, .title222))
                         .foregroundColor(.primary)
-                    
+
                     Spacer()
-                    
+
                     // Empty spacer for symmetry
                     Image(systemName: "arrow.left")
                         .font(.title2)
@@ -95,9 +95,9 @@ struct HatchEggView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
-                
+
                 Spacer()
-                
+
                 // Parent profile images
                 if let _ = item.properties.egg?.whichPetDidItComeFrom {
                     HStack(spacing: 40) {
@@ -118,13 +118,13 @@ struct HatchEggView: View {
                             Text(userDetails["firstname"] ?? "User")
                                 .font(.nunito(.medium, .body16))
                         }
-                        
+
                         // Sadece arkadaş varsa kalp ve arkadaş profilini göster
                         if let friendName = friendName {
                             Image(systemName: "heart.fill")
                                 .foregroundColor(.pink)
                                 .font(.system(size: 20))
-                            
+
                             VStack {
                                 // Arkadaş profil resmi - farklı bir sistem ikonu
                                 Image(systemName: "person.crop.circle.badge.fill")
@@ -146,7 +146,7 @@ struct HatchEggView: View {
                     }
                     .padding(.bottom, 20)
                 }
-                
+
                 // Large egg image
                 ZStack {
                     // Try to load the egg image with different approaches
@@ -180,18 +180,18 @@ struct HatchEggView: View {
                         }
                     }
                 }
-                
+
                 // Timer display
                 Text(timeString(from: remaining))
                     .font(.nunito(.bold, .title222))
                     .foregroundColor(isReadyToHatch ? .white : .primary)
-                
+
                 // Progress bar with blue gradient
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.gray.opacity(0.2))
                         .frame(height: 16)
-                    
+
                     RoundedRectangle(cornerRadius: 10)
                         .fill(
                             LinearGradient(
@@ -204,7 +204,7 @@ struct HatchEggView: View {
                         .animation(.easeInOut, value: progress)
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.8)
-                
+
                 Spacer()
                 Spacer()
 //                // Bottom action buttons
@@ -230,7 +230,7 @@ struct HatchEggView: View {
 //                    )
 //                }
 //                .padding(.bottom, 40)
-                
+
             }
             .padding()
             .overlay {
@@ -239,13 +239,13 @@ struct HatchEggView: View {
                 }
             }
         }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { 
-            self.now = $0 
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) {
+            self.now = $0
         }
         .onAppear {
             // Get user details from UserDefaults
             userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-            
+
             Task {
                 // Her zaman listeyi çekerek UserDefaults'un güncel olmasını sağla
                 await friendsViewModel.fetchFriendsList()
@@ -255,11 +255,11 @@ struct HatchEggView: View {
         }
         .navigationBarHidden(true)
     }
-    
+
     // Helper function to create action buttons
     private func actionButton(
-        imageName: String, 
-        text: String, 
+        imageName: String,
+        text: String,
         action: @escaping () -> Void,
         hasBadge: Bool = false,
         badgeText: String = "FREE"
@@ -277,7 +277,7 @@ struct HatchEggView: View {
                     .frame(width: 70, height: 70)
                     .background(Color.blue.opacity(0.2))
                     .cornerRadius(10)
-                    
+
                     if hasBadge {
                         Text(badgeText)
                             .font(.nunito(.bold, .xsmall))
@@ -290,18 +290,18 @@ struct HatchEggView: View {
                     }
                 }
             }
-            
+
             Text(text)
                 .font(.nunito(.medium, .caption12))
                 .foregroundColor(.primary)
         }
     }
-    
+
     private func timeString(from interval: TimeInterval) -> String {
         if interval <= 0 {
             return "Ready to Hatch!"
         }
-        
+
         let s = Int(interval)
         let h = s / 3600, m = (s % 3600) / 60, sec = s % 60
         return String(format: "%02d:%02d:%02d", h, m, sec)
@@ -341,10 +341,10 @@ struct HatchEggView: View {
             isOwned: true
         )
     )
-    
+
     return HatchEggView(
         item: mockItem,
         onClose: {},
         onHatch: { _ in }
     )
-} 
+}

@@ -13,14 +13,14 @@ protocol NetworkManaging {
     func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async throws -> T
     func requestWithPublisher<T: Decodable>(endpoint: Endpoint, responseType: T.Type) -> AnyPublisher<T, NetworkError>
     func requestWithCompletion<T: Decodable>(endpoint: Endpoint, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void)
-    func upload<T: Decodable>(endpoint: Endpoint,fileData: Data,fileName: String,mimeType: String,withName: String,responseType: T.Type) async throws -> T
+    func upload<T: Decodable>(endpoint: Endpoint, fileData: Data, fileName: String, mimeType: String, withName: String, responseType: T.Type) async throws -> T
 }
 
 class NetworkManager: NetworkManaging {
     static let shared = NetworkManager()
-    
+
     private init() {}
-    
+
     // MARK: - Async/Await API
     func request<T: Decodable>(endpoint: Endpoint, responseType: T.Type) async throws -> T {
         do {
@@ -73,15 +73,15 @@ class NetworkManager: NetworkManaging {
             throw NetworkError.unknown(error)
         }
     }
-    
+
     // MARK: - Combine API
     func requestWithPublisher<T: Decodable>(endpoint: Endpoint, responseType: T.Type) -> AnyPublisher<T, NetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
-        
+
         var headers: HTTPHeaders = [:]
-        
+
         // Add auth token if required
         if endpoint.requiresAuthentication {
             if let token = UserDefaults.standard.string(forKey: "authToken") {
@@ -90,14 +90,14 @@ class NetworkManager: NetworkManaging {
                 return Fail(error: NetworkError.unauthorized).eraseToAnyPublisher()
             }
         }
-        
+
         // Add any custom headers from endpoint
         if let customHeaders = endpoint.headers {
             for (key, value) in customHeaders {
                 headers[key] = value
             }
         }
-        
+
         return AF.request(
             url,
             method: endpoint.method.alamofireMethod,
@@ -126,11 +126,11 @@ class NetworkManager: NetworkManaging {
                     }
                 }
             }
-            
+
             guard let data = response.data else {
                 throw NetworkError.invalidData
             }
-            
+
             return data
         }
         .decode(type: T.self, decoder: JSONDecoder())
@@ -145,16 +145,16 @@ class NetworkManager: NetworkManaging {
         }
         .eraseToAnyPublisher()
     }
-    
+
     // MARK: - Completion Handler API
     func requestWithCompletion<T: Decodable>(endpoint: Endpoint, responseType: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let url = endpoint.url else {
             completion(.failure(NetworkError.invalidURL))
             return
         }
-        
+
         var headers: HTTPHeaders = [:]
-        
+
         // Add auth token if required
         if endpoint.requiresAuthentication {
             if let token = UserDefaults.standard.string(forKey: "authToken") {
@@ -164,14 +164,14 @@ class NetworkManager: NetworkManaging {
                 return
             }
         }
-        
+
         // Add any custom headers from endpoint
         if let customHeaders = endpoint.headers {
             for (key, value) in customHeaders {
                 headers[key] = value
             }
         }
-        
+
         AF.request(
             url,
             method: endpoint.method.alamofireMethod,
@@ -201,12 +201,12 @@ class NetworkManager: NetworkManaging {
                     return
                 }
             }
-            
+
             guard let data = response.data else {
                 completion(.failure(NetworkError.invalidData))
                 return
             }
-            
+
             do {
                 let decodedResponse = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decodedResponse))
@@ -225,13 +225,13 @@ class NetworkManager: NetworkManaging {
         withName: String,
         responseType: T.Type
     ) async throws -> T {
-        
+
         let urlRequest = try endpoint.asURLRequest()
-        
+
         let dataTask = AF.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(fileData, withName: withName, fileName: fileName, mimeType: mimeType)
-                
+
                 // Eğer endpoint'in ek parametreleri varsa, onları da ekle
                 if let parameters = endpoint.parameters {
                     for (key, value) in parameters {
@@ -262,4 +262,4 @@ class NetworkManager: NetworkManaging {
             throw NetworkError.unknown(afError)
         }
     }
-} 
+}

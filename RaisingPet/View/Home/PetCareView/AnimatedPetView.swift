@@ -10,7 +10,7 @@ import Lottie
 
 struct AnimatedPetView: View {
     let petTypeName: String
-    
+
     // JSON dosya adını petTypeName'e göre belirle (Bundle için)
     private var jsonFileName: String? {
         switch petTypeName.lowercased() {
@@ -20,7 +20,7 @@ struct AnimatedPetView: View {
         default: return nil
         }
     }
-    
+
     // Static image adını belirle (PetsImage klasöründeki isimler)
     private var staticImageName: String {
         switch petTypeName.lowercased() {
@@ -35,7 +35,7 @@ struct AnimatedPetView: View {
         default: return "dog" // fallback
         }
     }
-    
+
     var body: some View {
         Group {
             if let jsonFileName = jsonFileName {

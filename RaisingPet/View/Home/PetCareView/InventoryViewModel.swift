@@ -25,7 +25,7 @@ final class InventoryViewModel: ObservableObject {
     @Published var pets: [Pet] = []
     @Published var petItems: [InventoryItem] = []
     @Published var allShopPetItems: [PetItem] = []
-    @Published var selectedCategory: EffectType? = nil
+    @Published var selectedCategory: EffectType?
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var currentPet: Pet?
@@ -34,7 +34,7 @@ final class InventoryViewModel: ObservableObject {
     private let inventoryRepository: InventoryRepository
     private let petRepository: PetRepository
     private let shopRepository: ShopRepository
-    
+
     // MARK: - Initialization
     init(
         inventoryRepository: InventoryRepository = RepositoryProvider.shared.inventoryRepository,
@@ -54,17 +54,17 @@ final class InventoryViewModel: ObservableObject {
         do {
             let response = try await inventoryRepository.getInventory()
             let items = response.data.inventory.items
-            
+
             eggs = items.filter {
                 $0.itemType == .shopItem && $0.itemId.category == "eggs" && !($0.properties.egg?.isCrackedByUser ?? false)
             }
-            
+
             crackedEggs = items.filter {
                 $0.itemType == .shopItem && $0.itemId.category == "eggs" && ($0.properties.egg?.isCrackedByUser ?? false)
             }
-            
+
             petItems = items.filter { $0.isPetItem }
-            
+
             if allShopPetItems.isEmpty {
                 await fetchAllShopItems()
             }
@@ -75,7 +75,7 @@ final class InventoryViewModel: ObservableObject {
             print("Fetch inventory hatası: \(error)")
         }
     }
-    
+
     func fetchAllShopItems() async {
         do {
             let response = try await shopRepository.getAllShopItems()
@@ -116,7 +116,7 @@ final class InventoryViewModel: ObservableObject {
             throw error
         }
     }
-    
+
     func deletePet(petId: String) async throws {
         isLoading = true
         errorMessage = nil
@@ -134,7 +134,7 @@ final class InventoryViewModel: ObservableObject {
             throw error
         }
     }
-    
+
     func usePetItem(petId: String, petItemId: String) async {
         isLoading = true
         errorMessage = nil
@@ -149,7 +149,7 @@ final class InventoryViewModel: ObservableObject {
                 }
                 currentPet = updatedPet
             }
-            
+
             if let updatedInventory = response.data?.inventory {
                 petItems = updatedInventory.items.filter { $0.isPetItem }
             } else {
@@ -167,11 +167,11 @@ final class InventoryViewModel: ObservableObject {
             print("Use pet item error: \(error)")
         }
     }
-    
+
     func changePetName(petId: String, petName: String, petCalling: String) async throws {
         do {
             let response = try await petRepository.changePetName(petId: petId, petName: petName, petCalling: petCalling)
-            
+
             // Güncellenmiş pet verilerini al
             let updatedPet = response.data.pet
             // pets listesinde güncelle
@@ -196,23 +196,23 @@ final class InventoryViewModel: ObservableObject {
     func getAllPetItems() -> [GroupedPetItem] {
         var inventoryItemsById: [String: InventoryItem] = [:]
         var inventoryQuantities: [String: Int] = [:]
-        
+
         for item in petItems {
             let id = item.itemId.id
             inventoryItemsById[id] = item
             inventoryQuantities[id] = item.properties.quantity ?? 0
         }
-        
+
         var result: [GroupedPetItem] = []
-        
+
         for shopItem in allShopPetItems {
-            if let id = shopItem.id, 
-               let effectTypeStr = shopItem.effectType, 
+            if let id = shopItem.id,
+               let effectTypeStr = shopItem.effectType,
                let effectTypeEnum = EffectType(rawValue: effectTypeStr) {
-                
+
                 let quantity = inventoryQuantities[id] ?? 0
                 let isInInventory = quantity > 0
-                
+
                 if let inventoryItem = inventoryItemsById[id] {
                     result.append(GroupedPetItem(
                         id: id,
@@ -237,31 +237,31 @@ final class InventoryViewModel: ObservableObject {
                 }
             }
         }
-        
+
         return result.sorted { $0.name < $1.name }
     }
-    
+
     private func createSyntheticInventoryItem(from shopItem: PetItem) -> InventoryItem {
         let itemId = shopItem.id ?? ""
         let itemName = shopItem.name ?? ""
         let isItemDeleted = shopItem.isDeleted ?? false
         let itemVersion = shopItem.v ?? 0
-        
-        var effectTypeEnum: EffectType? = nil
+
+        var effectTypeEnum: EffectType?
         if let effectTypeStr = shopItem.effectType {
             effectTypeEnum = EffectType(rawValue: effectTypeStr)
         }
-        
-        var barAffectedEnum: BarAffected? = nil
+
+        var barAffectedEnum: BarAffected?
         if let barAffectedStr = shopItem.barAffected {
             barAffectedEnum = BarAffected(rawValue: barAffectedStr)
         }
-        
-        var currencyTypeEnum: CurrencyType? = nil
+
+        var currencyTypeEnum: CurrencyType?
         if let currencyType = shopItem.currencyType {
             currencyTypeEnum = CurrencyType(rawValue: currencyType.rawValue)
         }
-        
+
         return InventoryItem(
             id: nil,
             itemType: .petItem,
@@ -288,7 +288,7 @@ final class InventoryViewModel: ObservableObject {
             )
         )
     }
-    
+
     func filteredPetItems() -> [GroupedPetItem] {
         let allItems = getAllPetItems()
         if let category = selectedCategory {
@@ -296,7 +296,7 @@ final class InventoryViewModel: ObservableObject {
         }
         return allItems
     }
-    
+
     // MARK: - Error Handling
     private func handleNetworkError(_ error: NetworkError) {
         switch error {

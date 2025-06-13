@@ -13,7 +13,7 @@ struct CountdownWidgetPreviewDesignOne: View {
     let timeRemaining: (days: Int, hours: Int, minutes: Int)
     let backgroundColor: Color
     let textColor: Color
-    
+
     var body: some View {
         ZStack {
             if let base64String = item.backgroundImageData,
@@ -35,7 +35,7 @@ struct CountdownWidgetPreviewDesignOne: View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 25))
             }
-            
+
             VStack(alignment: .leading) {
                 HStack(alignment: .bottom) {
                     Text(item.title)

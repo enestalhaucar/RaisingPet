@@ -8,21 +8,21 @@
 import GoogleMobileAds
 
 class InterstitialAdsManager: NSObject, FullScreenContentDelegate, ObservableObject {
-    
+
     // Properties
-   @Published var interstitialAdLoaded:Bool = false
-    var interstitialAd:InterstitialAd?
+   @Published var interstitialAdLoaded: Bool = false
+    var interstitialAd: InterstitialAd?
     private var adDismissalCompletion: (() -> Void)?
-    
+
     override init() {
         super.init()
     }
-    
+
     // Load InterstitialAd
-    func loadInterstitialAd(){
+    func loadInterstitialAd() {
         InterstitialAd.load(with: "ca-app-pub-3940256099942544/4411468910", request: Request()) { [weak self] add, error in
             guard let self = self else {return}
-            if let error = error{
+            if let error = error {
                 print("🔴: \(error.localizedDescription)")
                 self.interstitialAdLoaded = false
                 return
@@ -33,9 +33,9 @@ class InterstitialAdsManager: NSObject, FullScreenContentDelegate, ObservableObj
             self.interstitialAd?.fullScreenContentDelegate = self
         }
     }
-    
+
     // Display InterstitialAd
-    func displayInterstitialAd(completion: @escaping () -> Void){
+    func displayInterstitialAd(completion: @escaping () -> Void) {
         self.adDismissalCompletion = completion
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
@@ -43,17 +43,17 @@ class InterstitialAdsManager: NSObject, FullScreenContentDelegate, ObservableObj
             completion()
             return
         }
-        if let add = interstitialAd{
+        if let add = interstitialAd {
             add.present(from: root)
             self.interstitialAdLoaded = false
-        }else{
+        } else {
             print("🔵: Ad wasn't ready")
             self.interstitialAdLoaded = false
             self.loadInterstitialAd()
             completion()
         }
     }
-    
+
     // Failure notification
     func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("🟡: Failed to display interstitial ad")
@@ -61,13 +61,13 @@ class InterstitialAdsManager: NSObject, FullScreenContentDelegate, ObservableObj
         adDismissalCompletion = nil
         self.loadInterstitialAd()
     }
-    
+
     // Indicate notification
     func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("🤩: Displayed an interstitial ad")
         self.interstitialAdLoaded = false
     }
-    
+
     // Close notification
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("😔: Interstitial ad closed")

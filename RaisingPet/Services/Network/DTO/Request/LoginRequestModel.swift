@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: Login Request
-struct LoginRequestBody : Codable {
-    let email : String
-    let password : String
+struct LoginRequestBody: Codable {
+    let email: String
+    let password: String
 }

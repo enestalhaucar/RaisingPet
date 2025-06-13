@@ -14,19 +14,19 @@ class SearchFriendViewModel: ObservableObject {
     @Published var searchedFriend: SearchFriendWithTagDataUser?
     @Published var errorMessage: String?
     @Published var searchText: String = ""
-    
+
     // Repository
     private let friendsRepository: FriendsRepository
-    
+
     // Combine
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Initialization
     init(friendsRepository: FriendsRepository = RepositoryProvider.shared.friendsRepository) {
         self.friendsRepository = friendsRepository
         setupSearchPublisher()
     }
-    
+
     private func setupSearchPublisher() {
         $searchText
             .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
@@ -50,7 +50,7 @@ class SearchFriendViewModel: ObservableObject {
         errorMessage = nil
         // Arama başladıgında bir önceki aranan kullanıcıyı siliyoruz.
         self.searchedFriend = nil
-        
+
         defer { isLoading = false }
 
         guard !friendTag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
@@ -105,7 +105,7 @@ class SearchFriendViewModel: ObservableObject {
             return false // Başarısız
         }
     }
-    
+
     // MARK: - Error Handling
     private func handleNetworkError(_ error: NetworkError) {
         switch error {
@@ -119,4 +119,4 @@ class SearchFriendViewModel: ObservableObject {
             errorMessage = "Network error: \(error.localizedDescription)"
         }
     }
-} 
+}

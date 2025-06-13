@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PremiumView: View {
-    @Binding var isShow : Bool
-    
+    @Binding var isShow: Bool
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 25) {
@@ -17,17 +17,17 @@ struct PremiumView: View {
                     HStack {
                         Image("Diamond")
                             .resizable()
-                            .frame(width: 40,height: 40)
+                            .frame(width: 40, height: 40)
                         Text("Petiverse Premium")
                             .font(.title2)
                     }
-                    
+
                     Text("Try free trial with 3 days")
                         .font(.caption)
                 }
-                
+
                 Image("premiumPhoto")
-                
+
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         Image("premiumBell")
@@ -41,15 +41,13 @@ struct PremiumView: View {
                         Image("premiumPet")
                         Text("Customized Events").font(.title2)
                     }
-                    
+
                 }
                 Spacer()
                 upgradeButton(title: "Monthly", dollar: "10", timePeriod: "Month")
                 upgradeButton(title: "Yearly", dollar: "20", timePeriod: "Month")
                 upgradeButton(title: "Lifetime", dollar: "30", timePeriod: "Lifetime")
-                
-                
-                
+
             }.toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
@@ -57,7 +55,7 @@ struct PremiumView: View {
                     }, label: {
                         Image(systemName: "xmark")
                             .resizable()
-                            .frame(width: 20,height: 20)
+                            .frame(width: 20, height: 20)
                             .foregroundStyle(.black)
                     })
                 }
@@ -72,27 +70,25 @@ struct PremiumView: View {
     }
 }
 
-
-struct upgradeButton : View {
-    var title : String
-    var dollar : String
-    var timePeriod : String
+struct upgradeButton: View {
+    var title: String
+    var dollar: String
+    var timePeriod: String
     var body: some View {
         Button(action: {
             // Butona tıklandığında yapılacak işlemler
         }) {
             HStack {
-                 
+
                 // Metin
                 Text(title)
                     .font(.system(size: 20))
                     .foregroundColor(.black)
-                
+
                 Spacer()
-                
+
                 Text("\(dollar)$ / \(timePeriod)")
-                
-                
+
             }.frame(width: UIScreen.main.bounds.width * 7 / 10, height: 40)
                 .padding()
                 .background(

@@ -93,7 +93,7 @@ struct BuyPackageCounterPopUpView: View {
                 let selections = counts.compactMap { id, amt in
                     amt > 0 ? PetItemWithAmount(petItemId: id, amount: amt) : nil
                 }
-                
+
                 if isAdPackage {
                     // Reklam paketi ise, reklam göster
                     isShowingAd = true
@@ -114,7 +114,7 @@ struct BuyPackageCounterPopUpView: View {
                               ? Color.yellow.opacity(0.3)    // etkin hali
                               : Color.gray.opacity(0.3))     // devre dışı hali
                         .frame(height: 50)
-                    
+
                     Text(isAdPackage ? "buy_package_get_with_ad_button".localized() : "buy_package_get_button".localized())
                         .font(.nunito(.medium, .callout14))
                         .foregroundColor(.black)
@@ -123,7 +123,7 @@ struct BuyPackageCounterPopUpView: View {
             }
             .disabled(totalSelected != limit)
             .padding(.horizontal, 20)
-            
+
             // Reklam yüklenirken gösterilecek overlay
             if isShowingAd {
                 Color.black.opacity(0.6).ignoresSafeArea()

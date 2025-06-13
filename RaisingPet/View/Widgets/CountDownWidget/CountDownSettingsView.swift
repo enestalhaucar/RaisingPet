@@ -1,9 +1,5 @@
-
-
-
 import SwiftUI
 import PhotosUI
-
 
 struct CountDownSettingsView: View {
     @StateObject private var viewModel = CountDownSettingsViewModel()
@@ -14,7 +10,7 @@ struct CountDownSettingsView: View {
     @State private var styleIndex: Int = 0
     @State private var sizeIndex: Int = 0
     @State private var title: String = "Title"
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -30,13 +26,13 @@ struct CountDownSettingsView: View {
                         .frame(height: 300)
                         .background(Color.white.opacity(0.1))
                         .animation(.easeInOut(duration: 0.3), value: sizeIndex)
-                        
+
                         HStack {
                             Text("Widget Style").font(.title3).bold()
                             Spacer()
                         }
                         .padding(.horizontal)
-                        
+
                         ScrollView(.horizontal) {
                             HStack {
                                 ForEach(0..<4) { item in
@@ -53,26 +49,26 @@ struct CountDownSettingsView: View {
                         }
                         .padding(.horizontal)
                         .scrollIndicators(.hidden)
-                        
+
                         TextFieldView(title: $title)
-                        
+
                         DatePicker("Target Date", selection: $viewModel.targetDate, displayedComponents: [.date, .hourAndMinute])
                             .padding(.horizontal)
-                        
+
                         WidgetBackgroundPhotoPickerView(
                             styleIndex: $styleIndex,
                             selectedBackgroundPhoto: $selectedBackgroundPhoto,
                             backgroundImageData: $backgroundImageData
                         )
-                        
+
                         WidgetBackgroundColorPickerView(
                             backgroundColor: $backgroundColor
                         )
-                        
+
                         WidgetTextColorPickerView(
                             textColor: $textColor
                         )
-                        
+
                         Button(action: saveWidget) {
                             Text("Save")
                                 .bold()
@@ -89,7 +85,7 @@ struct CountDownSettingsView: View {
             .toolbar(.hidden, for: .tabBar)
         }
     }
-    
+
     func saveWidget() {
         let size: WidgetSize = {
             switch sizeIndex {
@@ -99,7 +95,7 @@ struct CountDownSettingsView: View {
             default: return .small
             }
         }()
-        
+
         let widget = PetiverseWidgetItem(
             type: .countdown,
             title: title,
@@ -110,27 +106,27 @@ struct CountDownSettingsView: View {
             countdownStyle: CountdownStyle(rawValue: styleIndex),
             targetDate: viewModel.targetDate
         )
-        
+
         saveToUserDefaults(widget: widget)
-        
+
         title = "Title"
         selectedBackgroundPhoto = nil
         backgroundImageData = nil
     }
-    
+
     func saveToUserDefaults(widget: PetiverseWidgetItem) {
         let suiteName = "group.com.petiverse.widgets"
         guard let userDefaults = UserDefaults(suiteName: suiteName) else {
             print("UserDefaults nil döndü, App Group doğru ayarlanmamış!")
             return
         }
-        
+
         var savedWidgets: [PetiverseWidgetItem] = []
         if let data = userDefaults.data(forKey: "savedWidgets"),
            let decoded = try? JSONDecoder().decode([PetiverseWidgetItem].self, from: data) {
             savedWidgets = decoded
         }
-        
+
         savedWidgets.append(widget)
         if let encoded = try? JSONEncoder().encode(savedWidgets) {
             userDefaults.set(encoded, forKey: "savedWidgets")
@@ -150,7 +146,7 @@ struct WidgetPreview: View {
     let backgroundColor: Color
     let textColor: Color
     let backgroundImageData: String?
-    
+
     var body: some View {
         let widget = PetiverseWidgetItem(
             type: .countdown,
@@ -162,7 +158,7 @@ struct WidgetPreview: View {
             countdownStyle: CountdownStyle(rawValue: styleIndex),
             targetDate: viewModel.targetDate
         )
-        
+
         Group {
             switch styleIndex {
             case 0:
@@ -222,4 +218,3 @@ struct TextFieldView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
     }
 }
-

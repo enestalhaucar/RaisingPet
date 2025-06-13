@@ -11,10 +11,10 @@ struct PetNameEditPopupView: View {
     @Binding var isPresented: Bool
     @State private var petName: String
     @State private var petCalling: String
-    
+
     let pet: Pet
     let onSave: (String, String) -> Void
-    
+
     init(isPresented: Binding<Bool>, pet: Pet, onSave: @escaping (String, String) -> Void) {
         self._isPresented = isPresented
         self.pet = pet
@@ -22,7 +22,7 @@ struct PetNameEditPopupView: View {
         self._petName = State(initialValue: pet.petName ?? pet.petType.name.capitalized)
         self._petCalling = State(initialValue: pet.petCalling ?? "pet_calling_default".localized())
     }
-    
+
     var body: some View {
         ZStack {
             // Background overlay
@@ -31,20 +31,20 @@ struct PetNameEditPopupView: View {
                 .onTapGesture {
                     isPresented = false
                 }
-            
+
             VStack(spacing: 20) {
                 // Title
                 Text("pet_name_edit_title".localized())
                     .font(.nunito(.bold, .title320))
                     .foregroundColor(.black)
-                
+
                 VStack(spacing: 16) {
                     // Pet Name Section
                     VStack(alignment: .leading, spacing: 8) {
                         Text("pet_name_label".localized())
                             .font(.nunito(.semiBold, .callout14))
                             .foregroundColor(.gray)
-                        
+
                         TextField("pet_name_placeholder".localized(), text: $petName)
                             .font(.nunito(.medium, .body16))
                             .padding(.horizontal, 16)
@@ -63,20 +63,20 @@ struct PetNameEditPopupView: View {
                                     petName = String(filtered.prefix(12))
                                 }
                             }
-                        
+
                         if petName.count >= 12 {
                             Text("pet_name_limit_info".localized())
                                 .font(.nunito(.regular, .caption12))
                                 .foregroundColor(.red)
                         }
                     }
-                    
+
                     // Pet Calling Section
                     VStack(alignment: .leading, spacing: 8) {
                         Text("pet_calling_label".localized())
                             .font(.nunito(.semiBold, .callout14))
                             .foregroundColor(.gray)
-                        
+
                         TextField("pet_calling_placeholder".localized(), text: $petCalling)
                             .font(.nunito(.medium, .body16))
                             .padding(.horizontal, 16)
@@ -95,7 +95,7 @@ struct PetNameEditPopupView: View {
                                     petCalling = String(filtered.prefix(12))
                                 }
                             }
-                        
+
                         if petCalling.count >= 12 {
                             Text("pet_calling_limit_info".localized())
                                 .font(.nunito(.regular, .caption12))
@@ -103,7 +103,7 @@ struct PetNameEditPopupView: View {
                         }
                     }
                 }
-                
+
                 // Action Buttons
                 HStack(spacing: 12) {
                     // Cancel Button
@@ -120,10 +120,10 @@ struct PetNameEditPopupView: View {
                                     .stroke(Color.gray, lineWidth: 1)
                             )
                     }
-                    
+
                     // Save Button
                     Button(action: {
-                        onSave(petName.trimmingCharacters(in: .whitespacesAndNewlines), 
+                        onSave(petName.trimmingCharacters(in: .whitespacesAndNewlines),
                                petCalling.trimmingCharacters(in: .whitespacesAndNewlines))
                         isPresented = false
                     }) {
@@ -177,4 +177,4 @@ struct PetNameEditPopupView: View {
             print("Saved: \(name), \(calling)")
         }
     )
-} 
+}

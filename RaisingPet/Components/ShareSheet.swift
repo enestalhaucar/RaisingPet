@@ -8,21 +8,20 @@
 import Foundation
 import SwiftUI
 
-struct ShareSheet : UIViewControllerRepresentable {
+struct ShareSheet: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
-    
+
     let activityItems: [Any]
-    
+
     func makeUIViewController(context: Context) -> UIActivityViewController {
         let viewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        viewController.completionWithItemsHandler = {(_,_,_,_) in
+        viewController.completionWithItemsHandler = {(_, _, _, _) in
             presentationMode.wrappedValue.dismiss()
         }
         return viewController
-        
-    }
-    
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
-    
-}
 
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+
+}

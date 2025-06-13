@@ -14,7 +14,7 @@ struct WidgetDesignViews: View {
     var backgroundColor: Color
     var textColor: Color
     var backgroundImageData: String?
-    
+
     // Stil için örnek bir widget oluştur
     private func previewWidget(for style: CountdownStyle) -> PetiverseWidgetItem {
         PetiverseWidgetItem(
@@ -28,7 +28,7 @@ struct WidgetDesignViews: View {
             targetDate: viewModel.targetDate
         )
     }
-    
+
     var body: some View {
         TabView(selection: $styleIndex) {
             // Stil 1
@@ -39,7 +39,7 @@ struct WidgetDesignViews: View {
                 textColor: textColor
             )
             .tag(0)
-            
+
             // Stil 2
             CountdownWidgetPreviewDesignTwo(
                 item: previewWidget(for: .style2),
@@ -48,7 +48,7 @@ struct WidgetDesignViews: View {
                 textColor: textColor
             )
             .tag(1)
-            
+
             // Stil 3
             CountdownWidgetPreviewDesignThree(
                 item: previewWidget(for: .style3),
@@ -57,7 +57,7 @@ struct WidgetDesignViews: View {
                 textColor: textColor
             )
             .tag(2)
-            
+
             // Stil 4
             CountdownWidgetPreviewDesignFour(
                 item: previewWidget(for: .style4),
@@ -71,7 +71,7 @@ struct WidgetDesignViews: View {
         .frame(height: 250)
         .background(Color.gray.gradient.opacity(0.1))
     }
-    
+
     // Image’ı UIImage’e çevirme yardımcı fonksiyonu
     func uiImage(from image: Image) -> UIImage? {
         let controller = UIHostingController(rootView: image)

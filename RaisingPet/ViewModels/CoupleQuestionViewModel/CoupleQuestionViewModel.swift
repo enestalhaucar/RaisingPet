@@ -21,7 +21,7 @@ class CoupleQuestionViewModel: ObservableObject {
     // Repository'ler
     private let friendsRepository: FriendsRepository
     private let quizRepository: QuizRepository
-    
+
     // MARK: - Initialization
     init(
         friendsRepository: FriendsRepository = RepositoryProvider.shared.friendsRepository,
@@ -34,7 +34,7 @@ class CoupleQuestionViewModel: ObservableObject {
     func checkFriendship() async -> Bool {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             let response = try await friendsRepository.listFriends()
             isLoading = false
@@ -55,7 +55,7 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizzes() async {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             let response = try await quizRepository.getUserQuizzes()
             self.quiz = response.data
@@ -74,7 +74,7 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizById(quizId: String) async {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             let response = try await quizRepository.getQuizById(id: quizId)
             self.selectedQuiz = response.data.data
@@ -93,7 +93,7 @@ class CoupleQuestionViewModel: ObservableObject {
     func takeQuiz(takeQuizObject: TakeQuizRequest) async {
         isLoading = true
         errorMessage = nil
-        
+
         guard let quizId = takeQuizObject.quizId else {
             isLoading = false
             errorMessage = "Hata: Quiz ID eksik."
@@ -104,7 +104,7 @@ class CoupleQuestionViewModel: ObservableObject {
             errorMessage = "Hata: Cevaplar eksik."
             return
         }
-        
+
         // TakeQuizRequest formatını Repository'nin istediği formata dönüştür
         var answersDict: [String: String] = [:]
         for answer in answers {
@@ -116,7 +116,7 @@ class CoupleQuestionViewModel: ObservableObject {
             let response = try await quizRepository.takeQuiz(quizId: quizId, answers: answersDict)
             print("TakeQuiz Başarılı")
             isLoading = false
-            
+
             await fetchQuizResult(quizId: quizId) {
                 self.quizResultLoaded = true
                 // takeQuiz sonrası cache'i güncelle
@@ -136,7 +136,7 @@ class CoupleQuestionViewModel: ObservableObject {
     func fetchQuizResult(quizId: String, completion: @escaping () -> Void = {}) async {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             let response = try await quizRepository.quizResultForQuiz(quizId: quizId)
             self.quizResult = response.data?.formattedQuizResult

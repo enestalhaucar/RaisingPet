@@ -5,8 +5,7 @@
 //  Created by Enes Talha Uçar on 8.06.2025.
 //
 
-
-import SwiftUI 
+import SwiftUI
 // MARK: - RoofSideView
 
 struct RoofSideView: View {
@@ -19,11 +18,11 @@ struct RoofSideView: View {
                 .frame(maxWidth: .infinity, maxHeight: 200)
                 .ignoresSafeArea(edges: .top)
                 .clipped()
-            
+
             HStack(spacing: 16) {
                 BackButtonView()
                     .padding(.leading, 16)
-                
+
                 AssetNumberView(iconName: "goldIcon", currencyType: .gold)
                 AssetNumberView(iconName: "diamondIcon", currencyType: .diamond)
                 Spacer()

@@ -21,7 +21,7 @@ struct RootView: View {
         if networkMonitor.isConnected {
         ZStack {
             SignInUpBackground()
-            
+
             if showSplash {
                 SplashScreenView(onSplashComplete: {
                     showSplash = false
@@ -48,7 +48,7 @@ struct RootView: View {
                                 )
                             }
                             .tag(0)
-                        
+
                         CoupleQuestionView()
                             .tabItem {
                                 TabBarIcon(
@@ -59,7 +59,7 @@ struct RootView: View {
                                 )
                             }
                             .tag(1)
-                        
+
                         WallpaperView()
                             .tabItem {
                                 TabBarIcon(
@@ -70,7 +70,7 @@ struct RootView: View {
                                 )
                             }
                             .tag(2)
-                        
+
                         ProfileView()
                             .tabItem {
                                 TabBarIcon(
@@ -103,7 +103,7 @@ struct RootView: View {
             NoInternetView()
         }
     }
-    
+
     private func handleLoginSuccess() {
         appState.isLoggedIn = true
         Task {
@@ -118,7 +118,7 @@ struct TabBarIcon: View {
     let unselectedImage: String
     let text: String
     let isSelected: Bool
-    
+
     var body: some View {
         VStack {
             Image(isSelected ? selectedImage : unselectedImage)
@@ -127,7 +127,7 @@ struct TabBarIcon: View {
                 .scaledToFit() // Görseli çerçeveye sığdır, orantıyı koru
                 .frame(width: 25, height: 25)
                 .clipped()
-                
+
             Text(text)
                 .font(.nunito(.medium, .caption211))
                 .foregroundColor(isSelected ? Color("accentColor") : .gray) // Renkleri manuel olarak ayarlıyoruz

@@ -11,14 +11,14 @@ import GoogleMobileAds
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 #if DEBUG
         // Netfox'u çalıştır
         NFX.sharedInstance().start()
 #endif
-        
+
         MobileAds.shared.start(completionHandler: nil)
-        
+
         return true
     }
 }
@@ -43,7 +43,7 @@ struct RaisingPetApp: App {
                         Task {
                             currentUserVM.refresh()
                         }
-                    } 
+                    }
                     interstitialManager.loadInterstitialAd()
                 }
         }

@@ -7,7 +7,7 @@
 import SwiftUI
 import PhotosUI
 
-//struct AlbumSettingsView: View {
+// struct AlbumSettingsView: View {
 //    @State private var photosPickerItems: [PhotosPickerItem] = []
 //    @State private var images: [UIImage] = []
 //    @State private var selectedIndex: Int = 0
@@ -237,4 +237,4 @@ import PhotosUI
 //            print("Album widget kaydedildi: \(widget.id)")
 //        }
 //    }
-//}
+// }

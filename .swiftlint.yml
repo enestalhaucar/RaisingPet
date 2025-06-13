@@ -1,0 +1,45 @@
+//
+//  .swiftlint.yml
+//  RaisingPet
+//
+//  Created by Enes Talha Uçar on 13.06.2025.
+//
+    
+    # Bu kuraları şimdilik devre dışı bırakıyoruz.
+    disabled_rules:
+        - line_length # Satır uzunluğu kuralı başlangıçta çok uyarı verebilir.
+        - trailing_whitespace # Satır sonundaki boşluklar.
+        - vertical_whitespace # Çoklu boş satırlar.
+    
+    # Kontrol edilecek klasörleri belirtiyoruz.
+    included:
+        - RaisingPet
+        - PetiverseWidget
+    
+    # Kontrol EDİLMEYECEK klasörleri/dosyaları belirtiyoruz.
+    excluded:
+        - Pods
+        - RaisingPet/Source/ThirdParty
+    
+    # Bazı kuralların ayarlarını değiştirebiliriz.
+    # Örneğin, bir tipin (class, struct) gövdesi en fazla kaç satır olabilir?
+    type_body_length:
+        - 300 # 300 satırdan sonra uyarı ver
+        - 400 # 400 satırdan sonra hata ver
+    
+    # Dosya en fazla kaç satır olabilir?
+    file_length:
+        warning: 500
+        error: 800
+    
+    # Değişken ve fonksiyon isimleri için minimum uzunluk.
+    identifier_name:
+        min_length: # Sadece minimum uzunluk için ayar
+        error: 3 # 3 karakterden kısa isimler hata verir (id, vc gibi isimler için)
+        excluded: # Ama bu isimler hariç
+        - id
+        - to
+        - vc
+        - vm
+
+

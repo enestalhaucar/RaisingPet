@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct DrawSettingsView: View {
-    @State var selectedIndex : Int = 0
-    
-    
+    @State var selectedIndex: Int = 0
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -27,7 +26,7 @@ struct DrawSettingsView: View {
 //                        .background(Color.gray.gradient.opacity(0.1))
                 }
             }
-            
+
         }
     }
 }

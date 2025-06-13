@@ -4,7 +4,7 @@ import Combine
 /// Base protocol for all repositories
 protocol BaseRepository {
     var networkManager: NetworkManaging { get }
-    
+
     init(networkManager: NetworkManaging)
 }
 
@@ -13,4 +13,4 @@ extension BaseRepository {
     init() {
         self.init(networkManager: NetworkManager.shared)
     }
-} 
+}

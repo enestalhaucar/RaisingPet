@@ -12,12 +12,12 @@ struct PetItemView: View {
     @EnvironmentObject var vm: InventoryViewModel
     @State private var isUsing = false
     @State private var isPressed = false
-    
+
     // Yüksek etkili item kontrolü (50 veya daha yüksek)
     private var isHighEffect: Bool {
         return (groupedItem.effectAmount ?? 0) >= 50
     }
-    
+
     // Item kullanılabilir mi? (envanterimizde var mı?)
     private var isUsable: Bool {
         return groupedItem.isInInventory && groupedItem.totalQuantity > 0
@@ -47,9 +47,9 @@ struct PetItemView: View {
                             Capsule().stroke(Color.black, lineWidth: 1)
                         )
                         .padding(.leading, 8)
-                    
+
                     Spacer()
-                    
+
                     // Yüksek etkili ürünler için yıldız badge (ekran görüntüsünde olduğu gibi)
                     if isHighEffect {
                         Image(systemName: "star.fill")
@@ -59,7 +59,7 @@ struct PetItemView: View {
                             .padding(.trailing, 8)
                     }
                 }
-                
+
                 // Item görseli
                 Image("\(groupedItem.name)")
                     .resizable()
@@ -67,7 +67,7 @@ struct PetItemView: View {
                     .frame(width: 38, height: 38)
                     .padding(.top, 2)
                     .saturation(isUsable ? 1.0 : 0.5)
-                
+
                 // Item adı
                 Text(groupedItem.name.capitalized)
                     .font(.nunito(.medium, .callout14))

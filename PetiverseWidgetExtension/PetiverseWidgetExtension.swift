@@ -8,24 +8,23 @@
 import WidgetKit
 import SwiftUI
 
-
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), selectedWidget: nil)
     }
-    
+
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
         let selectedWidget = loadSelectedWidget(from: configuration)
         return SimpleEntry(date: Date(), selectedWidget: selectedWidget)
     }
-    
+
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let selectedWidget = loadSelectedWidget(from: configuration)
         let entry = SimpleEntry(date: Date(), selectedWidget: selectedWidget)
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
         return Timeline(entries: [entry], policy: .after(nextUpdate))
     }
-    
+
     func loadSelectedWidget(from configuration: ConfigurationAppIntent) -> PetiverseWidgetItem? {
         guard let selectedWidgetId = configuration.selectedWidgetId,
               let uuid = UUID(uuidString: selectedWidgetId),
@@ -36,7 +35,7 @@ struct Provider: AppIntentTimelineProvider {
             print("Seçili widget bulunamadı. ID: \(configuration.selectedWidgetId ?? "nil")")
             return nil
         }
-        
+
         if let encoded = try? JSONEncoder().encode(selectedWidget) {
             userDefaults.set(encoded, forKey: "selectedWidget")
             print("Seçili widget kaydedildi: \(selectedWidget.title)")
@@ -52,13 +51,13 @@ struct SimpleEntry: TimelineEntry {
 
 struct PetiverseWidgetExtensionEntryView: View {
     var entry: Provider.Entry
-    
+
     var body: some View {
         if let widget = entry.selectedWidget {
             let backgroundColor = colorFromString(widget.backgroundColor)
             let textColor = colorFromString(widget.textColor)
             let timeRemaining = calculateTimeRemaining(from: widget.targetDate ?? Date())
-            
+
             Group {
                 switch widget.type {
                 case .countdown:
@@ -121,7 +120,7 @@ struct PetiverseWidgetExtensionEntryView: View {
                 .foregroundStyle(Color.white)
         }
     }
-    
+
     func colorFromString(_ string: String) -> Color {
         switch string.lowercased() {
         case "blue": return .blue
@@ -132,7 +131,7 @@ struct PetiverseWidgetExtensionEntryView: View {
         default: return .gray // Bilinmeyen renkler için varsayılan
         }
     }
-    
+
     func calculateTimeRemaining(from targetDate: Date) -> (days: Int, hours: Int, minutes: Int) {
         let now = Date()
         let components = Calendar.current.dateComponents([.day, .hour, .minute], from: now, to: targetDate)
@@ -146,7 +145,7 @@ struct PetiverseWidgetExtensionEntryView: View {
 
 struct PetiverseWidgetExtension: Widget {
     let kind: String = "PetiverseWidgetExtension"
-    
+
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             PetiverseWidgetExtensionEntryView(entry: entry)

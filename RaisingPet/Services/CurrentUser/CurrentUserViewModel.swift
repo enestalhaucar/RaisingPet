@@ -11,7 +11,7 @@ import SwiftUI
 
 @MainActor
 final class CurrentUserViewModel: ObservableObject {
-    
+
     // MARK: - Published Properties
     @Published var user: GetMeUser?
     @Published var isLoading = false
@@ -24,7 +24,7 @@ final class CurrentUserViewModel: ObservableObject {
     private let userProfileRepository: UserProfileRepository
     private let userRepository: UserRepository
     private let authRepository: AuthRepository
-    
+
     // MARK: - Initialization
     init(
         userProfileRepository: UserProfileRepository = RepositoryProvider.shared.userProfileRepository,
@@ -51,14 +51,14 @@ final class CurrentUserViewModel: ObservableObject {
     func refresh() {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             guard UserDefaults.standard.string(forKey: "authToken") != nil else {
                 logout()
                 self.isLoading = false
                 return
             }
-            
+
             do {
                 let response = try await userProfileRepository.getCurrentUser()
                 self.user = response.data?.data
@@ -67,7 +67,7 @@ final class CurrentUserViewModel: ObservableObject {
                 // UserDefaults'a kaydet
                 if let user = response.data?.data {
                     saveUserDataToDefaults(user: user)
-                    
+
                     // FriendsView'ı güncelle
                     NotificationCenter.default.post(name: NSNotification.Name("UserDataUpdated"), object: nil)
                 }
@@ -78,10 +78,10 @@ final class CurrentUserViewModel: ObservableObject {
                          try await loadProfileImage(from: photoURLString)
                     }
                 }
-                
+
                 self.isLoading = false
                 self.isAuthenticated = true
-                
+
             } catch let error as NetworkError {
                 handleNetworkError(error)
                 if case .unauthorized = error {
@@ -93,7 +93,7 @@ final class CurrentUserViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func saveUserDataToDefaults(user: GetMeUser) {
         UserDefaults.standard.set(user.firstname, forKey: "userFirstname")
         UserDefaults.standard.set(user.surname, forKey: "userSurname")
@@ -102,24 +102,24 @@ final class CurrentUserViewModel: ObservableObject {
         UserDefaults.standard.set(user.id, forKey: "userId")
         UserDefaults.standard.set(user.phoneNumber, forKey: "userPhoneNumber")
     }
-    
+
     // MARK: - Logout
     func logout() {
         // UserDefaults temizle
-        let keysToRemove = ["authToken", "userFirstname", "userSurname", "userEmail", 
+        let keysToRemove = ["authToken", "userFirstname", "userSurname", "userEmail",
                            "userFriendTag", "userId", "userPhoneNumber", "userProfilePhoto"]
         keysToRemove.forEach { UserDefaults.standard.removeObject(forKey: $0) }
-        
+
         // State'i temizle
         self.isAuthenticated = false
         self.user = nil
         self.profileImage = nil
         self.isLoading = false
         self.errorMessage = nil
-        
+
         print("Çıkış yapıldı - tüm oturum verileri temizlendi")
     }
-    
+
     // MARK: - Helper Methods
     private func loadProfileImage(from urlString: String) async throws {
         do {
@@ -132,7 +132,7 @@ final class CurrentUserViewModel: ObservableObject {
             print("Profil fotoğrafı indirilemedi: \(error)")
         }
     }
-    
+
     private func handleNetworkError(_ error: NetworkError) {
         switch error {
         case .serverError(let statusCode, let message):

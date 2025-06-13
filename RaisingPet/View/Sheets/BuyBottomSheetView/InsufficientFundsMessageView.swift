@@ -16,11 +16,11 @@ struct InsufficientFundsMessageView: View {
     let userDiamond: Int
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     private func getInsufficientFundsMessage() -> String? {
         let totalGoldPrice = (item.goldPrice ?? 0) * (showCounter ? counterNumber : 1)
         let totalDiamondPrice = (item.diamondPrice ?? 0) * (showCounter ? counterNumber : 1)
-        
+
         // Sadece Gold fiyatı varsa
         if totalGoldPrice > 0 && totalDiamondPrice == 0 {
             if userGold < totalGoldPrice {
@@ -39,12 +39,12 @@ struct InsufficientFundsMessageView: View {
         else if totalGoldPrice > 0 && totalDiamondPrice > 0 {
             let canAffordWithGold = userGold >= totalGoldPrice
             let canAffordWithDiamond = userDiamond >= totalDiamondPrice
-            
+
             if !canAffordWithGold && !canAffordWithDiamond {
                 // Her ikisi de yeterli değil - daha az eksik olanı göster
                 let goldShortage = totalGoldPrice - userGold
                 let diamondShortage = totalDiamondPrice - userDiamond
-                
+
                 if goldShortage <= diamondShortage {
                     return String(format: "bottom_sheet_item_purchase".localized(), totalGoldPrice, goldShortage)
                 } else {
@@ -52,10 +52,10 @@ struct InsufficientFundsMessageView: View {
                 }
             }
         }
-        
+
         return nil
     }
-    
+
     var body: some View {
         if let insufficientMessage = getInsufficientFundsMessage() {
             VStack(spacing: 15) {
@@ -63,7 +63,7 @@ struct InsufficientFundsMessageView: View {
                     .font(.nunito(.medium, .callout14))
                     .foregroundStyle(.red)
                     .padding(.horizontal, 20)
-                
+
                 DiamondPurchaseOptionsView(vm: vm, currentVM: currentVM)
             }
         }

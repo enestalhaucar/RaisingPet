@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 // MARK: - Supporting Views
 struct ItemImageView: View {
     var imageName: String
@@ -34,13 +33,13 @@ struct BuyCounterView: View {
                         Image(systemName: "minus")
                             .opacity(counterNumber == 1 ? 0.3 : 1)
                     }
-                    
+
                     Spacer()
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(width: 90, height: 25)
                             .foregroundColor(.yellow.opacity(0.4))
-                        
+
                         Text("\(counterNumber)")
                             .font(.nunito(.medium, .callout14))
                     }
@@ -70,7 +69,7 @@ struct CounterItemBackgroundView: View {
     var counterNumber: Int
     var badgeVisible: Bool = false
     var onTap: () -> Void
-    
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
@@ -78,7 +77,7 @@ struct CounterItemBackgroundView: View {
                 .foregroundColor(.yellow.opacity(0.4))
             Text("\(counterNumber)")
                 .font(.nunito(.medium, .callout14))
-            
+
             if badgeVisible {
                 HStack {
                     Spacer()

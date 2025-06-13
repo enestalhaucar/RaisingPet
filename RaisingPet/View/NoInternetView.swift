@@ -5,9 +5,9 @@ struct NoInternetView: View {
         ZStack {
             Color("AppBackgroundColor") // Projendeki genel arka plan rengi varsa onu kullanabilirsin
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 25) {
-                Image(systemName: "wifi.exclamationmark.circle.fill") 
+                Image(systemName: "wifi.exclamationmark.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
@@ -16,7 +16,7 @@ struct NoInternetView: View {
                 Text("no_internet_title")
                     .font(.nunito(.bold, .title222))
                     .foregroundStyle(.black)
-                
+
                 Text("no_internet_message")
                     .font(.nunito(.regular, .body16))
                     .foregroundStyle(.black.opacity(0.7))

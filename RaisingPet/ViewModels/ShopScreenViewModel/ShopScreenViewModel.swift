@@ -14,18 +14,18 @@ class ShopScreenViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var allItems: AllItems?
-    
+
     private let shopRepository: ShopRepository
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(shopRepository: ShopRepository = ShopRepositoryImpl()) {
         self.shopRepository = shopRepository
     }
-    
+
     func fetchAllShopItem(completion: @escaping () -> Void = {}) {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             do {
                 let response = try await shopRepository.getAllShopItems()
@@ -42,11 +42,11 @@ class ShopScreenViewModel: ObservableObject {
             }
         }
     }
-    
+
     func buyShopItem(itemId: String, mine: MineEnum, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             do {
                 try await shopRepository.buyShopItem(itemId: itemId, mine: mine)
@@ -64,11 +64,11 @@ class ShopScreenViewModel: ObservableObject {
             }
         }
     }
-    
+
     func buyPetItem(itemId: String, amount: Int, mine: MineEnum, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             do {
                 try await shopRepository.buyPetItem(itemId: itemId, amount: amount, mine: mine)
@@ -85,11 +85,11 @@ class ShopScreenViewModel: ObservableObject {
             }
         }
     }
-    
+
     func buyPackageItem(packageType: PackageType, packageId: String, mine: MineEnum? = nil, petItemsWithAmounts: [PetItemWithAmount]? = nil, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             do {
                 try await shopRepository.buyPackageItem(
@@ -112,7 +112,7 @@ class ShopScreenViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func handleNetworkError(_ error: NetworkError) {
         switch error {
         case .serverError(let statusCode, let message):

@@ -12,23 +12,23 @@ enum UserEndpoint: Endpoint {
         phoneNumber: String?
     )
     case uploadProfilePhoto(photo: UIImage)
-    
+
     // Could add other user-related endpoints like password change, etc.
-    
+
     var path: String {
         switch self {
         case .updateProfile, .uploadProfilePhoto:
             return "/users/update-me"
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .updateProfile, .uploadProfilePhoto:
             return .patch
         }
     }
-    
+
     var parameters: [String: Any]? {
         switch self {
         case .updateProfile(let firstName, let lastName, let email, let phoneNumber):
@@ -42,7 +42,7 @@ enum UserEndpoint: Endpoint {
             return nil // We'll handle this specially with multipart
         }
     }
-    
+
     var encoding: ParameterEncoding {
         switch self {
         case .uploadProfilePhoto:
@@ -51,7 +51,7 @@ enum UserEndpoint: Endpoint {
             return JSONEncoding.default
         }
     }
-    
+
     var requiresAuthentication: Bool {
         return true
     }
@@ -65,9 +65,9 @@ protocol UserRepository: BaseRepository {
         email: String?,
         phoneNumber: String?
     ) async throws -> GetMeResponseModel
-    
+
     func uploadProfilePhoto(photo: UIImage) async throws -> GetMeResponseModel
-    
+
     func updateProfileWithPhoto(
         firstName: String?,
         lastName: String?,
@@ -75,12 +75,12 @@ protocol UserRepository: BaseRepository {
         phoneNumber: String?,
         photo: UIImage?
     ) async throws -> GetMeResponseModel
-    
+
     func getUserImage(imageURL: String) async throws -> Data
-    
+
     func logOut()
     func getUserDetails() -> [String: String]
-    
+
     // Combine variants
     func updateProfilePublisher(
         firstName: String?,
@@ -93,11 +93,11 @@ protocol UserRepository: BaseRepository {
 // MARK: - User Repository Implementation
 class UserRepositoryImpl: UserRepository {
     let networkManager: NetworkManaging
-    
+
     required init(networkManager: NetworkManaging) {
         self.networkManager = networkManager
     }
-    
+
     func updateProfile(
         firstName: String? = nil,
         lastName: String? = nil,
@@ -113,7 +113,7 @@ class UserRepositoryImpl: UserRepository {
             ),
             responseType: GetMeResponseModel.self
         )
-        
+
         // Update local storage with new user data
         if let userData = response.data?.data {
             UserDefaults.standard.set(userData.firstname, forKey: "userFirstname")
@@ -129,15 +129,15 @@ class UserRepositoryImpl: UserRepository {
                 UserDefaults.standard.set(photoURL, forKey: "userPhotoURL")
             }
         }
-        
+
         return response
     }
-    
+
     func uploadProfilePhoto(photo: UIImage) async throws -> GetMeResponseModel {
         guard let imageData = photo.jpegData(compressionQuality: 0.8) else {
             throw NetworkError.invalidData // Veya başka uygun bir hata
         }
-        
+
         return try await networkManager.upload(
             endpoint: UserEndpoint.uploadProfilePhoto(photo: photo),
             fileData: imageData,
@@ -147,7 +147,7 @@ class UserRepositoryImpl: UserRepository {
             responseType: GetMeResponseModel.self
         )
     }
-    
+
     func updateProfileWithPhoto(
         firstName: String? = nil,
         lastName: String? = nil,
@@ -157,45 +157,45 @@ class UserRepositoryImpl: UserRepository {
     ) async throws -> GetMeResponseModel {
         // This function would need a custom implementation for multipart form data upload
         // that includes both text fields and photo
-        
+
         let url = URL(string: APIManager.baseURL + UserEndpoint.uploadProfilePhoto(photo: UIImage()).path)!
         let token = UserDefaults.standard.string(forKey: "authToken") ?? ""
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+
         // Create multipart form data
         let boundary = UUID().uuidString
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
+
         var body = Data()
-        
+
         // Add text fields
         if let firstName = firstName {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
             body.append("Content-Disposition: form-data; name=\"firstname\"\r\n\r\n".data(using: .utf8)!)
             body.append("\(firstName)\r\n".data(using: .utf8)!)
         }
-        
+
         if let lastName = lastName {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
             body.append("Content-Disposition: form-data; name=\"surname\"\r\n\r\n".data(using: .utf8)!)
             body.append("\(lastName)\r\n".data(using: .utf8)!)
         }
-        
+
         if let email = email {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
             body.append("Content-Disposition: form-data; name=\"email\"\r\n\r\n".data(using: .utf8)!)
             body.append("\(email)\r\n".data(using: .utf8)!)
         }
-        
+
         if let phoneNumber = phoneNumber {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
             body.append("Content-Disposition: form-data; name=\"phoneNumber\"\r\n\r\n".data(using: .utf8)!)
             body.append("\(phoneNumber)\r\n".data(using: .utf8)!)
         }
-        
+
         // Add the photo if provided
         if let photo = photo, let imageData = photo.jpegData(compressionQuality: 0.8) {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
@@ -204,25 +204,25 @@ class UserRepositoryImpl: UserRepository {
             body.append(imageData)
             body.append("\r\n".data(using: .utf8)!)
         }
-        
+
         // Close the boundary
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
+
         request.httpBody = body
-        
+
         // Perform the request manually
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         // Verify the response
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
             throw NetworkError.serverError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0, message: nil)
         }
-        
+
         // Decode the response
         let decoder = JSONDecoder()
         let responseModel = try decoder.decode(GetMeResponseModel.self, from: data)
-        
+
         // Update UserDefaults with the new data
         if let userData = responseModel.data?.data {
             UserDefaults.standard.set(userData.firstname, forKey: "userFirstname")
@@ -237,25 +237,25 @@ class UserRepositoryImpl: UserRepository {
             if let photoURL = userData.photoURL {
                 UserDefaults.standard.set(photoURL, forKey: "userPhotoURL")
             }
-            
+
             // Save the photo to UserDefaults
             if let photo = photo, let photoData = photo.jpegData(compressionQuality: 0.8) {
                 UserDefaults.standard.set(photoData, forKey: "userProfilePhoto")
             }
         }
-        
+
         return responseModel
     }
-    
+
     func getUserImage(imageURL: String) async throws -> Data {
         // Check if the URL is empty or "N/A"
         if imageURL.isEmpty || imageURL == "N/A" {
             throw NetworkError.invalidURL
         }
-        
+
         // Normalize the URL to ensure it's properly formed
         let normalizedURL: String
-        
+
         // Case 1: If the URL already has a protocol (http:// or https://)
         if imageURL.hasPrefix("http://") || imageURL.hasPrefix("https://") {
             normalizedURL = imageURL
@@ -273,31 +273,31 @@ class UserRepositoryImpl: UserRepository {
                 normalizedURL = APIManager.baseURL + "/" + imageURL
             }
         }
-        
+
         print("Requesting image from normalized URL: \(normalizedURL)")
-        
+
         guard let url = URL(string: normalizedURL) else {
             print("Invalid URL string: \(normalizedURL)")
             throw NetworkError.invalidURL
         }
-        
+
         let token = UserDefaults.standard.string(forKey: "authToken") ?? ""
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            
+
             // Check if the response is valid
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw NetworkError.invalidResponse
             }
-            
+
             if !(200...299).contains(httpResponse.statusCode) {
                 print("Image download failed with status code: \(httpResponse.statusCode)")
-                
+
                 // For 404 errors on profile images, you might want to return a placeholder image
                 if httpResponse.statusCode == 404 {
                     // If we have a placeholder image in the assets, return its data
@@ -306,17 +306,17 @@ class UserRepositoryImpl: UserRepository {
                         return placeholderData
                     }
                 }
-                
+
                 throw NetworkError.serverError(statusCode: httpResponse.statusCode, message: "Failed to load image")
             }
-            
+
             return data
         } catch {
             print("Error downloading image: \(error.localizedDescription)")
             throw NetworkError.unknown(error)
         }
     }
-    
+
     func logOut() {
         UserDefaults.standard.removeObject(forKey: "authToken")
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
@@ -329,26 +329,26 @@ class UserRepositoryImpl: UserRepository {
         UserDefaults.standard.removeObject(forKey: "userProfilePhoto")
         UserDefaults.standard.removeObject(forKey: "userPhoto")
         UserDefaults.standard.removeObject(forKey: "userPhotoURL")
-        
+
         // Clear any cached images
         UserDefaults.standard.removeObject(forKey: "userProfilePhoto")
-        
+
         // Clear all data that might be associated with this user
         let userRelatedKeys = UserDefaults.standard.dictionaryRepresentation().keys.filter { key in
             key.hasPrefix("user") || key.contains("profile") || key.contains("Photo")
         }
-        
+
         for key in userRelatedKeys {
             UserDefaults.standard.removeObject(forKey: key)
         }
-        
+
         print("User has been fully logged out and all data cleared")
     }
-    
+
     func getUserDetails() -> [String: String] {
         return Utilities.shared.getUserDetailsFromUserDefaults()
     }
-    
+
     // MARK: - Combine API
     func updateProfilePublisher(
         firstName: String? = nil,
@@ -384,4 +384,4 @@ class UserRepositoryImpl: UserRepository {
         })
         .eraseToAnyPublisher()
     }
-} 
+}

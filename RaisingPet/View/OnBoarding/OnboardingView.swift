@@ -10,13 +10,13 @@ import SwiftUI
 struct OnboardingView: View {
     @State private var currentPage = 0
     var onOnboardingComplete: () -> Void
-    
+
     let pages = [
         (image: "onboardingFirstImage", title: "onboarding_first_title".localized(), subtitle: "onboarding_first_subtitle".localized()),
         (image: "onboardingSecondImage", title: "onboarding_second_title".localized(), subtitle: "onboarding_second_subtitle".localized()),
         (image: "onboardingThirdImage", title: "onboarding_third_title".localized(), subtitle: "onboarding_third_subtitle".localized())
     ]
-    
+
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
@@ -31,7 +31,7 @@ struct OnboardingView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-            
+
             Button(action: {
                 if currentPage < pages.count - 1 {
                     withAnimation {
@@ -64,7 +64,7 @@ struct OnboardingPageView: View {
     let imageName: String
     let title: String
     let subtitle: String
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Image(imageName)
@@ -72,20 +72,19 @@ struct OnboardingPageView: View {
                 .scaledToFit()
                 .frame(maxHeight: 300)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
-            
+
             Text(title)
                 .font(.nunito(.bold, .title222))
                 .multilineTextAlignment(.center)
-            
+
             Text(subtitle)
                 .font(.nunito(.medium, .headline17))
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-            
+
             Spacer()
         }
         .padding(.top, 50)
     }
 }
-

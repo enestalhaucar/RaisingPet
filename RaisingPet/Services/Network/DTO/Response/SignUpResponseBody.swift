@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 // MARK: Sign Up Response
-struct SignUpResponseBody : Codable {
-    let status : String
-    let token : String
-    let data : UserData
+struct SignUpResponseBody: Codable {
+    let status: String
+    let token: String
+    let data: UserData
 }

@@ -11,10 +11,10 @@ struct PetItemGroupsSection: View {
     let onSelect: (ShopItem) -> Void
 
     private let allGroups: [(title: String, key: String)] = [
-        ("shop_group_edible".localized(),    "edibleMaterial"),
+        ("shop_group_edible".localized(), "edibleMaterial"),
         ("shop_group_drinkable".localized(), "drinkableMaterial"),
-        ("shop_group_cleaning".localized(),  "cleaningMaterial"),
-        ("shop_group_fun".localized(),       "funMaterial")
+        ("shop_group_cleaning".localized(), "cleaningMaterial"),
+        ("shop_group_fun".localized(), "funMaterial")
     ]
 
     private var nonEmptyGroups: [(title: String, key: String)] {
@@ -32,9 +32,9 @@ struct PetItemGroupsSection: View {
             ThreeColumnGrid(items: filtered, id: \.id) { pet in
                 ShopItemView(
                     imageName: pet.name ?? "foodIcon",
-                    goldCost:   pet.goldPrice,
+                    goldCost: pet.goldPrice,
                     diamondCost: pet.diamondPrice,
-                    price:      nil
+                    price: nil
                 ) {
                     onSelect(pet.toShopItem())
                 }

@@ -19,28 +19,28 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var passwordConfirm = ""
     @State private var showError = false
-    
+
     // Focus state değişkenleri
     @FocusState private var firstnameFocused: Bool
     @FocusState private var surnameFocused: Bool
     @FocusState private var emailFocused: Bool
     @FocusState private var passwordFocused: Bool
     @FocusState private var passwordConfirmFocused: Bool
-    
+
     var onRegisterSuccess: () -> Void
 
     var body: some View {
         NavigationStack {
             ZStack {
                 SignInUpBackground()
-                
+
                 // Klavye dışına dokununca klavyeyi gizle
                 Color.clear
                     .contentShape(Rectangle())
                     .onTapGesture {
                         hideKeyboard()
                     }
-                
+
                 VStack(spacing: 25) {
                     Spacer()
                     Text("signup_welcome_title".localized())
@@ -49,7 +49,7 @@ struct SignUpView: View {
                     Text("signup_welcome_subtitle".localized())
                         .font(.headline)
                         .fontWeight(.regular)
-                    
+
                     Spacer()
                     MailTextField(placeholder: "signup_firstname_placeholder".localized(), text: $firstname)
                         .focused($firstnameFocused)
@@ -110,9 +110,9 @@ struct SignUpView: View {
                                 )
                             }
                         }
-                    
+
                     Spacer()
-                    
+
                     Button(action: {
                         hideKeyboard()
                         if validateInputs() {
@@ -177,7 +177,7 @@ struct SignUpView: View {
             .navigationBarBackButtonHidden(true)
         }
     }
-    
+
     // Klavyeyi gizleme fonksiyonu
     private func hideKeyboard() {
         firstnameFocused = false
@@ -186,7 +186,7 @@ struct SignUpView: View {
         passwordFocused = false
         passwordConfirmFocused = false
     }
-    
+
     private func validateInputs() -> Bool {
         return !firstname.isEmpty && !surname.isEmpty &&
                !email.isEmpty && ValidationUtility.isValidEmail(email) &&

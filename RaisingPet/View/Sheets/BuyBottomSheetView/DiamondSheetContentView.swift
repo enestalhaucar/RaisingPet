@@ -5,7 +5,6 @@
 //  Created by Enes Talha Uçar on 13.06.2025.
 //
 
-
 import SwiftUI
 
 // MARK: - Diamond Sheet Content
@@ -15,14 +14,14 @@ struct DiamondSheetContentView: View {
     let dismiss: DismissAction
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
                 SheetHeaderView(dismiss: dismiss)
-                
+
                 ItemInfoView(item: item, showCounter: .constant(false), counterNumber: .constant(counterNumber))
-                
+
                 Button {
                     Task {
                         await vm.buyShopItem(itemId: item.id!, mine: .diamond) {

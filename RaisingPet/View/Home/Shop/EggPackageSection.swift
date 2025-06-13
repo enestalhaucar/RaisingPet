@@ -21,19 +21,19 @@ struct EggPackageSection: View {
                 price: nil
             ) {
                 let shopItem = ShopItem(
-                    id:         egg.id,
-                    name:       egg.name,
+                    id: egg.id,
+                    name: egg.name,
                     description: egg.description,
-                    category:   .eggs,
-                    isDeleted:  egg.isDeleted,
-                    v:          egg.v,
-                    duration:   egg.eggType?.duration,
+                    category: .eggs,
+                    isDeleted: egg.isDeleted,
+                    v: egg.v,
+                    duration: egg.eggType?.duration,
                     isPurchasable: true,
                     diamondPrice: egg.diamondPrice,
-                    goldPrice:    egg.goldPrice,
-                    quantity:     egg.amount,
-                    price:        nil,
-                    isOwned:      false
+                    goldPrice: egg.goldPrice,
+                    quantity: egg.amount,
+                    price: nil,
+                    isOwned: false
                 )
                 onSelect(shopItem)
             }

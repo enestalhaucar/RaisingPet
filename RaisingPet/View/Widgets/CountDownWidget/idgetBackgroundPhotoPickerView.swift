@@ -12,7 +12,7 @@ struct WidgetBackgroundPhotoPickerView: View {
     @Binding var styleIndex: Int
     @Binding var selectedBackgroundPhoto: PhotosPickerItem?
     @Binding var backgroundImageData: String?
-    
+
     var body: some View {
         if styleIndex != 2 { // Stil 3’te fotoğraf kullanılmıyor
             PhotosPicker(selection: $selectedBackgroundPhoto, matching: .images) {

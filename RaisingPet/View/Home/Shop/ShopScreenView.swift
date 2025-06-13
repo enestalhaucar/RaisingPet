@@ -34,12 +34,12 @@ struct ShopScreenView: View {
     @State private var packageItems: [PetItemType] = []
     @State private var selectedPetItemPackage: PetItemPackage?
     @State private var packageLimit = 0
-    
+
     // — Paket alımları için uyarılar
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
-    
+
     @State private var isShowingAd = false
     @State private var isAdPackage: Bool = false
 
@@ -123,7 +123,7 @@ struct ShopScreenView: View {
                         )
                         .zIndex(1)
                     }
-                    
+
                     // Reklam yükleniyor göstergesi
                     if isShowingAd {
                         Color.black.opacity(0.4)
@@ -141,7 +141,7 @@ struct ShopScreenView: View {
             .navigationBarBackButtonHidden(true)
             .onAppear {
                 Task {
-                    vm.fetchAllShopItem() {
+                    vm.fetchAllShopItem {
                         currentUserVM.refresh()
                     }
                     interstitialManager.loadInterstitialAd()
@@ -185,7 +185,7 @@ struct ShopScreenView: View {
         selectedShopItem = item
         showShopSheet = true
     }
-    
+
     // MARK: - Paket Tıklama Yönetimi
     private func handlePackageTap(_ pkg: PetItemPackage) {
         guard let user = currentUserVM.user, let packageId = pkg.id else { return }
@@ -194,7 +194,7 @@ struct ShopScreenView: View {
         if name.contains("Ad") {
             isAdPackage = true
             openPackagePopup(pkg)
-            
+
         } else if name.contains("Premium") {
             isAdPackage = false
             guard user.role == "premium" else {
@@ -203,12 +203,12 @@ struct ShopScreenView: View {
                 showAlert = true
                 return
             }
-            
+
             // Bekleme süresi kontrolü zaten arayüzde yapılıyor, bu ek bir güvence.
             if let _ = packageState(for: pkg).remainingTime { return }
-            
+
             openPackagePopup(pkg)
-            
+
         } else { // "Free" paket olduğunu varsayıyoruz
             isAdPackage = false
             if let _ = packageState(for: pkg).remainingTime { return }
@@ -216,26 +216,26 @@ struct ShopScreenView: View {
             openPackagePopup(pkg)
         }
     }
-    
+
     private func openPackagePopup(_ pkg: PetItemPackage) {
         selectedPetItemPackage = pkg
         packageItems = pkg.petItemTypes ?? []
         packageLimit = pkg.limit ?? 0
         showPackagePopup = true
     }
-    
+
     // Kullanıcı modelinde `packageClaimDates: [String: Date]?` olduğunu varsayar.
     private func packageState(for pkg: PetItemPackage) -> (remainingTime: TimeInterval?, isTappable: Bool) {
         guard let user = currentUserVM.user, let packageId = pkg.id else {
             return (nil, false)
         }
-        
+
         let name = pkg.name ?? ""
 
         if name.contains("Premium") && user.role != "premium" {
             return (nil, false)
         }
-        
+
         if name.contains("Free") || name.contains("Premium") {
             if let lastClaimDate = user.packageClaimDates?[packageId] {
                 let cooldown: TimeInterval = 24 * 60 * 60
@@ -246,7 +246,7 @@ struct ShopScreenView: View {
                 }
             }
         }
-        
+
         return (nil, true)
     }
 }

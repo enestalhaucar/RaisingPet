@@ -5,7 +5,6 @@
 //  Created by Enes Talha Uçar  on 16.11.2024.
 //
 
-
 import Foundation
 import Combine
 
@@ -14,27 +13,27 @@ class LoginViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var loginSuccess: Bool = false
     @Published var errorMessage: String?
-    
+
     // Repository
     private let authRepository: AuthRepository
-    
+
     // MARK: - Initialization
     init(authRepository: AuthRepository = RepositoryProvider.shared.authRepository) {
         self.authRepository = authRepository
     }
-    
+
     func login(with email: String, password: String) {
         // İstek başlatılmadan önce durumu güncelle
         isLoading = true
         errorMessage = nil
-        
+
         Task { @MainActor in
             do {
                 let response = try await authRepository.login(email: email, password: password)
-                
+
                 // Başarılı giriş
                 saveUserToUserDefaults(data: response)
-                
+
                 isLoading = false
                 loginSuccess = true
                 print("user logged in successfully")
@@ -47,7 +46,7 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func saveUserToUserDefaults(data: LoginResponseModel) {
         let defaults = UserDefaults.standard
         defaults.set(data.token, forKey: "authToken")
@@ -57,11 +56,9 @@ class LoginViewModel: ObservableObject {
         defaults.set(data.data.user.friendTag, forKey: "userFriendTag")
         defaults.set(data.data.user._id, forKey: "userId")
         defaults.set(true, forKey: "isLoggedIn")
-        
-        defaults.synchronize() 
-        
+
+        defaults.synchronize()
+
         print("User details saved to UserDefaults")
     }
 }
-
-

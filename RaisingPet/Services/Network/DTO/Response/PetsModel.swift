@@ -19,8 +19,8 @@ struct Pet: Codable, Identifiable {
     let isHatched: Bool
     let isDeleted: Bool
     let petHistory: PetHistory
-    let petCalling : String?
-    let petName : String
+    let petCalling: String?
+    let petName: String
     let version: Int
     let hatchedAt: String
     let nextBarUpdate: String

@@ -10,12 +10,12 @@ import SwiftUI
 struct SplashScreenView: View {
     @State private var isActive = false
     var onSplashComplete: () -> Void
-    
+
     var body: some View {
         ZStack {
             Color.white
                 .ignoresSafeArea()
-            
+
             Image("logoPetiverse")
                 .resizable()
                 .scaledToFit()

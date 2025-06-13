@@ -8,7 +8,7 @@ enum PetEndpoint: Endpoint {
     case petItemInteraction(petId: String, petItemId: String)
     case deletePet(id: String)
     case changePetName(petId: String, petName: String, petCalling: String)
-    
+
     var path: String {
         switch self {
         case .getPets:
@@ -23,7 +23,7 @@ enum PetEndpoint: Endpoint {
             return "/pets/change-pet-name"
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .getPets:
@@ -36,7 +36,7 @@ enum PetEndpoint: Endpoint {
             return .patch
         }
     }
-    
+
     var parameters: [String: Any]? {
         switch self {
         case .getPets:
@@ -84,12 +84,12 @@ struct ChangePetNameData: Codable {
 // MARK: - Pet Repository Protocol
 protocol PetRepository: BaseRepository {
     func getPets() async throws -> GetPetsResponseModel
-    func buyPetItem(petId: String, itemId: String) async throws -> Void
-    func petItemInteraction(petId: String, petItemId: String) async throws -> Void
+    func buyPetItem(petId: String, itemId: String) async throws
+    func petItemInteraction(petId: String, petItemId: String) async throws
     func petItemInteractionWithResponse(petId: String, petItemId: String) async throws -> PetItemInteractionResponse
-    func deletePet(id: String) async throws -> Void
+    func deletePet(id: String) async throws
     func changePetName(petId: String, petName: String, petCalling: String) async throws -> ChangePetNameResponse
-    
+
     // Combine variants
     func getPetsPublisher() -> AnyPublisher<GetPetsResponseModel, NetworkError>
     func buyPetItemPublisher(petId: String, itemId: String) -> AnyPublisher<Void, NetworkError>
@@ -102,18 +102,18 @@ protocol PetRepository: BaseRepository {
 // MARK: - Pet Repository Implementation
 class PetRepositoryImpl: PetRepository {
     let networkManager: NetworkManaging
-    
+
     required init(networkManager: NetworkManaging) {
         self.networkManager = networkManager
     }
-    
+
     func getPets() async throws -> GetPetsResponseModel {
         return try await networkManager.request(
             endpoint: PetEndpoint.getPets,
             responseType: GetPetsResponseModel.self
         )
     }
-    
+
     func buyPetItem(petId: String, itemId: String) async throws {
         // Using EmptyResponse for void returns
         struct EmptyResponse: Decodable {}
@@ -122,7 +122,7 @@ class PetRepositoryImpl: PetRepository {
             responseType: EmptyResponse.self
         )
     }
-    
+
     func petItemInteraction(petId: String, petItemId: String) async throws {
         struct EmptyResponse: Decodable {}
         _ = try await networkManager.request(
@@ -130,14 +130,14 @@ class PetRepositoryImpl: PetRepository {
             responseType: EmptyResponse.self
         )
     }
-    
+
     func petItemInteractionWithResponse(petId: String, petItemId: String) async throws -> PetItemInteractionResponse {
         return try await networkManager.request(
             endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
             responseType: PetItemInteractionResponse.self
         )
     }
-    
+
     func deletePet(id: String) async throws {
         struct EmptyResponse: Decodable {}
         _ = try await networkManager.request(
@@ -145,14 +145,14 @@ class PetRepositoryImpl: PetRepository {
             responseType: EmptyResponse.self
         )
     }
-    
+
     func changePetName(petId: String, petName: String, petCalling: String) async throws -> ChangePetNameResponse {
         return try await networkManager.request(
             endpoint: PetEndpoint.changePetName(petId: petId, petName: petName, petCalling: petCalling),
             responseType: ChangePetNameResponse.self
         )
     }
-    
+
     // MARK: - Combine API
     func getPetsPublisher() -> AnyPublisher<GetPetsResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
@@ -160,7 +160,7 @@ class PetRepositoryImpl: PetRepository {
             responseType: GetPetsResponseModel.self
         )
     }
-    
+
     func buyPetItemPublisher(petId: String, itemId: String) -> AnyPublisher<Void, NetworkError> {
         struct EmptyResponse: Decodable {}
         return networkManager.requestWithPublisher(
@@ -170,7 +170,7 @@ class PetRepositoryImpl: PetRepository {
         .map { _ in () }
         .eraseToAnyPublisher()
     }
-    
+
     func petItemInteractionPublisher(petId: String, petItemId: String) -> AnyPublisher<Void, NetworkError> {
         struct EmptyResponse: Decodable {}
         return networkManager.requestWithPublisher(
@@ -180,14 +180,14 @@ class PetRepositoryImpl: PetRepository {
         .map { _ in () }
         .eraseToAnyPublisher()
     }
-    
+
     func petItemInteractionWithResponsePublisher(petId: String, petItemId: String) -> AnyPublisher<PetItemInteractionResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: PetEndpoint.petItemInteraction(petId: petId, petItemId: petItemId),
             responseType: PetItemInteractionResponse.self
         )
     }
-    
+
     func deletePetPublisher(id: String) -> AnyPublisher<Void, NetworkError> {
         struct EmptyResponse: Decodable {}
         return networkManager.requestWithPublisher(
@@ -197,11 +197,11 @@ class PetRepositoryImpl: PetRepository {
         .map { _ in () }
         .eraseToAnyPublisher()
     }
-    
+
     func changePetNamePublisher(petId: String, petName: String, petCalling: String) -> AnyPublisher<ChangePetNameResponse, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: PetEndpoint.changePetName(petId: petId, petName: petName, petCalling: petCalling),
             responseType: ChangePetNameResponse.self
         )
     }
-} 
+}

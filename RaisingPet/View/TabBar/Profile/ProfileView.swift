@@ -13,9 +13,9 @@ struct ProfileView: View {
     @State private var userDetails: [String: String] = [:]
     @EnvironmentObject var appState: AppState
     @State private var showCopiedMessage = false
-    @State private var profileImage: UIImage? = nil
+    @State private var profileImage: UIImage?
     private let placeholderImage = UIImage(named: "placeholder")
-    
+
     init() {
         _viewModel = StateObject(wrappedValue: ProfileViewModel())
     }
@@ -39,7 +39,7 @@ struct ProfileView: View {
                                     Circle()
                                         .fill(Color.gray.opacity(0.2))
                                         .frame(width: 120, height: 120)
-                                    
+
                                     if viewModel.isLoadingImage {
                                         ProgressView()
                                             .frame(width: 120, height: 120)
@@ -163,7 +163,7 @@ struct ProfileView: View {
                 .onAppear {
                     userDetails = viewModel.getUserDetailsForProfileView()
                     viewModel.loadProfileImageFromCache()
-                    
+
                     if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
                        let image = UIImage(data: photoData) {
                         profileImage = image
@@ -179,7 +179,7 @@ struct ProfileView: View {
                     }
                 }
             }
-            
+
             ToastView(message: "friends_tag_copied".localized(), isShowing: $showCopiedMessage)
         }
         .fullScreenCover(isPresented: $isShowPremiumView) {
@@ -265,7 +265,7 @@ struct LanguageSelectionView: View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(Array(Languages.allCases.enumerated()), id: \.element.hashValue) { (index, language) in
+                    ForEach(Array(Languages.allCases.enumerated()), id: \.element.hashValue) { (_, language) in
                         Button(action: {
                             Localizable.setCurrentLanguage(language)
                             selectedLanguage = language

@@ -16,7 +16,7 @@ struct Provider: AppIntentTimelineProvider {
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: configuration)
     }
-    
+
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
 
@@ -38,7 +38,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationAppIntent
 }
 
-struct PetiverseWidgetEntryView : View {
+struct PetiverseWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -47,15 +47,13 @@ struct PetiverseWidgetEntryView : View {
                 Image("logoPetiverse")
                     .resizable()
                     .frame(width: 30, height: 30)
-                
+
                 Text("Petiverse")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(.black)
             }
-            
-            
-            
-            VStack(alignment: .leading ,spacing: 5) {
+
+            VStack(alignment: .leading, spacing: 5) {
                 Text("1. Widget'a uzun basın").font(.system(size: 10, weight: .regular))
                 Text("2. Widgeti düzenlemek için üzerine dokunun")
                     .fixedSize(horizontal: false, vertical: true)
@@ -84,7 +82,7 @@ extension ConfigurationAppIntent {
         intent.favoriteEmoji = "😀"
         return intent
     }
-    
+
     fileprivate static var starEyes: ConfigurationAppIntent {
         let intent = ConfigurationAppIntent()
         intent.favoriteEmoji = "🤩"

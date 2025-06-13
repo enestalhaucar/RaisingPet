@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - User Quizzes Response Model
-typealias UserQuizzesResponseModel = GetUserQuizes 
+typealias UserQuizzesResponseModel = GetUserQuizes

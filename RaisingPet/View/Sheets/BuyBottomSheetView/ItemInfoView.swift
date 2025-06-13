@@ -12,7 +12,7 @@ struct ItemInfoView: View {
     let item: ShopItem
     @Binding var showCounter: Bool
     @Binding var counterNumber: Int
-    
+
     var body: some View {
         HStack {
             ItemImageView(imageName: item.name ?? "egg")

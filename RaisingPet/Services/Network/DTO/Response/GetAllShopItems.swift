@@ -37,7 +37,7 @@ struct ShopItem: Codable, Identifiable {
     let quantity: Int?
     let price: Int?
     let isOwned: Bool?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name
@@ -68,7 +68,7 @@ struct PetItem: Codable {
     let isDeleted: Bool?
     let v: Int?
     let goldPrice: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name
@@ -106,7 +106,7 @@ struct PetPackage: Codable {
     let limit: Int?
     let isDeleted: Bool?
     let v: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name
@@ -131,7 +131,7 @@ struct EggPackage: Codable {
     let v: Int?
     let isPurchasable: Bool?
     let goldPrice: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name
@@ -158,7 +158,7 @@ struct EggType: Codable {
     let currencyType: String?
     let isDeleted: Bool?
     let v: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case shopItemId
@@ -181,7 +181,7 @@ struct PetItemPackage: Codable, Identifiable {
     let limit: Int?
     let isDeleted: Bool?
     let v: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name
@@ -249,7 +249,7 @@ struct PetItemType: Codable {
     let goldPrice: Int?
     let _id: String?
     let v: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case name

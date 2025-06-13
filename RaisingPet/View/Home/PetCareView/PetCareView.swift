@@ -14,11 +14,11 @@ struct PetCareView: View {
     @State private var selectedTab: Int = 0
     @State private var showEditPopup = false
     @Environment(\.dismiss) var dismiss
-    
+
     private var petForView: Pet {
         vm.currentPet ?? pet
     }
-    
+
     // Pet name göster - eğer petName varsa onu, yoksa petType.name'i göster
     private var displayPetName: String {
         return petForView.petName.isEmpty == false ? petForView.petName : petForView.petType.name.capitalized
@@ -35,7 +35,7 @@ struct PetCareView: View {
                     PetDeleteAlertView(pet: petForView, isPresented: $deletePetShow)
                         .environmentObject(vm) // ViewModel'ı PetDeleteAlertView'a aktar
                 }
-                
+
                 // Pet Name Edit Popup
                 if showEditPopup {
                     PetNameEditPopupView(
@@ -79,10 +79,10 @@ struct PetCareView: View {
                 async let inventoryTask: () = vm.fetchInventory()
                 async let petsTask: () = vm.fetchPets()
                 async let shopItemsTask: () = vm.fetchAllShopItems()
-                
+
                 // Wait for all tasks to complete
                 _ = await [inventoryTask, petsTask, shopItemsTask]
-                
+
                 // Set current pet and initial category
                 vm.currentPet = pet
                 vm.selectedCategory = .funMaterial
@@ -91,7 +91,7 @@ struct PetCareView: View {
             .environmentObject(vm) // ViewModel'ı tüm alt view'lara aktar
         }
     }
-    
+
     // Pet name ve calling güncelleme işlemi
     private func handlePetNameUpdate(name: String, calling: String) {
         Task {

@@ -67,4 +67,3 @@ struct PetTabBarView: View {
 #Preview {
     PetTabBarView(selectedTab: .constant(0), vm: InventoryViewModel())
 }
-

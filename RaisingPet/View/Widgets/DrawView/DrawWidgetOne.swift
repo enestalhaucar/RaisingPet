@@ -5,18 +5,18 @@
 ////  Created by Enes Talha Uçar  on 4.11.2024.
 ////
 //
-//import SwiftUI
+// import SwiftUI
 //
-//struct DrawWidget : Identifiable, Equatable {
+// struct DrawWidget : Identifiable, Equatable {
 //    var id = UUID()
 //    var size : widgetSizeOne
 //    var backgroundImage : Image
 //    var drawSelected : Bool = false
 //
 //    
-//}
+// }
 //
-//struct DrawWidgetPreviewDesign: View {
+// struct DrawWidgetPreviewDesign: View {
 //    let item : DrawWidget
 //    var body: some View {
 //        ZStack {
@@ -27,8 +27,8 @@
 //        }.frame(width: item.size == .small ? 170 : 350, height: item.size == .large ? 350 : 170)
 //        
 //    }
-//}
+// }
 //
-//#Preview {
+// #Preview {
 //    DrawSettingsView()
-//}
+// }

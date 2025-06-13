@@ -5,9 +5,7 @@
 //  Created by Enes Talha Uçar on 13.06.2025.
 //
 
-
 import SwiftUI
-
 
 // MARK: - Purchase Buttons
 struct PurchaseButtonsView: View {
@@ -20,11 +18,11 @@ struct PurchaseButtonsView: View {
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
     let dismiss: DismissAction
-    
+
     private func canAffordItem(with currency: MineEnum) -> Bool {
         let totalGoldPrice = (item.goldPrice ?? 0) * (showCounter ? counterNumber : 1)
         let totalDiamondPrice = (item.diamondPrice ?? 0) * (showCounter ? counterNumber : 1)
-        
+
         switch currency {
         case .gold:
             return userGold >= totalGoldPrice
@@ -32,7 +30,7 @@ struct PurchaseButtonsView: View {
             return userDiamond >= totalDiamondPrice
         }
     }
-    
+
     private func purchaseItem() {
         guard let id = item.id, let mine = selectedMine else { return }
 
@@ -68,7 +66,7 @@ struct PurchaseButtonsView: View {
             dismiss()
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             if let diamondPrice = item.diamondPrice, diamondPrice > 0, item.goldPrice == nil || item.goldPrice == 0 {
@@ -107,9 +105,9 @@ struct PurchaseButtonsView: View {
                 }
                 .disabled(!canAffordItem(with: .diamond))
                 .opacity(canAffordItem(with: .diamond) ? 1.0 : 0.6)
-                
+
                 Divider()
-                
+
                 BuyPurchaseView(
                     iconName: "goldIcon",
                     itemName: item.name ?? "-",

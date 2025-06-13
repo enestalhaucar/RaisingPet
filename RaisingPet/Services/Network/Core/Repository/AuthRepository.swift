@@ -7,7 +7,7 @@ enum AuthEndpoint: Endpoint {
     case signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String)
     case me
     case updateMe(firstName: String?, lastName: String?, email: String?, phoneNumber: String?)
-    
+
     var path: String {
         switch self {
         case .login:
@@ -20,7 +20,7 @@ enum AuthEndpoint: Endpoint {
             return "/users/update-me"
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .login, .signup:
@@ -31,7 +31,7 @@ enum AuthEndpoint: Endpoint {
             return .patch
         }
     }
-    
+
     var parameters: [String: Any]? {
         switch self {
         case .login(let email, let password):
@@ -55,7 +55,7 @@ enum AuthEndpoint: Endpoint {
             return params
         }
     }
-    
+
     var requiresAuthentication: Bool {
         switch self {
         case .login, .signup:
@@ -72,7 +72,7 @@ protocol AuthRepository: BaseRepository {
     func signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) async throws -> SignUpResponseBody
     func getMe() async throws -> GetMeResponseModel
     func updateMe(firstName: String?, lastName: String?, email: String?, phoneNumber: String?) async throws -> GetMeResponseModel
-    
+
     // Combine variants
     func loginPublisher(email: String, password: String) -> AnyPublisher<LoginResponseModel, NetworkError>
     func signupPublisher(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) -> AnyPublisher<SignUpResponseBody, NetworkError>
@@ -83,18 +83,18 @@ protocol AuthRepository: BaseRepository {
 // MARK: - Auth Repository Implementation
 class AuthRepositoryImpl: AuthRepository {
     let networkManager: NetworkManaging
-    
+
     required init(networkManager: NetworkManaging) {
         self.networkManager = networkManager
     }
-    
+
     func login(email: String, password: String) async throws -> LoginResponseModel {
         return try await networkManager.request(
-            endpoint: AuthEndpoint.login(email: email, password: password), 
+            endpoint: AuthEndpoint.login(email: email, password: password),
             responseType: LoginResponseModel.self
         )
     }
-    
+
     func signup(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) async throws -> SignUpResponseBody {
         return try await networkManager.request(
             endpoint: AuthEndpoint.signup(
@@ -107,14 +107,14 @@ class AuthRepositoryImpl: AuthRepository {
             responseType: SignUpResponseBody.self
         )
     }
-    
+
     func getMe() async throws -> GetMeResponseModel {
         return try await networkManager.request(
             endpoint: AuthEndpoint.me,
             responseType: GetMeResponseModel.self
         )
     }
-    
+
     func updateMe(firstName: String? = nil, lastName: String? = nil, email: String? = nil, phoneNumber: String? = nil) async throws -> GetMeResponseModel {
         return try await networkManager.request(
             endpoint: AuthEndpoint.updateMe(
@@ -126,7 +126,7 @@ class AuthRepositoryImpl: AuthRepository {
             responseType: GetMeResponseModel.self
         )
     }
-    
+
     // MARK: - Combine API
     func loginPublisher(email: String, password: String) -> AnyPublisher<LoginResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
@@ -134,7 +134,7 @@ class AuthRepositoryImpl: AuthRepository {
             responseType: LoginResponseModel.self
         )
     }
-    
+
     func signupPublisher(firstName: String, lastName: String, email: String, password: String, passwordConfirm: String) -> AnyPublisher<SignUpResponseBody, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: AuthEndpoint.signup(
@@ -147,14 +147,14 @@ class AuthRepositoryImpl: AuthRepository {
             responseType: SignUpResponseBody.self
         )
     }
-    
+
     func getMePublisher() -> AnyPublisher<GetMeResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: AuthEndpoint.me,
             responseType: GetMeResponseModel.self
         )
     }
-    
+
     func updateMePublisher(firstName: String? = nil, lastName: String? = nil, email: String? = nil, phoneNumber: String? = nil) -> AnyPublisher<GetMeResponseModel, NetworkError> {
         return networkManager.requestWithPublisher(
             endpoint: AuthEndpoint.updateMe(
@@ -166,4 +166,4 @@ class AuthRepositoryImpl: AuthRepository {
             responseType: GetMeResponseModel.self
         )
     }
-} 
+}

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Sheet Header
 struct SheetHeaderView: View {
     let dismiss: DismissAction
-    
+
     var body: some View {
         HStack {
             AssetNumberView(iconName: "goldIcon", currencyType: .gold)

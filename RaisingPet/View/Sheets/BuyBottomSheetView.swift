@@ -13,10 +13,10 @@ struct BottomSheetView: View {
     @EnvironmentObject private var currentVM: CurrentUserViewModel
     var item: ShopItem
     @Binding var counterNumber: Int
-    @State private var selectedMine: MineEnum? = nil
+    @State private var selectedMine: MineEnum?
     @Binding var showCounter: Bool
     @State private var bottomSheetHeight: CGFloat = 0
-    
+
     var body: some View {
         if item.category == .gameCurrencyDiamond {
             DiamondSheetContentView(
@@ -47,14 +47,14 @@ struct DiamondSheetContentView: View {
     let dismiss: DismissAction
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
                 SheetHeaderView(dismiss: dismiss)
-                
+
                 ItemInfoView(item: item, showCounter: .constant(false), counterNumber: .constant(counterNumber))
-                
+
                 Button {
                     Task {
                         await vm.buyShopItem(itemId: item.id!, mine: .diamond) {
@@ -89,23 +89,23 @@ struct RegularSheetContentView: View {
     let dismiss: DismissAction
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     // Computed properties for user balances
     private var userGold: Int {
         currentVM.user?.gameCurrencyGold ?? 0
     }
-    
+
     private var userDiamond: Int {
         currentVM.user?.gameCurrencyDiamond ?? 0
     }
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
                 SheetHeaderView(dismiss: dismiss)
-                
+
                 ItemInfoView(item: item, showCounter: $showCounter, counterNumber: $counterNumber)
-                
+
                 InsufficientFundsMessageView(
                     item: item,
                     counterNumber: counterNumber,
@@ -115,7 +115,7 @@ struct RegularSheetContentView: View {
                     vm: vm,
                     currentVM: currentVM
                 )
-                
+
                 PurchaseButtonsView(
                     item: item,
                     counterNumber: counterNumber,
@@ -138,7 +138,7 @@ struct RegularSheetContentView: View {
 // MARK: - Sheet Header
 struct SheetHeaderView: View {
     let dismiss: DismissAction
-    
+
     var body: some View {
         HStack {
             AssetNumberView(iconName: "goldIcon", currencyType: .gold)
@@ -159,7 +159,7 @@ struct ItemInfoView: View {
     let item: ShopItem
     @Binding var showCounter: Bool
     @Binding var counterNumber: Int
-    
+
     var body: some View {
         HStack {
             ItemImageView(imageName: item.name ?? "egg")
@@ -187,11 +187,11 @@ struct InsufficientFundsMessageView: View {
     let userDiamond: Int
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     private func getInsufficientFundsMessage() -> String? {
         let totalGoldPrice = (item.goldPrice ?? 0) * (showCounter ? counterNumber : 1)
         let totalDiamondPrice = (item.diamondPrice ?? 0) * (showCounter ? counterNumber : 1)
-        
+
         // Sadece Gold fiyatı varsa
         if totalGoldPrice > 0 && totalDiamondPrice == 0 {
             if userGold < totalGoldPrice {
@@ -210,12 +210,12 @@ struct InsufficientFundsMessageView: View {
         else if totalGoldPrice > 0 && totalDiamondPrice > 0 {
             let canAffordWithGold = userGold >= totalGoldPrice
             let canAffordWithDiamond = userDiamond >= totalDiamondPrice
-            
+
             if !canAffordWithGold && !canAffordWithDiamond {
                 // Her ikisi de yeterli değil - daha az eksik olanı göster
                 let goldShortage = totalGoldPrice - userGold
                 let diamondShortage = totalDiamondPrice - userDiamond
-                
+
                 if goldShortage <= diamondShortage {
                     return String(format: "bottom_sheet_item_purchase".localized(), totalGoldPrice, goldShortage)
                 } else {
@@ -223,10 +223,10 @@ struct InsufficientFundsMessageView: View {
                 }
             }
         }
-        
+
         return nil
     }
-    
+
     var body: some View {
         if let insufficientMessage = getInsufficientFundsMessage() {
             VStack(spacing: 15) {
@@ -234,7 +234,7 @@ struct InsufficientFundsMessageView: View {
                     .font(.nunito(.medium, .callout14))
                     .foregroundStyle(.red)
                     .padding(.horizontal, 20)
-                
+
                 DiamondPurchaseOptionsView(vm: vm, currentVM: currentVM)
             }
         }
@@ -245,25 +245,25 @@ struct InsufficientFundsMessageView: View {
 struct DiamondPurchaseOptionsView: View {
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
-    
+
     // Get available diamond packages for purchase
     private var diamondPackages: [ShopItem] {
         let packages = vm.allItems?.shopItems.filter { $0.category == .gameCurrencyDiamond } ?? []
         return packages.sorted { ($0.price ?? 0) < ($1.price ?? 0) }
     }
-    
+
     // Get 3 diamond packages: cheapest, most expensive, and middle
     private var selectedDiamondPackages: [ShopItem] {
         let packages = diamondPackages
         guard packages.count >= 3 else { return packages }
-        
+
         let cheapest = packages.first!
         let mostExpensive = packages.last!
         let middle = packages[packages.count / 2]
-        
+
         return [mostExpensive, middle, cheapest] // En pahalı, ortanca, en ucuz (soldan sağa)
     }
-    
+
     private func purchaseDiamondPackage(_ diamondItem: ShopItem) {
         Task {
             await vm.buyShopItem(itemId: diamondItem.id!, mine: .diamond) {
@@ -272,21 +272,21 @@ struct DiamondPurchaseOptionsView: View {
             // Don't dismiss, let user continue with their original purchase
         }
     }
-    
+
     var body: some View {
         if !selectedDiamondPackages.isEmpty {
             VStack(spacing: 10) {
                 Text("bottom_sheet_diamond_purchase_title".localized())
                     .font(.nunito(.semiBold, .body16))
                     .foregroundStyle(.black)
-                
+
                 HStack(spacing: 10) {
                     ForEach(selectedDiamondPackages, id: \.id) { diamondItem in
                         VStack(spacing: 8) {
                             Image(diamondItem.name ?? "diamondPlaceholder")
                                 .resizable()
                                 .frame(width: 50, height: 50)
-                            
+
                             if let price = diamondItem.price {
                                 Text("₺\(price)")
                                     .font(.nunito(.bold, .callout14))
@@ -323,11 +323,11 @@ struct PurchaseButtonsView: View {
     @ObservedObject var vm: ShopScreenViewModel
     @ObservedObject var currentVM: CurrentUserViewModel
     let dismiss: DismissAction
-    
+
     private func canAffordItem(with currency: MineEnum) -> Bool {
         let totalGoldPrice = (item.goldPrice ?? 0) * (showCounter ? counterNumber : 1)
         let totalDiamondPrice = (item.diamondPrice ?? 0) * (showCounter ? counterNumber : 1)
-        
+
         switch currency {
         case .gold:
             return userGold >= totalGoldPrice
@@ -335,7 +335,7 @@ struct PurchaseButtonsView: View {
             return userDiamond >= totalDiamondPrice
         }
     }
-    
+
     private func purchaseItem() {
         guard let id = item.id, let mine = selectedMine else { return }
 
@@ -371,7 +371,7 @@ struct PurchaseButtonsView: View {
             dismiss()
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             if let diamondPrice = item.diamondPrice, diamondPrice > 0, item.goldPrice == nil || item.goldPrice == 0 {
@@ -410,9 +410,9 @@ struct PurchaseButtonsView: View {
                 }
                 .disabled(!canAffordItem(with: .diamond))
                 .opacity(canAffordItem(with: .diamond) ? 1.0 : 0.6)
-                
+
                 Divider()
-                
+
                 BuyPurchaseView(
                     iconName: "goldIcon",
                     itemName: item.name ?? "-",
@@ -456,13 +456,13 @@ struct BuyCounterView: View {
                         Image(systemName: "minus")
                             .opacity(counterNumber == 1 ? 0.3 : 1)
                     }
-                    
+
                     Spacer()
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(width: 90, height: 25)
                             .foregroundColor(.yellow.opacity(0.4))
-                        
+
                         Text("\(counterNumber)")
                             .font(.nunito(.medium, .callout14))
                     }
@@ -492,7 +492,7 @@ struct CounterItemBackgroundView: View {
     var counterNumber: Int
     var badgeVisible: Bool = false
     var onTap: () -> Void
-    
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
@@ -500,7 +500,7 @@ struct CounterItemBackgroundView: View {
                 .foregroundColor(.yellow.opacity(0.4))
             Text("\(counterNumber)")
                 .font(.nunito(.medium, .callout14))
-            
+
             if badgeVisible {
                 HStack {
                     Spacer()

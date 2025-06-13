@@ -26,7 +26,7 @@ struct NoteView: View {
                             RoundedRectangle(cornerRadius: 25.0)
                                 .stroke(Color.gray.gradient, lineWidth: 3)
                         }
-                        
+
                     HStack {
                         Image(systemName: "pawprint").font(.system(size: 30))
                         Image(systemName: "photo").font(.system(size: 30))
@@ -43,7 +43,7 @@ struct NoteView: View {
                     }
                 }.padding()
                     .padding(.horizontal)
-                
+
             }.navigationBarBackButtonHidden()
             .sheet(isPresented: $showingShareSheet, content: {
                 ShareSheet(activityItems: [canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)])
@@ -64,7 +64,7 @@ struct NoteView: View {
                         Text("note_clear_message".localized())
                     }
                 }
-                
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showingShareSheet = true
@@ -83,7 +83,7 @@ struct NoteView: View {
                     } label: {
                         Image(systemName: "arrow.uturn.backward")
                     }
-                    
+
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

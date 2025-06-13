@@ -9,7 +9,7 @@ import SwiftUI
 
 class CountDownSettingsViewModel: ObservableObject {
     @Published var targetDate: Date = Date().addingTimeInterval(60 * 60 * 24 * 23) // 23 gün sonrası
-    
+
     var timeRemaining: (days: Int, hours: Int, minutes: Int) {
         let now = Date()
         let diff = Calendar.current.dateComponents([.day, .hour, .minute], from: now, to: targetDate)
@@ -20,4 +20,3 @@ class CountDownSettingsViewModel: ObservableObject {
         )
     }
 }
-

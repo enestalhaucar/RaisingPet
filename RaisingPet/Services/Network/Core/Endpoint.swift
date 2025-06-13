@@ -22,19 +22,19 @@ extension Endpoint {
     var url: URL? {
         return URL(string: baseURL + path)
     }
-    
+
     var baseURL: String {
         return APIManager.baseURL
     }
-    
+
     var headers: [String: String]? {
         return nil
     }
-    
+
     var parameters: [String: Any]? {
         return nil
     }
-    
+
     var encoding: ParameterEncoding {
         switch method {
         case .get:
@@ -43,7 +43,7 @@ extension Endpoint {
             return JSONEncoding.default
         }
     }
-    
+
     var requiresAuthentication: Bool {
         return true
     }
@@ -77,4 +77,4 @@ extension Endpoint {
         // Encode parameters
         return try encoding.encode(urlRequest, with: parameters)
     }
-} 
+}

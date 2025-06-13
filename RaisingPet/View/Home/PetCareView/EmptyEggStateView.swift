@@ -12,7 +12,7 @@ struct EmptyEggStateView: View {
         VStack(spacing: 20) {
             // Option 1: Use a custom image if it exists in your assets
             // Image("emptyEgg")
-            
+
             // Option 2: Use a more appropriate SF Symbol
             ZStack {
                 Image(systemName: "circle.fill")
@@ -20,14 +20,14 @@ struct EmptyEggStateView: View {
                     .scaledToFit()
                     .frame(width: 80, height: 80)
                     .foregroundColor(.gray.opacity(0.3))
-                
+
                 Image(systemName: "sparkles")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .foregroundColor(.gray.opacity(0.7))
             }
-            
+
             Text("egg_empty_state_title".localized())
                 .font(.title2)
                 .foregroundColor(.gray)

@@ -23,7 +23,7 @@ struct QuestionComponents: View {
             .background(Color.blue.opacity(0.4).gradient)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding()
-            
+
     }
 }
 

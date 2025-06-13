@@ -14,24 +14,24 @@ class ProfileEditViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var isSuccess: Bool = false
-    
+
     private let userRepository: UserRepository
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(userRepository: UserRepository = UserRepositoryImpl()) {
         self.userRepository = userRepository
     }
-    
+
     // Simplified method that only updates the photo
     func updateProfile(photo: UIImage) async {
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
-        
+
         do {
             // Use uploadProfilePhoto to just update the photo
             let response = try await userRepository.uploadProfilePhoto(photo: photo)
-            
+
             isSuccess = true
             print("Profile photo updated successfully: \(response)")
         } catch let error as NetworkError {
@@ -41,7 +41,7 @@ class ProfileEditViewModel: ObservableObject {
             print("Update profile photo error: \(error)")
         }
     }
-    
+
     // Method to get the user's profile image from URL
     func getUserProfileImage(photoURL: String) async throws -> Data {
         do {
@@ -52,7 +52,7 @@ class ProfileEditViewModel: ObservableObject {
             throw error
         }
     }
-    
+
     private func handleNetworkError(_ error: NetworkError) {
         switch error {
         case .serverError(let statusCode, let message):

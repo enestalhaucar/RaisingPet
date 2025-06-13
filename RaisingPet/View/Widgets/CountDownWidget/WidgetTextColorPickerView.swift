@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WidgetTextColorPickerView: View {
     @Binding var textColor: Color
-    
+
     var body: some View {
         ColorPicker("Select text color", selection: $textColor)
             .padding(.horizontal)

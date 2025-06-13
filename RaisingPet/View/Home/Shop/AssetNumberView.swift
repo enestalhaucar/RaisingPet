@@ -10,7 +10,7 @@ struct AssetNumberView: View {
     @EnvironmentObject var currentUserVM: CurrentUserViewModel
     let iconName: String
     let currencyType: CurrencyGoldDiamondType
-    
+
     private var number: Int {
         switch currencyType {
         case .gold:
@@ -19,19 +19,19 @@ struct AssetNumberView: View {
             return currentUserVM.user?.gameCurrencyDiamond ?? 0
         }
     }
-    
+
     var body: some View {
         ZStack {
             HStack(spacing: 5) {
                 Image(iconName)
                     .resizable()
                     .frame(width: 15, height: 15)
-                
+
                 Text("\(number)")
                     .font(.nunito(.extraBold, .caption211))
                     .foregroundStyle(.accent)
                     .minimumScaleFactor(0.6)
-                
+
                 Image("plusIcon")
                     .resizable()
                     .frame(width: 10, height: 10)

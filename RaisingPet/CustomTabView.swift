@@ -5,9 +5,9 @@
 ////  Created by Enes Talha Uçar  on 12.10.2024.
 ////
 //
-//import SwiftUI
+// import SwiftUI
 //
-//struct CustomTabView: View {
+// struct CustomTabView: View {
 //    @Binding var selectedTab : String
 //    var body: some View {
 //        HStack {
@@ -23,13 +23,13 @@
 //            
 //        
 //    }
-//}
+// }
 //
-//#Preview {
+// #Preview {
 //    RootView2()
-//}
+// }
 //
-//struct TabView : View {
+// struct TabView : View {
 //    let image : String
 //    @Binding var selectedTab : String
 //    
@@ -50,4 +50,4 @@
 //            
 //        }.frame(height: 80)
 //    }
-//}
+// }

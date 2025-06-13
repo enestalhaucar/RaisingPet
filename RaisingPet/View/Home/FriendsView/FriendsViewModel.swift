@@ -5,7 +5,6 @@
 //  Created by Enes Talha Uçar  on 10.12.2024.
 //
 
-
 import Foundation
 import Combine
 
@@ -17,7 +16,7 @@ class FriendsViewModel: ObservableObject {
 
     // Repository
     private let friendsRepository: FriendsRepository
-    
+
     // MARK: - Initialization
     init(friendsRepository: FriendsRepository = RepositoryProvider.shared.friendsRepository) {
         self.friendsRepository = friendsRepository
@@ -32,7 +31,7 @@ class FriendsViewModel: ObservableObject {
         do {
             let response = try await friendsRepository.listFriends()
             self.friends = response.data.friends
-            
+
             // Eğer arkadaş listesi boş değilse ve ilk arkadaş varsa, bilgilerini kaydet.
             if let friend = self.friends.first {
                 Utilities.shared.saveFriendDetailsToUserDefaults(firstname: friend.friend.firstname, id: friend.friend._id)
@@ -40,7 +39,7 @@ class FriendsViewModel: ObservableObject {
                 // Eğer arkadaş listesi boşsa, UserDefaults'tan bilgileri temizle.
                 Utilities.shared.clearFriendDetailsFromUserDefaults()
             }
-            
+
         } catch let error as NetworkError {
             handleNetworkError(error)
         } catch {
@@ -107,7 +106,7 @@ class FriendsViewModel: ObservableObject {
     }
 
     // MARK: - Helper Methods
-    
+
     // Yardımcı Fonksiyonlar
     var pendingFriends: [Friend] {
         friends.filter { $0.status == "pending" }
@@ -116,7 +115,7 @@ class FriendsViewModel: ObservableObject {
     var acceptedFriends: [Friend] {
         friends.filter { $0.status == "accepted" }
     }
-    
+
     // MARK: - Error Handling
     private func handleNetworkError(_ error: NetworkError) {
         switch error {

@@ -12,13 +12,13 @@ struct ProfileEditView: View {
     @StateObject private var viewModel = ProfileEditViewModel()
     @Binding var isSuccess: Bool
     @Environment(\.dismiss) var dismiss
-    @State private var profileImage: UIImage? = nil
-    @State private var profileImageData: Data? = nil
+    @State private var profileImage: UIImage?
+    @State private var profileImageData: Data?
     private let placeholderImage = UIImage(named: "placeholder")
     @State private var isPhotoPickerPresented = false
     @State private var showAlert = false
     @State private var isLoading = false
-    
+
     // User details for display only
     @State private var userDetails: [String: String] = [:]
 
@@ -41,7 +41,7 @@ struct ProfileEditView: View {
                                     .stroke(Color.gray.opacity(0.3), lineWidth: 2)
                                     .frame(width: 120, height: 120)
                                     .shadow(radius: 5)
-                                
+
                                 // Profile image
                                 if let image = profileImage {
                                     Image(uiImage: image)
@@ -62,7 +62,7 @@ struct ProfileEditView: View {
                                         .foregroundColor(.blue.opacity(0.7))
                                         .clipShape(Circle())
                                 }
-                                
+
                                 // Edit button overlay
                                 VStack {
                                     Spacer()
@@ -81,7 +81,7 @@ struct ProfileEditView: View {
                                 }
                                 .frame(width: 110, height: 110)
                             }
-                            
+
                             // User name display
                             Text("\(userDetails["firstname"] ?? "User") \(userDetails["surname"] ?? "")")
                                 .font(.title3)
@@ -100,7 +100,7 @@ struct ProfileEditView: View {
                         HStack {
                             Text("profile_edit_save_changes".localized())
                                 .font(.headline)
-                            
+
                             if viewModel.isLoading {
                                 ProgressView()
                                     .padding(.leading, 5)
@@ -133,11 +133,11 @@ struct ProfileEditView: View {
             PhotoPicker(selectedImage: $profileImage)
         }
     }
-    
+
     private func loadUserData() {
         // Load user details from UserDefaults
         userDetails = Utilities.shared.getUserDetailsFromUserDefaults()
-        
+
         // Try to load existing profile photo
         if let photoData = UserDefaults.standard.data(forKey: "userProfilePhoto"),
            let image = UIImage(data: photoData) {
@@ -147,10 +147,10 @@ struct ProfileEditView: View {
             loadProfilePhotoFromURL(photoURL)
         }
     }
-    
+
     private func loadProfilePhotoFromURL(_ photoURL: String) {
         isLoading = true
-        
+
         Task {
             do {
                 let imageData = try await viewModel.getUserProfileImage(photoURL: photoURL)
@@ -170,25 +170,25 @@ struct ProfileEditView: View {
             }
         }
     }
-    
+
     private func saveProfilePhoto() async {
         guard let profileImage = profileImage else { return }
-        
+
         await viewModel.updateProfile(photo: profileImage)
-        
+
         if viewModel.isSuccess {
             // Save the image to UserDefaults so it's immediately available elsewhere
             if let imageData = profileImage.jpegData(compressionQuality: 0.8) {
                 UserDefaults.standard.set(imageData, forKey: "userProfilePhoto")
             }
-            
+
             // Set success status for the parent view
             isSuccess = true
-            
+
             // Post a notification that the profile has been updated
             // This allows other views to refresh their state
             NotificationCenter.default.post(name: .profileImageUpdated, object: nil)
-            
+
             // Dismiss this view to return to profile
             DispatchQueue.main.async {
                 dismiss()

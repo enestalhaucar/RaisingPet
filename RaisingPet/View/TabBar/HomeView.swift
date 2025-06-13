@@ -16,25 +16,25 @@ struct NavigationItem {
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("mainbgColor").ignoresSafeArea()
-                
+
                 ScrollView {
                     VStack {
-                        
+
                         HomePetSection(viewModel: viewModel)
-                        
+
                         HomeNavigationButtons()
-                        
+
                         HomeNewsSection()
-                        
+
                         WidgetsPreviewSection()
-                        
+
                         WidgetsNavigationSection()
-                        
+
                     }.toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             NavigationLink(destination: EmptyView()) {
@@ -45,7 +45,7 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        
+
                         ToolbarItem(placement: .topBarTrailing) {
                             Image("questionMarkBtn")
                         }
@@ -60,7 +60,7 @@ struct HomeView: View {
                         }
                     }
                     .padding(.top, 30)
-                    
+
                 }.scrollIndicators(.hidden)
             }.navigationBarBackButtonHidden()
         }
@@ -80,7 +80,7 @@ struct CustomNavigationLink<Destination: View>: View {
     let view: Destination
     var imageName: String
     var text: String
-    
+
     var body: some View {
         VStack {
             NavigationLink {
@@ -103,14 +103,14 @@ struct CustomNavigationLink<Destination: View>: View {
                     }
                 }
             }
-            
+
         }
     }
 }
 
 struct HomePetSection: View {
     @ObservedObject var viewModel: HomeViewModel
-    
+
     var body: some View {
         Group {
             if viewModel.isLoading {
@@ -145,20 +145,20 @@ struct HomePetSection: View {
 // Tekrarlanan ZStack yapısını önlemek için yardımcı View
 struct PetDisplayView: View {
     let imageName: String
-    
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .fill(.white)
                 .stroke(.gray.opacity(0.3), lineWidth: 2)
                 .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
-            
+
             Image("petBackgroundImage")
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width * 9 / 10, height: 150)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
-            
+
             Image(imageName)
                 .resizable()
                 .scaledToFit()

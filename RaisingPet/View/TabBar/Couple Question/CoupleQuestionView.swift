@@ -168,7 +168,7 @@ struct QuizRowView: View {
         .frame(width: ConstantManager.Layout.widthWithoutEdge, alignment: .leading)
         .onTapGesture {
             let userHasAnswered = quiz.quizStatus == .continued || quiz.quizStatus == .finished
-            
+
             if userHasAnswered {
                 print("QuizResultView'e yönlendiriliyor: result_\(quiz.id ?? "-")")
                 navigationPath.append("result_\(quiz.id ?? "-")")

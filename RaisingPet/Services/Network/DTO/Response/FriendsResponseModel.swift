@@ -84,7 +84,7 @@ struct SearchFriendWithTagDataUser: Codable {
     let gameCurrencyDiamond: Int
     let friendTag: String
     let v: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case firstname

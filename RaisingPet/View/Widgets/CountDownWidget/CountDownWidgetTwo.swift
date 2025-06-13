@@ -33,7 +33,7 @@ struct CountdownWidgetPreviewDesignTwo: View {
                     height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
                 ).clipShape(RoundedRectangle(cornerRadius: 25))
             }
-            
+
             VStack(alignment: .leading) {
                 HStack(alignment: .bottom) {
                     Text(item.title)
@@ -67,4 +67,3 @@ struct CountdownWidgetPreviewDesignTwo: View {
         )
     }
 }
-

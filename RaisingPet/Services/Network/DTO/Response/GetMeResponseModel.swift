@@ -11,7 +11,7 @@ import Foundation
 struct GetMeResponseModel: Codable {
     let status: String
     let data: DataWrapper?
-    
+
     struct DataWrapper: Codable {
         let data: GetMeUser?
     }
@@ -40,10 +40,10 @@ struct GetMeUser: Codable, Identifiable {
         case version = "__v"
         case pets, packageClaimDates
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         // Try to decode id from multiple possible fields
         if let mainId = try? container.decode(String.self, forKey: .id) {
             id = mainId
@@ -52,12 +52,12 @@ struct GetMeUser: Codable, Identifiable {
         } else {
             throw DecodingError.dataCorruptedError(forKey: .id, in: container, debugDescription: "Neither 'id' nor '_id' found")
         }
-        
+
         // Required fields
         firstname = try container.decode(String.self, forKey: .firstname)
         surname = try container.decode(String.self, forKey: .surname)
         email = try container.decode(String.self, forKey: .email)
-        
+
         // Optional fields with safe fallbacks
         photo = try container.decodeIfPresent(String.self, forKey: .photo)
         photoURL = try container.decodeIfPresent(String.self, forKey: .photoURL)
@@ -71,10 +71,10 @@ struct GetMeUser: Codable, Identifiable {
         pets = try container.decodeIfPresent([String].self, forKey: .pets)
         packageClaimDates = try container.decodeIfPresent([String: Date].self, forKey: .packageClaimDates)
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         try container.encode(id, forKey: .id)
         try container.encode(firstname, forKey: .firstname)
         try container.encode(surname, forKey: .surname)

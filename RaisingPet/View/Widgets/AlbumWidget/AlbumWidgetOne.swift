@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AlbumWidgetPreviewDesign: View {
     let item: PetiverseWidgetItem
-    
+
     var body: some View {
         ZStack {
             if let albumImages = item.albumImages, !albumImages.isEmpty,
@@ -44,7 +44,7 @@ struct AlbumWidgetPreviewDesign: View {
             height: item.size == .small ? 170 : item.size == .medium ? 170 : 250
         )
     }
-    
+
     private func colorFromString(_ string: String) -> Color? {
         switch string.lowercased() {
         case "black": return .black

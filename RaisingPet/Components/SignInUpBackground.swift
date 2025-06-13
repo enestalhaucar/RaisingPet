@@ -11,7 +11,7 @@ struct SignInUpBackground: View {
     var body: some View {
         ZStack {
             Color("backgroundColor").ignoresSafeArea()
-            
+
             Image("shapeEclipse")
                 .offset(x: -UIScreen.main.bounds.width / 2 + 70, y: -UIScreen.main.bounds.height / 2 + 50)
         }

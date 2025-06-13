@@ -20,7 +20,7 @@ extension EnvironmentValues {
         get { self[BackgroundColorKey.self] }
         set { self[BackgroundColorKey.self] = newValue }
     }
-    
+
     var textColor: Color {
         get { self[TextColorKey.self] }
         set { self[TextColorKey.self] = newValue }

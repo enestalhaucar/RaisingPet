@@ -25,9 +25,9 @@ struct EmotionsView: View {
                                 .multilineTextAlignment(.center)
                         }
                     }.padding(.vertical)
-                    
+
                     Button {
-                        
+
                     } label: {
                         Text("Unlock & Specialize Action")
                             .foregroundStyle(.white)
@@ -35,7 +35,7 @@ struct EmotionsView: View {
                             .background(Color("friendsViewbuttonColor") )
                             .clipShape(RoundedRectangle(cornerRadius: 25))
                     }.padding(.vertical)
-                    
+
                     HStack {
                         VStack {
                             ZStack {
@@ -47,9 +47,9 @@ struct EmotionsView: View {
                             }
                             Text("Kiss")
                                 .font(.title3)
-                                
+
                         }
-                        
+
                         VStack {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15)
@@ -60,7 +60,7 @@ struct EmotionsView: View {
                             }
                             Text("Pinch")
                                 .font(.title3)
-                                
+
                         }
                         VStack {
                             ZStack {
@@ -72,16 +72,12 @@ struct EmotionsView: View {
                             }
                             Text("Hug")
                                 .font(.title3)
-                                
+
                         }
                     }
-                    
-                    
-                    
-                    
 
                     Spacer()
-                    
+
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
                             .foregroundColor(Color("friendsViewbuttonColor"))
@@ -89,13 +85,13 @@ struct EmotionsView: View {
                             .padding(.horizontal)
                         HStack(spacing: 10) {
                             VStack {
-                                Circle().frame(width: 64,height: 64)
+                                Circle().frame(width: 64, height: 64)
                                     .foregroundStyle(.white)
                             }
                             Text("Friend's Name")
                             Spacer()
                             Button(action: {
-                                
+
                             }, label: {
                                 Text("Select")
                                     .foregroundStyle(.white)
@@ -103,7 +99,7 @@ struct EmotionsView: View {
                         }.padding(.horizontal)
                             .padding()
                     }
-                    
+
                 }.navigationTitle("Emotions")
                     .navigationBarTitleDisplayMode(.inline)
             }

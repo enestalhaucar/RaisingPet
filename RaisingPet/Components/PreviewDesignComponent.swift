@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PreviewDesignComponent: View {
-    var title : String
-    var subTitle : String
+    var title: String
+    var subTitle: String
     var body: some View {
         ZStack {
             VStack {
@@ -25,7 +25,7 @@ struct PreviewDesignComponent: View {
                         Spacer()
                     }
                 }.padding(12)
-                
+
                 Spacer()
                 HStack {
                     Spacer()
@@ -35,7 +35,7 @@ struct PreviewDesignComponent: View {
                     }
                     .frame(height: 60)
                 }
-                
+
             }
         }.frame(height: 120)
         .background(RoundedRectangle(cornerRadius: 10).stroke(style: .init(lineWidth: 1)))

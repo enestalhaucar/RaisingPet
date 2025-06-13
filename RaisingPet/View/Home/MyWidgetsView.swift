@@ -5,9 +5,9 @@
 ////  Created by Enes Talha Uçar  on 12.12.2024.
 ////
 //
-//import SwiftUI
+// import SwiftUI
 //
-//struct MyWidgetsView: View {
+// struct MyWidgetsView: View {
 //    
 //    @State private var CountDownItem: CountDownWidgetOne =
 //    CountDownWidgetOne(bgSelected: false, backgroundImage: nil, backgroundColor: .blue, textColor: .white, size: .small, title: "Maldives", targetDate: Date())
@@ -62,13 +62,13 @@
 //            .navigationBarTitleDisplayMode(.inline)
 //        }
 //    }
-//}
+// }
 //
-//#Preview {
+// #Preview {
 //    MyWidgetsView()
-//}
+// }
 //
-//struct myWidgetsTopSide : View {
+// struct myWidgetsTopSide : View {
 //    @Binding var selectedSize : WidgetSize
 //    var body: some View {
 //        ZStack {
@@ -86,9 +86,9 @@
 //        }
 //        .frame(width: UIScreen.main.bounds.size.width)
 //    }
-//}
+// }
 //
-//struct LockScreenOrHomeWidgets: View {
+// struct LockScreenOrHomeWidgets: View {
 //    var body: some View {
 //        HStack {
 //            Button {
@@ -103,9 +103,9 @@
 //            }
 //        }.padding(10)
 //    }
-//}
+// }
 //
-//struct widgetsSelectionButtonView : View {
+// struct widgetsSelectionButtonView : View {
 //    var imageName : String
 //    var text : String
 //    var body: some View {
@@ -118,6 +118,6 @@
 //                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.black,lineWidth: 1))
 //        }
 //    }
-//}
+// }
 //
 //

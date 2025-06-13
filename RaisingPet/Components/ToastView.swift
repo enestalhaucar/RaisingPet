@@ -10,7 +10,7 @@ import SwiftUI
 struct ToastView: View {
     let message: String
     @Binding var isShowing: Bool
-    
+
     var body: some View {
         VStack {
             Spacer() // Toast'u aşağıya iter
@@ -43,4 +43,4 @@ struct ToastView: View {
         .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0), value: isShowing)
         .allowsHitTesting(false) // Toast'un arkasındaki butonlara dokunulabilsin
     }
-} 
+}

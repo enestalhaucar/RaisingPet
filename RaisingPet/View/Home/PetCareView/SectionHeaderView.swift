@@ -5,28 +5,27 @@
 //  Created by Enes Talha Uçar on 9.06.2025.
 //
 
-
 import SwiftUI
 
 struct SectionHeaderView: View {
     let title: String
     var isCollapsible: Bool = false
     @Binding var isExpanded: Bool
-    
+
     // Add an initializer to handle the optional binding
     init(title: String, isCollapsible: Bool = false, isExpanded: Binding<Bool>? = nil) {
         self.title = title
         self.isCollapsible = isCollapsible
         self._isExpanded = isExpanded ?? .constant(true)
     }
-    
+
     var body: some View {
         HStack {
             Text(title)
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.primary)
             Spacer()
-            
+
             if isCollapsible {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {

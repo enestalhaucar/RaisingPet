@@ -13,10 +13,10 @@ struct BottomSheetView: View {
     @EnvironmentObject private var currentVM: CurrentUserViewModel
     var item: ShopItem
     @Binding var counterNumber: Int
-    @State private var selectedMine: MineEnum? = nil
+    @State private var selectedMine: MineEnum?
     @Binding var showCounter: Bool
     @State private var bottomSheetHeight: CGFloat = 0
-    
+
     var body: some View {
         if item.category == .gameCurrencyDiamond {
             DiamondSheetContentView(

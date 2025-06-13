@@ -37,12 +37,12 @@ struct QuizResultView: View {
                                     )
                                     .cornerRadius(10)
                                     .font(.nunito(.light, .body16))
-                                
+
                                 Text("quiz_result_vs".localized())
                                     .font(.nunito(.medium, .title320))
                                     .bold()
                                     .padding(.horizontal, 8)
-                                
+
                                 Text(answer.friendAnswer ?? "?")
                                     .frame(maxWidth: .infinity)
                                     .padding(10)
@@ -129,9 +129,9 @@ struct QuizResultView: View {
         guard friendHasAnswered else {
             return "quiz_result_waiting_friend".localized()
         }
-        
+
         let percentage = calculateMatchPercentage()
-        
+
         // Yüzdeye göre farklı mesajlar göster.
         switch percentage {
         case 81...100:

@@ -11,7 +11,7 @@ import UIKit
 final class Utilities {
     static let shared = Utilities()
     private init() {}
-    
+
     func getUserDetailsFromUserDefaults() -> [String: String] {
         let token = UserDefaults.standard.string(forKey: "authToken") ?? "N/A"
         let firstname = UserDefaults.standard.string(forKey: "userFirstname") ?? "N/A"
@@ -24,7 +24,7 @@ final class Utilities {
         let phoneNumber = UserDefaults.standard.string(forKey: "userPhoneNumber") ?? "N/A"
         let photo = UserDefaults.standard.string(forKey: "userPhoto") ?? "N/A"
         let photoURL = UserDefaults.standard.string(forKey: "userPhotoURL") ?? "N/A"
-        
+
         return [
             "token": token,
             "firstname": firstname,
@@ -56,5 +56,4 @@ final class Utilities {
         UserDefaults.standard.removeObject(forKey: "friendId")
     }
 
-    
 }

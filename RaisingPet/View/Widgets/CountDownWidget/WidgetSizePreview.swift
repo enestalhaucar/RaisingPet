@@ -15,7 +15,7 @@ struct WidgetSizePreview: View {
     let backgroundColor: Color
     let textColor: Color
     let backgroundImageData: String?
-    
+
     private func previewWidget(for size: WidgetSize) -> PetiverseWidgetItem {
         PetiverseWidgetItem(
             type: .countdown,
@@ -28,7 +28,7 @@ struct WidgetSizePreview: View {
             targetDate: viewModel.targetDate
         )
     }
-    
+
     var body: some View {
         TabView(selection: $sizeIndex) {
             // Small
@@ -43,7 +43,7 @@ struct WidgetSizePreview: View {
                     .offset(y: -60)
             }
             .tag(0)
-            
+
             // Medium
             ZStack {
                 previewForStyle(widget: previewWidget(for: .medium))
@@ -56,7 +56,7 @@ struct WidgetSizePreview: View {
                     .offset(y: -60)
             }
             .tag(1)
-            
+
             // Large
             ZStack {
                 previewForStyle(widget: previewWidget(for: .large))
@@ -74,7 +74,7 @@ struct WidgetSizePreview: View {
         .frame(height: 250)
         .background(Color.gray.opacity(0.2)) // Arka planı netleştirmek için
     }
-    
+
     @ViewBuilder
     func previewForStyle(widget: PetiverseWidgetItem) -> some View {
         switch widget.countdownStyle {
@@ -112,7 +112,7 @@ struct WidgetSizePreview: View {
                 .foregroundStyle(textColor)
         }
     }
-    
+
     func uiImage(from image: Image) -> UIImage? {
         let controller = UIHostingController(rootView: image)
         let view = controller.view
