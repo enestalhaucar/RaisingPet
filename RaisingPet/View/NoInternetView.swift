@@ -1,4 +1,5 @@
 import SwiftUI
+import DotLottie
 
 struct NoInternetView: View {
     var body: some View {
@@ -7,11 +8,9 @@ struct NoInternetView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 25) {
-                Image(systemName: "wifi.exclamationmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120, height: 120)
-                    .foregroundColor(.gray.opacity(0.2))
+                DotLottieAnimation(fileName: "noInternetAnimation", config: AnimationConfig(autoplay: true, loop: true))
+                    .view()
+                    .frame(width: 200, height: 200)
 
                 Text("no_internet_title")
                     .font(.nunito(.bold, .title222))
