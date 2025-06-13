@@ -218,6 +218,7 @@
 // BottomSheetView
 "bottom_sheet_purchase_title" = "Purchase %@";
 "bottom_sheet_buy_diamonds" = "Buy Diamonds";
+"bottom_sheet_diamond_purchase_title" = "Buy Diamonds";
 "bottom_sheet_item_purchase" = "Item purchase requires %d, you are %d short";
 "bottom_sheet_get_item" = "Get %@ x%d";
 "bottom_sheet_badge_plus_one" = "+1";

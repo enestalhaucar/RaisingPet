@@ -64,10 +64,10 @@ struct ShopScreenView: View {
                                     onSelect: openSheet
                                 )
                             } else {
-//                                EggPackageSection(
-//                                  eggs: vm.allItems?.eggPackages ?? [],
-//                                  onSelect: openSheet
-//                                )
+                                EggPackageSection(
+                                  eggs: vm.allItems?.eggPackages ?? [],
+                                  onSelect: openSheet
+                                )
 //                                
                                 PetItemPackageSection(
                                   packages: vm.allItems?.petItemPackages ?? [],
@@ -83,10 +83,10 @@ struct ShopScreenView: View {
                                     petItems: vm.allItems?.petItems ?? [],
                                     onSelect: openSheet
                                 )
-//                                HomeSection(
-//                                    items: vm.allItems?.shopItems ?? [],
-//                                    onSelect: openSheet
-//                                )
+                                HomeSection(
+                                    items: vm.allItems?.shopItems ?? [],
+                                    onSelect: openSheet
+                                )
                             }
                         }
                         .padding(.top, 20)
@@ -148,7 +148,15 @@ struct ShopScreenView: View {
                 }
             }
             .ignoresSafeArea(edges: .top)
-            .autoResizingSheet(isPresented: $showShopSheet) {
+            .autoResizingSheet(
+                isPresented: $showShopSheet,
+                configuration: AutoResizingSheetConfiguration(
+                    scrollable: false,
+                    showGrabber: false,
+                    extendableToFullSize: false,
+                    scrollBackground: .clear
+                )
+            ) {
                 if let item = selectedShopItem {
                     BottomSheetView(
                         item: item,

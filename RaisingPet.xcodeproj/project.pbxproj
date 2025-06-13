@@ -118,6 +118,14 @@
 		ECA0D3902DEFBBE4000528CD /* fox_idle.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA0D38E2DEFBBE4000528CD /* fox_idle.json */; };
 		ECA0D3922DEFBECA000528CD /* PetNameEditPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0D3912DEFBECA000528CD /* PetNameEditPopupView.swift */; };
 		ECAF55B32C75F19B0010B6CF /* EggAndPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */; };
+		ECB1079C2DFC50C500E2692A /* DiamondSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1079B2DFC50C500E2692A /* DiamondSheetContentView.swift */; };
+		ECB1079E2DFC50DC00E2692A /* RegularSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1079D2DFC50DC00E2692A /* RegularSheetContentView.swift */; };
+		ECB107A02DFC50E500E2692A /* SheetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB1079F2DFC50E500E2692A /* SheetHeaderView.swift */; };
+		ECB107A22DFC50EB00E2692A /* ItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A12DFC50EB00E2692A /* ItemInfoView.swift */; };
+		ECB107A42DFC50F700E2692A /* InsufficientFundsMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A32DFC50F700E2692A /* InsufficientFundsMessageView.swift */; };
+		ECB107A62DFC510000E2692A /* DiamondPurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A52DFC510000E2692A /* DiamondPurchaseOptionsView.swift */; };
+		ECB107A82DFC510C00E2692A /* PurchaseButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A72DFC510C00E2692A /* PurchaseButtonsView.swift */; };
+		ECB107AA2DFC513500E2692A /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB107A92DFC513500E2692A /* ItemImageView.swift */; };
 		ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */; };
 		ECB5F5702D54EA9C001AC419 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */; };
 		ECB5F5992D5637A4001AC419 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */; };
@@ -296,6 +304,14 @@
 		ECA0D38E2DEFBBE4000528CD /* fox_idle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fox_idle.json; sourceTree = "<group>"; };
 		ECA0D3912DEFBECA000528CD /* PetNameEditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameEditPopupView.swift; sourceTree = "<group>"; };
 		ECAF55B22C75F19A0010B6CF /* EggAndPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggAndPetsView.swift; sourceTree = "<group>"; };
+		ECB1079B2DFC50C500E2692A /* DiamondSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondSheetContentView.swift; sourceTree = "<group>"; };
+		ECB1079D2DFC50DC00E2692A /* RegularSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSheetContentView.swift; sourceTree = "<group>"; };
+		ECB1079F2DFC50E500E2692A /* SheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeaderView.swift; sourceTree = "<group>"; };
+		ECB107A12DFC50EB00E2692A /* ItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoView.swift; sourceTree = "<group>"; };
+		ECB107A32DFC50F700E2692A /* InsufficientFundsMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsufficientFundsMessageView.swift; sourceTree = "<group>"; };
+		ECB107A52DFC510000E2692A /* DiamondPurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondPurchaseOptionsView.swift; sourceTree = "<group>"; };
+		ECB107A72DFC510C00E2692A /* PurchaseButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButtonsView.swift; sourceTree = "<group>"; };
+		ECB107A92DFC513500E2692A /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
 		ECB5F56B2D54DBB2001AC419 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ECB5F56F2D54EA9C001AC419 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		ECB5F5982D5637A4001AC419 /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
@@ -488,6 +504,7 @@
 		EC1108302C622BDA00E91D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ECB107902DFC390400E2692A /* Sheets */,
 				EC7282BB2DDF71FD00F67ACF /* NoInternetView.swift */,
 				ECF3EACB2D6384E100EEFBB2 /* Paywall */,
 				EC1CE96E2D4D3C130082FD4F /* OnBoarding */,
@@ -760,8 +777,6 @@
 				EC7A55D02DCD6261006619EB /* FriendsView */,
 				EC1B965D2C9EF6E7001C5773 /* NoteView.swift */,
 				EC02EBC62DC950700019668C /* PetCareView */,
-				ECBA63AF2DBBC53E00A3F6C9 /* BuyBottomSheetView.swift */,
-				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
 				EC98CD732D0B404500801BD1 /* MyWidgetsView.swift */,
 			);
 			path = Home;
@@ -791,6 +806,31 @@
 				ECA0D38E2DEFBBE4000528CD /* fox_idle.json */,
 			);
 			path = IDLE;
+			sourceTree = "<group>";
+		};
+		ECB107902DFC390400E2692A /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				ECB1079A2DFC50B000E2692A /* BuyBottomSheetView */,
+				EC17F7052DC166A700956696 /* BuyPackageCounterPopUpView.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		ECB1079A2DFC50B000E2692A /* BuyBottomSheetView */ = {
+			isa = PBXGroup;
+			children = (
+				ECB107A92DFC513500E2692A /* ItemImageView.swift */,
+				ECB107A72DFC510C00E2692A /* PurchaseButtonsView.swift */,
+				ECB107A52DFC510000E2692A /* DiamondPurchaseOptionsView.swift */,
+				ECB107A32DFC50F700E2692A /* InsufficientFundsMessageView.swift */,
+				ECB107A12DFC50EB00E2692A /* ItemInfoView.swift */,
+				ECB1079F2DFC50E500E2692A /* SheetHeaderView.swift */,
+				ECB1079D2DFC50DC00E2692A /* RegularSheetContentView.swift */,
+				ECB1079B2DFC50C500E2692A /* DiamondSheetContentView.swift */,
+				ECBA63AF2DBBC53E00A3F6C9 /* BuyBottomSheetView.swift */,
+			);
+			path = BuyBottomSheetView;
 			sourceTree = "<group>";
 		};
 		ECB5F56A2D54DBA6001AC419 /* ProfileViewModel */ = {
@@ -1011,16 +1051,20 @@
 				ECF3A04A2DD651EF0052990B /* GetMeResponseModel.swift in Sources */,
 				EC1CE9702D4D3C400082FD4F /* OnboardingView.swift in Sources */,
 				ECF3A0522DD652920052990B /* FriendsResponseModel.swift in Sources */,
+				ECB107A02DFC50E500E2692A /* SheetHeaderView.swift in Sources */,
 				EC8E5A4A2D7AA4E4001B2335 /* Localizable.swift in Sources */,
 				ECF3A0582DD652F70052990B /* QuizResponseModel.swift in Sources */,
 				EC731E6D2DCBD8FB005A064A /* PetDeleteAlertView.swift in Sources */,
 				ECF3A0502DD6527D0052990B /* HatchPetsResponseModel.swift in Sources */,
 				ECDFC4452D6D1CC400FA450D /* LoadingAnimationView.swift in Sources */,
 				ECB5F56C2D54DBB7001AC419 /* ProfileViewModel.swift in Sources */,
+				ECB107A42DFC50F700E2692A /* InsufficientFundsMessageView.swift in Sources */,
+				ECB1079E2DFC50DC00E2692A /* RegularSheetContentView.swift in Sources */,
 				EC989DB32CE8B14900E3FA82 /* LoginViewModel.swift in Sources */,
 				ECF3A0462DD651940052990B /* LoginResponseModel.swift in Sources */,
 				ECC2BE562CA0491200790C92 /* ShareSheet.swift in Sources */,
 				EC606F222C5FB7F80015F103 /* Utilities.swift in Sources */,
+				ECB1079C2DFC50C500E2692A /* DiamondSheetContentView.swift in Sources */,
 				EC55210C2DF967770031BF37 /* SearchFriendViewModel.swift in Sources */,
 				ECF3A0562DD652C30052990B /* GetAllShopItems.swift in Sources */,
 				EC7282BA2DDF719600F67ACF /* NetworkMonitor.swift in Sources */,
@@ -1040,6 +1084,7 @@
 				EC02CA502DD64D2900CB53EE /* NetworkManager.swift in Sources */,
 				EC6760A02DD787430041C839 /* UserProfileRepository.swift in Sources */,
 				ECF3A05A2DD6533B0052990B /* LoginRequestModel.swift in Sources */,
+				ECB107A82DFC510C00E2692A /* PurchaseButtonsView.swift in Sources */,
 				EC02CA512DD64D2900CB53EE /* BaseRepository.swift in Sources */,
 				EC02CA522DD64D2900CB53EE /* QuizRepository.swift in Sources */,
 				EC02CA532DD64D2900CB53EE /* InventoryRepository.swift in Sources */,
@@ -1109,6 +1154,8 @@
 				ECF3A0732DD656130052990B /* QuizResultForQuizRequest.swift in Sources */,
 				EC1B96602C9EFC83001C5773 /* QuestionComponent.swift in Sources */,
 				EC4140142DF73F7C00B8D45B /* EmptyEggStateView.swift in Sources */,
+				ECB107A62DFC510000E2692A /* DiamondPurchaseOptionsView.swift in Sources */,
+				ECB107A22DFC50EB00E2692A /* ItemInfoView.swift in Sources */,
 				EC606ED72C57B7040015F103 /* RaisingPetApp.swift in Sources */,
 				EC1B965E2C9EF6E7001C5773 /* NoteView.swift in Sources */,
 				ECF37DC52DD11A2400552613 /* WallpaperView.swift in Sources */,
@@ -1117,6 +1164,7 @@
 				EC95E5AE2D8B4B660011EA7A /* UserDefaults+Extensions.swift in Sources */,
 				ECA0D3922DEFBECA000528CD /* PetNameEditPopupView.swift in Sources */,
 				ECF3A04C2DD6520B0052990B /* GetPetsResponseModel.swift in Sources */,
+				ECB107AA2DFC513500E2692A /* ItemImageView.swift in Sources */,
 				EC731E5D2DCB87C0005A064A /* EggCellView.swift in Sources */,
 				ECCDFAF62DC954EB0044DAC2 /* Utilities + RequestFunc .swift in Sources */,
 				EC0F1D032DDA298600060614 /* HatchEggView.swift in Sources */,

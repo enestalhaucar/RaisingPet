@@ -215,6 +215,7 @@
 // BottomSheetView
 "bottom_sheet_purchase_title" = "%@ Satın Al";
 "bottom_sheet_buy_diamonds" = "Elmas Satın Al";
+"bottom_sheet_diamond_purchase_title" = "Elmas Satın Al";
 "bottom_sheet_item_purchase" = "Eşya satın almak için %d gerekiyor, %d eksiksiniz";
 "bottom_sheet_get_item" = "%@ x%d Al";
 "bottom_sheet_badge_plus_one" = "+1";

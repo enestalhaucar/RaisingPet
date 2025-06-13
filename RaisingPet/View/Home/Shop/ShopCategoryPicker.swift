@@ -11,7 +11,7 @@ import SwiftUI
 struct CategoryPicker: View {
     @Binding var selected: MainCategory
     // Production'da Diamonds gizlensin (bu hardcoded, istersen bir environment değişkeni ile kontrol edebilirsin)
-    private let visibleCategories: [MainCategory] = [.pets] // Şu an sadece Pets görünecek
+    private let visibleCategories: [MainCategory] = [.diamonds, .pets] // Şu an sadece Pets görünecek
 
     var body: some View {
         HStack(spacing: 16) {
